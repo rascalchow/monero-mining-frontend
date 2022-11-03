@@ -6,18 +6,23 @@ import classnames from 'classnames'
 
 // ** Store & Actions
 import { useSelector, useDispatch } from 'react-redux'
-import { handleContentWidth, handleMenuCollapsed, handleMenuHidden } from '@store/actions/layout'
+import {
+  handleContentWidth,
+  handleMenuCollapsed,
+  handleMenuHidden
+} from '@store/actions/layout'
 
 // ** Styles
 import 'animate.css/animate.css'
 
-const LayoutWrapper = props => {
+const LayoutWrapper = (props) => {
   // ** Props
-  const { layout, children, appLayout, wrapperClass, transition, routeMeta } = props
+  const { layout, children, appLayout, wrapperClass, transition, routeMeta } =
+    props
 
   // ** Store Vars
   const dispatch = useDispatch()
-  const store = useSelector(state => state)
+  const store = useSelector((state) => state)
   const navbarStore = store.navbar
   const contentWidth = store.layout.contentWidth
 
@@ -62,14 +67,15 @@ const LayoutWrapper = props => {
         'show-overlay': navbarStore.query.length
       })}
     >
-      <div className='content-overlay'></div>
-      <div className='header-navbar-shadow' />
+      <div className="content-overlay"></div>
+      <div className="header-navbar-shadow" />
       <div
         className={classnames({
           'content-wrapper': !appLayout,
           'content-area-wrapper': appLayout,
           'container p-0': contentWidth === 'boxed',
-          [`animate__animated animate__${transition}`]: transition !== 'none' && transition.length
+          [`animate__animated animate__${transition}`]:
+            transition !== 'none' && transition.length
         })}
       >
         <Tag

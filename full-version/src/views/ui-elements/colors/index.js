@@ -9,12 +9,16 @@ import '@styles/base/pages/ui-colors.scss'
 const Colors = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Colors' breadCrumbParent='UI' breadCrumbActive='Colors' />
+      <Breadcrumbs
+        breadCrumbTitle="Colors"
+        breadCrumbParent="UI"
+        breadCrumbActive="Colors"
+      />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <DefaultColors />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <GradientColors />
         </Col>
       </Row>

@@ -19,9 +19,9 @@ import PermissionsTable from './PermissionsTable'
 // ** Styles
 import '@styles/react/apps/app-users.scss'
 
-const UserView = props => {
+const UserView = (props) => {
   // ** Vars
-  const store = useSelector(state => state.users),
+  const store = useSelector((state) => state.users),
     dispatch = useDispatch(),
     { id } = useParams()
 
@@ -31,34 +31,35 @@ const UserView = props => {
   }, [dispatch])
 
   return store.selectedUser !== null && store.selectedUser !== undefined ? (
-    <div className='app-user-view'>
+    <div className="app-user-view">
       <Row>
-        <Col xl='9' lg='8' md='7'>
+        <Col xl="9" lg="8" md="7">
           <UserInfoCard selectedUser={store.selectedUser} />
         </Col>
-        <Col xl='3' lg='4' md='5'>
+        <Col xl="3" lg="4" md="5">
           <PlanCard selectedUser={store.selectedUser} />
         </Col>
       </Row>
       <Row>
-        <Col md='6'>
+        <Col md="6">
           <UserTimeline />
         </Col>
-        <Col md='6'>
+        <Col md="6">
           <PermissionsTable />
         </Col>
       </Row>
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <InvoiceList />
         </Col>
       </Row>
     </div>
   ) : (
-    <Alert color='danger'>
-      <h4 className='alert-heading'>User not found</h4>
-      <div className='alert-body'>
-        User with id: {id} doesn't exist. Check list of all Users: <Link to='/apps/user/list'>Users List</Link>
+    <Alert color="danger">
+      <h4 className="alert-heading">User not found</h4>
+      <div className="alert-body">
+        User with id: {id} doesn't exist. Check list of all Users:{' '}
+        <Link to="/apps/user/list">Users List</Link>
       </div>
     </Alert>
   )

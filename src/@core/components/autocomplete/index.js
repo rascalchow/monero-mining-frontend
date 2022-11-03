@@ -16,7 +16,7 @@ import { useOnClickOutside } from '@hooks/useOnClickOutside'
 import '@styles/base/bootstrap-extended/_include.scss'
 import './autocomplete.scss'
 
-const Autocomplete = props => {
+const Autocomplete = (props) => {
   // ** Refs
   const container = useRef(null)
   const inputElRef = useRef(null)
@@ -47,12 +47,12 @@ const Autocomplete = props => {
   }
 
   // ** Suggestion Hover Event
-  const onSuggestionItemHover = index => {
+  const onSuggestionItemHover = (index) => {
     setActiveSuggestion(index)
   }
 
   // ** Input On Change Event
-  const onChange = e => {
+  const onChange = (e) => {
     const userInput = e.currentTarget.value
     setActiveSuggestion(0)
     setShowSuggestions(true)
@@ -63,12 +63,12 @@ const Autocomplete = props => {
   }
 
   // ** Input Click Event
-  const onInputClick = e => {
+  const onInputClick = (e) => {
     e.stopPropagation()
   }
 
   // ** Input's Keydown Event
-  const onKeyDown = e => {
+  const onKeyDown = (e) => {
     const filterKey = props.filterKey
     const suggestionList = ReactDOM.findDOMNode(suggestionsListRef.current)
 
@@ -76,14 +76,22 @@ const Autocomplete = props => {
     if (e.keyCode === 38 && activeSuggestion !== 0) {
       setActiveSuggestion(activeSuggestion - 1)
 
-      if (e.target.value.length > -1 && suggestionList !== null && activeSuggestion <= filteredData.length / 2) {
+      if (
+        e.target.value.length > -1 &&
+        suggestionList !== null &&
+        activeSuggestion <= filteredData.length / 2
+      ) {
         suggestionList.scrollTop = 0
       }
     } else if (e.keyCode === 40 && activeSuggestion < filteredData.length - 1) {
       // ** User pressed the down arrow
       setActiveSuggestion(activeSuggestion + 1)
 
-      if (e.target.value.length > -1 && suggestionList !== null && activeSuggestion >= filteredData.length / 2) {
+      if (
+        e.target.value.length > -1 &&
+        suggestionList !== null &&
+        activeSuggestion >= filteredData.length / 2
+      ) {
         suggestionList.scrollTop = suggestionList.scrollHeight
       }
     } else if (e.keyCode === 27) {
@@ -106,19 +114,20 @@ const Autocomplete = props => {
   }
 
   // ** Function To Render Grouped Suggestions
-  const renderGroupedSuggestion = arr => {
+  const renderGroupedSuggestion = (arr) => {
     const { filterKey, customRender } = props
 
     const renderSuggestion = (item, i) => {
       if (!customRender) {
-        const suggestionURL = item.link !== undefined && item.link !== null ? item.link : null
+        const suggestionURL =
+          item.link !== undefined && item.link !== null ? item.link : null
         return (
           <li
             className={classnames('suggestion-item', {
-              active: filteredData.indexOf(item) === activeSuggestion
+              active: filteredData.indexOf(item) === activeSuggestion,
             })}
             key={item[filterKey]}
-            onClick={e => onSuggestionItemClick(suggestionURL, e)}
+            onClick={(e) => onSuggestionItemClick(suggestionURL, e)}
             onMouseEnter={() => {
               onSuggestionItemHover(filteredData.indexOf(item))
             }}
@@ -134,7 +143,7 @@ const Autocomplete = props => {
           activeSuggestion,
           onSuggestionItemClick,
           onSuggestionItemHover,
-          userInput
+          userInput,
         )
       } else {
         return null
@@ -152,9 +161,13 @@ const Autocomplete = props => {
 
     filteredData = []
     const sortSingleData = suggestions
-      .filter(i => {
-        const startCondition = i[filterKey].toLowerCase().startsWith(userInput.toLowerCase()),
-          includeCondition = i[filterKey].toLowerCase().includes(userInput.toLowerCase())
+      .filter((i) => {
+        const startCondition = i[filterKey]
+            .toLowerCase()
+            .startsWith(userInput.toLowerCase()),
+          includeCondition = i[filterKey]
+            .toLowerCase()
+            .includes(userInput.toLowerCase())
         if (startCondition) {
           return startCondition
         } else if (!startCondition && includeCondition) {
@@ -167,16 +180,21 @@ const Autocomplete = props => {
     filteredData.push(...sortSingleData)
     if (sortSingleData.length) {
       return sortSingleData.map((suggestion, index) => {
-        const suggestionURL = suggestion.link !== undefined && suggestion.link !== null ? suggestion.link : null
+        const suggestionURL =
+          suggestion.link !== undefined && suggestion.link !== null
+            ? suggestion.link
+            : null
         if (!customRender) {
           return (
             <li
               className={classnames('suggestion-item', {
-                active: filteredData.indexOf(suggestion) === activeSuggestion
+                active: filteredData.indexOf(suggestion) === activeSuggestion,
               })}
               key={suggestion[filterKey]}
-              onClick={e => onSuggestionItemClick(suggestionURL, e)}
-              onMouseEnter={() => onSuggestionItemHover(filteredData.indexOf(suggestion))}
+              onClick={(e) => onSuggestionItemClick(suggestionURL, e)}
+              onMouseEnter={() =>
+                onSuggestionItemHover(filteredData.indexOf(suggestion))
+              }
             >
               {suggestion[filterKey]}
             </li>
@@ -189,7 +207,7 @@ const Autocomplete = props => {
             activeSuggestion,
             onSuggestionItemClick,
             onSuggestionItemHover,
-            userInput
+            userInput,
           )
         } else {
           return null
@@ -197,8 +215,9 @@ const Autocomplete = props => {
       })
     } else {
       return (
-        <li className='suggestion-item no-result'>
-          <AlertCircle size={15} /> <span className='align-middle ml-50'>No Result</span>
+        <li className="suggestion-item no-result">
+          <AlertCircle size={15} />{' '}
+          <span className="align-middle ml-50">No Result</span>
         </li>
       )
     }
@@ -213,11 +232,15 @@ const Autocomplete = props => {
       return renderUngroupedSuggestions()
     } else {
       filteredData = []
-      return suggestions.map(suggestion => {
+      return suggestions.map((suggestion) => {
         const sortData = suggestion.data
-          .filter(i => {
-            const startCondition = i[filterKey].toLowerCase().startsWith(userInput.toLowerCase()),
-              includeCondition = i[filterKey].toLowerCase().includes(userInput.toLowerCase())
+          .filter((i) => {
+            const startCondition = i[filterKey]
+                .toLowerCase()
+                .startsWith(userInput.toLowerCase()),
+              includeCondition = i[filterKey]
+                .toLowerCase()
+                .includes(userInput.toLowerCase())
             if (startCondition) {
               return startCondition
             } else if (!startCondition && includeCondition) {
@@ -231,14 +254,17 @@ const Autocomplete = props => {
         filteredData.push(...sortData)
         return (
           <Fragment key={suggestion[filterHeaderKey]}>
-            <li className='suggestion-item suggestion-title-wrapper'>
-              <h6 className='suggestion-title'>{suggestion[filterHeaderKey]}</h6>
+            <li className="suggestion-item suggestion-title-wrapper">
+              <h6 className="suggestion-title">
+                {suggestion[filterHeaderKey]}
+              </h6>
             </li>
             {sortData.length ? (
               renderGroupedSuggestion(sortData)
             ) : (
-              <li className='suggestion-item no-result'>
-                <AlertCircle size={15} /> <span className='align-middle ml-50'>No Result</span>
+              <li className="suggestion-item no-result">
+                <AlertCircle size={15} />{' '}
+                <span className="align-middle ml-50">No Result</span>
               </li>
             )}
           </Fragment>
@@ -293,10 +319,10 @@ const Autocomplete = props => {
     suggestionsListComponent = (
       <PerfectScrollbar
         className={classnames('suggestions-list', {
-          [props.wrapperClass]: props.wrapperClass
+          [props.wrapperClass]: props.wrapperClass,
         })}
         ref={suggestionsListRef}
-        component='ul'
+        component="ul"
         options={{ wheelPropagation: false }}
       >
         {renderSuggestions()}
@@ -305,24 +331,26 @@ const Autocomplete = props => {
   }
 
   return (
-    <div className='autocomplete-container' ref={container}>
+    <div className="autocomplete-container" ref={container}>
       <input
-        type='text'
-        onChange={e => {
+        type="text"
+        onChange={(e) => {
           onChange(e)
           if (props.onChange) {
             props.onChange(e)
           }
         }}
-        onKeyDown={e => onKeyDown(e)}
+        onKeyDown={(e) => onKeyDown(e)}
         value={userInput}
-        className={`autocomplete-search ${props.className ? props.className : ''}`}
+        className={`autocomplete-search ${
+          props.className ? props.className : ''
+        }`}
         placeholder={props.placeholder}
         onClick={onInputClick}
         ref={inputElRef}
-        onFocus={e => setFocused(true)}
+        onFocus={(e) => setFocused(true)}
         autoFocus={props.autoFocus}
-        onBlur={e => {
+        onBlur={(e) => {
           if (props.onBlur) props.onBlur(e)
           setFocused(false)
         }}
@@ -350,5 +378,5 @@ Autocomplete.propTypes = {
   onSuggestionsShown: PropTypes.func,
   onSuggestionItemClick: PropTypes.func,
   clearInput: PropTypes.func,
-  externalClick: PropTypes.func
+  externalClick: PropTypes.func,
 }

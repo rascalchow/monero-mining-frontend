@@ -10,21 +10,41 @@ import { Card, CardBody } from 'reactstrap'
 // ** Default Options
 import { areaChartOptions } from './ChartOptions'
 
-const StatsWithAreaChart = props => {
+const StatsWithAreaChart = (props) => {
   // ** Props
-  const { icon, color, stats, statTitle, series, options, type, height, className, ...rest } = props
+  const {
+    icon,
+    color,
+    stats,
+    statTitle,
+    series,
+    options,
+    type,
+    height,
+    className,
+    ...rest
+  } = props
   return (
     <Card {...rest}>
       <CardBody
         className={classnames('pb-0', {
-          [className]: className
+          [className]: className,
         })}
       >
-        <Avatar className='avatar-stats p-50 m-0' color={`light-${color}`} icon={icon} />
-        <h2 className='font-weight-bolder mt-1'>{stats}</h2>
-        <p className='card-text'>{statTitle}</p>
+        <Avatar
+          className="avatar-stats p-50 m-0"
+          color={`light-${color}`}
+          icon={icon}
+        />
+        <h2 className="font-weight-bolder mt-1">{stats}</h2>
+        <p className="card-text">{statTitle}</p>
       </CardBody>
-      <Chart options={options} series={series} type={type} height={height ? height : 100} />
+      <Chart
+        options={options}
+        series={series}
+        type={type}
+        height={height ? height : 100}
+      />
     </Card>
   )
 }
@@ -41,11 +61,11 @@ StatsWithAreaChart.propTypes = {
   series: PropTypes.array.isRequired,
   type: PropTypes.string,
   height: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
 }
 
 // ** Default Props
 StatsWithAreaChart.defaultProps = {
   options: areaChartOptions,
-  color: 'primary'
+  color: 'primary',
 }

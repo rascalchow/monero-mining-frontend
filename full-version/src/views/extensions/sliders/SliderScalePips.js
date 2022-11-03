@@ -5,11 +5,11 @@ const SliderScalePips = ({ direction }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Slider Scales / Pips</CardTitle>
+        <CardTitle tag="h4">Slider Scales / Pips</CardTitle>
       </CardHeader>
       <CardBody>
         <Nouislider
-          className='mt-1 mb-3'
+          className="mt-1 mb-3"
           start={10}
           step={10}
           tooltips={true}

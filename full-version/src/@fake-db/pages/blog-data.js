@@ -7,66 +7,78 @@ const data = {
       img: require('@src/assets/images/slider/02.jpg').default,
       title: 'The Best Features Coming to iOS and Web design',
       id: 1,
-      avatar: require('@src/assets/images/portrait/small/avatar-s-7.jpg').default,
+      avatar: require('@src/assets/images/portrait/small/avatar-s-7.jpg')
+        .default,
       userFullName: 'Ghani Pradita',
       blogPosted: 'Jan 10, 2020',
       tags: ['Quote', 'Fashion'],
-      excerpt: 'Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.',
+      excerpt:
+        'Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.',
       comment: 76
     },
     {
       img: require('@src/assets/images/slider/06.jpg').default,
       title: 'Latest Quirky Opening Sentence or Paragraph',
       id: 2,
-      avatar: require('@src/assets/images/portrait/small/avatar-s-9.jpg').default,
+      avatar: require('@src/assets/images/portrait/small/avatar-s-9.jpg')
+        .default,
       userFullName: 'Jorge Griffin',
       blogPosted: 'Jan 10, 2020',
       tags: ['Gaming', 'Video'],
-      excerpt: 'Apple pie caramels lemon drops halvah liquorice carrot cake. Tiramisu brownie lemon drops.',
+      excerpt:
+        'Apple pie caramels lemon drops halvah liquorice carrot cake. Tiramisu brownie lemon drops.',
       comment: 2100
     },
     {
       img: require('@src/assets/images/slider/04.jpg').default,
       title: 'Share an Amazing and Shocking Fact or Statistic',
       id: 3,
-      avatar: require('@src/assets/images/portrait/small/avatar-s-3.jpg').default,
+      avatar: require('@src/assets/images/portrait/small/avatar-s-3.jpg')
+        .default,
       userFullName: 'Claudia Neal',
       blogPosted: 'Jan 10, 2020',
       tags: ['Gaming', 'Food'],
-      excerpt: 'Tiramisu jelly-o chupa chups tootsie roll donut wafer marshmallow cheesecake topping.',
+      excerpt:
+        'Tiramisu jelly-o chupa chups tootsie roll donut wafer marshmallow cheesecake topping.',
       comment: 243
     },
     {
       img: require('@src/assets/images/slider/03.jpg').default,
       title: 'Withhold a Compelling Piece of Information',
       id: 4,
-      avatar: require('@src/assets/images/portrait/small/avatar-s-14.jpg').default,
+      avatar: require('@src/assets/images/portrait/small/avatar-s-14.jpg')
+        .default,
       userFullName: 'Fred Boone',
       blogPosted: 'Jan 10, 2020',
       tags: ['Video'],
-      excerpt: 'Croissant apple pie lollipop gingerbread. Cookie jujubes chocolate cake icing cheesecake.',
+      excerpt:
+        'Croissant apple pie lollipop gingerbread. Cookie jujubes chocolate cake icing cheesecake.',
       comment: 10
     },
     {
       img: require('@src/assets/images/slider/09.jpg').default,
       title: 'Unadvertised Bonus Opening: Share a Quote',
       id: 5,
-      avatar: require('@src/assets/images/portrait/small/avatar-s-13.jpg').default,
+      avatar: require('@src/assets/images/portrait/small/avatar-s-13.jpg')
+        .default,
       userFullName: 'Billy French',
       blogPosted: 'Jan 10, 2020',
       tags: ['Quote', 'Fashion'],
-      excerpt: 'Muffin liquorice candy soufflé bear claw apple pie icing halvah. Pie marshmallow jelly.',
+      excerpt:
+        'Muffin liquorice candy soufflé bear claw apple pie icing halvah. Pie marshmallow jelly.',
       comment: 319
     },
     {
       img: require('@src/assets/images/slider/10.jpg').default,
       title: 'Ships at a distance have Every Man’s Wish on Board',
       id: 6,
-      avatar: require('@src/assets/images/portrait/small/avatar-s-13.jpg').default,
+      avatar: require('@src/assets/images/portrait/small/avatar-s-13.jpg')
+        .default,
       userFullName: 'Helena Hunt',
       blogPosted: 'Jan 10, 2020',
       tags: ['Fashion', 'Video'],
-      excerpt: 'A little personality goes a long way, especially on a business blog. So don’t be afraid to let loose.',
+      excerpt:
+        'A little personality goes a long way, especially on a business blog. So don’t be afraid to let loose.',
       comment: 1500
     }
   ],
@@ -113,7 +125,8 @@ const data = {
     blog: {
       img: require('@src/assets/images/banner/banner-12.jpg').default,
       title: 'The Best Features Coming to iOS and Web design',
-      avatar: require('@src/assets/images/portrait/small/avatar-s-7.jpg').default,
+      avatar: require('@src/assets/images/portrait/small/avatar-s-7.jpg')
+        .default,
       userFullName: 'Ghani Pradita',
       createdTime: 'Jan 10, 2020',
       tags: ['Gaming', 'Video'],
@@ -124,7 +137,8 @@ const data = {
     },
     comments: [
       {
-        avatar: require('@src/assets/images/portrait/small/avatar-s-9.jpg').default,
+        avatar: require('@src/assets/images/portrait/small/avatar-s-9.jpg')
+          .default,
         userFullName: 'Chad Alexander',
         commentedAt: 'May 24, 2020',
         commentText:

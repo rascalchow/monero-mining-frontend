@@ -1,6 +1,14 @@
 import { Fragment, useContext } from 'react'
 import ExtensionsHeader from '@components/extensions-header'
-import { Row, Col, Card, CardHeader, CardTitle, CardBody, Button } from 'reactstrap'
+import {
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardBody,
+  Button
+} from 'reactstrap'
 import { ShepherdTour, ShepherdTourContext } from 'react-shepherd'
 
 import 'shepherd.js/dist/css/shepherd.css'
@@ -87,7 +95,7 @@ const Content = () => {
   instance = tour
 
   return (
-    <Button color='primary' onClick={() => tour.start()} outline>
+    <Button color="primary" onClick={() => tour.start()} outline>
       Start Tour
     </Button>
   )
@@ -97,15 +105,15 @@ const TourComponent = () => {
   return (
     <Fragment>
       <ExtensionsHeader
-        title='React Shepherd'
-        subTitle='Tourist Guide into your React Components With React Shepherd'
-        link='https://github.com/shipshapecode/react-shepherd'
+        title="React Shepherd"
+        subTitle="Tourist Guide into your React Components With React Shepherd"
+        link="https://github.com/shipshapecode/react-shepherd"
       />
-      <Row id='basic-tour'>
+      <Row id="basic-tour">
         <Col xs={12}>
           <Card>
             <CardHeader>
-              <CardTitle tag='h4'>Tour</CardTitle>
+              <CardTitle tag="h4">Tour</CardTitle>
             </CardHeader>
             <CardBody>
               <ShepherdTour

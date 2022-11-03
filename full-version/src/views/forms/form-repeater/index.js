@@ -8,7 +8,11 @@ import 'react-slidedown/lib/slidedown.css'
 const FormRepeater = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Form Repeater' breadCrumbParent='Form' breadCrumbActive='Form Repeater' />
+      <Breadcrumbs
+        breadCrumbTitle="Form Repeater"
+        breadCrumbParent="Form"
+        breadCrumbActive="Form Repeater"
+      />
       <Row>
         <Col sm={12}>
           <RepeatingForm />

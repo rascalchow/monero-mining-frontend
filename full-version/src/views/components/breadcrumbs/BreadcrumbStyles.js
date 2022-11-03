@@ -5,60 +5,60 @@ import { Link } from 'react-router-dom'
 const BreadcrumbsStyles = () => {
   return (
     <Fragment>
-      <Breadcrumb listClassName='breadcrumb-slash'>
+      <Breadcrumb listClassName="breadcrumb-slash">
         <BreadcrumbItem>
-          <Link to='#'> Home </Link>
+          <Link to="#"> Home </Link>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <Link to='#'> Library </Link>
+          <Link to="#"> Library </Link>
         </BreadcrumbItem>
         <BreadcrumbItem active>
           <span> Data </span>
         </BreadcrumbItem>
       </Breadcrumb>
 
-      <Breadcrumb listClassName='breadcrumb-dots'>
+      <Breadcrumb listClassName="breadcrumb-dots">
         <BreadcrumbItem>
-          <Link to='#'> Home </Link>
+          <Link to="#"> Home </Link>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <Link to='#'> Library </Link>
+          <Link to="#"> Library </Link>
         </BreadcrumbItem>
         <BreadcrumbItem active>
           <span> Data </span>
         </BreadcrumbItem>
       </Breadcrumb>
 
-      <Breadcrumb listClassName='breadcrumb-dashes'>
+      <Breadcrumb listClassName="breadcrumb-dashes">
         <BreadcrumbItem>
-          <Link to='#'> Home </Link>
+          <Link to="#"> Home </Link>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <Link to='#'> Library </Link>
+          <Link to="#"> Library </Link>
         </BreadcrumbItem>
         <BreadcrumbItem active>
           <span> Data </span>
         </BreadcrumbItem>
       </Breadcrumb>
 
-      <Breadcrumb listClassName='breadcrumb-pipes'>
+      <Breadcrumb listClassName="breadcrumb-pipes">
         <BreadcrumbItem>
-          <Link to='#'> Home </Link>
+          <Link to="#"> Home </Link>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <Link to='#'> Library </Link>
+          <Link to="#"> Library </Link>
         </BreadcrumbItem>
         <BreadcrumbItem active>
           <span> Data </span>
         </BreadcrumbItem>
       </Breadcrumb>
 
-      <Breadcrumb listClassName='breadcrumb-chevron'>
+      <Breadcrumb listClassName="breadcrumb-chevron">
         <BreadcrumbItem>
-          <Link to='#'> Home </Link>
+          <Link to="#"> Home </Link>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <Link to='#'> Library </Link>
+          <Link to="#"> Library </Link>
         </BreadcrumbItem>
         <BreadcrumbItem active>
           <span> Data </span>

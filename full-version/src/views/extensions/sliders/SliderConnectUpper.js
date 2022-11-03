@@ -5,14 +5,14 @@ const SliderConnectUpper = ({ direction }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Connect to upper</CardTitle>
+        <CardTitle tag="h4">Connect to upper</CardTitle>
       </CardHeader>
-      <CardBody className='text-center'>
+      <CardBody className="text-center">
         <Nouislider
-          connect='upper'
+          connect="upper"
           start={30}
           direction={direction}
-          orientation='vertical'
+          orientation="vertical"
           range={{
             min: 0,
             max: 100

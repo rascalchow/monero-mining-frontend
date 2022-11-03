@@ -6,12 +6,14 @@ const RatingBasic = ({ filledColor, dir }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Basic</CardTitle>
+        <CardTitle tag="h4">Basic</CardTitle>
       </CardHeader>
       <CardBody>
         <Rating
-          emptySymbol={<Star size={32} fill='#babfc7' stroke='#babfc7' />}
-          fullSymbol={<Star size={32} fill={filledColor} stroke={filledColor} />}
+          emptySymbol={<Star size={32} fill="#babfc7" stroke="#babfc7" />}
+          fullSymbol={
+            <Star size={32} fill={filledColor} stroke={filledColor} />
+          }
           initialRating={2}
           direction={dir}
         />

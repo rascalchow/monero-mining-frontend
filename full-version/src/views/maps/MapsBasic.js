@@ -6,15 +6,15 @@ const MapsBasic = () => {
     zoom = 13
 
   return (
-    <Card className='overflow-hidden'>
+    <Card className="overflow-hidden">
       <CardHeader>
-        <CardTitle tag='h4'>Basic</CardTitle>
+        <CardTitle tag="h4">Basic</CardTitle>
       </CardHeader>
       <CardBody>
-        <MapContainer center={center} zoom={zoom} className='leaflet-map'>
+        <MapContainer center={center} zoom={zoom} className="leaflet-map">
           <TileLayer
             attribution='&ampcopy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
+            url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
           />
           <Marker position={center} />
         </MapContainer>

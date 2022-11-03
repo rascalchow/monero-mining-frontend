@@ -4,7 +4,7 @@ const SeparatedPagination = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Separated</CardTitle>
+        <CardTitle tag="h4">Separated</CardTitle>
       </CardHeader>
       <CardBody>
         <ReactPaginate
@@ -21,8 +21,8 @@ const SeparatedPagination = () => {
           previousClassName={'page-item prev-item'}
           previousLinkClassName={'page-link'}
           pageLinkClassName={'page-link'}
-          breakClassName='page-item'
-          breakLinkClassName='page-link'
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
           containerClassName={'pagination react-paginate'}
         />
       </CardBody>

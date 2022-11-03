@@ -70,7 +70,7 @@ const HorizontalNavMenuLink = ({
         /*eslint-disable */
         {...(item.externalLink === true
           ? {
-              href: item.navLink || '/'
+              href: item.navLink || '/',
             }
           : {
               to: item.navLink || '/',
@@ -79,10 +79,14 @@ const HorizontalNavMenuLink = ({
                   return false
                 }
 
-                if (match.url && match.url !== '' && match.url === item.navLink) {
+                if (
+                  match.url &&
+                  match.url !== '' &&
+                  match.url === item.navLink
+                ) {
                   currentActiveItem = item.navLink
                 }
-              }
+              },
             })}
         /*eslint-enable */
       >

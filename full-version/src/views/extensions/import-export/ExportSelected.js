@@ -104,12 +104,12 @@ const ExportSelected = () => {
 
   const toggleModal = () => setModal(!modal)
 
-  const handleFilter = e => {
+  const handleFilter = (e) => {
     let filteredData = []
     const value = e.target.value
     setValue(value)
     if (value.length) {
-      filteredData = data.filter(col => {
+      filteredData = data.filter((col) => {
         const startsWithCondition =
           col.name.toLowerCase().startsWith(value.toLowerCase()) ||
           col.email.toLowerCase().startsWith(value.toLowerCase()) ||
@@ -133,7 +133,7 @@ const ExportSelected = () => {
 
   const handleExport = () => {
     const exportArr = dataToExport
-    data.map(item => {
+    data.map((item) => {
       if (selectedRows.includes(item.id)) {
         return exportArr.push(item)
       } else {
@@ -149,7 +149,7 @@ const ExportSelected = () => {
     toggleModal()
   }
 
-  const handleSelect = id => {
+  const handleSelect = (id) => {
     const selectedRowsArr = selectedRows
     if (!selectedRowsArr.includes(id)) {
       selectedRowsArr.push(id)
@@ -164,7 +164,7 @@ const ExportSelected = () => {
   const handleSelectAll = () => {
     let selectedRowsArr = selectedRows
     if (selectedRowsArr.length < data.length) {
-      const ids = data.map(i => i.id)
+      const ids = data.map((i) => i.id)
       selectedRowsArr = ids
     } else if (selectedRowsArr.length === data.length) {
       selectedRowsArr = []
@@ -176,7 +176,7 @@ const ExportSelected = () => {
   }
 
   const array = value ? filteredData : data
-  const renderTableData = array.map(col => {
+  const renderTableData = array.map((col) => {
     return (
       <tr
         key={col.id}
@@ -186,9 +186,9 @@ const ExportSelected = () => {
       >
         <td>
           <CustomInput
-            type='checkbox'
+            type="checkbox"
             id={col.id}
-            label=''
+            label=""
             checked={!!selectedRows.includes(col.id)}
             onChange={() => handleSelect(col.id)}
           />
@@ -204,36 +204,42 @@ const ExportSelected = () => {
   return (
     <Fragment>
       <ExtensionsHeader
-        title='XLSX'
-        subTitle='Xlsx is a parser and writer for various spreadsheet formats'
-        link='https://github.com/AdeleD/react-paginate'
+        title="XLSX"
+        subTitle="Xlsx is a parser and writer for various spreadsheet formats"
+        link="https://github.com/AdeleD/react-paginate"
       />
-      <Row className='export-component'>
-        <Col sm='12'>
+      <Row className="export-component">
+        <Col sm="12">
           <Card>
-            <CardBody className='pb-0'>
-              <div className='d-flex flex-wrap justify-content-between'>
-                <Button.Ripple color='primary' onClick={() => toggleModal()}>
+            <CardBody className="pb-0">
+              <div className="d-flex flex-wrap justify-content-between">
+                <Button.Ripple color="primary" onClick={() => toggleModal()}>
                   Export Selected
                 </Button.Ripple>
-                <div className='d-flex align-items-center justify-content-end'>
-                  <Label for='search-input' className='mr-1'>
+                <div className="d-flex align-items-center justify-content-end">
+                  <Label for="search-input" className="mr-1">
                     Search
                   </Label>
-                  <Input id='search-input' bsSize='sm' type='text' value={value} onChange={e => handleFilter(e)} />
+                  <Input
+                    id="search-input"
+                    bsSize="sm"
+                    type="text"
+                    value={value}
+                    onChange={(e) => handleFilter(e)}
+                  />
                 </div>
               </div>
             </CardBody>
-            <Table className='table-hover-animation mt-2' responsive>
+            <Table className="table-hover-animation mt-2" responsive>
               <thead>
                 <tr>
                   <th>
                     <CustomInput
-                      type='checkbox'
-                      id='select-all'
-                      label=''
+                      type="checkbox"
+                      id="select-all"
+                      label=""
                       checked={!!selectedRows.length}
-                      onChange={e => handleSelectAll()}
+                      onChange={(e) => handleSelectAll()}
                     />
                   </th>
                   <th>Email</th>
@@ -250,26 +256,26 @@ const ExportSelected = () => {
       <Modal
         isOpen={modal}
         toggle={() => toggleModal()}
-        className='modal-dialog-centered'
+        className="modal-dialog-centered"
         onClosed={() => setFileName('')}
       >
         <ModalHeader toggle={() => toggleModal()}>Export To Excel</ModalHeader>
         <ModalBody>
           <FormGroup>
             <Input
-              type='text'
+              type="text"
               value={fileName}
-              onChange={e => setFileName(e.target.value)}
-              placeholder='Enter File Name'
+              onChange={(e) => setFileName(e.target.value)}
+              placeholder="Enter File Name"
             />
           </FormGroup>
           <FormGroup>
             <CustomInput
-              type='select'
-              id='selectFileFormat'
-              name='customSelect'
+              type="select"
+              id="selectFileFormat"
+              name="customSelect"
               value={fileFormat}
-              onChange={e => {
+              onChange={(e) => {
                 setFileFormat(e.target.value)
               }}
             >
@@ -280,10 +286,10 @@ const ExportSelected = () => {
           </FormGroup>
         </ModalBody>
         <ModalFooter>
-          <Button color='primary' onClick={() => handleExport()}>
+          <Button color="primary" onClick={() => handleExport()}>
             Export
           </Button>
-          <Button color='flat-danger' onClick={() => toggleModal()}>
+          <Button color="flat-danger" onClick={() => toggleModal()}>
             Cancel
           </Button>
         </ModalFooter>

@@ -79,10 +79,13 @@ const ChartJS = () => {
         let barSize = Math.min(Math.abs(left - right), Math.abs(top - bottom))
         borderWidth = borderWidth > barSize ? barSize : borderWidth
         let halfStroke = borderWidth / 2
-        let borderLeft = left + (borderSkipped !== 'left' ? halfStroke * signX : 0)
-        let borderRight = right + (borderSkipped !== 'right' ? -halfStroke * signX : 0)
+        let borderLeft =
+          left + (borderSkipped !== 'left' ? halfStroke * signX : 0)
+        let borderRight =
+          right + (borderSkipped !== 'right' ? -halfStroke * signX : 0)
         let borderTop = top + (borderSkipped !== 'top' ? halfStroke * signY : 0)
-        let borderBottom = bottom + (borderSkipped !== 'bottom' ? -halfStroke * signY : 0)
+        let borderBottom =
+          bottom + (borderSkipped !== 'bottom' ? -halfStroke * signY : 0)
         if (borderLeft !== borderRight) {
           top = borderTop
           bottom = borderBottom
@@ -101,7 +104,7 @@ const ChartJS = () => {
         [left, bottom],
         [left, top],
         [right, top],
-        [right, bottom]
+        [right, bottom],
       ]
 
       let borders = ['bottom', 'left', 'top', 'right']
@@ -155,7 +158,12 @@ const ChartJS = () => {
           ctx.lineTo(x + width - radius, y)
           ctx.quadraticCurveTo(x + width, y, x + width, y + radius)
           ctx.lineTo(x + width, y + height - radius)
-          ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height)
+          ctx.quadraticCurveTo(
+            x + width,
+            y + height,
+            x + width - radius,
+            y + height,
+          )
           ctx.lineTo(x + radius, y + height)
           ctx.quadraticCurveTo(x, y + height, x, y + height)
           ctx.lineTo(x, y + radius)
@@ -172,18 +180,26 @@ const ChartJS = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='React ChartJS 2' breadCrumbParent='Charts' breadCrumbActive='ChartJS' />
-      <Row className='match-height'>
-        <Col sm='12'>
+      <Breadcrumbs
+        breadCrumbTitle="React ChartJS 2"
+        breadCrumbParent="Charts"
+        breadCrumbActive="ChartJS"
+      />
+      <Row className="match-height">
+        <Col sm="12">
           <p>
             React wrapper for Chart.js. Click{' '}
-            <a href='https://github.com/jerairrest/react-chartjs-2' target='_blank' rel='noopener noreferrer'>
+            <a
+              href="https://github.com/jerairrest/react-chartjs-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               here
             </a>{' '}
             for github repo.
           </p>
         </Col>
-        <Col xl='6' sm='12'>
+        <Col xl="6" sm="12">
           <BarChart
             successColorShade={successColorShade}
             labelColor={labelColor}
@@ -191,7 +207,7 @@ const ChartJS = () => {
             gridLineColor={gridLineColor}
           />
         </Col>
-        <Col xl='6' sm='12'>
+        <Col xl="6" sm="12">
           <HorizontalBarChart
             info={colors.info.main}
             labelColor={labelColor}
@@ -199,7 +215,7 @@ const ChartJS = () => {
             gridLineColor={gridLineColor}
           />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <LineChart
             warningColorShade={warningColorShade}
             lineChartDanger={lineChartDanger}
@@ -209,10 +225,14 @@ const ChartJS = () => {
             gridLineColor={gridLineColor}
           />
         </Col>
-        <Col lg='6' sm='12'>
-          <RadarChart labelColor={labelColor} tooltipShadow={tooltipShadow} gridLineColor={gridLineColor} />
+        <Col lg="6" sm="12">
+          <RadarChart
+            labelColor={labelColor}
+            tooltipShadow={tooltipShadow}
+            gridLineColor={gridLineColor}
+          />
         </Col>
-        <Col lg='6' sm='12'>
+        <Col lg="6" sm="12">
           <PolarAreaChart
             primary={colors.primary.main}
             labelColor={labelColor}
@@ -224,7 +244,7 @@ const ChartJS = () => {
             tooltipShadow={tooltipShadow}
           />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <BubbleChart
             labelColor={labelColor}
             primaryColorShade={primaryColorShade}
@@ -233,7 +253,7 @@ const ChartJS = () => {
             gridLineColor={gridLineColor}
           />
         </Col>
-        <Col lg='4' sm='12'>
+        <Col lg="4" sm="12">
           <DoughnutChart
             tooltipShadow={tooltipShadow}
             successColorShade={successColorShade}
@@ -241,7 +261,7 @@ const ChartJS = () => {
             primary={colors.primary.main}
           />
         </Col>
-        <Col lg='8' sm='12'>
+        <Col lg="8" sm="12">
           <ScatterChart
             labelColor={labelColor}
             tooltipShadow={tooltipShadow}
@@ -251,7 +271,7 @@ const ChartJS = () => {
             successColorShade={successColorShade}
           />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <AreaChart
             labelColor={labelColor}
             tooltipShadow={tooltipShadow}

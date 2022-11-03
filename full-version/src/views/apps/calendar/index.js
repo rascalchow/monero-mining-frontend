@@ -22,7 +22,7 @@ import {
   updateFilter,
   updateAllFilters,
   addEvent,
-  removeEvent
+  removeEvent,
 } from './store/actions/index'
 
 // ** Styles
@@ -34,13 +34,13 @@ const calendarsColor = {
   Holiday: 'success',
   Personal: 'danger',
   Family: 'warning',
-  ETC: 'info'
+  ETC: 'info',
 }
 
 const CalendarComponent = () => {
   // ** Variables
   const dispatch = useDispatch()
-  const store = useSelector(state => state.calendar)
+  const store = useSelector((state) => state.calendar)
 
   // ** states
   const [addSidebarOpen, setAddSidebarOpen] = useState(false),
@@ -54,7 +54,7 @@ const CalendarComponent = () => {
   const handleAddEventSidebar = () => setAddSidebarOpen(!addSidebarOpen)
 
   // ** LeftSidebar Toggle Function
-  const toggleSidebar = val => setLeftSidebarOpen(val)
+  const toggleSidebar = (val) => setLeftSidebarOpen(val)
 
   // ** Blank Event Object
   const blankEvent = {
@@ -67,8 +67,8 @@ const CalendarComponent = () => {
       calendar: '',
       guests: [],
       location: '',
-      description: ''
-    }
+      description: '',
+    },
   }
 
   // ** refetchEvents
@@ -85,13 +85,16 @@ const CalendarComponent = () => {
 
   return (
     <Fragment>
-      <div className='app-calendar overflow-hidden border'>
+      <div className="app-calendar overflow-hidden border">
         <Row noGutters>
           <Col
-            id='app-calendar-sidebar'
-            className={classnames('col app-calendar-sidebar flex-grow-0 overflow-hidden d-flex flex-column', {
-              show: leftSidebarOpen
-            })}
+            id="app-calendar-sidebar"
+            className={classnames(
+              'col app-calendar-sidebar flex-grow-0 overflow-hidden d-flex flex-column',
+              {
+                show: leftSidebarOpen,
+              },
+            )}
           >
             <SidebarLeft
               store={store}
@@ -102,7 +105,7 @@ const CalendarComponent = () => {
               handleAddEventSidebar={handleAddEventSidebar}
             />
           </Col>
-          <Col className='position-relative'>
+          <Col className="position-relative">
             <Calendar
               isRtl={isRtl}
               store={store}
@@ -119,7 +122,7 @@ const CalendarComponent = () => {
           </Col>
           <div
             className={classnames('body-content-overlay', {
-              show: leftSidebarOpen === true
+              show: leftSidebarOpen === true,
             })}
             onClick={() => toggleSidebar(false)}
           ></div>

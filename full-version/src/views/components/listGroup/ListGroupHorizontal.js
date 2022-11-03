@@ -2,7 +2,7 @@ import { ListGroup, ListGroupItem } from 'reactstrap'
 
 const ListGroupHorizontal = () => {
   return (
-    <ListGroup className='list-group-horizontal-sm'>
+    <ListGroup className="list-group-horizontal-sm">
       <ListGroupItem>Chocolate cake</ListGroupItem>
       <ListGroupItem>Cookie pie</ListGroupItem>
       <ListGroupItem>Cheesecake</ListGroupItem>

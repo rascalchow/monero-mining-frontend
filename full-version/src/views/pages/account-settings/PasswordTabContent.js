@@ -24,12 +24,12 @@ const PasswordTabContent = () => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Row>
-        <Col sm='6'>
+        <Col sm="6">
           <FormGroup>
             <InputPasswordToggle
-              label='Old Password'
-              htmlFor='old-password'
-              name='old-password'
+              label="Old Password"
+              htmlFor="old-password"
+              name="old-password"
               innerRef={register({ required: true })}
               className={classnames('input-group-merge', {
                 'is-invalid': errors['old-password']
@@ -39,12 +39,12 @@ const PasswordTabContent = () => {
         </Col>
       </Row>
       <Row>
-        <Col sm='6'>
+        <Col sm="6">
           <FormGroup>
             <InputPasswordToggle
-              label='New Password'
-              htmlFor='new-password'
-              name='new-password'
+              label="New Password"
+              htmlFor="new-password"
+              name="new-password"
               innerRef={register({ required: true })}
               className={classnames('input-group-merge', {
                 'is-invalid': errors['new-password']
@@ -52,12 +52,12 @@ const PasswordTabContent = () => {
             />
           </FormGroup>
         </Col>
-        <Col sm='6'>
+        <Col sm="6">
           <FormGroup>
             <InputPasswordToggle
-              label='Retype New Password'
-              htmlFor='retype-new-password'
-              name='retype-new-password'
+              label="Retype New Password"
+              htmlFor="retype-new-password"
+              name="retype-new-password"
               innerRef={register({ required: true })}
               className={classnames('input-group-merge', {
                 'is-invalid': errors['retype-new-password']
@@ -65,11 +65,11 @@ const PasswordTabContent = () => {
             />
           </FormGroup>
         </Col>
-        <Col className='mt-1' sm='12'>
-          <Button.Ripple type='submit' className='mr-1' color='primary'>
+        <Col className="mt-1" sm="12">
+          <Button.Ripple type="submit" className="mr-1" color="primary">
             Save changes
           </Button.Ripple>
-          <Button.Ripple color='secondary' outline>
+          <Button.Ripple color="secondary" outline>
             Cancel
           </Button.Ripple>
         </Col>

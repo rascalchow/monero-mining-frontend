@@ -5,9 +5,9 @@ const SliderLimit = ({ direction }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Limit</CardTitle>
+        <CardTitle tag="h4">Limit</CardTitle>
       </CardHeader>
-      <CardBody className='text-center'>
+      <CardBody className="text-center">
         <Nouislider
           start={[40, 60]}
           direction={direction}

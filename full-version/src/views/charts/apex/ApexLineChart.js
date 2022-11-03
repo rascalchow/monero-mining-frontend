@@ -1,6 +1,13 @@
 import Chart from 'react-apexcharts'
 import { ArrowDown } from 'react-feather'
-import { Card, CardHeader, CardTitle, CardBody, CardSubtitle, Badge } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardBody,
+  CardSubtitle,
+  Badge
+} from 'reactstrap'
 
 const ApexLineChart = ({ direction, warning }) => {
   const options = {
@@ -37,7 +44,9 @@ const ApexLineChart = ({ direction, warning }) => {
     tooltip: {
       custom(data) {
         return `<div class='px-1 py-50'>
-              <span>${data.series[data.seriesIndex][data.dataPointIndex]}%</span>
+              <span>${
+                data.series[data.seriesIndex][data.dataPointIndex]
+              }%</span>
             </div>`
       }
     },
@@ -73,23 +82,25 @@ const ApexLineChart = ({ direction, warning }) => {
 
   return (
     <Card>
-      <CardHeader className='d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start'>
+      <CardHeader className="d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
         <div>
-          <CardTitle className='mb-75' tag='h4'>
+          <CardTitle className="mb-75" tag="h4">
             Balance
           </CardTitle>
-          <CardSubtitle className='text-muted'>Commercial networks & enterprises</CardSubtitle>
+          <CardSubtitle className="text-muted">
+            Commercial networks & enterprises
+          </CardSubtitle>
         </div>
-        <div className='d-flex align-items-center flex-wrap mt-sm-0 mt-1'>
-          <h5 className='font-weight-bolder mb-0 mr-1'>$ 100,000</h5>
-          <Badge color='light-secondary'>
-            <ArrowDown size={13} className='text-danger' />
-            <span className='align-middle ml-25'>20%</span>
+        <div className="d-flex align-items-center flex-wrap mt-sm-0 mt-1">
+          <h5 className="font-weight-bolder mb-0 mr-1">$ 100,000</h5>
+          <Badge color="light-secondary">
+            <ArrowDown size={13} className="text-danger" />
+            <span className="align-middle ml-25">20%</span>
           </Badge>
         </div>
       </CardHeader>
       <CardBody>
-        <Chart options={options} series={series} type='line' height={400} />
+        <Chart options={options} series={series} type="line" height={400} />
       </CardBody>
     </Card>
   )

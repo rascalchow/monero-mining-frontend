@@ -1,6 +1,13 @@
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { Card, CardHeader, CardBody, CardTitle, Button, CardText } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  Button,
+  CardText
+} from 'reactstrap'
 
 const MySwal = withReactContent(Swal)
 
@@ -73,26 +80,27 @@ const AnimatedSweetAlert = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Animations</CardTitle>
+        <CardTitle tag="h4">Animations</CardTitle>
       </CardHeader>
       <CardBody>
-        <CardText className='mb-0'>
-          Use <code>popup</code> inside <code>showClass</code> parameter to add animation to your alert.
+        <CardText className="mb-0">
+          Use <code>popup</code> inside <code>showClass</code> parameter to add
+          animation to your alert.
         </CardText>
-        <div className='demo-inline-spacing'>
-          <Button color='primary' onClick={handleBounceIn} outline>
+        <div className="demo-inline-spacing">
+          <Button color="primary" onClick={handleBounceIn} outline>
             Bounce In
           </Button>
-          <Button color='primary' onClick={handleFadeIn} outline>
+          <Button color="primary" onClick={handleFadeIn} outline>
             Fade In
           </Button>
-          <Button color='primary' onClick={handleFlipIn} outline>
+          <Button color="primary" onClick={handleFlipIn} outline>
             Flip In
           </Button>
-          <Button color='primary' onClick={handleTada} outline>
+          <Button color="primary" onClick={handleTada} outline>
             Tada
           </Button>
-          <Button color='primary' onClick={handleShake} outline>
+          <Button color="primary" onClick={handleShake} outline>
             Shake
           </Button>
         </div>

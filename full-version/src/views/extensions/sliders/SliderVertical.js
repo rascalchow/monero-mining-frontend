@@ -5,13 +5,13 @@ const SliderVertical = ({ direction }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Vertical Default</CardTitle>
+        <CardTitle tag="h4">Vertical Default</CardTitle>
       </CardHeader>
-      <CardBody className='text-center'>
+      <CardBody className="text-center">
         <Nouislider
           start={20}
           direction={direction}
-          orientation='vertical'
+          orientation="vertical"
           range={{
             min: 0,
             max: 100

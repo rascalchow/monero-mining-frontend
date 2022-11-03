@@ -7,10 +7,10 @@ const BreadcrumbsDefault = () => {
     <Fragment>
       <Breadcrumb>
         <BreadcrumbItem>
-          <Link to='#'> Home </Link>
+          <Link to="#"> Home </Link>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <Link to='#'> Library </Link>
+          <Link to="#"> Library </Link>
         </BreadcrumbItem>
         <BreadcrumbItem active>
           <span> Data </span>

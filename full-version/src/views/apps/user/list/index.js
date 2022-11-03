@@ -6,7 +6,7 @@ import '@styles/react/apps/app-users.scss'
 
 const UsersList = () => {
   return (
-    <div className='app-user-list'>
+    <div className="app-user-list">
       <Table />
     </div>
   )

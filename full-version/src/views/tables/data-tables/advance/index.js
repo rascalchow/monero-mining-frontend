@@ -17,12 +17,16 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 const Tables = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Datatables' breadCrumbParent='Home' breadCrumbActive='Datatables Advance' />
+      <Breadcrumbs
+        breadCrumbTitle="Datatables"
+        breadCrumbParent="Home"
+        breadCrumbActive="Datatables Advance"
+      />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <TableServerSide />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <TableAdvSearch />
         </Col>
       </Row>

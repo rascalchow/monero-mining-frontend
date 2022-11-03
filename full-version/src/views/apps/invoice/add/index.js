@@ -11,8 +11,8 @@ import '@styles/base/pages/app-invoice.scss'
 
 const InvoiceAdd = () => {
   return (
-    <div className='invoice-add-wrapper'>
-      <Row className='invoice-add'>
+    <div className="invoice-add-wrapper">
+      <Row className="invoice-add">
         <Col xl={9} md={8} sm={12}>
           <AddCard />
         </Col>

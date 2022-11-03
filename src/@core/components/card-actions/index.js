@@ -8,9 +8,17 @@ import UiLoader from '@components/ui-loader'
 import { ChevronDown, RotateCw, X } from 'react-feather'
 import { Card, CardHeader, CardTitle, Collapse, Spinner } from 'reactstrap'
 
-const CardActions = props => {
+const CardActions = (props) => {
   // ** Props
-  const { title, actions, children, collapseIcon, reloadIcon, removeIcon, endReload } = props
+  const {
+    title,
+    actions,
+    children,
+    collapseIcon,
+    reloadIcon,
+    removeIcon,
+    endReload,
+  } = props
 
   // ** States
   const [reload, setReload] = useState(false)
@@ -23,11 +31,11 @@ const CardActions = props => {
   const Icons = {
     collapse: collapseIcon ? collapseIcon : ChevronDown,
     remove: removeIcon ? removeIcon : X,
-    reload: reloadIcon ? reloadIcon : RotateCw
+    reload: reloadIcon ? reloadIcon : RotateCw,
   }
 
   // ** Action to call
-  const callAction = action => {
+  const callAction = (action) => {
     switch (action) {
       case 'collapse':
         return setCollapse(!collapse)
@@ -53,7 +61,7 @@ const CardActions = props => {
           <Tag
             key={i}
             className={classnames('cursor-pointer', {
-              'mr-50': i < actions.length - 1
+              'mr-50': i < actions.length - 1,
             })}
             size={15}
             onClick={() => callAction(action)}
@@ -62,7 +70,13 @@ const CardActions = props => {
       })
     } else {
       const Tag = Icons[actions]
-      return <Tag className='cursor-pointer' size={15} onClick={() => callAction(actions)} />
+      return (
+        <Tag
+          className="cursor-pointer"
+          size={15}
+          onClick={() => callAction(actions)}
+        />
+      )
     }
   }
 
@@ -79,31 +93,37 @@ const CardActions = props => {
   })
 
   // ** If user passes collapse action then return <Collapse> as Wrapper else return <Fragment>
-  const CollapseWrapper = actions === 'collapse' || actions.includes('collapse') ? Collapse : Fragment
+  const CollapseWrapper =
+    actions === 'collapse' || actions.includes('collapse') ? Collapse : Fragment
 
   // ** If user passes reload action then return <BlockUi> as Wrapper else return <Fragment>
-  const BlockUiWrapper = actions === 'reload' || actions.includes('reload') ? UiLoader : Fragment
+  const BlockUiWrapper =
+    actions === 'reload' || actions.includes('reload') ? UiLoader : Fragment
 
   return (
     <BlockUiWrapper
       /*eslint-disable */
       {...(actions === 'reload' || actions.includes('reload')
         ? {
-            blocking: reload
+            blocking: reload,
           }
         : {})}
       /*eslint-enable */
     >
       <Card
         className={classnames('card-action', {
-          'd-none': !visibility
+          'd-none': !visibility,
         })}
       >
         <CardHeader>
-          <CardTitle tag='h4'>{title}</CardTitle>
-          <div className='action-icons'>{renderIcons()}</div>
+          <CardTitle tag="h4">{title}</CardTitle>
+          <div className="action-icons">{renderIcons()}</div>
         </CardHeader>
-        <CollapseWrapper {...(actions === 'collapse' || actions.includes('collapse') ? { isOpen: collapse } : {})}>
+        <CollapseWrapper
+          {...(actions === 'collapse' || actions.includes('collapse')
+            ? { isOpen: collapse }
+            : {})}
+        >
           {children}
         </CollapseWrapper>
       </Card>
@@ -119,7 +139,10 @@ CardActions.propTypes = {
   collapseIcon: PropTypes.any,
   removeIcon: PropTypes.any,
   reloadIcon: PropTypes.any,
-  actions: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).isRequired,
+  actions: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]).isRequired,
   endReload(props) {
     // ** User passes reload action and doesn't pass endReload then return Error
     if (
@@ -128,5 +151,5 @@ CardActions.propTypes = {
     ) {
       return new Error('Please provide a function to end reload!')
     }
-  }
+  },
 }

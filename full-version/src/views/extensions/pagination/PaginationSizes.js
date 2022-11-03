@@ -5,11 +5,11 @@ const PaginationSizes = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Sizes</CardTitle>
+        <CardTitle tag="h4">Sizes</CardTitle>
       </CardHeader>
       <CardBody>
         <Row>
-          <Col lg='4' sm='12'>
+          <Col lg="4" sm="12">
             <ReactPaginate
               pageCount={5}
               nextLabel={''}
@@ -22,12 +22,12 @@ const PaginationSizes = () => {
               previousClassName={'page-item prev'}
               previousLinkClassName={'page-link'}
               pageLinkClassName={'page-link'}
-              breakClassName='page-item'
-              breakLinkClassName='page-link'
+              breakClassName="page-item"
+              breakLinkClassName="page-link"
               containerClassName={'pagination react-paginate pagination-lg'}
             />
           </Col>
-          <Col lg='4' sm='12'>
+          <Col lg="4" sm="12">
             <ReactPaginate
               pageCount={5}
               nextLabel={''}
@@ -40,12 +40,12 @@ const PaginationSizes = () => {
               previousClassName={'page-item prev'}
               previousLinkClassName={'page-link'}
               pageLinkClassName={'page-link'}
-              breakClassName='page-item'
-              breakLinkClassName='page-link'
+              breakClassName="page-item"
+              breakLinkClassName="page-link"
               containerClassName={'pagination react-paginate'}
             />
           </Col>
-          <Col lg='4' sm='12'>
+          <Col lg="4" sm="12">
             <ReactPaginate
               pageCount={5}
               nextLabel={''}
@@ -58,8 +58,8 @@ const PaginationSizes = () => {
               previousClassName={'page-item prev'}
               previousLinkClassName={'page-link'}
               pageLinkClassName={'page-link'}
-              breakClassName='page-item'
-              breakLinkClassName='page-link'
+              breakClassName="page-item"
+              breakLinkClassName="page-link"
               containerClassName={'pagination react-paginate pagination-sm'}
             />
           </Col>

@@ -56,18 +56,18 @@ const OrdersReceived = ({ kFormatter, warning }) => {
   }
 
   useEffect(() => {
-    axios.get('/card/card-statistics/orders').then(res => setData(res.data))
+    axios.get('/card/card-statistics/orders').then((res) => setData(res.data))
   }, [])
 
   return data !== null ? (
     <StatsWithAreaChart
       icon={<Package size={21} />}
-      color='warning'
+      color="warning"
       stats={kFormatter(data.analyticsData.orders)}
-      statTitle='Orders Received'
+      statTitle="Orders Received"
       options={options}
       series={data.series}
-      type='area'
+      type="area"
     />
   ) : null
 }

@@ -23,7 +23,7 @@ const VerticalNavMenuGroup = ({
   menuCollapsed,
   menuHover,
   routerProps,
-  currentActiveItem
+  currentActiveItem,
 }) => {
   // ** Current Val
   const currentURL = useLocation().pathname
@@ -40,7 +40,9 @@ const VerticalNavMenuGroup = ({
 
     // ** If user clicked on menu group inside already opened group i.g. when user click on blog group inside pages group
     if (groupOpen && allParents && groupOpen[0] === allParents[0]) {
-      groupOpen.includes(item) ? openArr.splice(openArr.indexOf(item), 1) : openArr.push(item)
+      groupOpen.includes(item)
+        ? openArr.splice(openArr.indexOf(item), 1)
+        : openArr.push(item)
     } else {
       openArr = []
       if (!groupOpen.includes(item)) {
@@ -61,11 +63,13 @@ const VerticalNavMenuGroup = ({
       allParents = getAllParents(parentItem, 'id')
       activeArr = allParents
     } else {
-      activeArr.includes(item) ? activeArr.splice(activeArr.indexOf(item), 1) : activeArr.push(item)
+      activeArr.includes(item)
+        ? activeArr.splice(activeArr.indexOf(item), 1)
+        : activeArr.push(item)
     }
 
     // ** Set open group removing any activegroup item present in opengroup state
-    const openArr = groupOpen.filter(val => !activeArr.includes(val))
+    const openArr = groupOpen.filter((val) => !activeArr.includes(val))
     setGroupOpen([...openArr])
 
     // **  Set Active Group
@@ -74,7 +78,10 @@ const VerticalNavMenuGroup = ({
 
   // ** On Group Item Click
   const onCollapseClick = (e, item) => {
-    if ((groupActive && groupActive.includes(item.id)) || isNavGroupActive(item.children, currentURL, routerProps)) {
+    if (
+      (groupActive && groupActive.includes(item.id)) ||
+      isNavGroupActive(item.children, currentURL, routerProps)
+    ) {
       toggleActiveGroup(item.id)
     } else {
       toggleOpenGroup(item.id, parentItem)
@@ -84,12 +91,16 @@ const VerticalNavMenuGroup = ({
   }
 
   // ** Returns condition to add open class
-  const openClassCondition = id => {
+  const openClassCondition = (id) => {
     if ((menuCollapsed && menuHover) || menuCollapsed === false) {
       if (groupActive.includes(id) || groupOpen.includes(item.id)) {
         return true
       }
-    } else if (groupActive.includes(id) && menuCollapsed && menuHover === false) {
+    } else if (
+      groupActive.includes(id) &&
+      menuCollapsed &&
+      menuHover === false
+    ) {
       return false
     } else {
       return null
@@ -101,23 +112,33 @@ const VerticalNavMenuGroup = ({
       className={classnames('nav-item has-sub', {
         open: openClassCondition(item.id),
         'menu-collapsed-open': groupActive.includes(item.id),
-        'sidebar-group-active': groupActive.includes(item.id) || groupOpen.includes(item.id)
+        'sidebar-group-active':
+          groupActive.includes(item.id) || groupOpen.includes(item.id),
       })}
     >
-      <Link className='d-flex align-items-center' to='/' onClick={e => onCollapseClick(e, item)}>
+      <Link
+        className="d-flex align-items-center"
+        to="/"
+        onClick={(e) => onCollapseClick(e, item)}
+      >
         {item.icon}
-        <span className='menu-title text-truncate'>{item.title}</span>
+        <span className="menu-title text-truncate">{item.title}</span>
 
         {item.badge && item.badgeText ? (
-          <Badge className='ml-auto mr-1' color={item.badge} pill>
+          <Badge className="ml-auto mr-1" color={item.badge} pill>
             {item.badgeText}
           </Badge>
         ) : null}
       </Link>
 
       {/* Render Child Recursively Through VerticalNavMenuItems Component */}
-      <ul className='menu-content'>
-        <Collapse isOpen={(groupActive && groupActive.includes(item.id)) || (groupOpen && groupOpen.includes(item.id))}>
+      <ul className="menu-content">
+        <Collapse
+          isOpen={
+            (groupActive && groupActive.includes(item.id)) ||
+            (groupOpen && groupOpen.includes(item.id))
+          }
+        >
           <VerticalNavMenuItems
             items={item.children}
             groupActive={groupActive}

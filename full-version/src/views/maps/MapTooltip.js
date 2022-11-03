@@ -39,34 +39,40 @@ const MapTooltip = () => {
     setClicked(clicked + 1)
   }
 
-  const clickedText = clicked === 0 ? 'Click this Circle to change the Tooltip text' : `Circle click: ${clicked}`
+  const clickedText =
+    clicked === 0 ? 'Click this Circle to change the Tooltip text' : `Circle click: ${clicked}`
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Tooltip</CardTitle>
+        <CardTitle tag="h4">Tooltip</CardTitle>
       </CardHeader>
       <CardBody>
-        <MapContainer center={center} zoom={13} className='leaflet-map'>
+        <MapContainer center={center} zoom={13} className="leaflet-map">
           <TileLayer
             attribution='&ampcopy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Circle center={center} fillColor='blue' onClick={onClickCircle} radius={200}>
+          <Circle
+            center={center}
+            fillColor="blue"
+            onClick={onClickCircle}
+            radius={200}
+          >
             <Tooltip>{clickedText}</Tooltip>
           </Circle>
-          <CircleMarker center={[51.51, -0.12]} color='red' radius={20}>
+          <CircleMarker center={[51.51, -0.12]} color="red" radius={20}>
             <Tooltip>Tooltip for CircleMarker</Tooltip>
           </CircleMarker>
           <Marker position={[51.51, -0.09]}>
             <Popup>Popup for Marker</Popup>
             <Tooltip>Tooltip for Marker</Tooltip>
           </Marker>
-          <Polygon color='purple' positions={multiPolygon}>
+          <Polygon color="purple" positions={multiPolygon}>
             <Tooltip sticky>sticky Tooltip for Polygon</Tooltip>
           </Polygon>
-          <Rectangle bounds={rectangle} color='black'>
-            <Tooltip direction='bottom' offset={[0, 20]} opacity={1} permanent>
+          <Rectangle bounds={rectangle} color="black">
+            <Tooltip direction="bottom" offset={[0, 20]} opacity={1} permanent>
               permanent Tooltip for Rectangle
             </Tooltip>
           </Rectangle>

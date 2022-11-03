@@ -16,39 +16,45 @@ const AccountSettings = () => {
   const [activeTab, setActiveTab] = useState('1'),
     [data, setData] = useState(null)
 
-  const toggleTab = tab => {
+  const toggleTab = (tab) => {
     setActiveTab(tab)
   }
 
   useEffect(() => {
-    axios.get('/account-setting/data').then(response => setData(response.data))
+    axios
+      .get('/account-setting/data')
+      .then((response) => setData(response.data))
   }, [])
 
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Account Settings' breadCrumbParent='Pages' breadCrumbActive='Account Settings' />
+      <Breadcrumbs
+        breadCrumbTitle="Account Settings"
+        breadCrumbParent="Pages"
+        breadCrumbActive="Account Settings"
+      />
       {data !== null ? (
         <Row>
-          <Col className='mb-2 mb-md-0' md='3'>
+          <Col className="mb-2 mb-md-0" md="3">
             <Tabs activeTab={activeTab} toggleTab={toggleTab} />
           </Col>
-          <Col md='9'>
+          <Col md="9">
             <Card>
               <CardBody>
                 <TabContent activeTab={activeTab}>
-                  <TabPane tabId='1'>
+                  <TabPane tabId="1">
                     <GeneralTabContent data={data.general} />
                   </TabPane>
-                  <TabPane tabId='2'>
+                  <TabPane tabId="2">
                     <PasswordTabContent />
                   </TabPane>
-                  <TabPane tabId='3'>
+                  <TabPane tabId="3">
                     <InfoTabContent data={data.info} />
                   </TabPane>
-                  <TabPane tabId='4'>
+                  <TabPane tabId="4">
                     <SocialTabContent data={data.social} />
                   </TabPane>
-                  <TabPane tabId='5'>
+                  <TabPane tabId="5">
                     <NotificationsTabContent data={data.notification} />
                   </TabPane>
                 </TabContent>

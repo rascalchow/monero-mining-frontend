@@ -1,8 +1,22 @@
 import { useState } from 'react'
 import { Scatter } from 'react-chartjs-2'
-import { Card, CardHeader, CardTitle, CardBody, ButtonGroup, Button } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardBody,
+  ButtonGroup,
+  Button
+} from 'reactstrap'
 
-const ChartjsScatterChart = ({ labelColor, tooltipShadow, gridLineColor, primary, yellowColor, successColorShade }) => {
+const ChartjsScatterChart = ({
+  labelColor,
+  tooltipShadow,
+  gridLineColor,
+  primary,
+  yellowColor,
+  successColorShade
+}) => {
   const [active, setActive] = useState('daily')
 
   const options = {
@@ -293,23 +307,43 @@ const ChartjsScatterChart = ({ labelColor, tooltipShadow, gridLineColor, primary
 
   return (
     <Card>
-      <CardHeader className='d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column'>
-        <CardTitle tag='h4'>New Product Data</CardTitle>
-        <ButtonGroup className='mt-md-0 mt-1'>
-          <Button active={active === 'daily'} color='primary' outline onClick={() => setActive('daily')}>
+      <CardHeader className="d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
+        <CardTitle tag="h4">New Product Data</CardTitle>
+        <ButtonGroup className="mt-md-0 mt-1">
+          <Button
+            active={active === 'daily'}
+            color="primary"
+            outline
+            onClick={() => setActive('daily')}
+          >
             Daily
           </Button>
-          <Button active={active === 'monthly'} color='primary' outline onClick={() => setActive('monthly')}>
+          <Button
+            active={active === 'monthly'}
+            color="primary"
+            outline
+            onClick={() => setActive('monthly')}
+          >
             Monthly
           </Button>
-          <Button active={active === 'yearly'} color='primary' outline onClick={() => setActive('yearly')}>
+          <Button
+            active={active === 'yearly'}
+            color="primary"
+            outline
+            onClick={() => setActive('yearly')}
+          >
             Yearly
           </Button>
         </ButtonGroup>
       </CardHeader>
       <CardBody>
         <div style={{ height: '415px' }}>
-          <Scatter data={data} options={options} height={415} plugins={plugins} />
+          <Scatter
+            data={data}
+            options={options}
+            height={415}
+            plugins={plugins}
+          />
         </div>
       </CardBody>
     </Card>

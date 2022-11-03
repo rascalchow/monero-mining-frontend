@@ -6,13 +6,13 @@ const PickerDateTime = () => {
   const [picker, setPicker] = useState(new Date())
   return (
     <Fragment>
-      <Label for='date-time-picker'>Date & Time</Label>
+      <Label for="date-time-picker">Date & Time</Label>
       <Flatpickr
         value={picker}
         data-enable-time
-        id='date-time-picker'
-        className='form-control'
-        onChange={date => setPicker(date)}
+        id="date-time-picker"
+        className="form-control"
+        onChange={(date) => setPicker(date)}
       />
     </Fragment>
   )

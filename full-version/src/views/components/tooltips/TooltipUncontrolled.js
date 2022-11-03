@@ -4,10 +4,10 @@ import { Button, UncontrolledTooltip } from 'reactstrap'
 const TooltipUncontrolled = () => {
   return (
     <Fragment>
-      <Button color='primary' id='UnControlledExample'>
+      <Button color="primary" id="UnControlledExample">
         Uncontrolled
       </Button>
-      <UncontrolledTooltip placement='top' target='UnControlledExample'>
+      <UncontrolledTooltip placement="top" target="UnControlledExample">
         Hello World !
       </UncontrolledTooltip>
     </Fragment>

@@ -2,7 +2,7 @@ import { Spinner } from 'reactstrap'
 
 const SpinnerTextAlignment = () => {
   return (
-    <div className='text-center'>
+    <div className="text-center">
       <Spinner />
     </div>
   )

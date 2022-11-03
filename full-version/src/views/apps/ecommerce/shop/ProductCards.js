@@ -6,7 +6,7 @@ import classnames from 'classnames'
 import { Star, ShoppingCart, Heart } from 'react-feather'
 import { Card, CardBody, CardText, Button, Badge } from 'reactstrap'
 
-const ProductCards = props => {
+const ProductCards = (props) => {
   // ** Props
   const {
     store,
@@ -42,23 +42,27 @@ const ProductCards = props => {
   // ** Renders products
   const renderProducts = () => {
     if (products.length) {
-      return products.map(item => {
+      return products.map((item) => {
         const CartBtnTag = item.isInCart ? Link : 'button'
 
         return (
-          <Card className='ecommerce-card' key={item.name}>
-            <div className='item-img text-center mx-auto'>
+          <Card className="ecommerce-card" key={item.name}>
+            <div className="item-img text-center mx-auto">
               <Link to={`/apps/ecommerce/product-detail/${item.slug}`}>
-                <img className='img-fluid card-img-top' src={item.image} alt={item.name} />
+                <img
+                  className="img-fluid card-img-top"
+                  src={item.image}
+                  alt={item.name}
+                />
               </Link>
             </div>
             <CardBody>
-              <div className='item-wrapper'>
-                <div className='item-rating'>
-                  <ul className='unstyled-list list-inline'>
+              <div className="item-wrapper">
+                <div className="item-rating">
+                  <ul className="unstyled-list list-inline">
                     {new Array(5).fill().map((listItem, index) => {
                       return (
-                        <li key={index} className='ratings-list-item mr-25'>
+                        <li key={index} className="ratings-list-item mr-25">
                           <Star
                             className={classnames({
                               'filled-star': index + 1 <= item.rating,
@@ -70,37 +74,46 @@ const ProductCards = props => {
                     })}
                   </ul>
                 </div>
-                <div className='item-cost'>
-                  <h6 className='item-price'>${item.price}</h6>
+                <div className="item-cost">
+                  <h6 className="item-price">${item.price}</h6>
                 </div>
               </div>
-              <h6 className='item-name'>
-                <Link className='text-body' to={`/apps/ecommerce/product-detail/${item.slug}`}>
+              <h6 className="item-name">
+                <Link
+                  className="text-body"
+                  to={`/apps/ecommerce/product-detail/${item.slug}`}
+                >
                   {item.name}
                 </Link>
-                <CardText tag='span' className='item-company'>
+                <CardText tag="span" className="item-company">
                   By{' '}
-                  <a className='company-name' href='/' onClick={e => e.preventDefault()}>
+                  <a
+                    className="company-name"
+                    href="/"
+                    onClick={(e) => e.preventDefault()}
+                  >
                     {item.brand}
                   </a>
                 </CardText>
               </h6>
-              <CardText className='item-description'>{item.description}</CardText>
+              <CardText className="item-description">
+                {item.description}
+              </CardText>
             </CardBody>
-            <div className='item-options text-center'>
-              <div className='item-wrapper'>
-                <div className='item-cost'>
-                  <h4 className='item-price'>${item.price}</h4>
+            <div className="item-options text-center">
+              <div className="item-wrapper">
+                <div className="item-cost">
+                  <h4 className="item-price">${item.price}</h4>
                   {item.hasFreeShipping ? (
-                    <CardText className='shipping'>
-                      <Badge color='light-success'>Free Shipping</Badge>
+                    <CardText className="shipping">
+                      <Badge color="light-success">Free Shipping</Badge>
                     </CardText>
                   ) : null}
                 </div>
               </div>
               <Button
-                className='btn-wishlist'
-                color='light'
+                className="btn-wishlist"
+                color="light"
                 onClick={() => handleWishlistClick(item.id, item.isInWishlist)}
               >
                 <Heart
@@ -112,19 +125,19 @@ const ProductCards = props => {
                 <span>Wishlist</span>
               </Button>
               <Button
-                color='primary'
+                color="primary"
                 tag={CartBtnTag}
-                className='btn-cart move-cart'
+                className="btn-cart move-cart"
                 onClick={() => handleCartBtn(item.id, item.isInCart)}
                 /*eslint-disable */
                 {...(item.isInCart
                   ? {
-                      to: '/apps/ecommerce/checkout'
+                      to: '/apps/ecommerce/checkout',
                     }
                   : {})}
                 /*eslint-enable */
               >
-                <ShoppingCart className='mr-50' size={14} />
+                <ShoppingCart className="mr-50" size={14} />
                 <span>{item.isInCart ? 'View In Cart' : 'Add To Cart'}</span>
               </Button>
             </div>

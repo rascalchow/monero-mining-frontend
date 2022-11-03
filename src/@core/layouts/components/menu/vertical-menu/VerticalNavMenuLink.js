@@ -23,7 +23,7 @@ const VerticalNavMenuLink = ({
   toggleActiveGroup,
   parentItem,
   routerProps,
-  currentActiveItem
+  currentActiveItem,
 }) => {
   // ** Conditional Link Tag, if item has newTab or externalLink props use <a> tag else use NavLink
   const LinkTag = item.externalLink ? 'a' : NavLink
@@ -36,7 +36,7 @@ const VerticalNavMenuLink = ({
   const match = matchPath(currentURL, {
     path: `${item.navLink}/:param`,
     exact: true,
-    strict: false
+    strict: false,
   })
 
   // ** Search for current item parents
@@ -47,7 +47,7 @@ const VerticalNavMenuLink = ({
   }
 
   // ** URL Vars
-  const resetActiveGroup = navLink => {
+  const resetActiveGroup = (navLink) => {
     const parents = search(navigation, navLink, match)
     toggleActiveGroup(item.id, parents)
   }
@@ -72,16 +72,16 @@ const VerticalNavMenuLink = ({
       className={classnames({
         'nav-item': !item.children,
         disabled: item.disabled,
-        active: item.navLink === activeItem
+        active: item.navLink === activeItem,
       })}
     >
       <LinkTag
-        className='d-flex align-items-center'
+        className="d-flex align-items-center"
         target={item.newTab ? '_blank' : undefined}
         /*eslint-disable */
         {...(item.externalLink === true
           ? {
-              href: item.navLink || '/'
+              href: item.navLink || '/',
             }
           : {
               to: item.navLink || '/',
@@ -90,24 +90,30 @@ const VerticalNavMenuLink = ({
                   return false
                 }
 
-                if (match.url && match.url !== '' && match.url === item.navLink) {
+                if (
+                  match.url &&
+                  match.url !== '' &&
+                  match.url === item.navLink
+                ) {
                   currentActiveItem = item.navLink
                 }
-              }
+              },
             })}
         /*eslint-enable */
-        onClick={e => {
+        onClick={(e) => {
           if (!item.navLink.length) {
             e.preventDefault()
           }
-          parentItem ? resetActiveGroup(item.navLink) : resetActiveAndOpenGroups()
+          parentItem
+            ? resetActiveGroup(item.navLink)
+            : resetActiveAndOpenGroups()
         }}
       >
         {item.icon}
-        <span className='menu-item text-truncate'>{item.title}</span>
+        <span className="menu-item text-truncate">{item.title}</span>
 
         {item.badge && item.badgeText ? (
-          <Badge className='ml-auto mr-1' color={item.badge} pill>
+          <Badge className="ml-auto mr-1" color={item.badge} pill>
             {item.badgeText}
           </Badge>
         ) : null}

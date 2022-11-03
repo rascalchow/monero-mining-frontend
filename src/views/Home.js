@@ -1,4 +1,11 @@
-import { Card, CardHeader, CardBody, CardTitle, CardText, CardLink } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardText,
+  CardLink,
+} from 'reactstrap'
 
 const Home = () => {
   return (
@@ -12,8 +19,8 @@ const Home = () => {
           <CardText>
             Please make sure to read our{' '}
             <CardLink
-              href='https://pixinvent.com/demo/vuexy-react-admin-dashboard-template/documentation/'
-              target='_blank'
+              href="https://pixinvent.com/demo/vuexy-react-admin-dashboard-template/documentation/"
+              target="_blank"
             >
               Template Documentation
             </CardLink>{' '}
@@ -28,13 +35,14 @@ const Home = () => {
         </CardHeader>
         <CardBody>
           <CardText>
-            We carefully crafted JWT flow so you can implement JWT with ease and with minimum efforts.
+            We carefully crafted JWT flow so you can implement JWT with ease and
+            with minimum efforts.
           </CardText>
           <CardText>
             Please read our{' '}
             <CardLink
-              href='https://pixinvent.com/demo/vuexy-react-admin-dashboard-template/documentation/development/auth'
-              target='_blank'
+              href="https://pixinvent.com/demo/vuexy-react-admin-dashboard-template/documentation/development/auth"
+              target="_blank"
             >
               JWT Documentation
             </CardLink>{' '}

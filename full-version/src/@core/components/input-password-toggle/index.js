@@ -5,9 +5,16 @@ import { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { Eye, EyeOff } from 'react-feather'
-import { InputGroup, InputGroupAddon, Input, InputGroupText, Label, inputClassName } from 'reactstrap'
+import {
+  InputGroup,
+  InputGroupAddon,
+  Input,
+  InputGroupText,
+  Label,
+  inputClassName,
+} from 'reactstrap'
 
-const InputPasswordToggle = props => {
+const InputPasswordToggle = (props) => {
   // ** Props
   const {
     label,
@@ -41,26 +48,31 @@ const InputPasswordToggle = props => {
       {label ? <Label for={htmlFor}>{label}</Label> : null}
       <InputGroup
         className={classnames({
-          [className]: className
+          [className]: className,
         })}
       >
         <Input
           type={inputVisibility === false ? 'password' : 'text'}
           placeholder={placeholder ? placeholder : '············'}
           className={classnames({
-            [inputClassName]: inputClassName
+            [inputClassName]: inputClassName,
           })}
           /*eslint-disable */
           {...(label && htmlFor
             ? {
-                id: htmlFor
+                id: htmlFor,
               }
             : {})}
           {...rest}
           /*eslint-enable */
         />
-        <InputGroupAddon addonType='append' onClick={() => setInputVisibility(!inputVisibility)}>
-          <InputGroupText className='cursor-pointer'>{renderIcon()}</InputGroupText>
+        <InputGroupAddon
+          addonType="append"
+          onClick={() => setInputVisibility(!inputVisibility)}
+        >
+          <InputGroupText className="cursor-pointer">
+            {renderIcon()}
+          </InputGroupText>
         </InputGroupAddon>
       </InputGroup>
     </Fragment>
@@ -89,10 +101,10 @@ InputPasswordToggle.propTypes = {
     if (props[propName] && props['label'] === 'undefined') {
       throw new Error('label prop is required when htmlFor prop is present')
     }
-  }
+  },
 }
 
 // ** Default Props
 InputPasswordToggle.defaultProps = {
-  visible: false
+  visible: false,
 }

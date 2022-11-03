@@ -7,8 +7,25 @@ import interview from '@src/assets/images/portrait/small/avatar-s-20.jpg'
 import user1 from '@src/assets/images/portrait/small/avatar-s-25.jpg'
 import user2 from '@src/assets/images/portrait/small/avatar-s-7.jpg'
 import user3 from '@src/assets/images/portrait/small/avatar-s-10.jpg'
-import { Share2, MessageSquare, PhoneCall, PenTool, User, FileText, MapPin, ShoppingBag, Server } from 'react-feather'
-import { Media, Button, UncontrolledCollapse, ListGroup, ListGroupItem, Badge } from 'reactstrap'
+import {
+  Share2,
+  MessageSquare,
+  PhoneCall,
+  PenTool,
+  User,
+  FileText,
+  MapPin,
+  ShoppingBag,
+  Server
+} from 'react-feather'
+import {
+  Media,
+  Button,
+  UncontrolledCollapse,
+  ListGroup,
+  ListGroupItem,
+  Badge
+} from 'reactstrap'
 
 const avatarGroupBasic = [
   {
@@ -59,7 +76,7 @@ export const basicData = [
     meta: '12 min ago',
     customContent: (
       <Media>
-        <img className='mr-1' src={pdf} alt='pdf' height='23' />
+        <img className="mr-1" src={pdf} alt="pdf" height="23" />
         <Media body>invoice.pdf</Media>
       </Media>
     )
@@ -70,10 +87,10 @@ export const basicData = [
     meta: '45 min ago',
     color: 'secondary',
     customContent: (
-      <Media className='align-items-center'>
-        <Avatar img={ceo} imgHeight='38' imgWidth='38' />
-        <Media className='ml-50' body>
-          <h6 className='mb-0'>John Doe (Client)</h6>
+      <Media className="align-items-center">
+        <Avatar img={ceo} imgHeight="38" imgWidth="38" />
+        <Media className="ml-50" body>
+          <h6 className="mb-0">John Doe (Client)</h6>
           <span>CEO of Infibeam</span>
         </Media>
       </Media>
@@ -86,38 +103,43 @@ export const basicData = [
     color: 'success',
     customContent: (
       <Fragment>
-        <Button size='sm' color='primary' id='reportToggler' outline>
+        <Button size="sm" color="primary" id="reportToggler" outline>
           Show Report
         </Button>
-        <UncontrolledCollapse toggler='#reportToggler'>
-          <ListGroup className='mt-1' flush>
-            <ListGroupItem className='list-group-item d-flex justify-content-between flex-wrap'>
+        <UncontrolledCollapse toggler="#reportToggler">
+          <ListGroup className="mt-1" flush>
+            <ListGroupItem className="list-group-item d-flex justify-content-between flex-wrap">
               <span>
-                Last Years's Profit : <span className='font-weight-bold'>$20000</span>
+                Last Years's Profit :{' '}
+                <span className="font-weight-bold">$20000</span>
               </span>
               <Share2 size={17} />
             </ListGroupItem>
-            <ListGroupItem className='list-group-item d-flex justify-content-between flex-wrap'>
+            <ListGroupItem className="list-group-item d-flex justify-content-between flex-wrap">
               <span>
-                This Years's Profit : <span className='font-weight-bold'>$25000</span>
+                This Years's Profit :{' '}
+                <span className="font-weight-bold">$25000</span>
               </span>
               <Share2 size={17} />
             </ListGroupItem>
-            <ListGroupItem className='list-group-item d-flex justify-content-between flex-wrap'>
+            <ListGroupItem className="list-group-item d-flex justify-content-between flex-wrap">
               <span>
-                Last Years's Commission : <span className='font-weight-bold'>$5000</span>
+                Last Years's Commission :{' '}
+                <span className="font-weight-bold">$5000</span>
               </span>
               <Share2 size={17} />
             </ListGroupItem>
-            <ListGroupItem className='list-group-item d-flex justify-content-between flex-wrap'>
+            <ListGroupItem className="list-group-item d-flex justify-content-between flex-wrap">
               <span>
-                This Years's Commission : <span className='font-weight-bold'>$7000</span>
+                This Years's Commission :{' '}
+                <span className="font-weight-bold">$7000</span>
               </span>
               <Share2 size={17} />
             </ListGroupItem>
-            <ListGroupItem className='list-group-item d-flex justify-content-between flex-wrap'>
+            <ListGroupItem className="list-group-item d-flex justify-content-between flex-wrap">
               <span>
-                This Years's Total Balance : <span className='font-weight-bold'>$70000</span>
+                This Years's Total Balance :{' '}
+                <span className="font-weight-bold">$70000</span>
               </span>
               <Share2 size={17} />
             </ListGroupItem>
@@ -134,16 +156,16 @@ export const basicData = [
     customContent: (
       <Fragment>
         <hr />
-        <div className='d-flex justify-content-between flex-wrap'>
-          <Media className='align-items-center'>
-            <Avatar img={interview} className='mr-1' />
+        <div className="d-flex justify-content-between flex-wrap">
+          <Media className="align-items-center">
+            <Avatar img={interview} className="mr-1" />
             <Media body>
-              <h6 className='mb-0'>Katy Turner</h6>
-              <span className='text-muted'>Javascript Developer</span>
+              <h6 className="mb-0">Katy Turner</h6>
+              <span className="text-muted">Javascript Developer</span>
             </Media>
           </Media>
-          <div className='d-flex flex-wrap align-items-center cursor-pointer mt-sm-0 mt-50'>
-            <MessageSquare className='mr-50' size={14} />
+          <div className="d-flex flex-wrap align-items-center cursor-pointer mt-sm-0 mt-50">
+            <MessageSquare className="mr-50" size={14} />
             <PhoneCall size={14} />
           </div>
         </div>
@@ -157,22 +179,32 @@ export const basicData = [
     meta: '03:00PM',
     color: 'danger',
     customContent: (
-      <div className='d-flex justify-content-between flex-wrap flex-sm-row flex-column'>
+      <div className="d-flex justify-content-between flex-wrap flex-sm-row flex-column">
         <div>
-          <p className='text-muted mb-50'>Developers</p>
-          <div className='d-flex align-items-center'>
-            <Avatar color='light-primary' className='mr-50' content='A' size='sm' />
-            <Avatar color='light-success' className='mr-50' content='B' size='sm' />
-            <Avatar color='light-danger' content='C' size='sm' />
+          <p className="text-muted mb-50">Developers</p>
+          <div className="d-flex align-items-center">
+            <Avatar
+              color="light-primary"
+              className="mr-50"
+              content="A"
+              size="sm"
+            />
+            <Avatar
+              color="light-success"
+              className="mr-50"
+              content="B"
+              size="sm"
+            />
+            <Avatar color="light-danger" content="C" size="sm" />
           </div>
         </div>
-        <div className='mt-sm-0 mt-1'>
-          <p className='text-muted mb-50'>Deadline</p>
-          <p className='mb-0'>20 Dec 2077</p>
+        <div className="mt-sm-0 mt-1">
+          <p className="text-muted mb-50">Deadline</p>
+          <p className="mb-0">20 Dec 2077</p>
         </div>
-        <div className='mt-sm-0 mt-1'>
-          <p className='text-muted mb-50'>Budget</p>
-          <p className='mb-0'>$50000</p>
+        <div className="mt-sm-0 mt-1">
+          <p className="text-muted mb-50">Budget</p>
+          <p className="mb-0">$50000</p>
         </div>
       </div>
     )
@@ -182,15 +214,15 @@ export const basicData = [
     content:
       'Our main goal is to design a new mobile application for our client. The customer wants a clean & flat design.',
     meta: (
-      <Badge color='light-primary' pill>
+      <Badge color="light-primary" pill>
         Design
       </Badge>
     ),
     color: 'info',
     customContent: (
       <div>
-        <span className='text-muted'>Participants</span>
-        <AvatarGroup className='mt-50' data={avatarGroupBasic} />
+        <span className="text-muted">Participants</span>
+        <AvatarGroup className="mt-50" data={avatarGroupBasic} />
       </div>
     )
   }
@@ -204,7 +236,7 @@ export const iconsData = [
     meta: '12 min ago',
     customContent: (
       <Media>
-        <img className='mr-1' src={pdf} alt='pdf' height='23' />
+        <img className="mr-1" src={pdf} alt="pdf" height="23" />
         <Media body>invoice.pdf</Media>
       </Media>
     )
@@ -216,10 +248,10 @@ export const iconsData = [
     icon: <User size={14} />,
     color: 'secondary',
     customContent: (
-      <Media className='align-items-center'>
-        <Avatar img={ceo} imgHeight='38' imgWidth='38' />
-        <Media className='ml-50' body>
-          <h6 className='mb-0'>John Doe (Client)</h6>
+      <Media className="align-items-center">
+        <Avatar img={ceo} imgHeight="38" imgWidth="38" />
+        <Media className="ml-50" body>
+          <h6 className="mb-0">John Doe (Client)</h6>
           <span>CEO of Infibeam</span>
         </Media>
       </Media>
@@ -233,38 +265,43 @@ export const iconsData = [
     color: 'success',
     customContent: (
       <Fragment>
-        <Button size='sm' color='primary' id='reportToggler2' outline>
+        <Button size="sm" color="primary" id="reportToggler2" outline>
           Show Report
         </Button>
-        <UncontrolledCollapse toggler='#reportToggler2'>
-          <ListGroup className='mt-1' flush>
-            <ListGroupItem className='list-group-item d-flex justify-content-between flex-wrap'>
+        <UncontrolledCollapse toggler="#reportToggler2">
+          <ListGroup className="mt-1" flush>
+            <ListGroupItem className="list-group-item d-flex justify-content-between flex-wrap">
               <span>
-                Last Years's Profit : <span className='font-weight-bold'>$20000</span>
+                Last Years's Profit :{' '}
+                <span className="font-weight-bold">$20000</span>
               </span>
               <Share2 size={17} />
             </ListGroupItem>
-            <ListGroupItem className='list-group-item d-flex justify-content-between flex-wrap'>
+            <ListGroupItem className="list-group-item d-flex justify-content-between flex-wrap">
               <span>
-                This Years's Profit : <span className='font-weight-bold'>$25000</span>
+                This Years's Profit :{' '}
+                <span className="font-weight-bold">$25000</span>
               </span>
               <Share2 size={17} />
             </ListGroupItem>
-            <ListGroupItem className='list-group-item d-flex justify-content-between flex-wrap'>
+            <ListGroupItem className="list-group-item d-flex justify-content-between flex-wrap">
               <span>
-                Last Years's Commission : <span className='font-weight-bold'>$5000</span>
+                Last Years's Commission :{' '}
+                <span className="font-weight-bold">$5000</span>
               </span>
               <Share2 size={17} />
             </ListGroupItem>
-            <ListGroupItem className='list-group-item d-flex justify-content-between flex-wrap'>
+            <ListGroupItem className="list-group-item d-flex justify-content-between flex-wrap">
               <span>
-                This Years's Commission : <span className='font-weight-bold'>$7000</span>
+                This Years's Commission :{' '}
+                <span className="font-weight-bold">$7000</span>
               </span>
               <Share2 size={17} />
             </ListGroupItem>
-            <ListGroupItem className='list-group-item d-flex justify-content-between flex-wrap'>
+            <ListGroupItem className="list-group-item d-flex justify-content-between flex-wrap">
               <span>
-                This Years's Total Balance : <span className='font-weight-bold'>$70000</span>
+                This Years's Total Balance :{' '}
+                <span className="font-weight-bold">$70000</span>
               </span>
               <Share2 size={17} />
             </ListGroupItem>
@@ -282,16 +319,16 @@ export const iconsData = [
     customContent: (
       <Fragment>
         <hr />
-        <div className='d-flex justify-content-between flex-wrap'>
-          <Media className='align-items-center'>
-            <Avatar img={interview} className='mr-1' />
+        <div className="d-flex justify-content-between flex-wrap">
+          <Media className="align-items-center">
+            <Avatar img={interview} className="mr-1" />
             <Media body>
-              <h6 className='mb-0'>Katy Turner</h6>
-              <span className='text-muted'>Javascript Developer</span>
+              <h6 className="mb-0">Katy Turner</h6>
+              <span className="text-muted">Javascript Developer</span>
             </Media>
           </Media>
-          <div className='d-flex flex-wrap align-items-center cursor-pointer mt-sm-0 mt-50'>
-            <MessageSquare className='mr-50' size={14} />
+          <div className="d-flex flex-wrap align-items-center cursor-pointer mt-sm-0 mt-50">
+            <MessageSquare className="mr-50" size={14} />
             <PhoneCall size={14} />
           </div>
         </div>
@@ -306,22 +343,32 @@ export const iconsData = [
     icon: <ShoppingBag size={14} />,
     color: 'danger',
     customContent: (
-      <div className='d-flex justify-content-between flex-wrap flex-sm-row flex-column'>
+      <div className="d-flex justify-content-between flex-wrap flex-sm-row flex-column">
         <div>
-          <p className='text-muted mb-50'>Developers</p>
-          <div className='d-flex align-items-center'>
-            <Avatar color='light-primary' className='mr-50' content='A' size='sm' />
-            <Avatar color='light-success' className='mr-50' content='B' size='sm' />
-            <Avatar color='light-danger' content='C' size='sm' />
+          <p className="text-muted mb-50">Developers</p>
+          <div className="d-flex align-items-center">
+            <Avatar
+              color="light-primary"
+              className="mr-50"
+              content="A"
+              size="sm"
+            />
+            <Avatar
+              color="light-success"
+              className="mr-50"
+              content="B"
+              size="sm"
+            />
+            <Avatar color="light-danger" content="C" size="sm" />
           </div>
         </div>
-        <div className='mt-sm-0 mt-1'>
-          <p className='text-muted mb-50'>Deadline</p>
-          <p className='mb-0'>20 Dec 2077</p>
+        <div className="mt-sm-0 mt-1">
+          <p className="text-muted mb-50">Deadline</p>
+          <p className="mb-0">20 Dec 2077</p>
         </div>
-        <div className='mt-sm-0 mt-1'>
-          <p className='text-muted mb-50'>Budget</p>
-          <p className='mb-0'>$50000</p>
+        <div className="mt-sm-0 mt-1">
+          <p className="text-muted mb-50">Budget</p>
+          <p className="mb-0">$50000</p>
         </div>
       </div>
     )
@@ -332,15 +379,15 @@ export const iconsData = [
     content:
       'Our main goal is to design a new mobile application for our client. The customer wants a clean & flat design.',
     meta: (
-      <Badge color='light-primary' pill>
+      <Badge color="light-primary" pill>
         Design
       </Badge>
     ),
     color: 'info',
     customContent: (
       <div>
-        <span className='text-muted'>Participants</span>
-        <AvatarGroup className='mt-50' data={avatarGroupIcons} />
+        <span className="text-muted">Participants</span>
+        <AvatarGroup className="mt-50" data={avatarGroupIcons} />
       </div>
     )
   }

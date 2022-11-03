@@ -2,8 +2,8 @@ import axios from 'axios'
 
 // ** Get User Profile
 export const getUserProfile = () => {
-  return dispatch => {
-    return axios.get('/apps/chat/users/profile-user').then(res => {
+  return (dispatch) => {
+    return axios.get('/apps/chat/users/profile-user').then((res) => {
       return dispatch({
         type: 'GET_USER_PROFILE',
         userProfile: res.data
@@ -14,8 +14,8 @@ export const getUserProfile = () => {
 
 // ** Get Chats & Contacts
 export const getChatContacts = () => {
-  return dispatch => {
-    axios.get('/apps/chat/chats-and-contacts').then(res => {
+  return (dispatch) => {
+    axios.get('/apps/chat/chats-and-contacts').then((res) => {
       dispatch({
         type: 'GET_CHAT_CONTACTS',
         data: res.data
@@ -25,9 +25,9 @@ export const getChatContacts = () => {
 }
 
 // ** Select Chat
-export const selectChat = id => {
-  return dispatch => {
-    axios.get('/apps/chat/get-chat', { id }).then(res => {
+export const selectChat = (id) => {
+  return (dispatch) => {
+    axios.get('/apps/chat/get-chat', { id }).then((res) => {
       dispatch({ type: 'SELECT_CHAT', data: res.data })
       dispatch(getChatContacts())
     })
@@ -35,9 +35,9 @@ export const selectChat = id => {
 }
 
 // ** Send Msg
-export const sendMsg = obj => {
-  return dispatch => {
-    axios.post('/apps/chat/send-msg', { obj }).then(res => {
+export const sendMsg = (obj) => {
+  return (dispatch) => {
+    axios.post('/apps/chat/send-msg', { obj }).then((res) => {
       dispatch({ type: 'SEND_MSG', data: res.data })
       dispatch(selectChat(obj.contact.id))
     })

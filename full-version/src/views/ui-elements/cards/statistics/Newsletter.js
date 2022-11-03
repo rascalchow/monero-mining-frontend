@@ -7,7 +7,9 @@ const Newsletter = ({ warning }) => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    axios.get('/card/card-statistics/newsletter').then(res => setData(res.data))
+    axios
+      .get('/card/card-statistics/newsletter')
+      .then((res) => setData(res.data))
   }, [])
 
   const options = {
@@ -70,11 +72,11 @@ const Newsletter = ({ warning }) => {
   return data !== null ? (
     <StatsWithLineChart
       icon={<Mail size={21} />}
-      color='warning'
-      stats='28.7k'
-      statTitle='Newsletter'
+      color="warning"
+      stats="28.7k"
+      statTitle="Newsletter"
       series={data.series}
-      type='line'
+      type="line"
       options={options}
     />
   ) : null

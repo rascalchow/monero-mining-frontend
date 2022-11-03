@@ -25,6 +25,6 @@ const images = [
 ]
 
 const CarouselInterval = () => {
-  return <UncontrolledCarousel items={images} interval='500' keyboard={false} />
+  return <UncontrolledCarousel items={images} interval="500" keyboard={false} />
 }
 export default CarouselInterval

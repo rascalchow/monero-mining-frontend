@@ -1,5 +1,12 @@
 import { Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts'
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer
+} from 'recharts'
 
 const data = [
   {
@@ -48,30 +55,43 @@ const SimpleRadarChart = ({ series1, series3 }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Mobile Comparison</CardTitle>
+        <CardTitle tag="h4">Mobile Comparison</CardTitle>
       </CardHeader>
 
       <CardBody>
-        <div className='recharts-wrapper'>
+        <div className="recharts-wrapper">
           <ResponsiveContainer>
-            <RadarChart cx='50%' cy='50%' height={400} data={data}>
+            <RadarChart cx="50%" cy="50%" height={400} data={data}>
               <PolarGrid />
-              <PolarAngleAxis dataKey='subject' />
+              <PolarAngleAxis dataKey="subject" />
               <PolarRadiusAxis />
-              <Radar dataKey='iPhone 11' stroke={series1} fill={series1} fillOpacity={1} />
+              <Radar
+                dataKey="iPhone 11"
+                stroke={series1}
+                fill={series1}
+                fillOpacity={1}
+              />
 
-              <Radar dataKey='Samsung s20' stroke={series3} fill={series3} fillOpacity={0.8} />
+              <Radar
+                dataKey="Samsung s20"
+                stroke={series3}
+                fill={series3}
+                fillOpacity={0.8}
+              />
             </RadarChart>
           </ResponsiveContainer>
         </div>
-        <div className='d-flex align-items-center justify-content-center'>
-          <div className='mr-2'>
-            <span className='bullet bullet-sm bullet-primary bullet-bordered mr-50'></span>
-            <span className='align-middle mr-75'>Replies</span>
+        <div className="d-flex align-items-center justify-content-center">
+          <div className="mr-2">
+            <span className="bullet bullet-sm bullet-primary bullet-bordered mr-50"></span>
+            <span className="align-middle mr-75">Replies</span>
           </div>
           <div>
-            <span className='bullet bullet-sm bullet-bordered mr-50' style={{ backgroundColor: '#ffe700' }}></span>
-            <span className='align-middle mr-75'>Shares</span>
+            <span
+              className="bullet bullet-sm bullet-bordered mr-50"
+              style={{ backgroundColor: '#ffe700' }}
+            ></span>
+            <span className="align-middle mr-75">Shares</span>
           </div>
         </div>
       </CardBody>

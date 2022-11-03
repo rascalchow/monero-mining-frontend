@@ -5,7 +5,7 @@ const PillThemes = () => {
   return (
     <Fragment>
       <h6>Secondary</h6>
-      <Nav pills className='nav-pill-secondary my-2'>
+      <Nav pills className="nav-pill-secondary my-2">
         <NavItem>
           <NavLink active>Active</NavLink>
         </NavItem>
@@ -21,7 +21,7 @@ const PillThemes = () => {
       </Nav>
 
       <h6>Success</h6>
-      <Nav pills className='nav-pill-success my-2'>
+      <Nav pills className="nav-pill-success my-2">
         <NavItem>
           <NavLink active>Active</NavLink>
         </NavItem>
@@ -38,7 +38,7 @@ const PillThemes = () => {
 
       <h6>Danger</h6>
 
-      <Nav pills className='nav-pill-danger my-2'>
+      <Nav pills className="nav-pill-danger my-2">
         <NavItem>
           <NavLink active>Active</NavLink>
         </NavItem>
@@ -55,7 +55,7 @@ const PillThemes = () => {
 
       <h6>Warning</h6>
 
-      <Nav pills className='nav-pill-warning my-2'>
+      <Nav pills className="nav-pill-warning my-2">
         <NavItem>
           <NavLink active>Active</NavLink>
         </NavItem>
@@ -72,7 +72,7 @@ const PillThemes = () => {
 
       <h6>Info</h6>
 
-      <Nav pills className='nav-pill-info my-2'>
+      <Nav pills className="nav-pill-info my-2">
         <NavItem>
           <NavLink active>Active</NavLink>
         </NavItem>

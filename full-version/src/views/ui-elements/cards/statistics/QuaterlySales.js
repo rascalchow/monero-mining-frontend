@@ -56,18 +56,18 @@ const QuarterlySales = ({ danger }) => {
   }
 
   useEffect(() => {
-    axios.get('/card/card-statistics/sales').then(res => setData(res.data))
+    axios.get('/card/card-statistics/sales').then((res) => setData(res.data))
   }, [])
 
   return data !== null ? (
     <StatsWithAreaChart
       icon={<ShoppingCart size={21} />}
-      color='danger'
+      color="danger"
       stats={data.analyticsData.sales}
-      statTitle='Quarterly Sales'
+      statTitle="Quarterly Sales"
       options={options}
       series={data.series}
-      type='area'
+      type="area"
     />
   ) : null
 }

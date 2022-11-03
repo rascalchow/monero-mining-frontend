@@ -49,13 +49,17 @@ const ChartjsRadarChart = ({ gridLineColor, labelColor }) => {
         angleLines: { color: gridLineColor }
       }
     },
-    data = canvas => {
+    data = (canvas) => {
       // For radar gradient color
-      const gradientBlue = canvas.getContext('2d').createLinearGradient(0, 0, 0, 150)
+      const gradientBlue = canvas
+        .getContext('2d')
+        .createLinearGradient(0, 0, 0, 150)
       gradientBlue.addColorStop(0, 'rgba(155,136,250, 0.9)')
       gradientBlue.addColorStop(1, 'rgba(155,136,250, 0.8)')
 
-      const gradientRed = canvas.getContext('2d').createLinearGradient(0, 0, 0, 150)
+      const gradientRed = canvas
+        .getContext('2d')
+        .createLinearGradient(0, 0, 0, 150)
       gradientRed.addColorStop(0, 'rgba(255,161,161, 0.9)')
       gradientRed.addColorStop(1, 'rgba(255,161,161, 0.8)')
 
@@ -97,8 +101,8 @@ const ChartjsRadarChart = ({ gridLineColor, labelColor }) => {
 
   return (
     <Card>
-      <CardHeader className='d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column'>
-        <CardTitle tag='h4'>Radar Chart</CardTitle>
+      <CardHeader className="d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
+        <CardTitle tag="h4">Radar Chart</CardTitle>
       </CardHeader>
       <CardBody>
         <div style={{ height: '355px' }}>

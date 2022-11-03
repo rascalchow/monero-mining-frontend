@@ -8,15 +8,19 @@ import ColoredCheckbox from './CheckboxColors'
 const Checkbox = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Checkbox' breadCrumbParent='Form Elements' breadCrumbActive='Checkbox' />
+      <Breadcrumbs
+        breadCrumbTitle="Checkbox"
+        breadCrumbParent="Form Elements"
+        breadCrumbActive="Checkbox"
+      />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <BasicCheckbox />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <CustomCheckbox />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <ColoredCheckbox />
         </Col>
       </Row>

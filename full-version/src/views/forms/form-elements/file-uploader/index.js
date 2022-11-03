@@ -13,19 +13,19 @@ const Uploader = () => {
   return (
     <Fragment>
       <ExtensionsHeader
-        title='React Uppy'
-        subTitle='Uppy is a sleek, modular React file uploader that integrates seamlessly with any application.'
-        link='https://github.com/transloadit/uppy'
+        title="React Uppy"
+        subTitle="Uppy is a sleek, modular React file uploader that integrates seamlessly with any application."
+        link="https://github.com/transloadit/uppy"
       />
 
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <FileUploaderBasic />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <FileUploaderMulti />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <FileUploaderRestrictions />
         </Col>
       </Row>

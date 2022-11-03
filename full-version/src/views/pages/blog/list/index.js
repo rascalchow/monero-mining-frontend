@@ -27,7 +27,7 @@ const BlogList = () => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    axios.get('/blog/list/data').then(res => setData(res.data))
+    axios.get('/blog/list/data').then((res) => setData(res.data))
   }, [])
 
   const badgeColorsArr = {
@@ -38,11 +38,11 @@ const BlogList = () => {
     Food: 'light-success'
   }
   const renderRenderList = () => {
-    return data.map(item => {
+    return data.map((item) => {
       const renderTags = () => {
         return item.tags.map((tag, index) => {
           return (
-            <a key={index} href='/' onClick={e => e.preventDefault()}>
+            <a key={index} href="/" onClick={(e) => e.preventDefault()}>
               <Badge
                 className={classnames({
                   'mr-50': index !== item.tags.length - 1
@@ -58,39 +58,63 @@ const BlogList = () => {
       }
 
       return (
-        <Col key={item.title} md='6'>
+        <Col key={item.title} md="6">
           <Card>
             <Link to={`/pages/blog/detail/${item.id}`}>
-              <CardImg className='img-fluid' src={item.img} alt={item.title} top />
+              <CardImg
+                className="img-fluid"
+                src={item.img}
+                alt={item.title}
+                top
+              />
             </Link>
             <CardBody>
-              <CardTitle tag='h4'>
-                <Link className='blog-title-truncate text-body-heading' to={`/pages/blog/detail/${item.id}`}>
+              <CardTitle tag="h4">
+                <Link
+                  className="blog-title-truncate text-body-heading"
+                  to={`/pages/blog/detail/${item.id}`}
+                >
                   {item.title}
                 </Link>
               </CardTitle>
               <Media>
-                <Avatar className='mr-50' img={item.avatar} imgHeight='24' imgWidth='24' />
+                <Avatar
+                  className="mr-50"
+                  img={item.avatar}
+                  imgHeight="24"
+                  imgWidth="24"
+                />
                 <Media body>
-                  <small className='text-muted mr-25'>by</small>
+                  <small className="text-muted mr-25">by</small>
                   <small>
-                    <a className='text-body' href='/' onClick={e => e.preventDefault()}>
+                    <a
+                      className="text-body"
+                      href="/"
+                      onClick={(e) => e.preventDefault()}
+                    >
                       {item.userFullName}
                     </a>
                   </small>
-                  <span className='text-muted ml-50 mr-25'>|</span>
-                  <small className='text-muted'>{item.blogPosted}</small>
+                  <span className="text-muted ml-50 mr-25">|</span>
+                  <small className="text-muted">{item.blogPosted}</small>
                 </Media>
               </Media>
-              <div className='my-1 py-25'>{renderTags()}</div>
-              <CardText className='blog-content-truncate'>{item.excerpt}</CardText>
+              <div className="my-1 py-25">{renderTags()}</div>
+              <CardText className="blog-content-truncate">
+                {item.excerpt}
+              </CardText>
               <hr />
-              <div className='d-flex justify-content-between align-items-center'>
+              <div className="d-flex justify-content-between align-items-center">
                 <Link to={`/pages/blog/detail/${item.id}`}>
-                  <MessageSquare size={15} className='text-body mr-50' />
-                  <span className='text-body font-weight-bold'>{item.comment} Comments</span>
+                  <MessageSquare size={15} className="text-body mr-50" />
+                  <span className="text-body font-weight-bold">
+                    {item.comment} Comments
+                  </span>
                 </Link>
-                <Link className='font-weight-bold' to={`/pages/blog/detail/${item.id}`}>
+                <Link
+                  className="font-weight-bold"
+                  to={`/pages/blog/detail/${item.id}`}
+                >
                   Read More
                 </Link>
               </div>
@@ -104,60 +128,87 @@ const BlogList = () => {
   return (
     <Fragment>
       <Breadcrumbs
-        breadCrumbTitle='Blog List'
-        breadCrumbParent='Pages'
-        breadCrumbParent2='Blog'
-        breadCrumbActive='List'
+        breadCrumbTitle="Blog List"
+        breadCrumbParent="Pages"
+        breadCrumbParent2="Blog"
+        breadCrumbActive="List"
       />
-      <div className='blog-wrapper'>
-        <div className='content-detached content-left'>
-          <div className='content-body'>
+      <div className="blog-wrapper">
+        <div className="content-detached content-left">
+          <div className="content-body">
             {data !== null ? (
-              <div className='blog-list-wrapper'>
+              <div className="blog-list-wrapper">
                 <Row>{renderRenderList()}</Row>
                 <Row>
-                  <Col sm='12'>
-                    <Pagination className='d-flex justify-content-center mt-2'>
-                      <PaginationItem className='prev-item'>
-                        <PaginationLink href='#' onClick={e => e.preventDefault()}></PaginationLink>
+                  <Col sm="12">
+                    <Pagination className="d-flex justify-content-center mt-2">
+                      <PaginationItem className="prev-item">
+                        <PaginationLink
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                        ></PaginationLink>
                       </PaginationItem>
                       <PaginationItem>
-                        <PaginationLink href='#' onClick={e => e.preventDefault()}>
+                        <PaginationLink
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                        >
                           1
                         </PaginationLink>
                       </PaginationItem>
                       <PaginationItem>
-                        <PaginationLink href='#' onClick={e => e.preventDefault()}>
+                        <PaginationLink
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                        >
                           2
                         </PaginationLink>
                       </PaginationItem>
                       <PaginationItem>
-                        <PaginationLink href='#' onClick={e => e.preventDefault()}>
+                        <PaginationLink
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                        >
                           3
                         </PaginationLink>
                       </PaginationItem>
                       <PaginationItem active>
-                        <PaginationLink href='#' onClick={e => e.preventDefault()}>
+                        <PaginationLink
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                        >
                           4
                         </PaginationLink>
                       </PaginationItem>
                       <PaginationItem>
-                        <PaginationLink href='#' onClick={e => e.preventDefault()}>
+                        <PaginationLink
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                        >
                           5
                         </PaginationLink>
                       </PaginationItem>
                       <PaginationItem>
-                        <PaginationLink href='#' onClick={e => e.preventDefault()}>
+                        <PaginationLink
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                        >
                           6
                         </PaginationLink>
                       </PaginationItem>
                       <PaginationItem>
-                        <PaginationLink href='#' onClick={e => e.preventDefault()}>
+                        <PaginationLink
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                        >
                           7
                         </PaginationLink>
                       </PaginationItem>
-                      <PaginationItem className='next-item'>
-                        <PaginationLink href='#' onClick={e => e.preventDefault()}></PaginationLink>
+                      <PaginationItem className="next-item">
+                        <PaginationLink
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                        ></PaginationLink>
                       </PaginationItem>
                     </Pagination>
                   </Col>

@@ -49,7 +49,7 @@ const ModalConfig = [
 const ModalTheme = () => {
   const [modal, setModal] = useState(null)
 
-  const toggleModal = id => {
+  const toggleModal = (id) => {
     if (modal !== id) {
       setModal(id)
     } else {
@@ -57,23 +57,32 @@ const ModalTheme = () => {
     }
   }
 
-  const renderModal = ModalConfig.map(item => {
+  const renderModal = ModalConfig.map((item) => {
     return (
       <div className={`theme-${item.modalColor}`} key={item.id}>
-        <Button.Ripple color={item.btnColor} onClick={() => toggleModal(item.id)} key={item.title} outline>
+        <Button.Ripple
+          color={item.btnColor}
+          onClick={() => toggleModal(item.id)}
+          key={item.title}
+          outline
+        >
           {item.title}
         </Button.Ripple>
         <Modal
           isOpen={modal === item.id}
           toggle={() => toggleModal(item.id)}
-          className='modal-dialog-centered'
+          className="modal-dialog-centered"
           modalClassName={item.modalColor}
           key={item.id}
         >
-          <ModalHeader toggle={() => toggleModal(item.id)}>{item.title}</ModalHeader>
+          <ModalHeader toggle={() => toggleModal(item.id)}>
+            {item.title}
+          </ModalHeader>
           <ModalBody>
-            Tart lemon drops macaroon oat cake chocolate toffee chocolate bar icing. Pudding jelly beans carrot cake
-            pastry gummies cheesecake lollipop. I love cookie lollipop cake I love sweet gummi bears cupcake dessert.
+            Tart lemon drops macaroon oat cake chocolate toffee chocolate bar
+            icing. Pudding jelly beans carrot cake pastry gummies cheesecake
+            lollipop. I love cookie lollipop cake I love sweet gummi bears
+            cupcake dessert.
           </ModalBody>
           <ModalFooter>
             <Button color={item.btnColor} onClick={() => toggleModal(item.id)}>
@@ -85,6 +94,6 @@ const ModalTheme = () => {
     )
   })
 
-  return <div className='demo-inline-spacing'>{renderModal}</div>
+  return <div className="demo-inline-spacing">{renderModal}</div>
 }
 export default ModalTheme

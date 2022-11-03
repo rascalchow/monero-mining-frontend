@@ -48,7 +48,7 @@ const VerticalNavMenuLink = ({
   }
 
   // ** URL Vars
-  const resetActiveGroup = navLink => {
+  const resetActiveGroup = (navLink) => {
     const parents = search(navigation, navLink, match)
     toggleActiveGroup(item.id, parents)
   }
@@ -77,12 +77,12 @@ const VerticalNavMenuLink = ({
       })}
     >
       <LinkTag
-        className='d-flex align-items-center'
+        className="d-flex align-items-center"
         target={item.newTab ? '_blank' : undefined}
         /*eslint-disable */
         {...(item.externalLink === true
           ? {
-              href: item.navLink || '/'
+              href: item.navLink || '/',
             }
           : {
               to: item.navLink || '/',
@@ -91,13 +91,17 @@ const VerticalNavMenuLink = ({
                   return false
                 }
 
-                if (match.url && match.url !== '' && match.url === item.navLink) {
+                if (
+                  match.url &&
+                  match.url !== '' &&
+                  match.url === item.navLink
+                ) {
                   currentActiveItem = item.navLink
                 }
-              }
+              },
             })}
         /*eslint-enable */
-        onClick={e => {
+        onClick={(e) => {
           if (!item.navLink.length) {
             e.preventDefault()
           }
@@ -105,12 +109,12 @@ const VerticalNavMenuLink = ({
         }}
       >
         {item.icon}
-        <span className='menu-item text-truncate'>
+        <span className="menu-item text-truncate">
           <FormattedMessage id={item.title} />
         </span>
 
         {item.badge && item.badgeText ? (
-          <Badge className='ml-auto mr-1' color={item.badge} pill>
+          <Badge className="ml-auto mr-1" color={item.badge} pill>
             {item.badgeText}
           </Badge>
         ) : null}

@@ -13,7 +13,7 @@ const initialState = {
   isRTL: themeConfig.layout.isRTL,
   menuCollapsed: initialMenuCollapsed(),
   menuHidden: themeConfig.layout.menu.isHidden,
-  contentWidth: themeConfig.layout.contentWidth
+  contentWidth: themeConfig.layout.contentWidth,
 }
 
 const layoutReducer = (state = initialState, action) => {

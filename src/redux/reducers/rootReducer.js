@@ -9,7 +9,7 @@ import layout from './layout'
 const rootReducer = combineReducers({
   auth,
   navbar,
-  layout
+  layout,
 })
 
 export default rootReducer

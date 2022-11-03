@@ -15,7 +15,7 @@ const DataTableWithButtons = () => {
   const [currentPage, setCurrentPage] = useState(0)
 
   // ** Function to handle filter
-  const handlePagination = page => {
+  const handlePagination = (page) => {
     setCurrentPage(page.selected)
   }
 
@@ -25,7 +25,7 @@ const DataTableWithButtons = () => {
       previousLabel={''}
       nextLabel={''}
       forcePage={currentPage}
-      onPageChange={page => handlePagination(page)}
+      onPageChange={(page) => handlePagination(page)}
       pageCount={10}
       breakLabel={'...'}
       pageRangeDisplayed={2}
@@ -37,16 +37,18 @@ const DataTableWithButtons = () => {
       previousClassName={'page-item prev'}
       previousLinkClassName={'page-link'}
       pageLinkClassName={'page-link'}
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      containerClassName={'pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1'}
+      breakClassName="page-item"
+      breakLinkClassName="page-link"
+      containerClassName={
+        'pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1'
+      }
     />
   )
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Expandable Row</CardTitle>
+        <CardTitle tag="h4">Expandable Row</CardTitle>
       </CardHeader>
       <DataTable
         noHeader
@@ -55,7 +57,7 @@ const DataTableWithButtons = () => {
         expandableRows
         columns={columns}
         expandOnRowClicked
-        className='react-dataTable'
+        className="react-dataTable"
         sortIcon={<ChevronDown size={10} />}
         paginationDefaultPage={currentPage + 1}
         expandableRowsComponent={<ExpandableTable />}

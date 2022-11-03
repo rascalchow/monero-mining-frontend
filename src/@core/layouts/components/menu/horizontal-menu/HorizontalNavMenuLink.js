@@ -19,7 +19,7 @@ const HorizontalNavMenuLink = ({
   setActiveItem,
   routerProps,
   currentActiveItem,
-  isChild
+  isChild,
 }) => {
   // ** Conditional Link Tag, if item has newTab or externalLink props use <a> tag else use NavLink
   const LinkTag = item.externalLink ? 'a' : NavLink
@@ -54,21 +54,21 @@ const HorizontalNavMenuLink = ({
     <li
       className={classnames('nav-item', {
         active: item.navLink === activeItem,
-        disabled: item.disabled
+        disabled: item.disabled,
       })}
       onClick={resetOpenDropdowns}
     >
       <LinkTag
         className={classnames('d-flex align-items-center', {
           'dropdown-item': isChild,
-          'nav-link': !isChild
+          'nav-link': !isChild,
         })}
         tag={LinkTag}
         target={item.newTab ? '_blank' : undefined}
         /*eslint-disable */
         {...(item.externalLink === true
           ? {
-              href: item.navLink || '/'
+              href: item.navLink || '/',
             }
           : {
               to: item.navLink || '/',
@@ -77,10 +77,14 @@ const HorizontalNavMenuLink = ({
                   return false
                 }
 
-                if (match.url && match.url !== '' && match.url === item.navLink) {
+                if (
+                  match.url &&
+                  match.url !== '' &&
+                  match.url === item.navLink
+                ) {
                   currentActiveItem = item.navLink
                 }
-              }
+              },
             })}
         /*eslint-enable */
       >

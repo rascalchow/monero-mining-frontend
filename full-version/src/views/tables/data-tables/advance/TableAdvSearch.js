@@ -9,7 +9,17 @@ import Flatpickr from 'react-flatpickr'
 import ReactPaginate from 'react-paginate'
 import { ChevronDown } from 'react-feather'
 import DataTable from 'react-data-table-component'
-import { Card, CardHeader, CardBody, CardTitle, Input, Label, FormGroup, Row, Col } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  Input,
+  Label,
+  FormGroup,
+  Row,
+  Col
+} from 'reactstrap'
 
 // ** Styles
 import '@styles/react/libs/flatpickr/flatpickr.scss'
@@ -26,7 +36,7 @@ const DataTableAdvSearch = () => {
   const [filteredData, setFilteredData] = useState([])
 
   // ** Function to handle Pagination
-  const handlePagination = page => setCurrentPage(page.selected)
+  const handlePagination = (page) => setCurrentPage(page.selected)
 
   // ** Table data to render
   const dataToRender = () => {
@@ -50,7 +60,7 @@ const DataTableAdvSearch = () => {
       previousLabel={''}
       nextLabel={''}
       forcePage={currentPage}
-      onPageChange={page => handlePagination(page)}
+      onPageChange={(page) => handlePagination(page)}
       pageCount={dataToRender().length / 7 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
@@ -62,18 +72,26 @@ const DataTableAdvSearch = () => {
       previousClassName={'page-item prev'}
       previousLinkClassName={'page-link'}
       pageLinkClassName={'page-link'}
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      containerClassName={'pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1'}
+      breakClassName="page-item"
+      breakLinkClassName="page-link"
+      containerClassName={
+        'pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1'
+      }
     />
   )
 
   // ** Function to handle name filter
-  const handleNameFilter = e => {
+  const handleNameFilter = (e) => {
     const value = e.target.value
     let updatedData = []
     const dataToFilter = () => {
-      if (searchEmail.length || searchPost.length || searchCity.length || searchSalary.length || Picker.length) {
+      if (
+        searchEmail.length ||
+        searchPost.length ||
+        searchCity.length ||
+        searchSalary.length ||
+        Picker.length
+      ) {
         return filteredData
       } else {
         return data
@@ -82,10 +100,14 @@ const DataTableAdvSearch = () => {
 
     setSearchName(value)
     if (value.length) {
-      updatedData = dataToFilter().filter(item => {
-        const startsWith = item.full_name.toLowerCase().startsWith(value.toLowerCase())
+      updatedData = dataToFilter().filter((item) => {
+        const startsWith = item.full_name
+          .toLowerCase()
+          .startsWith(value.toLowerCase())
 
-        const includes = item.full_name.toLowerCase().includes(value.toLowerCase())
+        const includes = item.full_name
+          .toLowerCase()
+          .includes(value.toLowerCase())
 
         if (startsWith) {
           return startsWith
@@ -99,11 +121,17 @@ const DataTableAdvSearch = () => {
   }
 
   // ** Function to handle email filter
-  const handleEmailFilter = e => {
+  const handleEmailFilter = (e) => {
     const value = e.target.value
     let updatedData = []
     const dataToFilter = () => {
-      if (searchName.length || searchPost.length || searchCity.length || searchSalary.length || Picker.length) {
+      if (
+        searchName.length ||
+        searchPost.length ||
+        searchCity.length ||
+        searchSalary.length ||
+        Picker.length
+      ) {
         return filteredData
       } else {
         return data
@@ -112,8 +140,10 @@ const DataTableAdvSearch = () => {
 
     setSearchEmail(value)
     if (value.length) {
-      updatedData = dataToFilter().filter(item => {
-        const startsWith = item.email.toLowerCase().startsWith(value.toLowerCase())
+      updatedData = dataToFilter().filter((item) => {
+        const startsWith = item.email
+          .toLowerCase()
+          .startsWith(value.toLowerCase())
 
         const includes = item.email.toLowerCase().includes(value.toLowerCase())
 
@@ -129,11 +159,17 @@ const DataTableAdvSearch = () => {
   }
 
   // ** Function to handle post filter
-  const handlePostFilter = e => {
+  const handlePostFilter = (e) => {
     const value = e.target.value
     let updatedData = []
     const dataToFilter = () => {
-      if (searchEmail.length || searchName.length || searchCity.length || searchSalary.length || Picker.length) {
+      if (
+        searchEmail.length ||
+        searchName.length ||
+        searchCity.length ||
+        searchSalary.length ||
+        Picker.length
+      ) {
         return filteredData
       } else {
         return data
@@ -142,8 +178,10 @@ const DataTableAdvSearch = () => {
 
     setSearchPost(value)
     if (value.length) {
-      updatedData = dataToFilter().filter(item => {
-        const startsWith = item.post.toLowerCase().startsWith(value.toLowerCase())
+      updatedData = dataToFilter().filter((item) => {
+        const startsWith = item.post
+          .toLowerCase()
+          .startsWith(value.toLowerCase())
 
         const includes = item.post.toLowerCase().includes(value.toLowerCase())
 
@@ -159,11 +197,17 @@ const DataTableAdvSearch = () => {
   }
 
   // ** Function to handle city filter
-  const handleCityFilter = e => {
+  const handleCityFilter = (e) => {
     const value = e.target.value
     let updatedData = []
     const dataToFilter = () => {
-      if (searchEmail.length || searchName.length || searchPost.length || searchSalary.length || Picker.length) {
+      if (
+        searchEmail.length ||
+        searchName.length ||
+        searchPost.length ||
+        searchSalary.length ||
+        Picker.length
+      ) {
         return filteredData
       } else {
         return data
@@ -172,8 +216,10 @@ const DataTableAdvSearch = () => {
 
     setSearchCity(value)
     if (value.length) {
-      updatedData = dataToFilter().filter(item => {
-        const startsWith = item.city.toLowerCase().startsWith(value.toLowerCase())
+      updatedData = dataToFilter().filter((item) => {
+        const startsWith = item.city
+          .toLowerCase()
+          .startsWith(value.toLowerCase())
 
         const includes = item.city.toLowerCase().includes(value.toLowerCase())
 
@@ -189,11 +235,17 @@ const DataTableAdvSearch = () => {
   }
 
   // ** Function to handle salary filter
-  const handleSalaryFilter = e => {
+  const handleSalaryFilter = (e) => {
     const value = e.target.value
     let updatedData = []
     const dataToFilter = () => {
-      if (searchEmail.length || searchName.length || searchPost.length || searchCity.length || Picker.length) {
+      if (
+        searchEmail.length ||
+        searchName.length ||
+        searchPost.length ||
+        searchCity.length ||
+        Picker.length
+      ) {
         return filteredData
       } else {
         return data
@@ -202,8 +254,10 @@ const DataTableAdvSearch = () => {
 
     setSearchSalary(value)
     if (value.length) {
-      updatedData = dataToFilter().filter(item => {
-        const startsWith = item.salary.toLowerCase().startsWith(value.toLowerCase())
+      updatedData = dataToFilter().filter((item) => {
+        const startsWith = item.salary
+          .toLowerCase()
+          .startsWith(value.toLowerCase())
 
         const includes = item.salary.toLowerCase().includes(value.toLowerCase())
 
@@ -219,18 +273,24 @@ const DataTableAdvSearch = () => {
   }
 
   // ** Function to handle date filter
-  const handleDateFilter = range => {
+  const handleDateFilter = (range) => {
     const arr = []
     let updatedData = []
     const dataToFilter = () => {
-      if (searchEmail.length || searchName.length || searchPost.length || searchCity.length || searchSalary.length) {
+      if (
+        searchEmail.length ||
+        searchName.length ||
+        searchPost.length ||
+        searchCity.length ||
+        searchSalary.length
+      ) {
         return filteredData
       } else {
         return data
       }
     }
 
-    range.map(i => {
+    range.map((i) => {
       const date = new Date(i)
 
       const year = date.getFullYear()
@@ -248,7 +308,7 @@ const DataTableAdvSearch = () => {
     setPicker(range)
 
     if (range.length) {
-      updatedData = dataToFilter().filter(item => {
+      updatedData = dataToFilter().filter((item) => {
         return (
           new Date(item.start_date).getTime() >= new Date(arr[0]).getTime() &&
           new Date(item.start_date).getTime() <= new Date(arr[1]).getTime()
@@ -262,57 +322,77 @@ const DataTableAdvSearch = () => {
   return (
     <Fragment>
       <Card>
-        <CardHeader className='border-bottom'>
-          <CardTitle tag='h4'>Advance Search</CardTitle>
+        <CardHeader className="border-bottom">
+          <CardTitle tag="h4">Advance Search</CardTitle>
         </CardHeader>
         <CardBody>
-          <Row form className='mt-1 mb-50'>
-            <Col lg='4' md='6'>
+          <Row form className="mt-1 mb-50">
+            <Col lg="4" md="6">
               <FormGroup>
-                <Label for='name'>Name:</Label>
-                <Input id='name' placeholder='Bruce Wayne' value={searchName} onChange={handleNameFilter} />
+                <Label for="name">Name:</Label>
+                <Input
+                  id="name"
+                  placeholder="Bruce Wayne"
+                  value={searchName}
+                  onChange={handleNameFilter}
+                />
               </FormGroup>
             </Col>
-            <Col lg='4' md='6'>
+            <Col lg="4" md="6">
               <FormGroup>
-                <Label for='email'>Email:</Label>
+                <Label for="email">Email:</Label>
                 <Input
-                  type='email'
-                  id='email'
-                  placeholder='Bwayne@email.com'
+                  type="email"
+                  id="email"
+                  placeholder="Bwayne@email.com"
                   value={searchEmail}
                   onChange={handleEmailFilter}
                 />
               </FormGroup>
             </Col>
-            <Col lg='4' md='6'>
+            <Col lg="4" md="6">
               <FormGroup>
-                <Label for='post'>Post:</Label>
-                <Input id='post' placeholder='Web Designer' value={searchPost} onChange={handlePostFilter} />
-              </FormGroup>
-            </Col>
-            <Col lg='4' md='6'>
-              <FormGroup>
-                <Label for='city'>City:</Label>
-                <Input id='city' placeholder='San Diego' value={searchCity} onChange={handleCityFilter} />
-              </FormGroup>
-            </Col>
-            <Col lg='4' md='6'>
-              <FormGroup>
-                <Label for='date'>Date:</Label>
-                <Flatpickr
-                  className='form-control'
-                  id='date'
-                  value={Picker}
-                  options={{ mode: 'range', dateFormat: 'm/d/Y' }}
-                  onChange={date => handleDateFilter(date)}
+                <Label for="post">Post:</Label>
+                <Input
+                  id="post"
+                  placeholder="Web Designer"
+                  value={searchPost}
+                  onChange={handlePostFilter}
                 />
               </FormGroup>
             </Col>
-            <Col lg='4' md='6'>
+            <Col lg="4" md="6">
               <FormGroup>
-                <Label for='salary'>Salary:</Label>
-                <Input id='salary' placeholder='10000' value={searchSalary} onChange={handleSalaryFilter} />
+                <Label for="city">City:</Label>
+                <Input
+                  id="city"
+                  placeholder="San Diego"
+                  value={searchCity}
+                  onChange={handleCityFilter}
+                />
+              </FormGroup>
+            </Col>
+            <Col lg="4" md="6">
+              <FormGroup>
+                <Label for="date">Date:</Label>
+                <Flatpickr
+                  className="form-control"
+                  id="date"
+                  value={Picker}
+                  options={{ mode: 'range', dateFormat: 'm/d/Y' }}
+                  onChange={(date) => handleDateFilter(date)}
+                />
+              </FormGroup>
+            </Col>
+            <Col lg="4" md="6">
+              <FormGroup>
+                <Label for="salary">Salary:</Label>
+                <Input
+                  id="salary"
+                  placeholder="10000"
+                  value={searchSalary}
+                  onChange={handleSalaryFilter}
+                />
               </FormGroup>
             </Col>
           </Row>
@@ -322,7 +402,7 @@ const DataTableAdvSearch = () => {
           pagination
           columns={advSearchColumns}
           paginationPerPage={7}
-          className='react-dataTable'
+          className="react-dataTable"
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}

@@ -1,6 +1,14 @@
 import { Card, CardHeader, CardTitle, CardBody, Badge } from 'reactstrap'
 import { ArrowDown } from 'react-feather'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer
+} from 'recharts'
 
 const data = [
   {
@@ -68,7 +76,7 @@ const data = [
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload) {
     return (
-      <div className='recharts-custom-tooltip'>
+      <div className="recharts-custom-tooltip">
         <span>{`${payload[0].value}%`}</span>
       </div>
     )
@@ -82,27 +90,29 @@ const SimpleLineChart = ({ warning }) => {
     <Card>
       <CardHeader>
         <div>
-          <CardTitle tag='h4'>Balance</CardTitle>
-          <small className='text-muted'>Commercial networks & enterprises</small>
+          <CardTitle tag="h4">Balance</CardTitle>
+          <small className="text-muted">
+            Commercial networks & enterprises
+          </small>
         </div>
-        <div className='d-flex align-items-center flex-wrap mt-sm-0 mt-1'>
-          <h5 className='font-weight-bold mb-0 mr-1'>$ 100,000</h5>
-          <Badge className='badge-md' color='light-secondary'>
-            <ArrowDown className='text-danger mr-50' size={15} />
+        <div className="d-flex align-items-center flex-wrap mt-sm-0 mt-1">
+          <h5 className="font-weight-bold mb-0 mr-1">$ 100,000</h5>
+          <Badge className="badge-md" color="light-secondary">
+            <ArrowDown className="text-danger mr-50" size={15} />
             20%
           </Badge>
         </div>
       </CardHeader>
 
       <CardBody>
-        <div className='recharts-wrapper'>
+        <div className="recharts-wrapper">
           <ResponsiveContainer>
             <LineChart height={300} data={data}>
               <CartesianGrid />
-              <XAxis dataKey='name' />
+              <XAxis dataKey="name" />
               <YAxis />
               <Tooltip content={CustomTooltip} />
-              <Line dataKey='pv' stroke={warning} strokeWidth={3} />
+              <Line dataKey="pv" stroke={warning} strokeWidth={3} />
             </LineChart>
           </ResponsiveContainer>
         </div>

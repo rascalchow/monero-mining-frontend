@@ -5,7 +5,7 @@ const PaginationInfo = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Info</CardTitle>
+        <CardTitle tag="h4">Info</CardTitle>
       </CardHeader>
       <CardBody>
         <ReactPaginate
@@ -22,8 +22,8 @@ const PaginationInfo = () => {
           previousClassName={'page-item prev'}
           previousLinkClassName={'page-link'}
           pageLinkClassName={'page-link'}
-          breakClassName='page-item'
-          breakLinkClassName='page-link'
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
           containerClassName={'pagination react-paginate pagination-info'}
         />
       </CardBody>

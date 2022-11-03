@@ -35,8 +35,8 @@ const AutoCompleteSearchLimit = () => {
   return (
     <AutoComplete
       suggestions={suggestions}
-      className='form-control'
-      filterKey='title'
+      className="form-control"
+      filterKey="title"
       suggestionLimit={2}
       placeholder="Type 'a'"
     />

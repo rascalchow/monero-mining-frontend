@@ -2,26 +2,26 @@ import { Button } from 'reactstrap'
 
 const OutlineButtons = () => {
   return (
-    <div className='demo-inline-spacing'>
-      <Button.Ripple color='primary' outline>
+    <div className="demo-inline-spacing">
+      <Button.Ripple color="primary" outline>
         Primary
       </Button.Ripple>
-      <Button.Ripple color='secondary' outline>
+      <Button.Ripple color="secondary" outline>
         Secondary
       </Button.Ripple>
-      <Button.Ripple color='success' outline>
+      <Button.Ripple color="success" outline>
         Success
       </Button.Ripple>
-      <Button.Ripple color='danger' outline>
+      <Button.Ripple color="danger" outline>
         Danger
       </Button.Ripple>
-      <Button.Ripple color='warning' outline>
+      <Button.Ripple color="warning" outline>
         Warning
       </Button.Ripple>
-      <Button.Ripple color='info' outline>
+      <Button.Ripple color="info" outline>
         Info
       </Button.Ripple>
-      <Button.Ripple color='dark' outline>
+      <Button.Ripple color="dark" outline>
         Dark
       </Button.Ripple>
     </div>

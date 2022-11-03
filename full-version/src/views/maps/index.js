@@ -23,41 +23,45 @@ const Maps = () => {
   return (
     <Fragment>
       <Breadcrumbs
-        breadCrumbTitle='React Leaflet Maps'
-        breadCrumbParent='Charts & Maps'
-        breadCrumbActive='Leaflet Maps'
+        breadCrumbTitle="React Leaflet Maps"
+        breadCrumbParent="Charts & Maps"
+        breadCrumbActive="Leaflet Maps"
       />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <p>
             React components for{' '}
-            <a href='https://github.com/PaulLeCam/react-leaflet' target='_blank' rel='noopener noreferrer'>
-              <span role='img' aria-label='leaflet'>
+            <a
+              href="https://github.com/PaulLeCam/react-leaflet"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span role="img" aria-label="leaflet">
                 🍃
               </span>{' '}
               Leaflet Maps
             </a>
           </p>
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <MapBasic />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <MapEvents />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <MapTooltip />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <MapLayerControl />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <MapDrggableMarker />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <MapMarkerList />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <MapCustomIcon />
         </Col>
       </Row>

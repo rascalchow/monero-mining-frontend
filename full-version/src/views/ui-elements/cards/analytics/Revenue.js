@@ -4,11 +4,11 @@ import Chart from 'react-apexcharts'
 import { Settings } from 'react-feather'
 import { Card, CardHeader, CardTitle, CardBody, CardText } from 'reactstrap'
 
-const Revenue = props => {
+const Revenue = (props) => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    axios.get('/card/card-analytics/revenue').then(res => setData(res.data))
+    axios.get('/card/card-analytics/revenue').then((res) => setData(res.data))
   }, [])
 
   const options = {
@@ -99,27 +99,27 @@ const Revenue = props => {
   return data !== null ? (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Revenue</CardTitle>
-        <Settings size={18} className='text-muted cursor-pointer' />
+        <CardTitle tag="h4">Revenue</CardTitle>
+        <Settings size={18} className="text-muted cursor-pointer" />
       </CardHeader>
       <CardBody>
-        <div className='d-flex justify-content-start mb-3'>
-          <div className='mr-2'>
-            <CardText className='mb-50'>This Month</CardText>
-            <h3 className='font-weight-bolder'>
-              <sup className='font-medium-1 font-weight-bold mr-25'>$</sup>
-              <span className='text-primary'>86,589</span>
+        <div className="d-flex justify-content-start mb-3">
+          <div className="mr-2">
+            <CardText className="mb-50">This Month</CardText>
+            <h3 className="font-weight-bolder">
+              <sup className="font-medium-1 font-weight-bold mr-25">$</sup>
+              <span className="text-primary">86,589</span>
             </h3>
           </div>
           <div>
-            <CardText className='mb-50'>Last Month</CardText>
-            <h3 className='font-weight-bolder'>
-              <sup className='font-medium-1 font-weight-bold mr-25'>$</sup>
+            <CardText className="mb-50">Last Month</CardText>
+            <h3 className="font-weight-bolder">
+              <sup className="font-medium-1 font-weight-bold mr-25">$</sup>
               <span>73,683</span>
             </h3>
           </div>
         </div>
-        <Chart options={options} series={series} type='line' height={240} />
+        <Chart options={options} series={series} type="line" height={240} />
       </CardBody>
     </Card>
   ) : null

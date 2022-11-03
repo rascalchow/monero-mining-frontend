@@ -25,49 +25,58 @@ const Collapse = () => {
 
   return (
     <Fragment>
-      <BreadCrumbs breadCrumbTitle='Collapse' breadCrumbParent='Components' breadCrumbActive='Collapse' />
+      <BreadCrumbs
+        breadCrumbTitle="Collapse"
+        breadCrumbParent="Components"
+        breadCrumbActive="Collapse"
+      />
       <Row>
-        <Col sm='12'>
-          <Card title='Collapse Default' code={defaultCollapse}>
+        <Col sm="12">
+          <Card title="Collapse Default" code={defaultCollapse}>
             <CollapseDefault />
           </Card>
         </Col>
-        <Col sm='12'>
-          <Card title='Accordion' code={accordion}>
+        <Col sm="12">
+          <Card title="Accordion" code={accordion}>
             <CardText>
-              You may want to open one item at a time for that you can use prop <code>accordion</code>.
+              You may want to open one item at a time for that you can use prop{' '}
+              <code>accordion</code>.
             </CardText>
             <Accordion />
           </Card>
         </Col>
-        <Col sm='12'>
-          <Card title='Accordion Shadow' code={accordionShadow}>
+        <Col sm="12">
+          <Card title="Accordion Shadow" code={accordionShadow}>
             <CardText>
-              Use prop <code>type='shadow'</code> to create collapse/accordion with shadow.
+              Use prop <code>type='shadow'</code> to create collapse/accordion
+              with shadow.
             </CardText>
             <AccordionShadow />
           </Card>
         </Col>
-        <Col sm='12'>
-          <Card title='Accordion Border' code={accordionBorder}>
+        <Col sm="12">
+          <Card title="Accordion Border" code={accordionBorder}>
             <CardText>
-              Use prop <code>type='border'</code> to create collapse/accordion with border.
+              Use prop <code>type='border'</code> to create collapse/accordion
+              with border.
             </CardText>
             <AccordionBorder />
           </Card>
         </Col>
-        <Col sm='12'>
-          <Card title='Accordion Margin' code={accordionMargin}>
+        <Col sm="12">
+          <Card title="Accordion Margin" code={accordionMargin}>
             <CardText>
-              Use prop <code>type='margin'</code> to create collapse/accordion with margin.
+              Use prop <code>type='margin'</code> to create collapse/accordion
+              with margin.
             </CardText>
             <AccordionMargin />
           </Card>
         </Col>
-        <Col sm='12'>
-          <Card title='Accordion Hover' code={accordionHover}>
+        <Col sm="12">
+          <Card title="Accordion Hover" code={accordionHover}>
             <CardText>
-              Use prop <code>toggle='hover'</code> to create hoverable collapse/accordion.
+              Use prop <code>toggle='hover'</code> to create hoverable
+              collapse/accordion.
             </CardText>
             <AccordionHover />
           </Card>

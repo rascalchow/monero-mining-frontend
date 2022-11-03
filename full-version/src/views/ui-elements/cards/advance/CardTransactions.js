@@ -44,27 +44,37 @@ const CardTransactions = () => {
   ]
 
   const renderTransactions = () => {
-    return transactionsArr.map(item => {
+    return transactionsArr.map((item) => {
       return (
-        <div key={item.title} className='transaction-item'>
+        <div key={item.title} className="transaction-item">
           <Media>
-            <Avatar className='rounded' color={item.color} icon={<item.Icon size={18} />} />
+            <Avatar
+              className="rounded"
+              color={item.color}
+              icon={<item.Icon size={18} />}
+            />
             <Media body>
-              <h6 className='transaction-title'>{item.title}</h6>
+              <h6 className="transaction-title">{item.title}</h6>
               <small>{item.subtitle}</small>
             </Media>
           </Media>
-          <div className={`font-weight-bolder ${item.down ? 'text-danger' : 'text-success'}`}>{item.amount}</div>
+          <div
+            className={`font-weight-bolder ${
+              item.down ? 'text-danger' : 'text-success'
+            }`}
+          >
+            {item.amount}
+          </div>
         </div>
       )
     })
   }
 
   return (
-    <Card className='card-transaction'>
+    <Card className="card-transaction">
       <CardHeader>
-        <CardTitle tag='h4'>Transactions</CardTitle>
-        <Icon.MoreVertical size={18} className='cursor-pointer' />
+        <CardTitle tag="h4">Transactions</CardTitle>
+        <Icon.MoreVertical size={18} className="cursor-pointer" />
       </CardHeader>
       <CardBody>{renderTransactions()}</CardBody>
     </Card>

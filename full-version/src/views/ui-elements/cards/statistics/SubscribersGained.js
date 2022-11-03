@@ -7,17 +7,19 @@ const SubscribersGained = ({ kFormatter }) => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    axios.get('/card/card-statistics/subscribers').then(res => setData(res.data))
+    axios
+      .get('/card/card-statistics/subscribers')
+      .then((res) => setData(res.data))
   }, [])
 
   return data !== null ? (
     <StatsWithAreaChart
       icon={<Users size={21} />}
-      color='primary'
+      color="primary"
       stats={kFormatter(data.analyticsData.subscribers)}
-      statTitle='Subscribers Gained'
+      statTitle="Subscribers Gained"
       series={data.series}
-      type='area'
+      type="area"
     />
   ) : null
 }

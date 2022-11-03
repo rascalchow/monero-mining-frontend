@@ -8,15 +8,19 @@ import TextareaCounter from './TextareaCounter'
 const Textarea = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Textarea' breadCrumbParent='Form Elements' breadCrumbActive='Textarea' />
+      <Breadcrumbs
+        breadCrumbTitle="Textarea"
+        breadCrumbParent="Form Elements"
+        breadCrumbActive="Textarea"
+      />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <TextareaDefault />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <TextareaFloatingLabel />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <TextareaCounter />
         </Col>
       </Row>

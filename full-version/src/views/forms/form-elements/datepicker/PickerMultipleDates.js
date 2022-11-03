@@ -6,13 +6,13 @@ const PickerMultipleDates = () => {
   const [picker, setPicker] = useState(new Date())
   return (
     <Fragment>
-      <Label for='multi-dates-picker'>Multiple Dates</Label>
+      <Label for="multi-dates-picker">Multiple Dates</Label>
       <Flatpickr
         value={picker}
-        id='multi-dates-picker'
-        className='form-control'
+        id="multi-dates-picker"
+        className="form-control"
         options={{ mode: 'multiple' }}
-        onChange={date => setPicker(date)}
+        onChange={(date) => setPicker(date)}
       />
     </Fragment>
   )

@@ -7,21 +7,21 @@ const ButtonGroups = () => {
     <Fragment>
       <Row>
         <Col md={6} sm={12}>
-          <ButtonGroup className='mb-1'>
-            <Button color='primary'>Left</Button>
-            <Button color='primary'>Middle</Button>
-            <Button color='primary'>Right</Button>
+          <ButtonGroup className="mb-1">
+            <Button color="primary">Left</Button>
+            <Button color="primary">Middle</Button>
+            <Button color="primary">Right</Button>
           </ButtonGroup>
         </Col>
         <Col md={6} sm={12}>
-          <ButtonGroup className='mb-1'>
-            <Button outline color='primary'>
+          <ButtonGroup className="mb-1">
+            <Button outline color="primary">
               <Facebook size={15} />
             </Button>
-            <Button outline color='primary'>
+            <Button outline color="primary">
               <Twitter size={15} />
             </Button>
-            <Button outline color='primary'>
+            <Button outline color="primary">
               <Instagram size={15} />
             </Button>
           </ButtonGroup>

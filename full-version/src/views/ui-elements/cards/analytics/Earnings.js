@@ -87,20 +87,25 @@ const Earnings = ({ success }) => {
   }
 
   return (
-    <Card className='earnings-card'>
+    <Card className="earnings-card">
       <CardBody>
         <Row>
-          <Col xs='6'>
-            <CardTitle className='mb-1'>Earnings</CardTitle>
-            <div className='font-small-2'>This Month</div>
-            <h5 className='mb-1'>$4055.56</h5>
-            <CardText className='text-muted font-small-2'>
-              <span className='font-weight-bolder'>68.2%</span>
+          <Col xs="6">
+            <CardTitle className="mb-1">Earnings</CardTitle>
+            <div className="font-small-2">This Month</div>
+            <h5 className="mb-1">$4055.56</h5>
+            <CardText className="text-muted font-small-2">
+              <span className="font-weight-bolder">68.2%</span>
               <span> more earnings than last month.</span>
             </CardText>
           </Col>
-          <Col xs='6'>
-            <Chart options={options} series={[53, 16, 31]} type='donut' height={120} />
+          <Col xs="6">
+            <Chart
+              options={options}
+              series={[53, 16, 31]}
+              type="donut"
+              height={120}
+            />
           </Col>
         </Row>
       </CardBody>

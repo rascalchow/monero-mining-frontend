@@ -11,7 +11,11 @@ import Breadcrumbs from '@components/breadcrumbs'
 const BasicCards = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Basic Cards' breadCrumbParent='Card' breadCrumbActive='Basic Cards' />
+      <Breadcrumbs
+        breadCrumbTitle="Basic Cards"
+        breadCrumbParent="Card"
+        breadCrumbActive="Basic Cards"
+      />
       <CardTitles />
       <CardContentTypes />
       <CardHeaderFooter />

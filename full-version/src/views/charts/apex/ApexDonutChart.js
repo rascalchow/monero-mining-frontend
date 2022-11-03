@@ -16,7 +16,12 @@ const ApexRadiarChart = () => {
     },
     labels: ['Operational', 'Networking', 'Hiring', 'R&D'],
 
-    colors: [donutColors.series1, donutColors.series5, donutColors.series3, donutColors.series2],
+    colors: [
+      donutColors.series1,
+      donutColors.series5,
+      donutColors.series3,
+      donutColors.series2
+    ],
     dataLabels: {
       enabled: true,
       formatter(val, opt) {
@@ -98,14 +103,16 @@ const ApexRadiarChart = () => {
     <Card>
       <CardHeader>
         <div>
-          <CardTitle className='mb-75' tag='h4'>
+          <CardTitle className="mb-75" tag="h4">
             Expense Ratio
           </CardTitle>
-          <CardSubtitle className='text-muted'>Spending on various categories</CardSubtitle>
+          <CardSubtitle className="text-muted">
+            Spending on various categories
+          </CardSubtitle>
         </div>
       </CardHeader>
       <CardBody>
-        <Chart options={options} series={series} type='donut' height={350} />
+        <Chart options={options} series={series} type="donut" height={350} />
       </CardBody>
     </Card>
   )

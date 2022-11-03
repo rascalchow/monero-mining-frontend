@@ -29,8 +29,15 @@ html[dir='rtl'] {
   }
 
   // Horizontal menu
-  .horizontal-menu .header-navbar.navbar-horizontal .dropdown-menu .dropdown-toggle::after {
-    background-image: url(str-replace(str-replace($chevron-left, 'currentColor', $body-color), '#', '%23'));
+  .horizontal-menu
+    .header-navbar.navbar-horizontal
+    .dropdown-menu
+    .dropdown-toggle::after {
+    background-image: url(str-replace(
+      str-replace($chevron-left, 'currentColor', $body-color),
+      '#',
+      '%23'
+    ));
   }
 
   // Breadcrumbs
@@ -165,7 +172,8 @@ html[dir='rtl'] {
   // Invoice List
   .invoice-list-table-header {
     select {
-      background-position: calc(100% - (100% - 45px)) 13px, calc(100% - (100% - 20px)) 13px, 0% 0 !important;
+      background-position: calc(100% - (100% - 45px)) 13px,
+        calc(100% - (100% - 20px)) 13px, 0% 0 !important;
     }
   }
 

@@ -16,8 +16,8 @@ const data = [
     content: 'Invoices have been paid to the company.',
     meta: '12 min ago',
     customContent: (
-      <Media className='align-items-center'>
-        <img className='mr-1' src={pdf} alt='pdf' height='23' />
+      <Media className="align-items-center">
+        <img className="mr-1" src={pdf} alt="pdf" height="23" />
         <Media body>invoice.pdf</Media>
       </Media>
     )
@@ -28,10 +28,10 @@ const data = [
     meta: '45 min ago',
     color: 'warning',
     customContent: (
-      <Media className='align-items-center'>
+      <Media className="align-items-center">
         <Avatar img={ceo} imgHeight={38} imgWidth={38} />
-        <Media className='ml-50' body>
-          <h6 className='mb-0'>John Doe (Client)</h6>
+        <Media className="ml-50" body>
+          <h6 className="mb-0">John Doe (Client)</h6>
           <span>CEO of Infibeam</span>
         </Media>
       </Media>
@@ -49,7 +49,7 @@ const UserTimeline = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4' className='mb-2'>
+        <CardTitle tag="h4" className="mb-2">
           User Timeline
         </CardTitle>
       </CardHeader>

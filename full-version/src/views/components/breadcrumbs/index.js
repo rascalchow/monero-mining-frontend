@@ -6,7 +6,11 @@ import BreadCrumbAlignment from './BreadcrumbAlignment'
 import BreadCrumbsPage from '@components/breadcrumbs'
 import Card from '@components/card-snippet'
 import { Row, Col, CardText } from 'reactstrap'
-import { breadcrumbsAlignment, breadcrumbsDefault, breadcrumbsStyles } from './BreadCrumbsSourceCode'
+import {
+  breadcrumbsAlignment,
+  breadcrumbsDefault,
+  breadcrumbsStyles
+} from './BreadCrumbsSourceCode'
 
 const BreadCrumbs = () => {
   useEffect(() => {
@@ -15,28 +19,34 @@ const BreadCrumbs = () => {
 
   return (
     <Fragment>
-      <BreadCrumbsPage breadCrumbTitle='Breadcrumbs' breadCrumbParent='Components' breadCrumbActive='Breadcrumbs' />
+      <BreadCrumbsPage
+        breadCrumbTitle="Breadcrumbs"
+        breadCrumbParent="Components"
+        breadCrumbActive="Breadcrumbs"
+      />
 
       <Row>
-        <Col sm='12'>
-          <section id='component-breadcrumbs'>
-            <Card title='Default' code={breadcrumbsDefault}>
+        <Col sm="12">
+          <section id="component-breadcrumbs">
+            <Card title="Default" code={breadcrumbsDefault}>
               <BreadcrumbsDefault />
             </Card>
-            <Card title='Styles' code={breadcrumbsStyles}>
+            <Card title="Styles" code={breadcrumbsStyles}>
               <CardText>
-                These breadcrumbs are only for demo puropses. You can change breadcrumb seprator by changing{' '}
-                <code>$breadcrumb-divider</code> variable value in scss
+                These breadcrumbs are only for demo puropses. You can change
+                breadcrumb seprator by changing <code>$breadcrumb-divider</code>{' '}
+                variable value in scss
               </CardText>
               <BreadCrumbStyles />
             </Card>
           </section>
         </Col>
-        <Col sm='12'>
-          <section id='breadcrumb-alignment'>
-            <Card title='Alignment' code={breadcrumbsAlignment}>
+        <Col sm="12">
+          <section id="breadcrumb-alignment">
+            <Card title="Alignment" code={breadcrumbsAlignment}>
               <CardText>
-                Use class <code>.justify-content-{'{position}'}</code> to align breadcrumb to desired position.
+                Use class <code>.justify-content-{'{position}'}</code> to align
+                breadcrumb to desired position.
               </CardText>
               <BreadCrumbAlignment />
             </Card>

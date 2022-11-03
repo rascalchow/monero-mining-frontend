@@ -2,7 +2,13 @@ import { Bubble } from 'react-chartjs-2'
 import { ArrowDown } from 'react-feather'
 import { Card, CardHeader, CardTitle, CardBody, Badge } from 'reactstrap'
 
-const ChartjsRadarChart = ({ labelColor, primaryColorShade, warningColorShade, tooltipShadow, gridLineColor }) => {
+const ChartjsRadarChart = ({
+  labelColor,
+  primaryColorShade,
+  warningColorShade,
+  tooltipShadow,
+  gridLineColor
+}) => {
   const options = {
       responsive: true,
       maintainAspectRatio: false,
@@ -348,13 +354,13 @@ const ChartjsRadarChart = ({ labelColor, primaryColorShade, warningColorShade, t
 
   return (
     <Card>
-      <CardHeader className='d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column'>
-        <CardTitle tag='h4'>Bubble Chart</CardTitle>
-        <div className='d-flex align-items-center flex-wrap'>
-          <h5 className='font-weight-bolder mb-0 mr-1'>$ 100,000</h5>
-          <Badge color='light-secondary'>
-            <ArrowDown size={13} className='text-danger' />
-            <span className='align-middle ml-25'>20%</span>
+      <CardHeader className="d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
+        <CardTitle tag="h4">Bubble Chart</CardTitle>
+        <div className="d-flex align-items-center flex-wrap">
+          <h5 className="font-weight-bolder mb-0 mr-1">$ 100,000</h5>
+          <Badge color="light-secondary">
+            <ArrowDown size={13} className="text-danger" />
+            <span className="align-middle ml-25">20%</span>
           </Badge>
         </div>
       </CardHeader>

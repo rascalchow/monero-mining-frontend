@@ -12,21 +12,25 @@ import '@styles/react/libs/react-select/_react-select.scss'
 const Select = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Select' breadCrumbParent='Form Elements' breadCrumbActive='Select' />
+      <Breadcrumbs
+        breadCrumbTitle="Select"
+        breadCrumbParent="Form Elements"
+        breadCrumbActive="Select"
+      />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <ReactSelect />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <Selectoptions />
         </Col>
-        <Col md='6' sm='12'>
+        <Col md="6" sm="12">
           <SelectReactstrap />
         </Col>
-        <Col md='6' sm='12'>
+        <Col md="6" sm="12">
           <SelectSizing />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <SelectMulti />
         </Col>
       </Row>

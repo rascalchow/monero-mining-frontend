@@ -6,12 +6,12 @@ const PickerRangeDisabled = () => {
   const [picker, setPicker] = useState(new Date())
   return (
     <Fragment>
-      <Label for='disabled-picker'>Disabled Range</Label>
+      <Label for="disabled-picker">Disabled Range</Label>
       <Flatpickr
         value={picker}
-        id='disabled-picker'
-        className='form-control'
-        onChange={date => setPicker(date)}
+        id="disabled-picker"
+        className="form-control"
+        onChange={(date) => setPicker(date)}
         options={{
           dateFormat: 'Y-m-d',
           disable: [

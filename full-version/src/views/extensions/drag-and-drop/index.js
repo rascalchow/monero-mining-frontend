@@ -14,27 +14,27 @@ const DragAndDrop = () => {
   return (
     <Fragment>
       <ExtensionsHeader
-        title='React Sortablejs'
-        subTitle='Sortablejs wrapper for React'
-        link='https://github.com/SortableJS/react-sortablejs'
+        title="React Sortablejs"
+        subTitle="Sortablejs wrapper for React"
+        link="https://github.com/SortableJS/react-sortablejs"
       />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <DndCards />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <DndListGroup />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <DndMultiple />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <DndClone />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <DndHandle />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <DndMultiDrag />
         </Col>
       </Row>

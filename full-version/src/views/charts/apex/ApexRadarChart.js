@@ -29,7 +29,16 @@ const ApexRadiarChart = () => {
     },
     colors: [donutColors.series1, donutColors.series3],
     xaxis: {
-      categories: ['Battery', 'Brand', 'Camera', 'Memory', 'Storage', 'Display', 'OS', 'Price']
+      categories: [
+        'Battery',
+        'Brand',
+        'Camera',
+        'Memory',
+        'Storage',
+        'Display',
+        'OS',
+        'Price'
+      ]
     },
     fill: {
       opacity: [1, 0.8]
@@ -64,10 +73,10 @@ const ApexRadiarChart = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Mobile Comparison</CardTitle>
+        <CardTitle tag="h4">Mobile Comparison</CardTitle>
       </CardHeader>
       <CardBody>
-        <Chart options={options} series={series} type='radar' height={400} />
+        <Chart options={options} series={series} type="radar" height={400} />
       </CardBody>
     </Card>
   )

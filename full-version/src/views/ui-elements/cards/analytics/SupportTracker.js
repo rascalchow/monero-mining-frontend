@@ -15,11 +15,13 @@ import {
 } from 'reactstrap'
 import Chart from 'react-apexcharts'
 
-const SupportTracker = props => {
+const SupportTracker = (props) => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    axios.get('/card/card-analytics/support-tracker').then(res => setData(res.data))
+    axios
+      .get('/card/card-analytics/support-tracker')
+      .then((res) => setData(res.data))
   }, [])
 
   const options = {
@@ -73,15 +75,18 @@ const SupportTracker = props => {
 
   return data !== null ? (
     <Card>
-      <CardHeader className='pb-0'>
-        <CardTitle tag='h4'>{data.title}</CardTitle>
-        <UncontrolledDropdown className='chart-dropdown'>
-          <DropdownToggle color='' className='bg-transparent btn-sm border-0 p-50'>
+      <CardHeader className="pb-0">
+        <CardTitle tag="h4">{data.title}</CardTitle>
+        <UncontrolledDropdown className="chart-dropdown">
+          <DropdownToggle
+            color=""
+            className="bg-transparent btn-sm border-0 p-50"
+          >
             Last 7 days
           </DropdownToggle>
           <DropdownMenu right>
-            {data.last_days.map(item => (
-              <DropdownItem className='w-100' key={item}>
+            {data.last_days.map((item) => (
+              <DropdownItem className="w-100" key={item}>
                 {item}
               </DropdownItem>
             ))}
@@ -90,26 +95,40 @@ const SupportTracker = props => {
       </CardHeader>
       <CardBody>
         <Row>
-          <Col sm='2' className='d-flex flex-column flex-wrap text-center'>
-            <h1 className='font-large-2 font-weight-bolder mt-2 mb-0'>{data.totalTicket}</h1>
+          <Col sm="2" className="d-flex flex-column flex-wrap text-center">
+            <h1 className="font-large-2 font-weight-bolder mt-2 mb-0">
+              {data.totalTicket}
+            </h1>
             <CardText>Tickets</CardText>
           </Col>
-          <Col sm='10' className='d-flex justify-content-center'>
-            <Chart options={options} series={series} type='radialBar' height={270} id='support-tracker-card' />
+          <Col sm="10" className="d-flex justify-content-center">
+            <Chart
+              options={options}
+              series={series}
+              type="radialBar"
+              height={270}
+              id="support-tracker-card"
+            />
           </Col>
         </Row>
-        <div className='d-flex justify-content-between mt-1'>
-          <div className='text-center'>
-            <CardText className='mb-50'>New Tickets</CardText>
-            <span className='font-large-1 font-weight-bold'>{data.newTicket}</span>
+        <div className="d-flex justify-content-between mt-1">
+          <div className="text-center">
+            <CardText className="mb-50">New Tickets</CardText>
+            <span className="font-large-1 font-weight-bold">
+              {data.newTicket}
+            </span>
           </div>
-          <div className='text-center'>
-            <CardText className='mb-50'>Open Tickets</CardText>
-            <span className='font-large-1 font-weight-bold'>{data.openTicket}</span>
+          <div className="text-center">
+            <CardText className="mb-50">Open Tickets</CardText>
+            <span className="font-large-1 font-weight-bold">
+              {data.openTicket}
+            </span>
           </div>
-          <div className='text-center'>
-            <CardText className='mb-50'>Response Time</CardText>
-            <span className='font-large-1 font-weight-bold'>{data.responseTime}d</span>
+          <div className="text-center">
+            <CardText className="mb-50">Response Time</CardText>
+            <span className="font-large-1 font-weight-bold">
+              {data.responseTime}d
+            </span>
           </div>
         </div>
       </CardBody>

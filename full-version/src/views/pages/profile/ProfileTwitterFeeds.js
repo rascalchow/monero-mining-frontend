@@ -14,16 +14,21 @@ const ProfileTwitterFeeds = ({ data }) => {
           })}
           key={index}
         >
-          <div className='d-flex justify-content-start align-items-center mb-1'>
-            <Avatar className='mr-1' img={feed.imgUrl} imgHeight='40' imgWidth='40' />
-            <div className='profile-user-info'>
-              <h6 className='mb-0'>{feed.title}</h6>
-              <a href='/' onClick={e => e.preventDefault()}>
-                <small className='text-muted'>{feed.id}</small>
+          <div className="d-flex justify-content-start align-items-center mb-1">
+            <Avatar
+              className="mr-1"
+              img={feed.imgUrl}
+              imgHeight="40"
+              imgWidth="40"
+            />
+            <div className="profile-user-info">
+              <h6 className="mb-0">{feed.title}</h6>
+              <a href="/" onClick={(e) => e.preventDefault()}>
+                <small className="text-muted">{feed.id}</small>
                 <CheckCircle size={14} />
               </a>
             </div>
-            <div className='profile-star ml-auto'>
+            <div className="profile-star ml-auto">
               <Star
                 size={18}
                 className={classnames('cursor-pointer', {
@@ -32,8 +37,8 @@ const ProfileTwitterFeeds = ({ data }) => {
               />
             </div>
           </div>
-          <CardText className='mb-50'>{feed.desc}</CardText>
-          <a href='/' onClick={e => e.preventDefault()}>
+          <CardText className="mb-50">{feed.desc}</CardText>
+          <a href="/" onClick={(e) => e.preventDefault()}>
             <small>{feed.tags}</small>
           </a>
         </div>

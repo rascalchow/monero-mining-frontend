@@ -6,9 +6,9 @@ const SliderTooltips = ({ direction }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Tooltips</CardTitle>
+        <CardTitle tag="h4">Tooltips</CardTitle>
       </CardHeader>
-      <CardBody className='text-center'>
+      <CardBody className="text-center">
         <Nouislider
           start={[20, 80]}
           direction={direction}

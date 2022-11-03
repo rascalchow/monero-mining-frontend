@@ -11,7 +11,7 @@ import { isNavGroupActive } from '@layouts/utils'
 // ** Horizontal Menu Items Component
 import HorizontalNavMenuItems from './HorizontalNavMenuItems'
 
-const HorizontalNavMenuGroup = props => {
+const HorizontalNavMenuGroup = (props) => {
   // ** Props
   const {
     item,
@@ -25,7 +25,7 @@ const HorizontalNavMenuGroup = props => {
     setActiveItem,
     routerProps,
     setOpenDropdown,
-    currentActiveItem
+    currentActiveItem,
   } = props
 
   // ** URL Var
@@ -35,7 +35,7 @@ const HorizontalNavMenuGroup = props => {
   const menuModifiers = {
     setMaxHeight: {
       enabled: true,
-      fn: data => {
+      fn: (data) => {
         const pageHeight = window.innerHeight,
           ddTop = data.instance.reference.getBoundingClientRect().top,
           ddHeight = data.popper.height
@@ -46,7 +46,7 @@ const HorizontalNavMenuGroup = props => {
           maxHeight = pageHeight - ddTop - 25
           stylesObj = {
             maxHeight,
-            overflowY: 'auto'
+            overflowY: 'auto',
           }
         }
 
@@ -60,20 +60,21 @@ const HorizontalNavMenuGroup = props => {
         return {
           ...data,
           styles: {
-            ...stylesObj
-          }
+            ...stylesObj,
+          },
         }
-      }
-    }
+      },
+    },
   }
   return (
     <Dropdown
-      tag='li'
+      tag="li"
       className={classnames({
         'nav-item': submenu === false,
         'dropdown-submenu': submenu === true,
         'sidebar-group-active active':
-          isNavGroupActive(item.children, currentURL, routerProps) || groupActive.includes(item.id)
+          isNavGroupActive(item.children, currentURL, routerProps) ||
+          groupActive.includes(item.id),
       })}
       isOpen={openDropdown.includes(item.id)}
       toggle={() => onMouseEnter(item.id)}
@@ -81,18 +82,18 @@ const HorizontalNavMenuGroup = props => {
       onMouseLeave={() => onMouseLeave(item.id)}
     >
       <DropdownToggle
-        to='/'
+        to="/"
         tag={Link}
         className={classnames('dropdown-toggle d-flex align-items-center', {
           'dropdown-item': submenu === true,
-          'nav-link': submenu === false
+          'nav-link': submenu === false,
         })}
-        onClick={e => e.preventDefault()}
+        onClick={(e) => e.preventDefault()}
       >
         {item.icon}
         <span>{item.title}</span>
       </DropdownToggle>
-      <DropdownMenu tag='ul' modifiers={menuModifiers}>
+      <DropdownMenu tag="ul" modifiers={menuModifiers}>
         <HorizontalNavMenuItems
           submenu={true}
           parentItem={item}

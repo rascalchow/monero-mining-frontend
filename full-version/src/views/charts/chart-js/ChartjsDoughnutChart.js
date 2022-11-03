@@ -2,7 +2,12 @@ import { Doughnut } from 'react-chartjs-2'
 import { Monitor, Tablet, ArrowDown, ArrowUp } from 'react-feather'
 import { Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
 
-const ChartjsRadarChart = ({ tooltipShadow, successColorShade, warningLightColor, primary }) => {
+const ChartjsRadarChart = ({
+  tooltipShadow,
+  successColorShade,
+  warningLightColor,
+  primary
+}) => {
   const options = {
       responsive: true,
       maintainAspectRatio: false,
@@ -42,44 +47,44 @@ const ChartjsRadarChart = ({ tooltipShadow, successColorShade, warningLightColor
 
   return (
     <Card>
-      <CardHeader className='d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column'>
-        <CardTitle tag='h4'>Sessions By Device</CardTitle>
+      <CardHeader className="d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
+        <CardTitle tag="h4">Sessions By Device</CardTitle>
       </CardHeader>
       <CardBody>
         <div style={{ height: '275px' }}>
           <Doughnut data={data} options={options} height={275} />
         </div>
-        <div className='d-flex justify-content-between mt-3 mb-1'>
-          <div className='d-flex align-items-center'>
-            <Monitor size={17} className='text-primary' />
-            <span className='font-weight-bold ml-75 mr-25'>Desktop</span>
+        <div className="d-flex justify-content-between mt-3 mb-1">
+          <div className="d-flex align-items-center">
+            <Monitor size={17} className="text-primary" />
+            <span className="font-weight-bold ml-75 mr-25">Desktop</span>
             <span>- 80%</span>
           </div>
           <div>
             <span>2%</span>
-            <ArrowUp className='text-success' size={14} />
+            <ArrowUp className="text-success" size={14} />
           </div>
         </div>
-        <div className='d-flex justify-content-between mb-1'>
-          <div className='d-flex align-items-center'>
-            <Tablet size={17} className='text-warning' />
-            <span className='font-weight-bold ml-75 mr-25'>Mobile</span>
+        <div className="d-flex justify-content-between mb-1">
+          <div className="d-flex align-items-center">
+            <Tablet size={17} className="text-warning" />
+            <span className="font-weight-bold ml-75 mr-25">Mobile</span>
             <span>- 10%</span>
           </div>
           <div>
             <span>8%</span>
-            <ArrowUp className='text-success' size={14} />
+            <ArrowUp className="text-success" size={14} />
           </div>
         </div>
-        <div className='d-flex justify-content-between'>
-          <div className='d-flex align-items-center'>
-            <Tablet size={17} className='text-success' />
-            <span className='font-weight-bold ml-75 mr-25'>Tablet</span>
+        <div className="d-flex justify-content-between">
+          <div className="d-flex align-items-center">
+            <Tablet size={17} className="text-success" />
+            <span className="font-weight-bold ml-75 mr-25">Tablet</span>
             <span>- 10%</span>
           </div>
           <div>
             <span>-5%</span>
-            <ArrowDown className='text-danger' size={14} />
+            <ArrowDown className="text-danger" size={14} />
           </div>
         </div>
       </CardBody>

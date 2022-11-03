@@ -6,8 +6,13 @@ const CreditCardMask = () => {
 
   return (
     <Fragment>
-      <label htmlFor='credit-card'>Credit Card</label>
-      <Cleave className='form-control' placeholder='0000 0000 0000 0000' options={options} id='credit-card' />
+      <label htmlFor="credit-card">Credit Card</label>
+      <Cleave
+        className="form-control"
+        placeholder="0000 0000 0000 0000"
+        options={options}
+        id="credit-card"
+      />
     </Fragment>
   )
 }

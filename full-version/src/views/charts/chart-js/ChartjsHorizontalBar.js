@@ -3,7 +3,12 @@ import { Calendar } from 'react-feather'
 import { HorizontalBar } from 'react-chartjs-2'
 import { Card, CardHeader, CardTitle, CardBody, CardSubtitle } from 'reactstrap'
 
-const ChartjsHorizontalBarChart = ({ tooltipShadow, gridLineColor, labelColor, info }) => {
+const ChartjsHorizontalBarChart = ({
+  tooltipShadow,
+  gridLineColor,
+  labelColor,
+  info
+}) => {
   const options = {
       elements: {
         rectangle: {
@@ -83,19 +88,19 @@ const ChartjsHorizontalBarChart = ({ tooltipShadow, gridLineColor, labelColor, i
 
   return (
     <Card>
-      <CardHeader className='d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column'>
+      <CardHeader className="d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
         <div>
-          <CardSubtitle className='text-muted mb-25'>Balance</CardSubtitle>
-          <CardTitle tag='h4'>$74,123</CardTitle>
+          <CardSubtitle className="text-muted mb-25">Balance</CardSubtitle>
+          <CardTitle tag="h4">$74,123</CardTitle>
         </div>
-        <div className='d-flex align-items-center'>
+        <div className="d-flex align-items-center">
           <Calendar size={14} />
           <Flatpickr
             options={{
               mode: 'range',
               defaultDate: ['2019-05-01', '2019-05-10']
             }}
-            className='form-control flat-picker bg-transparent border-0 shadow-none'
+            className="form-control flat-picker bg-transparent border-0 shadow-none"
           />
         </div>
       </CardHeader>

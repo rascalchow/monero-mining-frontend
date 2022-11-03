@@ -3,7 +3,14 @@ import Flatpickr from 'react-flatpickr'
 import { Calendar } from 'react-feather'
 import { Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
 
-const ChartjsAreaChart = ({ labelColor, tooltipShadow, gridLineColor, blueColor, blueLightColor, greyLightColor }) => {
+const ChartjsAreaChart = ({
+  labelColor,
+  tooltipShadow,
+  gridLineColor,
+  blueColor,
+  blueLightColor,
+  greyLightColor
+}) => {
   const options = {
       responsive: true,
       maintainAspectRatio: false,
@@ -104,7 +111,10 @@ const ChartjsAreaChart = ({ labelColor, tooltipShadow, gridLineColor, blueColor,
         },
         {
           label: 'Asia',
-          data: [70, 85, 75, 150, 100, 140, 110, 105, 160, 150, 125, 190, 200, 240, 275],
+          data: [
+            70, 85, 75, 150, 100, 140, 110, 105, 160, 150, 125, 190, 200, 240,
+            275
+          ],
           lineTension: 0,
           backgroundColor: blueLightColor,
           pointStyle: 'circle',
@@ -118,7 +128,10 @@ const ChartjsAreaChart = ({ labelColor, tooltipShadow, gridLineColor, blueColor,
         },
         {
           label: 'Europe',
-          data: [240, 195, 160, 215, 185, 215, 185, 200, 250, 210, 195, 250, 235, 300, 315],
+          data: [
+            240, 195, 160, 215, 185, 215, 185, 200, 250, 210, 195, 250, 235,
+            300, 315
+          ],
           lineTension: 0,
           backgroundColor: greyLightColor,
           pointStyle: 'circle',
@@ -146,16 +159,16 @@ const ChartjsAreaChart = ({ labelColor, tooltipShadow, gridLineColor, blueColor,
 
   return (
     <Card>
-      <CardHeader className='d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column'>
-        <CardTitle tag='h4'>Data Science</CardTitle>
-        <div className='d-flex align-items-center'>
+      <CardHeader className="d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
+        <CardTitle tag="h4">Data Science</CardTitle>
+        <div className="d-flex align-items-center">
           <Calendar size={14} />
           <Flatpickr
             options={{
               mode: 'range',
               defaultDate: ['2019-05-01', '2019-05-10']
             }}
-            className='form-control flat-picker bg-transparent border-0 shadow-none'
+            className="form-control flat-picker bg-transparent border-0 shadow-none"
           />
         </div>
       </CardHeader>

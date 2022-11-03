@@ -19,7 +19,7 @@ import '@styles/base/pages/app-chat-list.scss'
 const AppChat = () => {
   // ** Store Vars
   const dispatch = useDispatch()
-  const store = useSelector(state => state.chat)
+  const store = useSelector((state) => state.chat)
 
   // ** States
   const [user, setUser] = useState({})
@@ -38,7 +38,7 @@ const AppChat = () => {
   }
 
   // ** Set user function for Right Sidebar
-  const handleUser = obj => setUser(obj)
+  const handleUser = (obj) => setUser(obj)
 
   // ** Get data on Mount
   useEffect(() => {
@@ -55,12 +55,15 @@ const AppChat = () => {
         userSidebarLeft={userSidebarLeft}
         handleUserSidebarLeft={handleUserSidebarLeft}
       />
-      <div className='content-right'>
-        <div className='content-wrapper'>
-          <div className='content-body'>
+      <div className="content-right">
+        <div className="content-wrapper">
+          <div className="content-body">
             <div
               className={classnames('body-content-overlay', {
-                show: userSidebarRight === true || sidebar === true || userSidebarLeft === true
+                show:
+                  userSidebarRight === true ||
+                  sidebar === true ||
+                  userSidebarLeft === true
               })}
               onClick={handleOverlayClick}
             ></div>

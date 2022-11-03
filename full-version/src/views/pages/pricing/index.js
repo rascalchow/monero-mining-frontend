@@ -13,7 +13,7 @@ const Pricing = () => {
     [duration, setDuration] = useState('monthly')
 
   useEffect(() => {
-    axios.get('/pricing/data').then(res => {
+    axios.get('/pricing/data').then((res) => {
       const dataArr = [],
         faqArr = []
 
@@ -30,7 +30,7 @@ const Pricing = () => {
   }, [])
 
   return (
-    <div id='pricing-table'>
+    <div id="pricing-table">
       <PricingHeader duration={duration} setDuration={setDuration} />
       {data !== null && faq !== null ? (
         <Fragment>

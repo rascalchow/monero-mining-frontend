@@ -2,22 +2,22 @@
 export const areaChartOptions = {
   chart: {
     toolbar: {
-      show: false
+      show: false,
     },
     sparkline: {
-      enabled: true
-    }
+      enabled: true,
+    },
   },
   grid: {
-    show: false
+    show: false,
   },
   colors: ['#7367F0'],
   dataLabels: {
-    enabled: false
+    enabled: false,
   },
   stroke: {
     curve: 'smooth',
-    width: 2.5
+    width: 2.5,
   },
   fill: {
     type: 'gradient',
@@ -25,54 +25,54 @@ export const areaChartOptions = {
       shadeIntensity: 0.9,
       opacityFrom: 0.7,
       opacityTo: 0.5,
-      stops: [0, 80, 100]
-    }
+      stops: [0, 80, 100],
+    },
   },
   xaxis: {
     labels: {
-      show: false
+      show: false,
     },
     axisBorder: {
-      show: false
-    }
+      show: false,
+    },
   },
   yaxis: {
     labels: {
-      show: false
-    }
+      show: false,
+    },
   },
   tooltip: {
-    x: { show: false }
-  }
+    x: { show: false },
+  },
 }
 
 // ** Line Chart Common Options
 export const lineChartOptions = {
   chart: {
     toolbar: {
-      show: false
+      show: false,
     },
     sparkline: {
-      enabled: true
+      enabled: true,
     },
     dropShadow: {
       enabled: true,
       top: 5,
       left: 0,
       blur: 4,
-      opacity: 0.1
-    }
+      opacity: 0.1,
+    },
   },
   grid: {
-    show: false
+    show: false,
   },
   colors: ['#7367F0'],
   dataLabels: {
-    enabled: false
+    enabled: false,
   },
   stroke: {
     curve: 'smooth',
-    width: 5
+    width: 5,
   },
   fill: {
     type: 'gradient',
@@ -81,24 +81,24 @@ export const lineChartOptions = {
       gradientToColors: ['#A9A2F6'],
       opacityFrom: 1,
       opacityTo: 1,
-      stops: [0, 100, 100, 100]
-    }
+      stops: [0, 100, 100, 100],
+    },
   },
 
   xaxis: {
     labels: {
-      show: false
+      show: false,
     },
     axisBorder: {
-      show: false
-    }
+      show: false,
+    },
   },
   yaxis: {
     labels: {
-      show: false
-    }
+      show: false,
+    },
   },
   tooltip: {
-    x: { show: false }
-  }
+    x: { show: false },
+  },
 }

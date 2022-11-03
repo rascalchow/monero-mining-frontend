@@ -5,7 +5,7 @@ const PaginationSuccess = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Success</CardTitle>
+        <CardTitle tag="h4">Success</CardTitle>
       </CardHeader>
       <CardBody>
         <ReactPaginate
@@ -22,8 +22,8 @@ const PaginationSuccess = () => {
           previousClassName={'page-item prev'}
           previousLinkClassName={'page-link'}
           pageLinkClassName={'page-link'}
-          breakClassName='page-item'
-          breakLinkClassName='page-link'
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
           containerClassName={'pagination react-paginate pagination-success'}
         />
       </CardBody>

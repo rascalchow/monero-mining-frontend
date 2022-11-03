@@ -23,7 +23,9 @@ const FileUploaderRestrictions = () => {
 
   const renderPreview = () => {
     if (previewArr.length) {
-      return previewArr.map((src, index) => <img key={index} className='rounded mt-2 mr-1' src={src} alt='avatar' />)
+      return previewArr.map((src, index) => (
+        <img key={index} className="rounded mt-2 mr-1" src={src} alt="avatar" />
+      ))
     } else {
       return null
     }
@@ -32,13 +34,18 @@ const FileUploaderRestrictions = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'> Restrictions</CardTitle>
+        <CardTitle tag="h4"> Restrictions</CardTitle>
       </CardHeader>
       <CardBody>
         <CardText>
-          Use prop <code>restrictions</code> add upload restrictions like <code>maxNumberOfFiles</code> &
-          <code>allowedFileTypes</code>. Refer this{' '}
-          <a href='https://uppy.io/docs/uppy/#restrictions' target='_blank' rel='noopener noreferrer'>
+          Use prop <code>restrictions</code> add upload restrictions like{' '}
+          <code>maxNumberOfFiles</code> &<code>allowedFileTypes</code>. Refer
+          this{' '}
+          <a
+            href="https://uppy.io/docs/uppy/#restrictions"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             link
           </a>{' '}
           for more info.

@@ -67,7 +67,14 @@ const ChartjsPolarAreaChart = ({
       }
     },
     data = {
-      labels: ['Africa', 'Asia', 'Europe', 'America', 'Antarctica', 'Australia'],
+      labels: [
+        'Africa',
+        'Asia',
+        'Europe',
+        'America',
+        'Antarctica',
+        'Australia'
+      ],
       datasets: [
         {
           label: 'Population (millions)',
@@ -87,16 +94,16 @@ const ChartjsPolarAreaChart = ({
 
   return (
     <Card>
-      <CardHeader className='d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column'>
-        <CardTitle tag='h4'>Average Skills</CardTitle>
+      <CardHeader className="d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
+        <CardTitle tag="h4">Average Skills</CardTitle>
         <UncontrolledDropdown>
-          <DropdownToggle className='cursor-pointer' tag='span'>
+          <DropdownToggle className="cursor-pointer" tag="span">
             <MoreVertical size={14} />
           </DropdownToggle>
           <DropdownMenu right>
-            <DropdownItem className='w-100'>Last 28 days</DropdownItem>
-            <DropdownItem className='w-100'>Last Month</DropdownItem>
-            <DropdownItem className='w-100'>Last Year</DropdownItem>
+            <DropdownItem className="w-100">Last 28 days</DropdownItem>
+            <DropdownItem className="w-100">Last Month</DropdownItem>
+            <DropdownItem className="w-100">Last Year</DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </CardHeader>

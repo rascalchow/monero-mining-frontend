@@ -75,9 +75,9 @@ const AutoCompleteSections = () => {
   return (
     <AutoComplete
       suggestions={suggestions}
-      className='form-control'
-      filterKey='title'
-      filterHeaderKey='groupTitle'
+      className="form-control"
+      filterKey="title"
+      filterHeaderKey="groupTitle"
       grouped={true}
       placeholder="Type 'c'"
     />

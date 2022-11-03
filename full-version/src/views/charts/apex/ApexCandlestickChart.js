@@ -105,26 +105,31 @@ const ApexCandleStickChart = ({ danger, success, direction }) => {
 
   return (
     <Card>
-      <CardHeader className='d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start'>
+      <CardHeader className="d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
         <div>
-          <CardTitle className='mb-50' tag='h4'>
+          <CardTitle className="mb-50" tag="h4">
             $74,382.72
           </CardTitle>
-          <p className='mb-0'>$50,863.98</p>
+          <p className="mb-0">$50,863.98</p>
         </div>
-        <div className='d-flex align-items-center mt-md-0 mt-1'>
+        <div className="d-flex align-items-center mt-md-0 mt-1">
           <Calendar size={17} />
           <Flatpickr
             options={{
               mode: 'range',
               defaultDate: ['2019-05-01', '2019-05-10']
             }}
-            className='form-control flat-picker bg-transparent border-0 shadow-none'
+            className="form-control flat-picker bg-transparent border-0 shadow-none"
           />
         </div>
       </CardHeader>
       <CardBody>
-        <Chart options={options} series={series} type='candlestick' height={400} />
+        <Chart
+          options={options}
+          series={series}
+          type="candlestick"
+          height={400}
+        />
       </CardBody>
     </Card>
   )

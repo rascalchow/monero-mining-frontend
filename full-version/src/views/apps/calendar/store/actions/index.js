@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 // ** Fetch Events
-export const fetchEvents = calendars => {
-  return dispatch => {
-    axios.get('/apps/calendar/events', { calendars }).then(response => {
+export const fetchEvents = (calendars) => {
+  return (dispatch) => {
+    axios.get('/apps/calendar/events', { calendars }).then((response) => {
       dispatch({
         type: 'FETCH_EVENTS',
         events: response.data
@@ -13,7 +13,7 @@ export const fetchEvents = calendars => {
 }
 
 // ** Add Event
-export const addEvent = event => {
+export const addEvent = (event) => {
   return (dispatch, getState) => {
     axios.post('/apps/calendar/add-event', { event }).then(() => {
       dispatch({
@@ -25,8 +25,8 @@ export const addEvent = event => {
 }
 
 // ** Update Event
-export const updateEvent = event => {
-  return dispatch => {
+export const updateEvent = (event) => {
+  return (dispatch) => {
     axios.post('/apps/calendar/update-event', { event }).then(() => {
       dispatch({
         type: 'UPDATE_EVENT'
@@ -36,7 +36,7 @@ export const updateEvent = event => {
 }
 
 // ** Filter Events
-export const updateFilter = filter => {
+export const updateFilter = (filter) => {
   return (dispatch, getState) => {
     dispatch({
       type: 'UPDATE_FILTERS',
@@ -47,7 +47,7 @@ export const updateFilter = filter => {
 }
 
 // ** Add/Remove All Filters
-export const updateAllFilters = value => {
+export const updateAllFilters = (value) => {
   return (dispatch, getState) => {
     dispatch({
       type: 'UPDATE_ALL_FILTERS',
@@ -58,8 +58,8 @@ export const updateAllFilters = value => {
 }
 
 // ** remove Event
-export const removeEvent = id => {
-  return dispatch => {
+export const removeEvent = (id) => {
+  return (dispatch) => {
     axios.delete('/apps/calendar/remove-event', { id }).then(() => {
       dispatch({
         type: 'REMOVE_EVENT'
@@ -69,8 +69,8 @@ export const removeEvent = id => {
 }
 
 // ** Select Event (get event data on click)
-export const selectEvent = event => {
-  return dispatch => {
+export const selectEvent = (event) => {
+  return (dispatch) => {
     dispatch({
       type: 'SELECT_EVENT',
       event

@@ -1,4 +1,12 @@
-import { Card, CardHeader, CardBody, CardTitle, Button, Row, Col } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  Button,
+  Row,
+  Col
+} from 'reactstrap'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -69,20 +77,20 @@ const BasicSweetCallback = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Callback</CardTitle>
+        <CardTitle tag="h4">Callback</CardTitle>
       </CardHeader>
       <CardBody>
         <Row>
-          <Col className='mb-2 mb-md-0' md='6' sm='12'>
-            <h5 className='mb-1'>Confirm Button Text</h5>
-            <Button color='primary' onClick={handleConfirmText} outline>
+          <Col className="mb-2 mb-md-0" md="6" sm="12">
+            <h5 className="mb-1">Confirm Button Text</h5>
+            <Button color="primary" onClick={handleConfirmText} outline>
               Confirm Text
             </Button>
           </Col>
 
-          <Col md='6' sm='12'>
-            <h5 className='mb-1'>Confirm Button Color</h5>
-            <Button color='primary' onClick={handleConfirmCancel} outline>
+          <Col md="6" sm="12">
+            <h5 className="mb-1">Confirm Button Color</h5>
+            <Button color="primary" onClick={handleConfirmCancel} outline>
               Confirm & cancel
             </Button>
           </Col>

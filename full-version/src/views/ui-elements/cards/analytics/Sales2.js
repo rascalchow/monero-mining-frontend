@@ -2,7 +2,7 @@ import Chart from 'react-apexcharts'
 import { Settings } from 'react-feather'
 import { Card, CardHeader, CardTitle, CardBody, CardText } from 'reactstrap'
 
-const Sales2 = props => {
+const Sales2 = (props) => {
   const options = {
       chart: {
         toolbar: { show: false },
@@ -64,7 +64,20 @@ const Sales2 = props => {
         axisTicks: {
           show: false
         },
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        categories: [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'July',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec'
+        ],
         axisBorder: {
           show: false
         },
@@ -95,17 +108,17 @@ const Sales2 = props => {
     ]
   return (
     <Card>
-      <CardHeader className='align-items-start'>
+      <CardHeader className="align-items-start">
         <div>
-          <CardTitle className='mb-25' tag='h4'>
+          <CardTitle className="mb-25" tag="h4">
             Sales
           </CardTitle>
-          <CardText className='mb-0'>2020 Total Sales: 12.84k</CardText>
+          <CardText className="mb-0">2020 Total Sales: 12.84k</CardText>
         </div>
-        <Settings size={18} className='text-muted cursor-pointer' />
+        <Settings size={18} className="text-muted cursor-pointer" />
       </CardHeader>
-      <CardBody className='pb-0'>
-        <Chart options={options} series={series} type='line' height={240} />
+      <CardBody className="pb-0">
+        <Chart options={options} series={series} type="line" height={240} />
       </CardBody>
     </Card>
   )

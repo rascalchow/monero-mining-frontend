@@ -23,39 +23,49 @@ const MapLayerControl = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Layer Control</CardTitle>
+        <CardTitle tag="h4">Layer Control</CardTitle>
       </CardHeader>
       <CardBody>
-        <MapContainer center={center} zoom={13} className='leaflet-map'>
-          <LayersControl position='topright'>
-            <BaseLayer checked name='OpenStreetMap.Mapnik'>
+        <MapContainer center={center} zoom={13} className="leaflet-map">
+          <LayersControl position="topright">
+            <BaseLayer checked name="OpenStreetMap.Mapnik">
               <TileLayer
                 attribution='&ampcopy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
             </BaseLayer>
-            <BaseLayer name='OpenStreetMap.BlackAndWhite'>
+            <BaseLayer name="OpenStreetMap.BlackAndWhite">
               <TileLayer
                 attribution='&ampcopy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url='https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png'
+                url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
               />
             </BaseLayer>
-            <Overlay name='Marker with popup'>
+            <Overlay name="Marker with popup">
               <Marker position={center}>
                 <Popup>You're here.</Popup>
               </Marker>
             </Overlay>
-            <Overlay checked name='Layer group with circles'>
+            <Overlay checked name="Layer group with circles">
               <LayerGroup>
-                <Circle center={center} fillColor='blue' radius={200} />
-                <Circle center={center} fillColor='red' radius={100} stroke={false} />
+                <Circle center={center} fillColor="blue" radius={200} />
+                <Circle
+                  center={center}
+                  fillColor="red"
+                  radius={100}
+                  stroke={false}
+                />
                 <LayerGroup>
-                  <Circle center={[51.51, -0.08]} color='green' fillColor='green' radius={100} />
+                  <Circle
+                    center={[51.51, -0.08]}
+                    color="green"
+                    fillColor="green"
+                    radius={100}
+                  />
                 </LayerGroup>
               </LayerGroup>
             </Overlay>
-            <Overlay name='Feature group'>
-              <FeatureGroup color='purple'>
+            <Overlay name="Feature group">
+              <FeatureGroup color="purple">
                 <Popup>Popup </Popup>
                 <Circle center={[51.51, -0.06]} radius={200} />
                 <Rectangle bounds={rectangle} />

@@ -5,7 +5,7 @@ const PaginationWarning = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Warning</CardTitle>
+        <CardTitle tag="h4">Warning</CardTitle>
       </CardHeader>
       <CardBody>
         <ReactPaginate
@@ -22,8 +22,8 @@ const PaginationWarning = () => {
           previousClassName={'page-item prev'}
           previousLinkClassName={'page-link'}
           pageLinkClassName={'page-link'}
-          breakClassName='page-item'
-          breakLinkClassName='page-link'
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
           containerClassName={'pagination react-paginate pagination-warning'}
         />
       </CardBody>

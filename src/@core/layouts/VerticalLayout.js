@@ -4,7 +4,11 @@ import { useLocation } from 'react-router-dom'
 
 // ** Store & Actions
 import { useSelector, useDispatch } from 'react-redux'
-import { handleMenuCollapsed, handleContentWidth, handleMenuHidden } from '@store/actions/layout'
+import {
+  handleMenuCollapsed,
+  handleContentWidth,
+  handleMenuHidden,
+} from '@store/actions/layout'
 
 // ** Third Party Components
 import classnames from 'classnames'
@@ -32,9 +36,10 @@ import { useNavbarColor } from '@hooks/useNavbarColor'
 import '@styles/base/core/menu/menu-types/vertical-menu.scss'
 import '@styles/base/core/menu/menu-types/vertical-overlay-menu.scss'
 
-const VerticalLayout = props => {
+const VerticalLayout = (props) => {
   // ** Props
-  const { children, navbar, footer, menu, routerProps, currentActiveItem } = props
+  const { children, navbar, footer, menu, routerProps, currentActiveItem } =
+    props
 
   // ** Hooks
   const [skin, setSkin] = useSkin()
@@ -50,7 +55,7 @@ const VerticalLayout = props => {
 
   // ** Store Vars
   const dispatch = useDispatch()
-  const layoutStore = useSelector(state => state.layout)
+  const layoutStore = useSelector((state) => state.layout)
 
   // ** Update Window Width
   const handleWindowWidth = () => {
@@ -64,13 +69,13 @@ const VerticalLayout = props => {
   const isHidden = layoutStore.menuHidden
 
   // ** Toggles Menu Collapsed
-  const setMenuCollapsed = val => dispatch(handleMenuCollapsed(val))
+  const setMenuCollapsed = (val) => dispatch(handleMenuCollapsed(val))
 
   // ** Handles Content Width
-  const setContentWidth = val => dispatch(handleContentWidth(val))
+  const setContentWidth = (val) => dispatch(handleContentWidth(val))
 
   // ** Handles Content Width
-  const setIsHidden = val => dispatch(handleMenuHidden(val))
+  const setIsHidden = (val) => dispatch(handleMenuHidden(val))
 
   //** This function will detect the Route Change and will hide the menu on menu item click
   useEffect(() => {
@@ -96,24 +101,25 @@ const VerticalLayout = props => {
   const footerClasses = {
     static: 'footer-static',
     sticky: 'footer-fixed',
-    hidden: 'footer-hidden'
+    hidden: 'footer-hidden',
   }
 
   const navbarWrapperClasses = {
     floating: 'navbar-floating',
     sticky: 'navbar-sticky',
     static: 'navbar-static',
-    hidden: 'navbar-hidden'
+    hidden: 'navbar-hidden',
   }
 
   const navbarClasses = {
     floating: 'floating-nav',
     sticky: 'fixed-top',
     static: 'navbar-static-top',
-    hidden: 'd-none'
+    hidden: 'd-none',
   }
 
-  const bgColorCondition = navbarColor !== '' && navbarColor !== 'light' && navbarColor !== 'white'
+  const bgColorCondition =
+    navbarColor !== '' && navbarColor !== 'light' && navbarColor !== 'white'
 
   if (!isMounted) {
     return null
@@ -121,9 +127,9 @@ const VerticalLayout = props => {
   return (
     <div
       className={classnames(
-        `wrapper vertical-layout ${navbarWrapperClasses[navbarType] || 'navbar-floating'} ${
-          footerClasses[footerType] || 'footer-static'
-        }`,
+        `wrapper vertical-layout ${
+          navbarWrapperClasses[navbarType] || 'navbar-floating'
+        } ${footerClasses[footerType] || 'footer-static'}`,
         {
           // Modern Menu
           'vertical-menu-modern': windowWidth >= 1200,
@@ -133,8 +139,8 @@ const VerticalLayout = props => {
           // Overlay Menu
           'vertical-overlay-menu': windowWidth < 1200,
           'menu-hide': !menuVisibility && windowWidth < 1200,
-          'menu-open': menuVisibility && windowWidth < 1200
-        }
+          'menu-open': menuVisibility && windowWidth < 1200,
+        },
       )}
       {...(isHidden ? { 'data-col': '1-column' } : {})}
     >
@@ -152,16 +158,26 @@ const VerticalLayout = props => {
       ) : null}
 
       <Navbar
-        expand='lg'
+        expand="lg"
         light={skin !== 'dark'}
         dark={skin === 'dark' || bgColorCondition}
         color={bgColorCondition ? navbarColor : undefined}
         className={classnames(
-          `header-navbar navbar align-items-center ${navbarClasses[navbarType] || 'floating-nav'} navbar-shadow`
+          `header-navbar navbar align-items-center ${
+            navbarClasses[navbarType] || 'floating-nav'
+          } navbar-shadow`,
         )}
       >
-        <div className='navbar-container d-flex content'>
-          {navbar ? navbar : <NavbarComponent setMenuVisibility={setMenuVisibility} skin={skin} setSkin={setSkin} />}
+        <div className="navbar-container d-flex content">
+          {navbar ? (
+            navbar
+          ) : (
+            <NavbarComponent
+              setMenuVisibility={setMenuVisibility}
+              skin={skin}
+              setSkin={setSkin}
+            />
+          )}
         </div>
       </Navbar>
       {children}
@@ -169,7 +185,7 @@ const VerticalLayout = props => {
       {/* Vertical Nav Menu Overlay */}
       <div
         className={classnames('sidenav-overlay', {
-          show: menuVisibility
+          show: menuVisibility,
         })}
         onClick={() => setMenuVisibility(false)}
       ></div>
@@ -201,17 +217,27 @@ const VerticalLayout = props => {
         />
       ) : null}
       <footer
-        className={classnames(`footer footer-light ${footerClasses[footerType] || 'footer-static'}`, {
-          'd-none': footerType === 'hidden'
-        })}
+        className={classnames(
+          `footer footer-light ${footerClasses[footerType] || 'footer-static'}`,
+          {
+            'd-none': footerType === 'hidden',
+          },
+        )}
       >
-        {footer ? footer : <FooterComponent footerType={footerType} footerClasses={footerClasses} />}
+        {footer ? (
+          footer
+        ) : (
+          <FooterComponent
+            footerType={footerType}
+            footerClasses={footerClasses}
+          />
+        )}
       </footer>
 
       {themeConfig.layout.scrollTop === true ? (
-        <div className='scroll-to-top'>
+        <div className="scroll-to-top">
           <ScrollToTop showUnder={300} style={{ bottom: '5%' }}>
-            <Button className='btn-icon' color='primary'>
+            <Button className="btn-icon" color="primary">
               <ArrowUp size={14} />
             </Button>
           </ScrollToTop>

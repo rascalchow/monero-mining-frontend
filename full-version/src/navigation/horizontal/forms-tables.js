@@ -1,4 +1,14 @@
-import { Edit, Copy, Circle, Box, Package, CheckCircle, RotateCw, Server, Grid } from 'react-feather'
+import {
+  Edit,
+  Copy,
+  Circle,
+  Box,
+  Package,
+  CheckCircle,
+  RotateCw,
+  Server,
+  Grid
+} from 'react-feather'
 
 export default [
   {

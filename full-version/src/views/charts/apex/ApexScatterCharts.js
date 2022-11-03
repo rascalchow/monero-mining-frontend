@@ -1,6 +1,13 @@
 import { useState } from 'react'
 import Chart from 'react-apexcharts'
-import { Card, CardHeader, CardTitle, CardBody, ButtonGroup, Button } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardBody,
+  ButtonGroup,
+  Button
+} from 'reactstrap'
 
 const ApexScatterCharts = ({ direction, warning, primary, success }) => {
   const [active, setActive] = useState('daily')
@@ -98,22 +105,37 @@ const ApexScatterCharts = ({ direction, warning, primary, success }) => {
 
   return (
     <Card>
-      <CardHeader className='d-flex flex-md-row flex-column justify-content-md-between justify-content-start align-items-md-center align-items-start'>
-        <CardTitle tag='h4'>New Technologies Data</CardTitle>
-        <ButtonGroup className='mt-md-0 mt-1'>
-          <Button active={active === 'daily'} color='primary' outline onClick={() => setActive('daily')}>
+      <CardHeader className="d-flex flex-md-row flex-column justify-content-md-between justify-content-start align-items-md-center align-items-start">
+        <CardTitle tag="h4">New Technologies Data</CardTitle>
+        <ButtonGroup className="mt-md-0 mt-1">
+          <Button
+            active={active === 'daily'}
+            color="primary"
+            outline
+            onClick={() => setActive('daily')}
+          >
             Daily
           </Button>
-          <Button active={active === 'monthly'} color='primary' outline onClick={() => setActive('monthly')}>
+          <Button
+            active={active === 'monthly'}
+            color="primary"
+            outline
+            onClick={() => setActive('monthly')}
+          >
             Monthly
           </Button>
-          <Button active={active === 'yearly'} color='primary' outline onClick={() => setActive('yearly')}>
+          <Button
+            active={active === 'yearly'}
+            color="primary"
+            outline
+            onClick={() => setActive('yearly')}
+          >
             Yearly
           </Button>
         </ButtonGroup>
       </CardHeader>
       <CardBody>
-        <Chart options={options} series={series} type='scatter' height={400} />
+        <Chart options={options} series={series} type="scatter" height={400} />
       </CardBody>
     </Card>
   )

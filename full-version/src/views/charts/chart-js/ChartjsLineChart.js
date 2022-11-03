@@ -92,7 +92,10 @@ const ChartjsLineChart = ({
       labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140],
       datasets: [
         {
-          data: [80, 150, 180, 270, 210, 160, 160, 202, 265, 210, 270, 255, 290, 360, 375],
+          data: [
+            80, 150, 180, 270, 210, 160, 160, 202, 265, 210, 270, 255, 290, 360,
+            375
+          ],
           label: 'Europe',
           borderColor: lineChartDanger,
           lineTension: 0.5,
@@ -111,7 +114,10 @@ const ChartjsLineChart = ({
           pointShadowColor: tooltipShadow
         },
         {
-          data: [80, 125, 105, 130, 215, 195, 140, 160, 230, 300, 220, 170, 210, 200, 280],
+          data: [
+            80, 125, 105, 130, 215, 195, 140, 160, 230, 300, 220, 170, 210, 200,
+            280
+          ],
           label: 'Asia',
           borderColor: lineChartPrimary,
           lineTension: 0.5,
@@ -164,9 +170,9 @@ const ChartjsLineChart = ({
 
   return (
     <Card>
-      <CardHeader className='d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column'>
+      <CardHeader className="d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
         <div>
-          <CardTitle className='mb-75' tag='h4'>
+          <CardTitle className="mb-75" tag="h4">
             Statistics
           </CardTitle>
           <CardSubtitle>Commercial networks and enterprises</CardSubtitle>

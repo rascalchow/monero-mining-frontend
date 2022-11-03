@@ -6,12 +6,12 @@ import VerticalNavMenuSectionHeader from './VerticalNavMenuSectionHeader'
 // ** Utils
 import { resolveVerticalNavMenuItemComponent as resolveNavItemComponent } from '@layouts/utils'
 
-const VerticalMenuNavItems = props => {
+const VerticalMenuNavItems = (props) => {
   // ** Components Object
   const Components = {
     VerticalNavMenuSectionHeader,
     VerticalNavMenuGroup,
-    VerticalNavMenuLink
+    VerticalNavMenuLink,
   }
 
   // ** Render Nav Menu Items

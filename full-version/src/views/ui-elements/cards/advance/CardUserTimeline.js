@@ -52,8 +52,8 @@ const data = [
     metaClassName: 'mr-1',
     customContent: (
       <Media>
-        <img className='mr-1' src={jsonImg} alt='data.json' height='23' />
-        <Media className='mb-0' body>
+        <img className="mr-1" src={jsonImg} alt="data.json" height="23" />
+        <Media className="mb-0" body>
           data.json
         </Media>
       </Media>
@@ -66,10 +66,10 @@ const data = [
     metaClassName: 'mr-1',
     color: 'warning',
     customContent: (
-      <Media className='align-items-center'>
+      <Media className="align-items-center">
         <Avatar img={ceo} />
-        <Media className='ml-50' body>
-          <h6 className='mb-0'>John Doe (Client)</h6>
+        <Media className="ml-50" body>
+          <h6 className="mb-0">John Doe (Client)</h6>
           <span>CEO of Infibeam</span>
         </Media>
       </Media>
@@ -94,16 +94,16 @@ const data = [
 
 const UserTimeline = () => {
   return (
-    <Card className='card-user-timeline'>
+    <Card className="card-user-timeline">
       <CardHeader>
-        <div className='d-flex align-items-center'>
-          <List className='user-timeline-title-icon' />
-          <CardTitle tag='h4'>User Timeline</CardTitle>
+        <div className="d-flex align-items-center">
+          <List className="user-timeline-title-icon" />
+          <CardTitle tag="h4">User Timeline</CardTitle>
         </div>
-        <MoreVertical size={18} className='cursor-pointer' />
+        <MoreVertical size={18} className="cursor-pointer" />
       </CardHeader>
       <CardBody>
-        <Timeline className='ml-50 mb-0' data={data} />
+        <Timeline className="ml-50 mb-0" data={data} />
       </CardBody>
     </Card>
   )

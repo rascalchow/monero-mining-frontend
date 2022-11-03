@@ -12,17 +12,17 @@ const KnowledgeBase = () => {
     [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
-    axios.get('/faq/data/knowledge_base').then(res => setData(res.data))
+    axios.get('/faq/data/knowledge_base').then((res) => setData(res.data))
   }, [])
 
   const Content = ({ item }) => (
-    <Col className='kb-search-content' key={item.id} md='4' sm='6'>
+    <Col className="kb-search-content" key={item.id} md="4" sm="6">
       <Card>
         <Link to={`/pages/knowledge-base/${item.category}`}>
-          <CardImg src={item.img} alt='knowledge-base-image' top />
-          <CardBody className='text-center'>
+          <CardImg src={item.img} alt="knowledge-base-image" top />
+          <CardBody className="text-center">
             <h4>{item.title}</h4>
-            <p className='text-body mt-1 mb-0'>{item.desc}</p>
+            <p className="text-body mt-1 mb-0">{item.desc}</p>
           </CardBody>
         </Link>
       </Card>
@@ -30,9 +30,13 @@ const KnowledgeBase = () => {
   )
 
   const renderContent = () => {
-    return data.map(item => {
-      const titleCondition = item.title.toLowerCase().includes(searchTerm.toLowerCase()),
-        descCondition = item.desc.toLowerCase().includes(searchTerm.toLowerCase())
+    return data.map((item) => {
+      const titleCondition = item.title
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()),
+        descCondition = item.desc
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
 
       if (searchTerm.length < 1) {
         return <Content key={item.id} item={item} />
@@ -46,11 +50,20 @@ const KnowledgeBase = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Knowledge Base' breadCrumbParent='Pages' breadCrumbActive='Knowledge Base' />
-      <KnowledgeBaseHeader searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Breadcrumbs
+        breadCrumbTitle="Knowledge Base"
+        breadCrumbParent="Pages"
+        breadCrumbActive="Knowledge Base"
+      />
+      <KnowledgeBaseHeader
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
       {data !== null ? (
-        <div id='knowledge-base-content'>
-          <Row className='kb-search-content-info match-height'>{renderContent()}</Row>
+        <div id="knowledge-base-content">
+          <Row className="kb-search-content-info match-height">
+            {renderContent()}
+          </Row>
         </div>
       ) : null}
     </Fragment>

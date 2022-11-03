@@ -11,24 +11,28 @@ import InputState from './InputStates'
 const Input = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Input' breadCrumbParent='Form Elements' breadCrumbActive='Input' />
-      <Row className='match-height'>
-        <Col sm='12'>
+      <Breadcrumbs
+        breadCrumbTitle="Input"
+        breadCrumbParent="Form Elements"
+        breadCrumbActive="Input"
+      />
+      <Row className="match-height">
+        <Col sm="12">
           <InputBasic />
         </Col>
-        <Col md='6' sm='12'>
+        <Col md="6" sm="12">
           <InputSizes />
         </Col>
-        <Col md='6' sm='12'>
+        <Col md="6" sm="12">
           <InputHorizontalSize />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <InputFloating />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <InputFile />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <InputState />
         </Col>
       </Row>

@@ -10,9 +10,9 @@ const Editor = () => {
   return (
     <Fragment>
       <ExtensionsHeader
-        title='React BlockUI'
-        subTitle='Easy way to block the user from interacting with your UI.'
-        link='https://availity.github.io/react-block-ui/'
+        title="React BlockUI"
+        subTitle="Easy way to block the user from interacting with your UI."
+        link="https://availity.github.io/react-block-ui/"
       />
 
       <Row>

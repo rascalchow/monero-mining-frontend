@@ -17,7 +17,7 @@ const data = {
       price: 10.99,
       image: require('@src/assets/images/pages/eCommerce/27.png').default,
       hasFreeShipping: true,
-      rating: 2
+      rating: 2,
     },
     {
       id: 2,
@@ -29,7 +29,7 @@ const data = {
       price: 249.0,
       image: require('@src/assets/images/pages/eCommerce/26.png').default,
       hasFreeShipping: false,
-      rating: 5
+      rating: 5,
     },
     {
       id: 3,
@@ -41,7 +41,7 @@ const data = {
       price: 29.99,
       image: require('@src/assets/images/pages/eCommerce/25.png').default,
       hasFreeShipping: false,
-      rating: 5
+      rating: 5,
     },
     {
       id: 4,
@@ -53,18 +53,19 @@ const data = {
       price: 23.99,
       image: require('@src/assets/images/pages/eCommerce/24.png').default,
       hasFreeShipping: false,
-      rating: 2
+      rating: 2,
     },
     {
       id: 5,
       name: 'Toshiba Canvio Advance 2TB Portable External Hard Drive',
       slug: '3-dr-solo-gimbal-black-5',
-      description: 'Up to 3TB of storage capacity to store your growing files and content',
+      description:
+        'Up to 3TB of storage capacity to store your growing files and content',
       brand: 'Toshiba',
       price: 69.99,
       image: require('@src/assets/images/pages/eCommerce/23.png').default,
       hasFreeShipping: false,
-      rating: 2
+      rating: 2,
     },
     {
       id: 6,
@@ -76,7 +77,7 @@ const data = {
       price: 29.99,
       image: require('@src/assets/images/pages/eCommerce/22.png').default,
       hasFreeShipping: false,
-      rating: 4
+      rating: 4,
     },
     {
       id: 7,
@@ -88,7 +89,7 @@ const data = {
       price: 56.0,
       image: require('@src/assets/images/pages/eCommerce/21.png').default,
       hasFreeShipping: false,
-      rating: 3
+      rating: 3,
     },
     {
       id: 8,
@@ -100,7 +101,7 @@ const data = {
       price: 339.95,
       image: require('@src/assets/images/pages/eCommerce/20.png').default,
       hasFreeShipping: false,
-      rating: 1
+      rating: 1,
     },
     {
       id: 9,
@@ -112,7 +113,7 @@ const data = {
       price: 16.99,
       image: require('@src/assets/images/pages/eCommerce/19.png').default,
       hasFreeShipping: false,
-      rating: 5
+      rating: 5,
     },
     {
       id: 10,
@@ -124,7 +125,7 @@ const data = {
       price: 645.0,
       image: require('@src/assets/images/pages/eCommerce/18.png').default,
       hasFreeShipping: false,
-      rating: 1
+      rating: 1,
     },
     {
       id: 11,
@@ -136,7 +137,7 @@ const data = {
       price: 39.99,
       image: require('@src/assets/images/pages/eCommerce/17.png').default,
       hasFreeShipping: false,
-      rating: 3
+      rating: 3,
     },
     {
       id: 12,
@@ -148,7 +149,7 @@ const data = {
       price: 54.59,
       image: require('@src/assets/images/pages/eCommerce/16.png').default,
       hasFreeShipping: false,
-      rating: 5
+      rating: 5,
     },
     {
       id: 13,
@@ -160,7 +161,7 @@ const data = {
       price: 29.99,
       image: require('@src/assets/images/pages/eCommerce/15.png').default,
       hasFreeShipping: false,
-      rating: 5
+      rating: 5,
     },
     {
       id: 14,
@@ -172,7 +173,7 @@ const data = {
       price: 10.83,
       image: require('@src/assets/images/pages/eCommerce/14.png').default,
       hasFreeShipping: false,
-      rating: 3
+      rating: 3,
     },
     {
       id: 15,
@@ -184,7 +185,7 @@ const data = {
       price: 99.99,
       image: require('@src/assets/images/pages/eCommerce/13.png').default,
       hasFreeShipping: false,
-      rating: 2
+      rating: 2,
     },
     {
       id: 16,
@@ -196,7 +197,7 @@ const data = {
       price: 799.99,
       image: require('@src/assets/images/pages/eCommerce/12.png').default,
       hasFreeShipping: false,
-      rating: 3
+      rating: 3,
     },
     {
       id: 17,
@@ -208,7 +209,7 @@ const data = {
       price: 98.95,
       image: require('@src/assets/images/pages/eCommerce/11.png').default,
       hasFreeShipping: false,
-      rating: 1
+      rating: 1,
     },
     {
       id: 18,
@@ -220,7 +221,7 @@ const data = {
       price: 81.99,
       image: require('@src/assets/images/pages/eCommerce/10.png').default,
       hasFreeShipping: false,
-      rating: 4
+      rating: 4,
     },
     {
       id: 19,
@@ -235,7 +236,7 @@ const data = {
     very premium but’s it’s also very heavy. The Nebula Blue variant looks slick but it’s quite slippery, which
     makes single-handed use a real challenge. It has a massive 6.67-inch ‘Fluid AMOLED’ display with a QHD+
     resolution, 90Hz refresh rate and support for HDR 10+ content. The display produces vivid colours, deep blacks
-    and has good viewing angles.`
+    and has good viewing angles.`,
     },
     {
       id: 20,
@@ -248,7 +249,7 @@ const data = {
       rating: 5,
       description: `Sony 4K Ultra HD LED TV has 4K HDR Support. The TV provides clear visuals and provides distinct sound quality
     and an immersive experience. This TV has Yes HDMI ports & Yes USB ports. Connectivity options included are HDMI.
-    You can connect various gadgets such as your laptop using the HDMI port. The TV comes with a 1 Year warranty.`
+    You can connect various gadgets such as your laptop using the HDMI port. The TV comes with a 1 Year warranty.`,
     },
     {
       id: 21,
@@ -261,7 +262,7 @@ const data = {
       rating: 4,
       description: `Simplify your everyday life with the Google Home, a voice-activated speaker powered by the Google Assistant. Use
     voice commands to enjoy music, get answers from Google and manage everyday tasks. Google Home is compatible with
-    Android and iOS operating systems, and can control compatible smart devices such as Chromecast or Nest.`
+    Android and iOS operating systems, and can control compatible smart devices such as Chromecast or Nest.`,
     },
     {
       id: 22,
@@ -275,7 +276,7 @@ const data = {
       description: `The Nintendo Switch Pro Controller is one of the priciest "baseline" controllers in the current console
     generation, but it's also sturdy, feels good to play with, has an excellent direction pad, and features
     impressive motion sensors and vibration systems. On top of all of that, it uses Bluetooth, so you don't need an
-    adapter to use it with your PC.`
+    adapter to use it with your PC.`,
     },
     {
       id: 23,
@@ -289,7 +290,7 @@ const data = {
       description: `MacBook Air is a thin, lightweight laptop from Apple. MacBook Air features up to 8GB of memory, a
     fifth-generation Intel Core processor, Thunderbolt 2, great built-in apps, and all-day battery life.1 Its thin,
     light, and durable enough to take everywhere you go-and powerful enough to do everything once you get there,
-    better.`
+    better.`,
     },
     {
       id: 24,
@@ -303,7 +304,7 @@ const data = {
       description: `Omnidirectional detachable boom mic upgrades the headphones into a professional headset for gaming, business,
     podcasting and taking calls on the go. Better pick up your voice. Control most electric devices through voice
     activation, or schedule a ride with Uber and order a pizza. OneOdio A71 Wired Headphones voice-controlled device
-    turns any home into a smart device on a smartphone or tablet.`
+    turns any home into a smart device on a smartphone or tablet.`,
     },
     {
       id: 25,
@@ -318,7 +319,7 @@ const data = {
     packed with tools that let you take any idea to the next level. And the new 27-inch model elevates the
     experience in way, with faster processors and graphics, expanded memory and storage, enhanced audio and video
     capabilities, and an even more stunning Retina 5K display. It’s the desktop that does it all — better and faster
-    than ever.`
+    than ever.`,
     },
     {
       id: 26,
@@ -332,7 +333,7 @@ const data = {
       description: `The Apple iPhone 11 is a great smartphone, which was loaded with a lot of quality features. It comes with a
     waterproof and dustproof body which is the key attraction of the device. The excellent set of cameras offer
     excellent images as well as capable of recording crisp videos. However, expandable storage and a fingerprint
-    scanner would have made it a perfect option to go for around this price range.`
+    scanner would have made it a perfect option to go for around this price range.`,
     },
     {
       id: 27,
@@ -347,33 +348,35 @@ const data = {
     raising or tapping the display. New location features, from a built-in compass to current elevation, help users
     better navigate their day, while international emergency calling1 allows customers to call emergency services
     directly from Apple Watch in over 150 countries, even without iPhone nearby. Apple Watch Series 5 is available
-    in a wider range of materials, including aluminium, stainless steel, ceramic and an all-new titanium.`
-    }
+    in a wider range of materials, including aluminium, stainless steel, ceramic and an all-new titanium.`,
+    },
   ],
   userWishlist: [
     { id: 1, productId: 26 },
-    { id: 2, productId: 23 }
+    { id: 2, productId: 23 },
   ],
   userCart: [
     { id: 1, productId: 27, qty: 1 },
     { id: 2, productId: 21, qty: 1 },
     { id: 3, productId: 26, qty: 1 },
     { id: 4, productId: 25, qty: 1 },
-    { id: 5, productId: 23, qty: 1 }
-  ]
+    { id: 5, productId: 23, qty: 1 },
+  ],
 }
 /* eslint-enable */
 
 // ------------------------------------------------
 // GET: Return products
 // ------------------------------------------------
-mock.onGet('/apps/ecommerce/products').reply(config => {
+mock.onGet('/apps/ecommerce/products').reply((config) => {
   // eslint-disable-next-line object-curly-newline
   const { q = '', sortBy = 'featured', perPage = 9, page = 1 } = config.params
 
   const queryLowered = q.toLowerCase()
 
-  const filteredData = data.products.filter(product => product.name.toLowerCase().includes(queryLowered))
+  const filteredData = data.products.filter((product) =>
+    product.name.toLowerCase().includes(queryLowered),
+  )
 
   let sortDesc = false
   const sortByKey = (() => {
@@ -391,12 +394,16 @@ mock.onGet('/apps/ecommerce/products').reply(config => {
   const sortedData = filteredData.sort(sortCompare(sortByKey))
   if (sortDesc) sortedData.reverse()
 
-  const paginatedData = JSON.parse(JSON.stringify(paginateArray(sortedData, perPage, page)))
+  const paginatedData = JSON.parse(
+    JSON.stringify(paginateArray(sortedData, perPage, page)),
+  )
 
-  paginatedData.forEach(product => {
+  paginatedData.forEach((product) => {
     /* eslint-disable no-param-reassign */
-    product.isInWishlist = data.userWishlist.findIndex(p => p.productId === product.id) > -1
-    product.isInCart = data.userCart.findIndex(p => p.productId === product.id) > -1
+    product.isInWishlist =
+      data.userWishlist.findIndex((p) => p.productId === product.id) > -1
+    product.isInCart =
+      data.userCart.findIndex((p) => p.productId === product.id) > -1
     /* eslint-enable */
   })
 
@@ -406,28 +413,30 @@ mock.onGet('/apps/ecommerce/products').reply(config => {
       products: paginatedData,
       total: filteredData.length,
       userWishlist: data.userWishlist,
-      userCart: data.userCart
-    }
+      userCart: data.userCart,
+    },
   ]
 })
 
 // ------------------------------------------------
 // GET: Return Single Product
 // ------------------------------------------------
-mock.onGet(/\/apps\/ecommerce\/products\/\d+/).reply(config => {
+mock.onGet(/\/apps\/ecommerce\/products\/\d+/).reply((config) => {
   // Get product id from URL
   let productId = config.url.substring(config.url.lastIndexOf('/') + 1)
 
   // Convert Id to number
   productId = Number(productId)
 
-  const productIndex = data.products.findIndex(p => p.id === productId)
+  const productIndex = data.products.findIndex((p) => p.id === productId)
   const product = data.products[productIndex]
 
   if (product) {
     // Add data of wishlist and cart
-    product.isInWishlist = data.userWishlist.findIndex(p => p.productId === product.id) > -1
-    product.isInCart = data.userCart.findIndex(p => p.productId === product.id) > -1
+    product.isInWishlist =
+      data.userWishlist.findIndex((p) => p.productId === product.id) > -1
+    product.isInCart =
+      data.userCart.findIndex((p) => p.productId === product.id) > -1
 
     // * Add Dummy data for details page
     product.colorOptions = ['primary', 'success', 'warning', 'danger', 'info']
@@ -441,9 +450,14 @@ mock.onGet(/\/apps\/ecommerce\/products\/\d+/).reply(config => {
 // GET: Return Wishlist Products
 // ------------------------------------------------
 mock.onGet('/apps/ecommerce/wishlist').reply(() => {
-  const products = data.userWishlist.map(wishlistProduct => {
-    const product = data.products.find(p => p.id === wishlistProduct.productId)
-    product.isInCart = data.userCart.findIndex(p => p.productId === wishlistProduct.productId) > -1
+  const products = data.userWishlist.map((wishlistProduct) => {
+    const product = data.products.find(
+      (p) => p.id === wishlistProduct.productId,
+    )
+    product.isInCart =
+      data.userCart.findIndex(
+        (p) => p.productId === wishlistProduct.productId,
+      ) > -1
     return product
   })
 
@@ -454,11 +468,14 @@ mock.onGet('/apps/ecommerce/wishlist').reply(() => {
 // GET: Return Cart Products
 // ------------------------------------------------
 mock.onGet('/apps/ecommerce/cart').reply(() => {
-  const products = data.userCart.map(cartProduct => {
-    const product = data.products.find(p => p.id === cartProduct.productId)
+  const products = data.userCart.map((cartProduct) => {
+    const product = data.products.find((p) => p.id === cartProduct.productId)
 
     // Other data
-    product.isInWishlist = data.userWishlist.findIndex(p => p.productId === cartProduct.productId) > -1
+    product.isInWishlist =
+      data.userWishlist.findIndex(
+        (p) => p.productId === cartProduct.productId,
+      ) > -1
     product.qty = cartProduct.qty
     product.shippingDate = randomDate(nextDay, nextWeek)
     product.offers = getRandomInt(1, 4)
@@ -473,7 +490,7 @@ mock.onGet('/apps/ecommerce/cart').reply(() => {
 // ------------------------------------------------
 // POST: Add Item in user Cart
 // ------------------------------------------------
-mock.onPost('/apps/ecommerce/cart').reply(config => {
+mock.onPost('/apps/ecommerce/cart').reply((config) => {
   // Get product from post data
   const { productId } = JSON.parse(config.data)
 
@@ -484,7 +501,7 @@ mock.onPost('/apps/ecommerce/cart').reply(config => {
   data.userCart.push({
     id: lastId + 1,
     productId,
-    qty: 1
+    qty: 1,
   })
 
   return [201]
@@ -493,14 +510,14 @@ mock.onPost('/apps/ecommerce/cart').reply(config => {
 // ------------------------------------------------
 // DELETE: Remove Item from user Cart
 // ------------------------------------------------
-mock.onDelete(/\/apps\/ecommerce\/cart\/\d+/).reply(config => {
+mock.onDelete(/\/apps\/ecommerce\/cart\/\d+/).reply((config) => {
   // Get product id from URL
   let productId = config.url.substring(config.url.lastIndexOf('/') + 1)
 
   // Convert Id to number
   productId = Number(productId)
 
-  const productIndex = data.userCart.findIndex(i => i.productId === productId)
+  const productIndex = data.userCart.findIndex((i) => i.productId === productId)
   if (productIndex > -1) data.userCart.splice(productIndex, 1)
 
   return [200]
@@ -509,7 +526,7 @@ mock.onDelete(/\/apps\/ecommerce\/cart\/\d+/).reply(config => {
 // ------------------------------------------------
 // POST: Add Item in user Wishlist
 // ------------------------------------------------
-mock.onPost('/apps/ecommerce/wishlist').reply(config => {
+mock.onPost('/apps/ecommerce/wishlist').reply((config) => {
   // Get product from post data
   const { productId } = JSON.parse(config.data)
 
@@ -519,7 +536,7 @@ mock.onPost('/apps/ecommerce/wishlist').reply(config => {
 
   data.userWishlist.push({
     id: lastId + 1,
-    productId: Number(productId)
+    productId: Number(productId),
   })
 
   return [201]
@@ -528,14 +545,16 @@ mock.onPost('/apps/ecommerce/wishlist').reply(config => {
 // ------------------------------------------------
 // DELETE: Remove Item from user Wishlist
 // ------------------------------------------------
-mock.onDelete(/\/apps\/ecommerce\/wishlist\/\d+/).reply(config => {
+mock.onDelete(/\/apps\/ecommerce\/wishlist\/\d+/).reply((config) => {
   // Get product id from URL
   let productId = config.url.substring(config.url.lastIndexOf('/') + 1)
 
   // Convert Id to number
   productId = Number(productId)
 
-  const productIndex = data.userWishlist.findIndex(i => i.productId === productId)
+  const productIndex = data.userWishlist.findIndex(
+    (i) => i.productId === productId,
+  )
   if (productIndex > -1) data.userWishlist.splice(productIndex, 1)
 
   return [200]

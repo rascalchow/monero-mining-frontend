@@ -30,7 +30,15 @@ const ApexBarChart = ({ info, direction }) => {
       enabled: false
     },
     xaxis: {
-      categories: ['MON, 11', 'THU, 14', 'FRI, 15', 'MON, 18', 'WED, 20', 'FRI, 21', 'MON, 23']
+      categories: [
+        'MON, 11',
+        'THU, 14',
+        'FRI, 15',
+        'MON, 18',
+        'WED, 20',
+        'FRI, 21',
+        'MON, 23'
+      ]
     },
     yaxis: {
       opposite: direction === 'rtl'
@@ -45,26 +53,26 @@ const ApexBarChart = ({ info, direction }) => {
 
   return (
     <Card>
-      <CardHeader className='d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start'>
+      <CardHeader className="d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
         <div>
-          <CardSubtitle className='text-muted mb-25'>Balance</CardSubtitle>
-          <CardTitle className='font-weight-bolder' tag='h4'>
+          <CardSubtitle className="text-muted mb-25">Balance</CardSubtitle>
+          <CardTitle className="font-weight-bolder" tag="h4">
             $74,382.72
           </CardTitle>
         </div>
-        <div className='d-flex align-items-center mt-md-0 mt-1'>
+        <div className="d-flex align-items-center mt-md-0 mt-1">
           <Calendar size={17} />
           <Flatpickr
             options={{
               mode: 'range',
               defaultDate: ['2019-05-01', '2019-05-10']
             }}
-            className='form-control flat-picker bg-transparent border-0 shadow-none'
+            className="form-control flat-picker bg-transparent border-0 shadow-none"
           />
         </div>
       </CardHeader>
       <CardBody>
-        <Chart options={options} series={series} type='bar' height={400} />
+        <Chart options={options} series={series} type="bar" height={400} />
       </CardBody>
     </Card>
   )

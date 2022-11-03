@@ -56,18 +56,18 @@ const RevenueGenerated = ({ kFormatter, success }) => {
   }
 
   useEffect(() => {
-    axios.get('/card/card-statistics/revenue').then(res => setData(res.data))
+    axios.get('/card/card-statistics/revenue').then((res) => setData(res.data))
   }, [])
 
   return data !== null ? (
     <StatsWithAreaChart
       icon={<CreditCard size={21} />}
-      color='success'
+      color="success"
       stats={kFormatter(data.analyticsData.revenue)}
-      statTitle='Revenue Generated'
+      statTitle="Revenue Generated"
       options={options}
       series={data.series}
-      type='area'
+      type="area"
     />
   ) : null
 }

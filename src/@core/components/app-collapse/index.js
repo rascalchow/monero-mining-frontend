@@ -7,9 +7,18 @@ import classnames from 'classnames'
 import { ChevronUp } from 'react-feather'
 import { Collapse, Card, CardHeader, CardBody, CardTitle } from 'reactstrap'
 
-const AppCollapse = props => {
+const AppCollapse = (props) => {
   // ** Props
-  const { data, type, accordion, active, toggle, titleKey, contentKey, className } = props
+  const {
+    data,
+    type,
+    accordion,
+    active,
+    toggle,
+    titleKey,
+    contentKey,
+    className,
+  } = props
 
   /**
    ** If accordion is true then return only one active index else return an Array
@@ -26,7 +35,7 @@ const AppCollapse = props => {
   const [openCollapse, setOpenCollapse] = useState(defaultActive())
 
   // ** Function to handle Collapse Toggle
-  const handleCollapseToggle = id => {
+  const handleCollapseToggle = (id) => {
     if (accordion) {
       if (id === openCollapse) {
         setOpenCollapse(null)
@@ -56,28 +65,36 @@ const AppCollapse = props => {
         <Card
           className={classnames('app-collapse', {
             [item.className]: item.className,
-            open: accordion ? openCollapse === index : openCollapse.includes(index) && type === 'shadow'
+            open: accordion
+              ? openCollapse === index
+              : openCollapse.includes(index) && type === 'shadow',
           })}
           key={index}
         >
           <CardHeader
             className={classnames('align-items-center', {
-              collapsed: accordion ? openCollapse !== index : !openCollapse.includes(index)
+              collapsed: accordion
+                ? openCollapse !== index
+                : !openCollapse.includes(index),
             })}
             /*eslint-disable */
             {...(toggle === 'hover'
               ? {
-                  onMouseEnter: () => handleCollapseToggle(index)
+                  onMouseEnter: () => handleCollapseToggle(index),
                 }
               : {
-                  onClick: () => handleCollapseToggle(index)
+                  onClick: () => handleCollapseToggle(index),
                 })}
             /*eslint-enable */
           >
-            <CardTitle className='collapse-title'>{title}</CardTitle>
+            <CardTitle className="collapse-title">{title}</CardTitle>
             <ChevronUp size={14} />
           </CardHeader>
-          <Collapse isOpen={accordion ? openCollapse === index : openCollapse.includes(index)}>
+          <Collapse
+            isOpen={
+              accordion ? openCollapse === index : openCollapse.includes(index)
+            }
+          >
             <CardBody>{content}</CardBody>
           </Collapse>
         </Card>
@@ -92,7 +109,7 @@ const AppCollapse = props => {
         'collapse-default': !type,
         'collapse-shadow': type === 'shadow',
         'collapse-border': type === 'border',
-        'collapse-margin': type === 'margin'
+        'collapse-margin': type === 'margin',
       })}
     >
       {renderData()}
@@ -110,11 +127,11 @@ AppCollapse.propTypes = {
   active: Proptypes.oneOfType([Proptypes.array, Proptypes.number]),
   titleKey: Proptypes.string,
   contentKey: Proptypes.string,
-  className: Proptypes.string
+  className: Proptypes.string,
 }
 
 // ** Default Props
 AppCollapse.defaultProps = {
   active: [],
-  toggle: 'click'
+  toggle: 'click',
 }

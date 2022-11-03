@@ -8,15 +8,19 @@ import RadioColors from './RadioColors'
 const Radio = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Radio' breadCrumbParent='Form Elements' breadCrumbActive='Radio' />
+      <Breadcrumbs
+        breadCrumbTitle="Radio"
+        breadCrumbParent="Form Elements"
+        breadCrumbActive="Radio"
+      />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <RadioBasic />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <RadioCustom />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <RadioColors />
         </Col>
       </Row>

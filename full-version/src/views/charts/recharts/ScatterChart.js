@@ -1,7 +1,14 @@
 import { Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
 import { Calendar } from 'react-feather'
 import Flatpickr from 'react-flatpickr'
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
+import {
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer
+} from 'recharts'
 
 const angularData = [
   { x: 5.4, y: 170 },
@@ -54,44 +61,44 @@ const reactData = [
 const SimpleScatterChart = ({ primary, success, danger }) => {
   return (
     <Card>
-      <CardHeader className='flex-sm-row flex-column justify-content-sm-between justify-content-center align-items-sm-center align-items-start'>
-        <CardTitle tag='h4'>Framework Usage</CardTitle>
-        <div className='d-flex align-items-center'>
+      <CardHeader className="flex-sm-row flex-column justify-content-sm-between justify-content-center align-items-sm-center align-items-start">
+        <CardTitle tag="h4">Framework Usage</CardTitle>
+        <div className="d-flex align-items-center">
           <Calendar size={15} />
           <Flatpickr
             options={{
               mode: 'range',
               defaultDate: ['2019-05-01', '2019-05-10']
             }}
-            className='form-control flat-picker bg-transparent border-0 shadow-none'
+            className="form-control flat-picker bg-transparent border-0 shadow-none"
           />
         </div>
       </CardHeader>
 
       <CardBody>
-        <div className='d-flex align-items-center mb-2'>
-          <div className='mr-2'>
-            <span className='bullet bullet-sm bullet-primary bullet-bordered mr-50'></span>
-            <span className='align-middle mr-75'>React</span>
+        <div className="d-flex align-items-center mb-2">
+          <div className="mr-2">
+            <span className="bullet bullet-sm bullet-primary bullet-bordered mr-50"></span>
+            <span className="align-middle mr-75">React</span>
           </div>
-          <div className='mr-2'>
-            <span className='bullet bullet-sm bullet-success bullet-bordered mr-50'></span>
-            <span className='align-middle mr-75'>Vue</span>
+          <div className="mr-2">
+            <span className="bullet bullet-sm bullet-success bullet-bordered mr-50"></span>
+            <span className="align-middle mr-75">Vue</span>
           </div>
           <div>
-            <span className='bullet bullet-sm bullet-danger bullet-bordered mr-50'></span>
-            <span className='align-middle'>Angular</span>
+            <span className="bullet bullet-sm bullet-danger bullet-bordered mr-50"></span>
+            <span className="align-middle">Angular</span>
           </div>
         </div>
-        <div className='recharts-wrapper'>
+        <div className="recharts-wrapper">
           <ResponsiveContainer>
             <ScatterChart height={400}>
               <CartesianGrid />
-              <XAxis type='number' dataKey='x' />
-              <YAxis type='number' dataKey='y' />
-              <Scatter name='Angular' data={angularData} fill={danger} />
-              <Scatter name='Vue' data={vueData} fill={success} />
-              <Scatter name='React' data={reactData} fill={primary} />
+              <XAxis type="number" dataKey="x" />
+              <YAxis type="number" dataKey="y" />
+              <Scatter name="Angular" data={angularData} fill={danger} />
+              <Scatter name="Vue" data={vueData} fill={success} />
+              <Scatter name="React" data={reactData} fill={primary} />
             </ScatterChart>
           </ResponsiveContainer>
         </div>

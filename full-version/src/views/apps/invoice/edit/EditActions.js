@@ -8,26 +8,42 @@ import { Card, CardBody, Button, Input, CustomInput, Label } from 'reactstrap'
 const EditActions = ({ setSendSidebarOpen, setAddPaymentOpen }) => {
   return (
     <Fragment>
-      <Card className='invoice-action-wrapper'>
+      <Card className="invoice-action-wrapper">
         <CardBody>
-          <Button.Ripple color='primary' block className='mb-75' onClick={() => setSendSidebarOpen(true)}>
+          <Button.Ripple
+            color="primary"
+            block
+            className="mb-75"
+            onClick={() => setSendSidebarOpen(true)}
+          >
             Send Invoice
           </Button.Ripple>
-          <Button.Ripple tag={Link} to='/apps/invoice/preview' color='primary' block outline className='mb-75'>
+          <Button.Ripple
+            tag={Link}
+            to="/apps/invoice/preview"
+            color="primary"
+            block
+            outline
+            className="mb-75"
+          >
             Preview
           </Button.Ripple>
-          <Button.Ripple color='primary' block outline className='mb-75'>
+          <Button.Ripple color="primary" block outline className="mb-75">
             Save
           </Button.Ripple>
-          <Button.Ripple color='success' block onClick={() => setAddPaymentOpen(true)}>
+          <Button.Ripple
+            color="success"
+            block
+            onClick={() => setAddPaymentOpen(true)}
+          >
             Add Payment
           </Button.Ripple>
         </CardBody>
       </Card>
-      <div className='mt-2'>
-        <div className='invoice-payment-option'>
-          <p className='mb-50'>Accept payments via</p>
-          <Input type='select' id='payment-select'>
+      <div className="mt-2">
+        <div className="invoice-payment-option">
+          <p className="mb-50">Accept payments via</p>
+          <Input type="select" id="payment-select">
             <option>Debit Card</option>
             <option>Credit Card</option>
             <option>Paypal</option>
@@ -35,24 +51,24 @@ const EditActions = ({ setSendSidebarOpen, setAddPaymentOpen }) => {
             <option>UPI Transfer</option>
           </Input>
         </div>
-        <div className='invoice-terms mt-1'>
-          <div className='d-flex justify-content-between'>
-            <Label className='mb-0' for='payment-terms'>
+        <div className="invoice-terms mt-1">
+          <div className="d-flex justify-content-between">
+            <Label className="mb-0" for="payment-terms">
               Payment Terms
             </Label>
-            <CustomInput type='switch' id='payment-terms' defaultChecked />
+            <CustomInput type="switch" id="payment-terms" defaultChecked />
           </div>
-          <div className='d-flex justify-content-between py-1'>
-            <Label className='mb-0' for='client-notes'>
+          <div className="d-flex justify-content-between py-1">
+            <Label className="mb-0" for="client-notes">
               Client Notes
             </Label>
-            <CustomInput type='switch' id='client-notes' defaultChecked />
+            <CustomInput type="switch" id="client-notes" defaultChecked />
           </div>
-          <div className='d-flex justify-content-between'>
-            <Label className='mb-0' for='payment-stub'>
+          <div className="d-flex justify-content-between">
+            <Label className="mb-0" for="payment-stub">
               Payment Stub
             </Label>
-            <CustomInput type='switch' id='payment-stub' />
+            <CustomInput type="switch" id="payment-stub" />
           </div>
         </div>
       </div>

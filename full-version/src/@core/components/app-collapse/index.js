@@ -7,9 +7,18 @@ import classnames from 'classnames'
 import { ChevronUp } from 'react-feather'
 import { Collapse, Card, CardHeader, CardBody, CardTitle } from 'reactstrap'
 
-const AppCollapse = props => {
+const AppCollapse = (props) => {
   // ** Props
-  const { data, type, accordion, active, toggle, titleKey, contentKey, className } = props
+  const {
+    data,
+    type,
+    accordion,
+    active,
+    toggle,
+    titleKey,
+    contentKey,
+    className
+  } = props
 
   /**
    ** If accordion is true then return only one active index else return an Array
@@ -26,7 +35,7 @@ const AppCollapse = props => {
   const [openCollapse, setOpenCollapse] = useState(defaultActive())
 
   // ** Function to handle Collapse Toggle
-  const handleCollapseToggle = id => {
+  const handleCollapseToggle = (id) => {
     if (accordion) {
       if (id === openCollapse) {
         setOpenCollapse(null)
@@ -67,17 +76,21 @@ const AppCollapse = props => {
             /*eslint-disable */
             {...(toggle === 'hover'
               ? {
-                  onMouseEnter: () => handleCollapseToggle(index)
+                  onMouseEnter: () => handleCollapseToggle(index),
                 }
               : {
-                  onClick: () => handleCollapseToggle(index)
+                  onClick: () => handleCollapseToggle(index),
                 })}
             /*eslint-enable */
           >
-            <CardTitle className='collapse-title'>{title}</CardTitle>
+            <CardTitle className="collapse-title">{title}</CardTitle>
             <ChevronUp size={14} />
           </CardHeader>
-          <Collapse isOpen={accordion ? openCollapse === index : openCollapse.includes(index)}>
+          <Collapse
+            isOpen={
+              accordion ? openCollapse === index : openCollapse.includes(index)
+            }
+          >
             <CardBody>{content}</CardBody>
           </Collapse>
         </Card>

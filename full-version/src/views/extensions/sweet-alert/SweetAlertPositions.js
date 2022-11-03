@@ -1,4 +1,11 @@
-import { Card, CardHeader, CardBody, CardTitle, Button, CardText } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  Button,
+  CardText
+} from 'reactstrap'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -48,27 +55,29 @@ const SweetAlertPositions = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Position</CardTitle>
+        <CardTitle tag="h4">Position</CardTitle>
       </CardHeader>
       <CardBody>
-        <CardText className='mb-0'>
+        <CardText className="mb-0">
           You can specify position of your alert with
-          <code>{'position : top-start | top-end | bottom-start | bottom-end '}</code>{' '}
+          <code>
+            {'position : top-start | top-end | bottom-start | bottom-end '}
+          </code>{' '}
         </CardText>
-        <div className='demo-inline-spacing'>
-          <Button color='primary' onClick={handleTopStart} outline>
+        <div className="demo-inline-spacing">
+          <Button color="primary" onClick={handleTopStart} outline>
             Top Start
           </Button>
 
-          <Button color='primary' onClick={handleTopEnd} outline>
+          <Button color="primary" onClick={handleTopEnd} outline>
             Top End
           </Button>
 
-          <Button color='primary' onClick={handleBottomStart} outline>
+          <Button color="primary" onClick={handleBottomStart} outline>
             Bottom Start
           </Button>
 
-          <Button color='primary' onClick={handleBottomEnd} outline>
+          <Button color="primary" onClick={handleBottomEnd} outline>
             Bottom End
           </Button>
         </div>

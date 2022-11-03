@@ -5,8 +5,8 @@ const PrefixMask = () => {
   const options = { prefix: '+63', blocks: [3, 3, 3, 4], uppercase: true }
   return (
     <Fragment>
-      <label htmlFor='prefix'>Prefix</label>
-      <Cleave className='form-control' options={options} id='prefix' />
+      <label htmlFor="prefix">Prefix</label>
+      <Cleave className="form-control" options={options} id="prefix" />
     </Fragment>
   )
 }

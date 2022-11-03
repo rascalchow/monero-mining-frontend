@@ -35,8 +35,8 @@ const AutoCompleteDefaultSuggestions = () => {
   return (
     <AutoComplete
       suggestions={suggestions}
-      className='form-control'
-      filterKey='title'
+      className="form-control"
+      filterKey="title"
       suggestionLimit={4}
       defaultSuggestions={true}
       placeholder="Type 'a'"

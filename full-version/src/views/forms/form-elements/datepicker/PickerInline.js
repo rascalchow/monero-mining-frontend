@@ -6,12 +6,12 @@ const PickerInline = () => {
   const [picker, setPicker] = useState(new Date())
   return (
     <Fragment>
-      <Label for='inline-picker'>Inline</Label>
+      <Label for="inline-picker">Inline</Label>
       <Flatpickr
-        className='form-control'
+        className="form-control"
         value={picker}
         options={{ inline: true }}
-        onChange={date => setPicker(date)}
+        onChange={(date) => setPicker(date)}
       />
     </Fragment>
   )

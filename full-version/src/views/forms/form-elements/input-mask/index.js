@@ -14,40 +14,44 @@ import { Row, Col, Card, CardBody, CardTitle, CardHeader } from 'reactstrap'
 const InputMask = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Input Mask' breadCrumbParent='Form Elements' breadCrumbActive='Input Mask' />
+      <Breadcrumbs
+        breadCrumbTitle="Input Mask"
+        breadCrumbParent="Form Elements"
+        breadCrumbActive="Input Mask"
+      />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <Card>
             <CardHeader>
-              <CardTitle tag='h4'>Input Masks</CardTitle>
+              <CardTitle tag="h4">Input Masks</CardTitle>
             </CardHeader>
             <CardBody>
               <Row>
-                <Col className='mb-2' xl='4' md='6' sm='12'>
+                <Col className="mb-2" xl="4" md="6" sm="12">
                   <CreditCardMask />
                 </Col>
-                <Col className='mb-2' xl='4' md='6' sm='12'>
+                <Col className="mb-2" xl="4" md="6" sm="12">
                   <PhoneMask />
                 </Col>
-                <Col className='mb-2' xl='4' md='6' sm='12'>
+                <Col className="mb-2" xl="4" md="6" sm="12">
                   <DateMask />
                 </Col>
-                <Col className='mb-2' xl='4' md='6' sm='12'>
+                <Col className="mb-2" xl="4" md="6" sm="12">
                   <TimeMask />
                 </Col>
-                <Col className='mb-2' xl='4' md='6' sm='12'>
+                <Col className="mb-2" xl="4" md="6" sm="12">
                   <NumeralFormattingMask />
                 </Col>
-                <Col className='mb-2' xl='4' md='6' sm='12'>
+                <Col className="mb-2" xl="4" md="6" sm="12">
                   <BlocksMask />
                 </Col>
-                <Col xl='4' md='6' sm='12'>
+                <Col xl="4" md="6" sm="12">
                   <DelimitersMask />
                 </Col>
-                <Col xl='4' md='6' sm='12'>
+                <Col xl="4" md="6" sm="12">
                   <CustomDelimitersMask />
                 </Col>
-                <Col xl='4' md='6' sm='12'>
+                <Col xl="4" md="6" sm="12">
                   <PrefixMask />
                 </Col>
               </Row>

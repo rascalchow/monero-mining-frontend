@@ -2,7 +2,7 @@ import { Badge } from 'reactstrap'
 
 const BadgePillBlock = () => {
   return (
-    <Badge pill color='danger' className='d-block'>
+    <Badge pill color="danger" className="d-block">
       <span>Block Badge Pill</span>
     </Badge>
   )

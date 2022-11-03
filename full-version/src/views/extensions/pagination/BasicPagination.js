@@ -4,7 +4,7 @@ const BasicPagination = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Basic</CardTitle>
+        <CardTitle tag="h4">Basic</CardTitle>
       </CardHeader>
       <CardBody>
         <ReactPaginate
@@ -16,8 +16,8 @@ const BasicPagination = () => {
           activeClassName={'active'}
           pageClassName={'page-item'}
           previousLabel={''}
-          breakClassName='page-item'
-          breakLinkClassName='page-link'
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
           nextLinkClassName={'page-link'}
           nextClassName={'page-item next-item'}
           previousClassName={'page-item prev-item'}

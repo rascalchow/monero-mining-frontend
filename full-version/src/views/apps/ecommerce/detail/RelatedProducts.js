@@ -88,27 +88,27 @@ const RelatedProducts = () => {
 
   return (
     <Fragment>
-      <div className='mt-4 mb-2 text-center'>
+      <div className="mt-4 mb-2 text-center">
         <h4>Related Products</h4>
         <CardText>People also search for this items</CardText>
       </div>
       <Swiper {...params}>
-        {slides.map(slide => {
+        {slides.map((slide) => {
           return (
             <SwiperSlide key={slide.name}>
-              <a href='/' onClick={e => e.preventDefault()}>
-                <div className='item-heading'>
-                  <h5 className='text-truncate mb-0'>{slide.name}</h5>
-                  <small className='text-body'>by {slide.brand}</small>
+              <a href="/" onClick={(e) => e.preventDefault()}>
+                <div className="item-heading">
+                  <h5 className="text-truncate mb-0">{slide.name}</h5>
+                  <small className="text-body">by {slide.brand}</small>
                 </div>
-                <div className='img-container w-50 mx-auto py-75'>
-                  <img src={slide.img} alt='swiper 1' className='img-fluid' />
+                <div className="img-container w-50 mx-auto py-75">
+                  <img src={slide.img} alt="swiper 1" className="img-fluid" />
                 </div>
-                <div className='item-meta'>
-                  <ul className='unstyled-list list-inline mb-25'>
+                <div className="item-meta">
+                  <ul className="unstyled-list list-inline mb-25">
                     {new Array(5).fill().map((listItem, index) => {
                       return (
-                        <li key={index} className='ratings-list-item mr-25'>
+                        <li key={index} className="ratings-list-item mr-25">
                           <Star
                             className={classnames({
                               'filled-star': index + 1 <= slide.ratings,
@@ -119,7 +119,9 @@ const RelatedProducts = () => {
                       )
                     })}
                   </ul>
-                  <CardText className='text-primary mb-0'>${slide.price}</CardText>
+                  <CardText className="text-primary mb-0">
+                    ${slide.price}
+                  </CardText>
                 </div>
               </a>
             </SwiperSlide>

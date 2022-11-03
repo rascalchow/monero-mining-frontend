@@ -7,7 +7,9 @@ const ActiveUsers = ({ success }) => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    axios.get('/card/card-statistics/active-users').then(res => setData(res.data))
+    axios
+      .get('/card/card-statistics/active-users')
+      .then((res) => setData(res.data))
   }, [])
 
   const options = {
@@ -70,12 +72,12 @@ const ActiveUsers = ({ success }) => {
   return data !== null ? (
     <StatsWithLineChart
       icon={<UserCheck size={21} />}
-      color='success'
-      stats='659.8k'
-      statTitle='Active Users'
+      color="success"
+      stats="659.8k"
+      statTitle="Active Users"
       series={data.series}
       options={options}
-      type='line'
+      type="line"
     />
   ) : null
 }

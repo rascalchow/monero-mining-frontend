@@ -27,49 +27,53 @@ const Tabs = () => {
   }, [])
   return (
     <Fragment>
-      <BreadCrumbs breadCrumbTitle='Tabs' breadCrumbParent='Components' breadCrumbActive='Tabs' />
+      <BreadCrumbs
+        breadCrumbTitle="Tabs"
+        breadCrumbParent="Components"
+        breadCrumbActive="Tabs"
+      />
       <Row>
-        <Col xl='6' lg='12'>
-          <Card title='Basic Tabs' code={tabsBasic}>
+        <Col xl="6" lg="12">
+          <Card title="Basic Tabs" code={tabsBasic}>
             <TabsBasic />
           </Card>
         </Col>
-        <Col xl='6' lg='12'>
-          <Card title='Tabs with icons' code={tabsBasic}>
+        <Col xl="6" lg="12">
+          <Card title="Tabs with icons" code={tabsBasic}>
             <TabsIcons />
           </Card>
         </Col>
       </Row>
       <Row>
-        <Col xl='6' lg='12'>
-          <Card title='Vertical Left Tabs' code={tabsVerticalLeft}>
+        <Col xl="6" lg="12">
+          <Card title="Vertical Left Tabs" code={tabsVerticalLeft}>
             <TabsVerticalLeft />
           </Card>
         </Col>
-        <Col xl='6' lg='12'>
-          <Card title='Vertical Right Tabs' code={tabsVerticalRight}>
+        <Col xl="6" lg="12">
+          <Card title="Vertical Right Tabs" code={tabsVerticalRight}>
             <TabsVerticalRight />
           </Card>
         </Col>
       </Row>
       <Row>
-        <Col xl='6' lg='12'>
-          <Card title='Filled' code={tabsFilled}>
+        <Col xl="6" lg="12">
+          <Card title="Filled" code={tabsFilled}>
             <TabsFilled />
           </Card>
         </Col>
-        <Col xl='6' lg='12'>
-          <Card title='Justified' code={tabsJustified}>
+        <Col xl="6" lg="12">
+          <Card title="Justified" code={tabsJustified}>
             <TabsJustified />
           </Card>
         </Col>
-        <Col xl='6' lg='12'>
-          <Card title='Centered' code={tabsCentered}>
+        <Col xl="6" lg="12">
+          <Card title="Centered" code={tabsCentered}>
             <TabsCentered />
           </Card>
         </Col>
-        <Col xl='6' lg='12'>
-          <Card title='End' code={tabsEnd}>
+        <Col xl="6" lg="12">
+          <Card title="End" code={tabsEnd}>
             <TabsEnd />
           </Card>
         </Col>

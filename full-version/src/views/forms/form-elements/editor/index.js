@@ -10,9 +10,9 @@ const Editor = () => {
   return (
     <Fragment>
       <ExtensionsHeader
-        title='React Draft Wysiwyg'
-        subTitle='A Wysiwyg Built on ReactJS and DraftJS'
-        link='https://jpuri.github.io/react-draft-wysiwyg/#/docs'
+        title="React Draft Wysiwyg"
+        subTitle="A Wysiwyg Built on ReactJS and DraftJS"
+        link="https://jpuri.github.io/react-draft-wysiwyg/#/docs"
       />
 
       <Row>

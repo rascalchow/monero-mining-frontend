@@ -3,11 +3,11 @@ import HorizontalNavMenuLink from './HorizontalNavMenuLink'
 import HorizontalNavMenuGroup from './HorizontalNavMenuGroup'
 import { resolveHorizontalNavMenuItemComponent as resolveNavItemComponent } from '@layouts/utils'
 
-const HorizontalNavMenuItems = props => {
+const HorizontalNavMenuItems = (props) => {
   // ** Components Object
   const Components = {
     HorizontalNavMenuGroup,
-    HorizontalNavMenuLink
+    HorizontalNavMenuLink,
   }
 
   // ** Render Nav Items

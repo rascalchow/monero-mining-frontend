@@ -3,7 +3,12 @@ import { Calendar } from 'react-feather'
 import { Bar } from 'react-chartjs-2'
 import { Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
 
-const ChartjsBarChart = ({ tooltipShadow, gridLineColor, labelColor, successColorShade }) => {
+const ChartjsBarChart = ({
+  tooltipShadow,
+  gridLineColor,
+  labelColor,
+  successColorShade
+}) => {
   const options = {
       elements: {
         rectangle: {
@@ -62,7 +67,19 @@ const ChartjsBarChart = ({ tooltipShadow, gridLineColor, labelColor, successColo
       }
     },
     data = {
-      labels: ['7/12', '8/12', '9/12', '10/12', '11/12', '12/12', '13/12', '14/12', '15/12', '16/12', '17/12'],
+      labels: [
+        '7/12',
+        '8/12',
+        '9/12',
+        '10/12',
+        '11/12',
+        '12/12',
+        '13/12',
+        '14/12',
+        '15/12',
+        '16/12',
+        '17/12'
+      ],
       datasets: [
         {
           data: [275, 90, 190, 205, 125, 85, 55, 87, 127, 150, 230, 280, 190],
@@ -75,16 +92,16 @@ const ChartjsBarChart = ({ tooltipShadow, gridLineColor, labelColor, successColo
 
   return (
     <Card>
-      <CardHeader className='d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column'>
-        <CardTitle tag='h4'>Latest Statistics</CardTitle>
-        <div className='d-flex align-items-center'>
+      <CardHeader className="d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
+        <CardTitle tag="h4">Latest Statistics</CardTitle>
+        <div className="d-flex align-items-center">
           <Calendar size={14} />
           <Flatpickr
             options={{
               mode: 'range',
               defaultDate: ['2019-05-01', '2019-05-10']
             }}
-            className='form-control flat-picker bg-transparent border-0 shadow-none'
+            className="form-control flat-picker bg-transparent border-0 shadow-none"
           />
         </div>
       </CardHeader>

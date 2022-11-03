@@ -10,22 +10,22 @@ const Toastr = () => {
   return (
     <Fragment>
       <ExtensionsHeader
-        title='React Toastify'
-        subTitle='React Toastify makes notification easy 🚀 !'
-        link='https://github.com/fkhadra/react-toastify'
+        title="React Toastify"
+        subTitle="React Toastify makes notification easy 🚀 !"
+        link="https://github.com/fkhadra/react-toastify"
       />
 
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <ToastrTypes />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <ToastrPositions />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <ToastrAnimations />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <ToastrOptions />
         </Col>
       </Row>

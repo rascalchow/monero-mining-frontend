@@ -8,13 +8,13 @@ const data = {
       from: {
         email: 'tommys@mail.com',
         name: 'Tommy Sicilia',
-        avatar: require('@src/assets/images/avatars/1.png').default
+        avatar: require('@src/assets/images/avatars/1.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@mail.com'
-        }
+          email: 'johndoe@mail.com',
+        },
       ],
       subject: 'Theme Update',
       cc: [],
@@ -26,34 +26,34 @@ const data = {
           fileName: 'log.txt',
           thumbnail: require('@src/assets/images/icons/txt.png').default,
           url: '',
-          size: '5mb'
+          size: '5mb',
         },
         {
           fileName: 'performance.xls',
           thumbnail: require('@src/assets/images/icons/xls.png').default,
           url: '',
-          size: '10mb'
-        }
+          size: '10mb',
+        },
       ],
       isStarred: false,
       labels: ['private'],
       time: 'Mon Dec 10 2018 07:46:00 GMT+0000 (GMT)',
       replies: [],
       folder: 'inbox',
-      isRead: true
+      isRead: true,
     },
     {
       id: 2,
       from: {
         email: 'tressag@mail.com',
         name: 'Tressa Gass',
-        avatar: require('@src/assets/images/avatars/2.png').default
+        avatar: require('@src/assets/images/avatars/2.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@mail.com'
-        }
+          email: 'johndoe@mail.com',
+        },
       ],
       subject: 'Company Report',
       cc: ['vrushankbrahmshatriya@mail.com'],
@@ -66,24 +66,24 @@ const data = {
       time: 'Mon Dec 10 2018 07:55:00 GMT+0000 (GMT)',
       replies: [],
       folder: 'inbox',
-      isRead: true
+      isRead: true,
     },
     {
       id: 3,
       from: {
         email: 'hettiem@mail.com',
         name: 'Hettie Mcerlean',
-        avatar: require('@src/assets/images/avatars/3.png').default
+        avatar: require('@src/assets/images/avatars/3.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@mail.com'
+          email: 'johndoe@mail.com',
         },
         {
           name: 'Pixinvent',
-          email: 'hello@pixinvent.net'
-        }
+          email: 'hello@pixinvent.net',
+        },
       ],
       subject: 'Order Delivered',
       cc: [],
@@ -96,20 +96,20 @@ const data = {
       time: 'Mon Dec 10 2018 08:35:00 GMT+0000 (GMT)',
       replies: [],
       folder: 'spam',
-      isRead: true
+      isRead: true,
     },
     {
       id: 4,
       from: {
         email: 'louettae@mail.com',
         name: 'Louetta Esses',
-        avatar: require('@src/assets/images/avatars/4.png').default
+        avatar: require('@src/assets/images/avatars/4.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@mail.com'
-        }
+          email: 'johndoe@mail.com',
+        },
       ],
       subject: 'Waterfall Model Update',
       cc: [],
@@ -121,28 +121,28 @@ const data = {
           fileName: 'report.doc',
           thumbnail: require('@src/assets/images/icons/doc.png').default,
           url: '',
-          size: '32mb'
-        }
+          size: '32mb',
+        },
       ],
       isStarred: false,
       labels: ['important'],
       time: 'Mon Dec 11 2018 09:04:10 GMT+0000 (GMT)',
       replies: [],
       folder: 'inbox',
-      isRead: true
+      isRead: true,
     },
     {
       id: 5,
       from: {
         email: 'bposvner0@zdnet.com',
         name: 'Bobbie Posvner',
-        avatar: require('@src/assets/images/avatars/11.png').default
+        avatar: require('@src/assets/images/avatars/11.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@dot.gov'
-        }
+          email: 'johndoe@dot.gov',
+        },
       ],
       subject: 'Re-contextualized zero administration toolset',
       cc: [],
@@ -155,20 +155,20 @@ const data = {
       time: 'Tue Dec 12 2018 11:55:00 GMT+0000 (GMT)',
       replies: [],
       folder: 'spam',
-      isRead: true
+      isRead: true,
     },
     {
       id: 6,
       from: {
         email: 'rgilder1@illinois.edu',
         name: 'Rebecca Gilder',
-        avatar: require('@src/assets/images/avatars/6.png').default
+        avatar: require('@src/assets/images/avatars/6.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@google.co.uk'
-        }
+          email: 'johndoe@google.co.uk',
+        },
       ],
       subject: 'Integrated bi-directional help-desk',
       cc: [],
@@ -181,20 +181,20 @@ const data = {
       time: 'Thu Dec 13 2018 08:25:00 GMT+0000 (GMT)',
       replies: [],
       folder: 'trash',
-      isRead: true
+      isRead: true,
     },
     {
       id: 7,
       from: {
         email: 'swilby2@yandex.ru',
         name: 'Shawn Wilby',
-        avatar: require('@src/assets/images/avatars/1.png').default
+        avatar: require('@src/assets/images/avatars/1.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@altervista.org'
-        }
+          email: 'johndoe@altervista.org',
+        },
       ],
       subject: 'Devolved regional product',
       cc: [],
@@ -207,20 +207,20 @@ const data = {
       time: 'Fri Dec 14 2018 04:49:23 GMT+0000 (GMT)',
       replies: [],
       folder: 'draft',
-      isRead: true
+      isRead: true,
     },
     {
       id: 8,
       from: {
         email: 'wmannering3@mozilla.org',
         name: 'Waldemar Mannering',
-        avatar: require('@src/assets/images/avatars/11.png').default
+        avatar: require('@src/assets/images/avatars/11.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@sciencedaily.com'
-        }
+          email: 'johndoe@sciencedaily.com',
+        },
       ],
       subject: 'Quality-focused methodical flexibility',
       cc: [],
@@ -233,20 +233,20 @@ const data = {
       time: 'Tue Dec 15 2018 11:02:28 GMT+0000 (GMT)',
       replies: [],
       folder: 'inbox',
-      isRead: false
+      isRead: false,
     },
     {
       id: 9,
       from: {
         email: 'hfrostdyke4@scientificamerican.com',
         name: 'Heath Frostdyke',
-        avatar: require('@src/assets/images/avatars/9.png').default
+        avatar: require('@src/assets/images/avatars/9.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@weibo.com'
-        }
+          email: 'johndoe@weibo.com',
+        },
       ],
       subject: 'Secured optimal algorithm',
       cc: [],
@@ -259,20 +259,20 @@ const data = {
       time: 'Tue Jan 01 2018 18:31:19 GMT+0000 (GMT)',
       replies: [],
       folder: 'trash',
-      isRead: false
+      isRead: false,
     },
     {
       id: 10,
       from: {
         email: 'pjentzsch5@tamu.edu',
         name: 'Paulita Jentzsch',
-        avatar: require('@src/assets/images/avatars/7.png').default
+        avatar: require('@src/assets/images/avatars/7.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@skype.com'
-        }
+          email: 'johndoe@skype.com',
+        },
       ],
       subject: 'Profound user-facing frame',
       cc: [],
@@ -284,28 +284,28 @@ const data = {
           fileName: 'UtNulla.xls',
           thumbnail: require('@src/assets/images/icons/xls.png').default,
           url: '',
-          size: '1mb'
-        }
+          size: '1mb',
+        },
       ],
       isStarred: true,
       labels: ['important'],
       time: 'Tue Jan 03 2018 08:05:33 GMT+0000 (GMT)',
       replies: [],
       folder: 'draft',
-      isRead: false
+      isRead: false,
     },
     {
       id: 11,
       from: {
         email: 'lminghetti6@yale.edu',
         name: 'Lowell Minghetti',
-        avatar: require('@src/assets/images/avatars/4.png').default
+        avatar: require('@src/assets/images/avatars/4.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@fda.gov'
-        }
+          email: 'johndoe@fda.gov',
+        },
       ],
       subject: 'Reactive full-range encryption',
       cc: [],
@@ -317,28 +317,28 @@ const data = {
           fileName: 'ElementumLigula.js',
           thumbnail: require('@src/assets/images/icons/js.png').default,
           url: '',
-          size: '29mb'
-        }
+          size: '29mb',
+        },
       ],
       isStarred: false,
       labels: ['company'],
       time: 'Tue Jan 03 2018 01:05:20 GMT+0000 (GMT)',
       replies: [],
       folder: 'trash',
-      isRead: true
+      isRead: true,
     },
     {
       id: 12,
       from: {
         email: 'efinessy7@sbwire.com',
         name: 'Eugenie Finessy',
-        avatar: require('@src/assets/images/avatars/2.png').default
+        avatar: require('@src/assets/images/avatars/2.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@odnoklassniki.ru'
-        }
+          email: 'johndoe@odnoklassniki.ru',
+        },
       ],
       subject: 'Polarised holistic protocol',
       cc: [],
@@ -351,20 +351,20 @@ const data = {
       time: 'Tue Jan 04 2018 21:26:54 GMT+0000 (GMT)',
       replies: [],
       folder: 'sent',
-      isRead: true
+      isRead: true,
     },
     {
       id: 13,
       from: {
         email: 'tmckeurton8@163.com',
         name: 'Tadio McKeurton',
-        avatar: require('@src/assets/images/avatars/10.png').default
+        avatar: require('@src/assets/images/avatars/10.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@nifty.com'
-        }
+          email: 'johndoe@nifty.com',
+        },
       ],
       subject: 'Down-sized transitional intranet',
       cc: [],
@@ -377,20 +377,21 @@ const data = {
       time: 'Tue Jan 05 2018 19:00:00 GMT+0000 (GMT)',
       replies: [],
       folder: 'draft',
-      isRead: true
+      isRead: true,
     },
     {
       id: 14,
       from: {
         email: 'ebegg9@wikia.com',
         name: 'Eb Begg',
-        avatar: require('@src/assets/images/portrait/small/avatar-s-9.jpg').default
+        avatar: require('@src/assets/images/portrait/small/avatar-s-9.jpg')
+          .default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@51.la'
-        }
+          email: 'johndoe@51.la',
+        },
       ],
       subject: 'Organized value-added model',
       cc: [],
@@ -403,20 +404,20 @@ const data = {
       time: 'Tue Jan 06 2018 23:12:13 GMT+0000 (GMT)',
       replies: [],
       folder: 'inbox',
-      isRead: true
+      isRead: true,
     },
     {
       id: 15,
       from: {
         email: 'mspata@sina.com.cn',
         name: 'Modestine Spat',
-        avatar: require('@src/assets/images/avatars/9.png').default
+        avatar: require('@src/assets/images/avatars/9.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@oracle.com'
-        }
+          email: 'johndoe@oracle.com',
+        },
       ],
       subject: 'Profound systemic alliance 🎉 🎊',
       cc: [],
@@ -429,20 +430,20 @@ const data = {
       time: 'Tue Jan 07 2018 12:25:03 GMT+0000 (GMT)',
       replies: [],
       folder: 'inbox',
-      isRead: false
+      isRead: false,
     },
     {
       id: 16,
       from: {
         email: 'cprandob@rambler.ru',
         name: 'Chase Prando',
-        avatar: require('@src/assets/images/avatars/2.png').default
+        avatar: require('@src/assets/images/avatars/2.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@vistaprint.com'
-        }
+          email: 'johndoe@vistaprint.com',
+        },
       ],
       subject: 'Centralized intermediate instruction set',
       cc: [],
@@ -455,20 +456,20 @@ const data = {
       time: 'Tue Jan 08 2018 00:36:40 GMT+0000 (GMT)',
       replies: [],
       folder: 'sent',
-      isRead: true
+      isRead: true,
     },
     {
       id: 17,
       from: {
         email: 'nbartlesc@merriam-webster.com',
         name: 'Normand Bartles',
-        avatar: require('@src/assets/images/avatars/9.png').default
+        avatar: require('@src/assets/images/avatars/9.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@si.edu'
-        }
+          email: 'johndoe@si.edu',
+        },
       ],
       subject: 'Re-contextualized leading edge projection',
       cc: [],
@@ -481,20 +482,20 @@ const data = {
       time: 'Tue Jan 09 2018 22:06:50 GMT+0000 (GMT)',
       replies: [],
       folder: 'spam',
-      isRead: true
+      isRead: true,
     },
     {
       id: 18,
       from: {
         email: 'rgennd@dedecms.com',
         name: 'Robin Genn',
-        avatar: require('@src/assets/images/avatars/6.png').default
+        avatar: require('@src/assets/images/avatars/6.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@about.com'
-        }
+          email: 'johndoe@about.com',
+        },
       ],
       subject: 'Team-oriented system-worthy intranet',
       cc: [],
@@ -507,20 +508,20 @@ const data = {
       time: 'Tue Jan 10 2018 01:51:24 GMT+0000 (GMT)',
       replies: [],
       folder: 'spam',
-      isRead: true
+      isRead: true,
     },
     {
       id: 19,
       from: {
         email: 'eramelote@webeden.co.uk',
         name: 'Emmalynn Ramelot',
-        avatar: require('@src/assets/images/avatars/8.png').default
+        avatar: require('@src/assets/images/avatars/8.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@tinypic.com'
-        }
+          email: 'johndoe@tinypic.com',
+        },
       ],
       subject: 'Phased eco-centric architecture',
       cc: [],
@@ -533,20 +534,20 @@ const data = {
       time: 'Tue Jan 11 2018 14:25:46 GMT+0000 (GMT)',
       replies: [],
       folder: 'spam',
-      isRead: false
+      isRead: false,
     },
     {
       id: 20,
       from: {
         email: 'pcuzenf@mediafire.com',
         name: 'Penni Cuzen',
-        avatar: require('@src/assets/images/avatars/9.png').default
+        avatar: require('@src/assets/images/avatars/9.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@google.es'
-        }
+          email: 'johndoe@google.es',
+        },
       ],
       subject: 'Future-proofed motivating support',
       cc: [],
@@ -558,28 +559,29 @@ const data = {
           fileName: 'Augue.js',
           thumbnail: require('@src/assets/images/icons/js.png').default,
           url: '',
-          size: '4mb'
-        }
+          size: '4mb',
+        },
       ],
       isStarred: false,
       labels: ['private'],
       time: 'Tue Jan 12 2018 04:16:10 GMT+0000 (GMT)',
       replies: [],
       folder: 'spam',
-      isRead: false
+      isRead: false,
     },
     {
       id: 21,
       from: {
         email: 'abaldersong@utexas.edu',
         name: 'Ardis Balderson',
-        avatar: require('@src/assets/images/portrait/small/avatar-s-9.jpg').default
+        avatar: require('@src/assets/images/portrait/small/avatar-s-9.jpg')
+          .default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@ow.ly'
-        }
+          email: 'johndoe@ow.ly',
+        },
       ],
       subject: 'Focused impactful open system 📷 😃',
       cc: [],
@@ -592,20 +594,20 @@ const data = {
       time: new Date(new Date().getTime() - 7 * 60 * 60 * 1000),
       replies: [],
       folder: 'inbox',
-      isRead: false
+      isRead: false,
     },
     {
       id: 22,
       from: {
         email: 'dmallallh@ask.com',
         name: 'Dagmar Mallall',
-        avatar: require('@src/assets/images/avatars/8.png').default
+        avatar: require('@src/assets/images/avatars/8.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@furl.net'
-        }
+          email: 'johndoe@furl.net',
+        },
       ],
       subject: 'Function-based local productivity 💻',
       cc: [],
@@ -618,20 +620,20 @@ const data = {
       time: new Date(new Date().getTime() - 5 * 20 * 60 * 1000),
       replies: [],
       folder: 'draft',
-      isRead: false
+      isRead: false,
     },
     {
       id: 23,
       from: {
         email: 'nmacgaughyi@aol.com',
         name: 'Nada MacGaughy',
-        avatar: require('@src/assets/images/avatars/3.png').default
+        avatar: require('@src/assets/images/avatars/3.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@cnet.com'
-        }
+          email: 'johndoe@cnet.com',
+        },
       ],
       subject: 'Compatible object-oriented policy ',
       cc: [],
@@ -643,28 +645,28 @@ const data = {
           fileName: 'Leo.xls',
           thumbnail: require('@src/assets/images/icons/xls.png').default,
           url: '',
-          size: '33mb'
-        }
+          size: '33mb',
+        },
       ],
       isStarred: false,
       labels: ['private'],
       time: new Date(new Date().getTime() - 2 * 60 * 60 * 1000),
       replies: [],
       folder: 'trash',
-      isRead: false
+      isRead: false,
     },
     {
       id: 24,
       from: {
         email: 'douldcottj@yellowpages.com',
         name: 'Dalila Ouldcott',
-        avatar: require('@src/assets/images/avatars/1.png').default
+        avatar: require('@src/assets/images/avatars/1.png').default,
       },
       to: [
         {
           name: 'me',
-          email: 'johndoe@github.io'
-        }
+          email: 'johndoe@github.io',
+        },
       ],
       subject: 'User-friendly value-added application 😊',
       cc: [],
@@ -676,8 +678,8 @@ const data = {
           fileName: 'example.doc',
           thumbnail: require('@src/assets/images/icons/doc.png').default,
           url: '',
-          size: '21mb'
-        }
+          size: '21mb',
+        },
       ],
       isStarred: false,
       labels: ['personal'],
@@ -688,13 +690,13 @@ const data = {
           from: {
             email: 'johndoe@mail.com',
             name: 'John Doe',
-            avatar: require('@src/assets/images/avatars/11.png').default
+            avatar: require('@src/assets/images/avatars/11.png').default,
           },
           to: [
             {
               name: 'me',
-              email: 'hettiem@mail.com'
-            }
+              email: 'hettiem@mail.com',
+            },
           ],
           subject: '🎯 Focused impactful open system',
           cc: [],
@@ -707,20 +709,20 @@ const data = {
           time: 'Mon Dec 10 2018 10:56:00 GMT+0000 (GMT)',
           replies: [],
           folder: 'inbox',
-          isRead: false
+          isRead: false,
         },
         {
           id: 26,
           from: {
             email: 'hettiem@mail.com',
             name: 'Hettie Mcerlean',
-            avatar: require('@src/assets/images/avatars/3.png').default
+            avatar: require('@src/assets/images/avatars/3.png').default,
           },
           to: [
             {
               name: 'me',
-              email: 'johndoe@mail.com'
-            }
+              email: 'johndoe@mail.com',
+            },
           ],
           subject: 'Profound systemic alliance 🎉 🎊',
           cc: [],
@@ -733,19 +735,19 @@ const data = {
           time: 'Mon Dec 10 2018 11:25:00 GMT+0000 (GMT)',
           replies: [],
           folder: 'inbox',
-          isRead: false
-        }
+          isRead: false,
+        },
       ],
       folder: 'inbox',
-      isRead: true
-    }
-  ]
+      isRead: true,
+    },
+  ],
 }
 
 // ------------------------------------------------
 // GET: Return Emails
 // ------------------------------------------------
-mock.onGet('/apps/email/emails').reply(config => {
+mock.onGet('/apps/email/emails').reply((config) => {
   const { q = '', folder = 'inbox', label } = config.params
 
   const queryLowered = q.toLowerCase()
@@ -757,11 +759,11 @@ mock.onGet('/apps/email/emails').reply(config => {
   }
 
   const filteredData = data.emails.filter(
-    email =>
+    (email) =>
       /* eslint-disable operator-linebreak, implicit-arrow-linebreak */
       email.subject.toLowerCase().includes(queryLowered) &&
       isInFolder(email) &&
-      (label ? email.labels.includes(label) : true)
+      (label ? email.labels.includes(label) : true),
   )
   /* eslint-enable  */
 
@@ -769,30 +771,34 @@ mock.onGet('/apps/email/emails').reply(config => {
   // Email Meta
   // ------------------------------------------------
   const emailsMeta = {
-    inbox: data.emails.filter(email => !email.isDeleted && !email.isRead && email.folder === 'inbox').length,
-    draft: data.emails.filter(email => email.folder === 'draft').length,
-    spam: data.emails.filter(email => !email.isDeleted && !email.isRead && email.folder === 'spam').length
+    inbox: data.emails.filter(
+      (email) => !email.isDeleted && !email.isRead && email.folder === 'inbox',
+    ).length,
+    draft: data.emails.filter((email) => email.folder === 'draft').length,
+    spam: data.emails.filter(
+      (email) => !email.isDeleted && !email.isRead && email.folder === 'spam',
+    ).length,
   }
 
   return [
     200,
     {
       emails: filteredData.reverse(),
-      emailsMeta
-    }
+      emailsMeta,
+    },
   ]
 })
 
 // ------------------------------------------------
 // POST: Update Email
 // ------------------------------------------------
-mock.onPost('/apps/email/update-emails').reply(config => {
+mock.onPost('/apps/email/update-emails').reply((config) => {
   const { emailIds, dataToUpdate } = JSON.parse(config.data)
   function updateMailData(email) {
     Object.assign(email, dataToUpdate)
   }
 
-  data.emails.forEach(email => {
+  data.emails.forEach((email) => {
     if (emailIds.includes(email.id)) updateMailData(email)
   })
 
@@ -802,7 +808,7 @@ mock.onPost('/apps/email/update-emails').reply(config => {
 // ------------------------------------------------
 // POST: Update Emails Label
 // ------------------------------------------------
-mock.onPost('/apps/email/update-emails-label').reply(config => {
+mock.onPost('/apps/email/update-emails-label').reply((config) => {
   const { emailIds, label } = JSON.parse(config.data)
 
   function updateMailLabels(email) {
@@ -812,7 +818,7 @@ mock.onPost('/apps/email/update-emails-label').reply(config => {
     else email.labels.splice(labelIndex, 1)
   }
 
-  data.emails.forEach(email => {
+  data.emails.forEach((email) => {
     if (emailIds.includes(email.id)) updateMailLabels(email)
   })
 
@@ -822,15 +828,19 @@ mock.onPost('/apps/email/update-emails-label').reply(config => {
 // ------------------------------------------------
 // GET: GET Single Email
 // ------------------------------------------------
-mock.onGet('/apps/email/get-email').reply(config => {
+mock.onGet('/apps/email/get-email').reply((config) => {
   const { id } = config
 
   const emailId = Number(id)
 
-  const mail = data.emails.find(i => i.id === emailId)
-  const mailIndex = data.emails.findIndex(i => i.id === mail.id)
-  mailIndex === 0 ? (mail.hasPreviousMail = true) : (mail.hasPreviousMail = false)
-  mailIndex === data.emails.length - 1 ? (mail.hasNextMail = true) : (mail.hasNextMail = false)
+  const mail = data.emails.find((i) => i.id === emailId)
+  const mailIndex = data.emails.findIndex((i) => i.id === mail.id)
+  mailIndex === 0
+    ? (mail.hasPreviousMail = true)
+    : (mail.hasPreviousMail = false)
+  mailIndex === data.emails.length - 1
+    ? (mail.hasNextMail = true)
+    : (mail.hasNextMail = false)
 
   return mail ? [200, mail] : [404]
 })
@@ -838,12 +848,13 @@ mock.onGet('/apps/email/get-email').reply(config => {
 // ------------------------------------------------
 // GET: Paginate Existing Email
 // ------------------------------------------------
-mock.onGet('/apps/email/paginate-email').reply(config => {
+mock.onGet('/apps/email/paginate-email').reply((config) => {
   const { dir, emailId } = config.params
 
-  const currentEmailIndex = data.emails.findIndex(e => e.id === emailId)
+  const currentEmailIndex = data.emails.findIndex((e) => e.id === emailId)
 
-  const newEmailIndex = dir === 'previous' ? currentEmailIndex - 1 : currentEmailIndex + 1
+  const newEmailIndex =
+    dir === 'previous' ? currentEmailIndex - 1 : currentEmailIndex + 1
 
   const newEmail = data.emails[newEmailIndex]
 

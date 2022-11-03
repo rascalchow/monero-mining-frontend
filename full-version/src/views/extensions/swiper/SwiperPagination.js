@@ -16,24 +16,24 @@ const SwiperPagination = ({ isRtl }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Pagination</CardTitle>
+        <CardTitle tag="h4">Pagination</CardTitle>
       </CardHeader>
       <CardBody>
         <Swiper dir={isRtl ? 'rtl' : 'ltr'} {...params}>
           <SwiperSlide>
-            <img src={img1} alt='swiper 1' className='img-fluid' />
+            <img src={img1} alt="swiper 1" className="img-fluid" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={img2} alt='swiper 2' className='img-fluid' />
+            <img src={img2} alt="swiper 2" className="img-fluid" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={img3} alt='swiper 3' className='img-fluid' />
+            <img src={img3} alt="swiper 3" className="img-fluid" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={img4} alt='swiper 4' className='img-fluid' />
+            <img src={img4} alt="swiper 4" className="img-fluid" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={img5} alt='swiper 5' className='img-fluid' />
+            <img src={img5} alt="swiper 5" className="img-fluid" />
           </SwiperSlide>
         </Swiper>
       </CardBody>

@@ -6,8 +6,13 @@ const NumeralFormattingMask = () => {
 
   return (
     <Fragment>
-      <label htmlFor='numeral-formatting'>Numeral Formatting</label>
-      <Cleave className='form-control' placeholder='10,000' options={options} id='numeral-formatting' />
+      <label htmlFor="numeral-formatting">Numeral Formatting</label>
+      <Cleave
+        className="form-control"
+        placeholder="10,000"
+        options={options}
+        id="numeral-formatting"
+      />
     </Fragment>
   )
 }

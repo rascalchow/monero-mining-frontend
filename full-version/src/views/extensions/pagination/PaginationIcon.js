@@ -5,7 +5,7 @@ const IconPagination = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Icon Only</CardTitle>
+        <CardTitle tag="h4">Icon Only</CardTitle>
       </CardHeader>
       <CardBody>
         <ReactPaginate
@@ -17,8 +17,8 @@ const IconPagination = () => {
           activeClassName={'active'}
           pageClassName={'page-item'}
           previousLabel={''}
-          breakClassName='page-item'
-          breakLinkClassName='page-link'
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
           nextLinkClassName={'page-link'}
           nextClassName={'page-item next'}
           previousClassName={'page-item prev'}

@@ -37,7 +37,7 @@ const ModalConfig = [
 const ModalSizes = () => {
   const [modal, setModal] = useState(null)
 
-  const toggleModal = id => {
+  const toggleModal = (id) => {
     if (modal !== id) {
       setModal(id)
     } else {
@@ -45,11 +45,16 @@ const ModalSizes = () => {
     }
   }
 
-  const renderModal = ModalConfig.map(item => {
+  const renderModal = ModalConfig.map((item) => {
     return (
       <Fragment key={item.id}>
         <div>
-          <Button.Ripple color='primary' onClick={() => toggleModal(item.id)} key={item.title} outline>
+          <Button.Ripple
+            color="primary"
+            onClick={() => toggleModal(item.id)}
+            key={item.title}
+            outline
+          >
             {item.btnTitle}
           </Button.Ripple>
         </div>
@@ -64,11 +69,17 @@ const ModalSizes = () => {
             {item.title}
           </ModalHeader>
           <ModalBody>
-            Halvah powder wafer. Chupa chups pie topping carrot cake cake. Tootsie roll sesame snaps jelly-o marshmallow
-            marshmallow jelly jujubes candy. Chupa chups cheesecake gingerbread chupa chups cake candy canes sweet roll.
+            Halvah powder wafer. Chupa chups pie topping carrot cake cake.
+            Tootsie roll sesame snaps jelly-o marshmallow marshmallow jelly
+            jujubes candy. Chupa chups cheesecake gingerbread chupa chups cake
+            candy canes sweet roll.
           </ModalBody>
           <ModalFooter>
-            <Button color='primary' onClick={() => toggleModal(item.id)} outline>
+            <Button
+              color="primary"
+              onClick={() => toggleModal(item.id)}
+              outline
+            >
               Accept
             </Button>
           </ModalFooter>
@@ -77,6 +88,6 @@ const ModalSizes = () => {
     )
   })
 
-  return <div className='demo-inline-spacing'>{renderModal}</div>
+  return <div className="demo-inline-spacing">{renderModal}</div>
 }
 export default ModalSizes

@@ -1,6 +1,15 @@
 import { useState } from 'react'
 import { ReactSortable } from 'react-sortablejs'
-import { Card, CardHeader, CardTitle, CardBody, CardText, Row, Col, Badge } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardBody,
+  CardText,
+  Row,
+  Col,
+  Badge
+} from 'reactstrap'
 
 const DndClone = () => {
   const source1 = [
@@ -62,41 +71,51 @@ const DndClone = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Clone List</CardTitle>
+        <CardTitle tag="h4">Clone List</CardTitle>
       </CardHeader>
       <CardBody>
         <CardText>
           Add <code>pull:clone</code> with your group prop to clone items.
         </CardText>
         <Row>
-          <Col md='6' sm='12'>
-            <h4 className='my-1'>Badge Source 1</h4>
+          <Col md="6" sm="12">
+            <h4 className="my-1">Badge Source 1</h4>
             <ReactSortable
-              className='demo-inline-spacing sortable'
+              className="demo-inline-spacing sortable"
               group={{ name: 'shared-badge-group', pull: 'clone' }}
               list={list}
               setList={setList}
             >
-              {list.map(item => {
+              {list.map((item) => {
                 return (
-                  <Badge className='draggable' key={item.text} color={item.color} pill>
+                  <Badge
+                    className="draggable"
+                    key={item.text}
+                    color={item.color}
+                    pill
+                  >
                     {item.text}
                   </Badge>
                 )
               })}
             </ReactSortable>
           </Col>
-          <Col md='6' sm='12'>
-            <h4 className='my-1'>Badge Source 2</h4>
+          <Col md="6" sm="12">
+            <h4 className="my-1">Badge Source 2</h4>
             <ReactSortable
-              className='demo-inline-spacing sortable'
+              className="demo-inline-spacing sortable"
               group={{ name: 'shared-badge-group', pull: 'clone' }}
               list={list2}
               setList={setList2}
             >
-              {list2.map(item => {
+              {list2.map((item) => {
                 return (
-                  <Badge className='draggable' key={item.text} color={item.color} pill>
+                  <Badge
+                    className="draggable"
+                    key={item.text}
+                    color={item.color}
+                    pill
+                  >
                     {item.text}
                   </Badge>
                 )

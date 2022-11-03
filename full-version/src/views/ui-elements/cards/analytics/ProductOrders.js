@@ -13,11 +13,13 @@ import {
 import Chart from 'react-apexcharts'
 import { Circle } from 'react-feather'
 
-const ProductOrders = props => {
+const ProductOrders = (props) => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    axios.get('/card/card-analytics/product-orders').then(res => setData(res.data))
+    axios
+      .get('/card/card-analytics/product-orders')
+      .then((res) => setData(res.data))
   }, [])
 
   const options = {
@@ -74,14 +76,17 @@ const ProductOrders = props => {
   return data !== null ? (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Product Orders</CardTitle>
-        <UncontrolledDropdown className='chart-dropdown'>
-          <DropdownToggle color='' className='bg-transparent btn-sm border-0 p-50'>
+        <CardTitle tag="h4">Product Orders</CardTitle>
+        <UncontrolledDropdown className="chart-dropdown">
+          <DropdownToggle
+            color=""
+            className="bg-transparent btn-sm border-0 p-50"
+          >
             Last 7 days
           </DropdownToggle>
           <DropdownMenu right>
-            {data.last_days.map(item => (
-              <DropdownItem className='w-100' key={item}>
+            {data.last_days.map((item) => (
+              <DropdownItem className="w-100" key={item}>
                 {item}
               </DropdownItem>
             ))}
@@ -89,25 +94,30 @@ const ProductOrders = props => {
         </UncontrolledDropdown>
       </CardHeader>
       <CardBody>
-        <Chart options={options} series={series} type='radialBar' height={325} />
-        <div className='d-flex justify-content-between mb-1'>
-          <div className='d-flex align-items-center'>
-            <Circle size={15} className='text-primary' />
-            <span className='font-weight-bold ml-75'>Finished</span>
+        <Chart
+          options={options}
+          series={series}
+          type="radialBar"
+          height={325}
+        />
+        <div className="d-flex justify-content-between mb-1">
+          <div className="d-flex align-items-center">
+            <Circle size={15} className="text-primary" />
+            <span className="font-weight-bold ml-75">Finished</span>
           </div>
           <span>{data.chart_info.finished}</span>
         </div>
-        <div className='d-flex justify-content-between mb-1'>
-          <div className='d-flex align-items-center'>
-            <Circle size={15} className='text-warning' />
-            <span className='font-weight-bold ml-75'>Pending</span>
+        <div className="d-flex justify-content-between mb-1">
+          <div className="d-flex align-items-center">
+            <Circle size={15} className="text-warning" />
+            <span className="font-weight-bold ml-75">Pending</span>
           </div>
           <span>{data.chart_info.pending}</span>
         </div>
-        <div className='d-flex justify-content-between'>
-          <div className='d-flex align-items-center'>
-            <Circle size={15} className='text-danger' />
-            <span className='font-weight-bold ml-75'>Rejected</span>
+        <div className="d-flex justify-content-between">
+          <div className="d-flex align-items-center">
+            <Circle size={15} className="text-danger" />
+            <span className="font-weight-bold ml-75">Rejected</span>
           </div>
           <span>{data.chart_info.rejected}</span>
         </div>

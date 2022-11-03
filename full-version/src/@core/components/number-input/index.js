@@ -12,7 +12,7 @@ import './number-input.scss'
 const KEYCODE_UP = 38
 const KEYCODE_DOWN = 40
 
-const NumberInput = props => {
+const NumberInput = (props) => {
   // ** Props
   const {
     min,
@@ -97,12 +97,12 @@ const NumberInput = props => {
   }
 
   // ** Handle input change
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     setCount(Number(e.target.value))
   }
 
   // ** Handle Arrow Up & Down
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     e.preventDefault()
     if (!readonly) {
       if (e.keyCode === KEYCODE_UP) {
@@ -128,14 +128,14 @@ const NumberInput = props => {
         readonly,
         [className]: className,
         'vertical-number-input': vertical,
-        [`vertical-number-input-${size}`]: vertical && size
+        [`vertical-number-input-${size}`]: vertical && size,
       })}
       {...(style ? { style } : {})}
     >
-      <InputGroupAddon addonType='prepend' onClick={handleDecrement}>
+      <InputGroupAddon addonType="prepend" onClick={handleDecrement}>
         <Button
-          className='btn-icon'
-          color='transparent'
+          className="btn-icon"
+          color="transparent"
           {...(size ? { size } : {})}
           disabled={(!wrap && count <= min) || disabled || readonly}
         >
@@ -144,21 +144,21 @@ const NumberInput = props => {
       </InputGroupAddon>
       <Input
         {...rest}
-        type='number'
+        type="number"
         value={count}
         disabled={disabled}
         readOnly={readonly}
         onKeyDown={handleKeyDown}
         onChange={handleInputChange}
         className={classnames({
-          [inputClassName]: inputClassName
+          [inputClassName]: inputClassName,
         })}
         {...(size ? { bsSize: size } : {})}
       />
-      <InputGroupAddon addonType='append' onClick={handleIncrement}>
+      <InputGroupAddon addonType="append" onClick={handleIncrement}>
         <Button
-          className='btn-icon'
-          color='transparent'
+          className="btn-icon"
+          color="transparent"
           {...(size ? { size } : {})}
           disabled={(!wrap && count >= max) || disabled || readonly}
         >
@@ -180,7 +180,7 @@ NumberInput.defaultProps = {
   disabled: false,
   readonly: false,
   downIcon: <Minus size={14} />,
-  upIcon: <Plus size={14} />
+  upIcon: <Plus size={14} />,
 }
 
 // ** PropTypes
@@ -201,5 +201,5 @@ NumberInput.propTypes = {
   onDecrement: PropTypes.func,
   onIncrement: PropTypes.func,
   inputClassName: PropTypes.string,
-  size: PropTypes.oneOf(['sm', 'lg'])
+  size: PropTypes.oneOf(['sm', 'lg']),
 }

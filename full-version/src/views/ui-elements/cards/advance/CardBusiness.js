@@ -1,5 +1,14 @@
 import { MoreVertical } from 'react-feather'
-import { Card, CardHeader, CardTitle, CardBody, CardText, CustomInput, Badge, Button } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardBody,
+  CardText,
+  CustomInput,
+  Badge,
+  Button
+} from 'reactstrap'
 
 const CardBusiness = () => {
   const dataArr = [
@@ -31,13 +40,13 @@ const CardBusiness = () => {
   ]
 
   const renderOptions = () => {
-    return dataArr.map(item => {
+    return dataArr.map((item) => {
       return (
-        <div key={item.id} className='business-item'>
-          <div className='d-flex align-items-center justify-content-between'>
+        <div key={item.id} className="business-item">
+          <div className="d-flex align-items-center justify-content-between">
             <CustomInput
-              type='checkbox'
-              className='custom-control-Primary'
+              type="checkbox"
+              className="custom-control-Primary"
               id={item.id}
               label={item.title}
               defaultChecked={item.checked}
@@ -50,16 +59,19 @@ const CardBusiness = () => {
   }
 
   return (
-    <Card className='business-card'>
-      <CardHeader className='pb-1'>
-        <CardTitle tag='h4'>For Business Sharks</CardTitle>
-        <MoreVertical size={18} className='cursor-pointer' />
+    <Card className="business-card">
+      <CardHeader className="pb-1">
+        <CardTitle tag="h4">For Business Sharks</CardTitle>
+        <MoreVertical size={18} className="cursor-pointer" />
       </CardHeader>
       <CardBody>
-        <CardText>Here, i focus ona range of items and featured that we use in life without giving them</CardText>
-        <h6 className='mb-75'>Basic price is $130</h6>
-        <div className='business-items'>{renderOptions()}</div>
-        <Button.Ripple color='primary' block>
+        <CardText>
+          Here, i focus ona range of items and featured that we use in life
+          without giving them
+        </CardText>
+        <h6 className="mb-75">Basic price is $130</h6>
+        <div className="business-items">{renderOptions()}</div>
+        <Button.Ripple color="primary" block>
           Purchase
         </Button.Ripple>
       </CardBody>

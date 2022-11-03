@@ -6,7 +6,7 @@ const BasicTimeline = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Basic</CardTitle>
+        <CardTitle tag="h4">Basic</CardTitle>
       </CardHeader>
       <CardBody>
         <Timeline data={basicData} />

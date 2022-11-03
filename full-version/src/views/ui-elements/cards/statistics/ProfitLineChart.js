@@ -6,7 +6,9 @@ const ProfitLineChart = ({ info }) => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    axios.get('/card/card-statistics/profit-line-chart').then(res => setData(res.data))
+    axios
+      .get('/card/card-statistics/profit-line-chart')
+      .then((res) => setData(res.data))
   }, [])
 
   const options = {
@@ -95,7 +97,7 @@ const ProfitLineChart = ({ info }) => {
   return data !== null ? (
     <TinyChartStats
       height={70}
-      type='line'
+      type="line"
       options={options}
       title={data.title}
       stats={data.statistics}

@@ -8,15 +8,19 @@ import SwitchIcons from './SwitchIcons'
 const Switch = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Switch' breadCrumbParent='Form Elements' breadCrumbActive='Switch' />
+      <Breadcrumbs
+        breadCrumbTitle="Switch"
+        breadCrumbParent="Form Elements"
+        breadCrumbActive="Switch"
+      />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <SwitchReactstrap />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <SwitchColors />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <SwitchIcons />
         </Col>
       </Row>

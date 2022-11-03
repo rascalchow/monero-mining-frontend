@@ -1,6 +1,15 @@
 import { useState } from 'react'
 import { ReactSortable } from 'react-sortablejs'
-import { Card, CardHeader, CardTitle, CardBody, CardText, Row, Col, ListGroupItem } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardBody,
+  CardText,
+  Row,
+  Col,
+  ListGroupItem
+} from 'reactstrap'
 
 const array = {
   list1: [
@@ -56,47 +65,47 @@ const DndMultiple = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Drag And Drop With Handle</CardTitle>
+        <CardTitle tag="h4">Drag And Drop With Handle</CardTitle>
       </CardHeader>
       <CardBody>
         <CardText>
           Add handle to your items using <code>handle</code> prop.
         </CardText>
-        <Row id='dd-with-handle'>
-          <Col md='6' sm='12'>
-            <h4 className='my-1'>List One</h4>
+        <Row id="dd-with-handle">
+          <Col md="6" sm="12">
+            <h4 className="my-1">List One</h4>
             <ReactSortable
-              tag='ul'
-              className='list-group sortable'
-              group='shared-handle-group'
-              handle='.handle'
+              tag="ul"
+              className="list-group sortable"
+              group="shared-handle-group"
+              handle=".handle"
               list={listArr1}
               setList={setListArr1}
             >
-              {listArr1.map(item => {
+              {listArr1.map((item) => {
                 return (
-                  <ListGroupItem className='draggable' key={item.id}>
-                    <span className='handle'>+</span>
+                  <ListGroupItem className="draggable" key={item.id}>
+                    <span className="handle">+</span>
                     {item.content}
                   </ListGroupItem>
                 )
               })}
             </ReactSortable>
           </Col>
-          <Col md='6' sm='12'>
-            <h4 className='my-1'>People Group 2</h4>
+          <Col md="6" sm="12">
+            <h4 className="my-1">People Group 2</h4>
             <ReactSortable
-              tag='ul'
-              className='list-group sortable'
-              group='shared-handle-group'
-              handle='.handle'
+              tag="ul"
+              className="list-group sortable"
+              group="shared-handle-group"
+              handle=".handle"
               list={listArr2}
               setList={setListArr2}
             >
-              {listArr2.map(item => {
+              {listArr2.map((item) => {
                 return (
-                  <ListGroupItem className='draggable' key={item.id}>
-                    <span className='handle'>+</span>
+                  <ListGroupItem className="draggable" key={item.id}>
+                    <span className="handle">+</span>
                     {item.content}
                   </ListGroupItem>
                 )

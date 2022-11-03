@@ -1,14 +1,14 @@
 import { Progress } from 'reactstrap'
 const ProgressBasic = () => {
   return (
-    <div className='demo-vertical-spacing'>
+    <div className="demo-vertical-spacing">
       <div>
         <span>Reticulating splines… 0%</span>
         <Progress />
       </div>
       <div>
         <span>Reticulating splines… 25%</span>
-        <Progress value='25' />
+        <Progress value="25" />
       </div>
       <div>
         <span>Reticulating splines… 50%</span>
@@ -20,7 +20,7 @@ const ProgressBasic = () => {
       </div>
       <div>
         <span>Reticulating splines… 100%</span>
-        <Progress value='100' />
+        <Progress value="100" />
       </div>
     </div>
   )

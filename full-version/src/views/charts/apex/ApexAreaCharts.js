@@ -83,26 +83,28 @@ const ApexAreaCharts = ({ direction }) => {
 
   return (
     <Card>
-      <CardHeader className='d-flex flex-md-row flex-column justify-content-md-between justify-content-start align-items-md-center align-items-start'>
+      <CardHeader className="d-flex flex-md-row flex-column justify-content-md-between justify-content-start align-items-md-center align-items-start">
         <div>
-          <CardTitle className='mb-75' tag='h4'>
+          <CardTitle className="mb-75" tag="h4">
             Line Chart
           </CardTitle>
-          <CardSubtitle className='text-muted'>Commercial networks</CardSubtitle>
+          <CardSubtitle className="text-muted">
+            Commercial networks
+          </CardSubtitle>
         </div>
-        <div className='d-flex align-items-center mt-md-0 mt-1'>
+        <div className="d-flex align-items-center mt-md-0 mt-1">
           <Calendar size={17} />
           <Flatpickr
             options={{
               mode: 'range',
               defaultDate: ['2019-05-01', '2019-05-10']
             }}
-            className='form-control flat-picker bg-transparent border-0 shadow-none'
+            className="form-control flat-picker bg-transparent border-0 shadow-none"
           />
         </div>
       </CardHeader>
       <CardBody>
-        <Chart options={options} series={series} type='area' height={400} />
+        <Chart options={options} series={series} type="area" height={400} />
       </CardBody>
     </Card>
   )

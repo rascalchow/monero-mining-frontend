@@ -13,11 +13,13 @@ import {
 } from 'reactstrap'
 import Chart from 'react-apexcharts'
 
-const RevenueReport = props => {
+const RevenueReport = (props) => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    axios.get('/card/card-analytics/revenue-report').then(res => setData(res.data))
+    axios
+      .get('/card/card-analytics/revenue-report')
+      .then((res) => setData(res.data))
   }, [])
 
   const revenueOptions = {
@@ -36,7 +38,17 @@ const RevenueReport = props => {
         }
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+        categories: [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep'
+        ],
         labels: {
           style: {
             colors: '#b9b9c3',
@@ -111,44 +123,62 @@ const RevenueReport = props => {
     }
 
   return data !== null ? (
-    <Card className='card-revenue-budget'>
-      <Row className='mx-0'>
-        <Col className='revenue-report-wrapper' md='8' xs='12'>
-          <div className='d-sm-flex justify-content-between align-items-center mb-3'>
-            <CardTitle className='mb-50 mb-sm-0'>Revenue Report</CardTitle>
-            <div className='d-flex align-items-center'>
-              <div className='d-flex align-items-center mr-2'>
-                <span className='bullet bullet-primary mr-50 cursor-pointer'></span>
+    <Card className="card-revenue-budget">
+      <Row className="mx-0">
+        <Col className="revenue-report-wrapper" md="8" xs="12">
+          <div className="d-sm-flex justify-content-between align-items-center mb-3">
+            <CardTitle className="mb-50 mb-sm-0">Revenue Report</CardTitle>
+            <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center mr-2">
+                <span className="bullet bullet-primary mr-50 cursor-pointer"></span>
                 <span>Earning</span>
               </div>
-              <div className='d-flex align-items-center'>
-                <span className='bullet bullet-warning mr-50 cursor-pointer'></span>
+              <div className="d-flex align-items-center">
+                <span className="bullet bullet-warning mr-50 cursor-pointer"></span>
                 <span>Expense</span>
               </div>
             </div>
           </div>
-          <Chart id='revenue-report-chart' type='bar' height='230' options={revenueOptions} series={revenueSeries} />
+          <Chart
+            id="revenue-report-chart"
+            type="bar"
+            height="230"
+            options={revenueOptions}
+            series={revenueSeries}
+          />
         </Col>
-        <Col className='budget-wrapper' md='4' xs='12'>
+        <Col className="budget-wrapper" md="4" xs="12">
           <UncontrolledButtonDropdown>
-            <DropdownToggle className='budget-dropdown' outline color='primary' size='sm' caret>
+            <DropdownToggle
+              className="budget-dropdown"
+              outline
+              color="primary"
+              size="sm"
+              caret
+            >
               2020
             </DropdownToggle>
             <DropdownMenu>
-              {data.years.map(item => (
-                <DropdownItem className='w-100' key={item}>
+              {data.years.map((item) => (
+                <DropdownItem className="w-100" key={item}>
                   {item}
                 </DropdownItem>
               ))}
             </DropdownMenu>
           </UncontrolledButtonDropdown>
-          <h2 className='mb-25'>${data.price}</h2>
-          <div className='d-flex justify-content-center'>
-            <span className='font-weight-bolder mr-25'>Budget:</span>
+          <h2 className="mb-25">${data.price}</h2>
+          <div className="d-flex justify-content-center">
+            <span className="font-weight-bolder mr-25">Budget:</span>
             <span>{data.budget}</span>
           </div>
-          <Chart id='budget-chart' type='line' height='80' options={budgetOptions} series={budgetSeries} />
-          <Button color='primary'>Increase Budget</Button>
+          <Chart
+            id="budget-chart"
+            type="line"
+            height="80"
+            options={budgetOptions}
+            series={budgetSeries}
+          />
+          <Button color="primary">Increase Budget</Button>
         </Col>
       </Row>
     </Card>

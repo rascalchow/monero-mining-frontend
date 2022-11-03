@@ -7,12 +7,12 @@ const ReactstrapValidation = () => {
   return (
     <Fragment>
       <Breadcrumbs
-        breadCrumbTitle='Reactstrap Validation'
-        breadCrumbParent='Form'
-        breadCrumbActive='Reactstrap Validation'
+        breadCrumbTitle="Reactstrap Validation"
+        breadCrumbParent="Form"
+        breadCrumbActive="Reactstrap Validation"
       />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <Validations />
         </Col>
       </Row>

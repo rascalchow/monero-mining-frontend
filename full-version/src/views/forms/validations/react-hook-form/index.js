@@ -10,18 +10,22 @@ import ValidationThirdPartyComponents from './ValidationThirdPartyComponents'
 const ReactHookForm = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='React Hook Form' breadCrumbParent='Form' breadCrumbActive='React Hook Form' />
-      <Row className='match-height'>
-        <Col lg='6' md='12'>
+      <Breadcrumbs
+        breadCrumbTitle="React Hook Form"
+        breadCrumbParent="Form"
+        breadCrumbActive="React Hook Form"
+      />
+      <Row className="match-height">
+        <Col lg="6" md="12">
           <BasicHookForm />
         </Col>
-        <Col lg='6' md='12'>
+        <Col lg="6" md="12">
           <ValidationThirdPartyComponents />
         </Col>
-        <Col lg='6' md='12'>
+        <Col lg="6" md="12">
           <ValidationSchema />
         </Col>
-        <Col lg='6' md='12'>
+        <Col lg="6" md="12">
           <AsyncValidationForm />
         </Col>
       </Row>

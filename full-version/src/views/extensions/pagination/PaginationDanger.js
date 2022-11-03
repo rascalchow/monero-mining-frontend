@@ -5,7 +5,7 @@ const PaginationDanger = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Danger</CardTitle>
+        <CardTitle tag="h4">Danger</CardTitle>
       </CardHeader>
       <CardBody>
         <ReactPaginate
@@ -17,8 +17,8 @@ const PaginationDanger = () => {
           activeClassName={'active'}
           pageClassName={'page-item'}
           previousLabel={''}
-          breakClassName='page-item'
-          breakLinkClassName='page-link'
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
           nextLinkClassName={'page-link'}
           nextClassName={'page-item next'}
           previousClassName={'page-item prev'}

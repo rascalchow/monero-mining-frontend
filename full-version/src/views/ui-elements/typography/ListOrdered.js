@@ -4,13 +4,14 @@ const ListOrdered = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Lists Ordered</CardTitle>
+        <CardTitle tag="h4">Lists Ordered</CardTitle>
       </CardHeader>
 
       <CardBody>
         <CardText>
-          List of items in which the order does explicitly matter. Use <code>&ltol type="1|a|A|i|I"&gt</code>, The type
-          attribute specifies the kind of marker to use in the list.
+          List of items in which the order does explicitly matter. Use{' '}
+          <code>&ltol type="1|a|A|i|I"&gt</code>, The type attribute specifies
+          the kind of marker to use in the list.
         </CardText>
         <ol>
           <li>Lorem ipsum dolor sit amet</li>
@@ -19,7 +20,7 @@ const ListOrdered = () => {
           <li>Facilisis in pretium nisl aliquet</li>
           <li>
             Nulla volutpat aliquam velit
-            <ol type='A'>
+            <ol type="A">
               <li>Phasellus iaculis neque</li>
               <li>Purus sodales ultricies</li>
               <li>Vestibulum laoreet porttitor sem</li>

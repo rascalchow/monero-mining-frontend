@@ -15,7 +15,12 @@ import { Card, CardBody } from 'reactstrap'
 
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
-import { getProduct, deleteWishlistItem, addToWishlist, addToCart } from '../store/actions'
+import {
+  getProduct,
+  deleteWishlistItem,
+  addToWishlist,
+  addToCart
+} from '../store/actions'
 
 import '@styles/base/pages/app-ecommerce-details.scss'
 
@@ -26,7 +31,7 @@ const Details = () => {
 
   // ** Store Vars
   const dispatch = useDispatch()
-  const store = useSelector(state => state.ecommerce)
+  const store = useSelector((state) => state.ecommerce)
 
   // ** ComponentDidMount : Get product
   useEffect(() => {
@@ -35,8 +40,12 @@ const Details = () => {
 
   return (
     <Fragment>
-      <BreadCrumbs breadCrumbTitle='Product Details' breadCrumbParent='eCommerce' breadCrumbActive='Details' />
-      <div className='app-ecommerce-details'>
+      <BreadCrumbs
+        breadCrumbTitle="Product Details"
+        breadCrumbParent="eCommerce"
+        breadCrumbActive="Details"
+      />
+      <div className="app-ecommerce-details">
         {Object.keys(store.productDetail).length ? (
           <Card>
             <CardBody>

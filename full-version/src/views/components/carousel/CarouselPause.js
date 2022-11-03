@@ -25,6 +25,6 @@ const images = [
 ]
 
 const CarouselPause = () => {
-  return <UncontrolledCarousel items={images} pause='hover' keyboard={false} />
+  return <UncontrolledCarousel items={images} pause="hover" keyboard={false} />
 }
 export default CarouselPause

@@ -2,7 +2,7 @@
 const initialState = {
   events: [],
   selectedEvent: {},
-  selectedCalendars: ['Personal', 'Business', 'Family', 'Holiday', 'ETC']
+  selectedCalendars: ['Personal', 'Business', 'Family', 'Holiday', 'ETC'],
 }
 
 const calenderReducer = (state = initialState, action) => {
@@ -17,7 +17,9 @@ const calenderReducer = (state = initialState, action) => {
       return { ...state }
     case 'UPDATE_FILTERS':
       // ** Updates Filters based on action filter
-      const filterIndex = state.selectedCalendars.findIndex(i => i === action.filter)
+      const filterIndex = state.selectedCalendars.findIndex(
+        (i) => i === action.filter,
+      )
       if (state.selectedCalendars.includes(action.filter)) {
         state.selectedCalendars.splice(filterIndex, 1)
       } else {

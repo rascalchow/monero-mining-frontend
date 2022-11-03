@@ -7,12 +7,16 @@ import BreadCrumbs from '@components/breadcrumbs'
 const Timeline = () => {
   return (
     <Fragment>
-      <BreadCrumbs breadCrumbTitle='Timeline' breadCrumbParent='Extra Components' breadCrumbActive='Timeline' />
+      <BreadCrumbs
+        breadCrumbTitle="Timeline"
+        breadCrumbParent="Extra Components"
+        breadCrumbActive="Timeline"
+      />
       <Row>
-        <Col lg='6'>
+        <Col lg="6">
           <BasicTimeline />
         </Col>
-        <Col lg='6'>
+        <Col lg="6">
           <IconsTimeline />
         </Col>
       </Row>

@@ -8,46 +8,54 @@ import { Form, FormGroup, Input, Label, Badge, Button } from 'reactstrap'
 const SidebarSendInvoice = ({ open, toggleSidebar }) => {
   return (
     <Sidebar
-      size='lg'
+      size="lg"
       open={open}
-      title='Send Invoice'
-      headerClassName='mb-1'
-      contentClassName='p-0'
-      bodyClassName='pb-sm-0 pb-3'
+      title="Send Invoice"
+      headerClassName="mb-1"
+      contentClassName="p-0"
+      bodyClassName="pb-sm-0 pb-3"
       toggleSidebar={toggleSidebar}
     >
       <Form>
         <FormGroup>
-          <Label for='invoice-from' className='form-label'>
+          <Label for="invoice-from" className="form-label">
             From
           </Label>
-          <Input id='invoice-from' defaultValue='shelbyComapny@email.com' placeholder='company@email.com' />
-        </FormGroup>
-        <FormGroup>
-          <Label for='invoice-to' className='form-label'>
-            To
-          </Label>
-          <Input id='invoice-to' defaultValue='qConsolidated@email.com' placeholder='company@email.com' />
-        </FormGroup>
-        <FormGroup>
-          <Label for='invoice-subject' className='form-label'>
-            Subject
-          </Label>
           <Input
-            id='invoice-subject'
-            defaultValue='Invoice of purchased Admin Templates'
-            placeholder='Invoice regarding goods'
+            id="invoice-from"
+            defaultValue="shelbyComapny@email.com"
+            placeholder="company@email.com"
           />
         </FormGroup>
         <FormGroup>
-          <Label for='invoice-message' className='form-label'>
+          <Label for="invoice-to" className="form-label">
+            To
+          </Label>
+          <Input
+            id="invoice-to"
+            defaultValue="qConsolidated@email.com"
+            placeholder="company@email.com"
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="invoice-subject" className="form-label">
+            Subject
+          </Label>
+          <Input
+            id="invoice-subject"
+            defaultValue="Invoice of purchased Admin Templates"
+            placeholder="Invoice regarding goods"
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="invoice-message" className="form-label">
             Message
           </Label>
           <Input
-            type='textarea'
-            cols='3'
-            rows='11'
-            id='invoice-message'
+            type="textarea"
+            cols="3"
+            rows="11"
+            id="invoice-message"
             defaultValue={`Dear Queen Consolidated,
 
 Thank you for your business, always a pleasure to work with you!
@@ -58,16 +66,16 @@ We would appreciate payment of this invoice by 05/11/2019`}
           />
         </FormGroup>
         <FormGroup>
-          <Badge color='light-primary'>
-            <Link className='mr-50' size={14} />
-            <span className='align-middle'>Invoice Attached</span>
+          <Badge color="light-primary">
+            <Link className="mr-50" size={14} />
+            <span className="align-middle">Invoice Attached</span>
           </Badge>
         </FormGroup>
-        <FormGroup className='d-flex flex-wrap mt-2'>
-          <Button className='mr-1' color='primary' onClick={toggleSidebar}>
+        <FormGroup className="d-flex flex-wrap mt-2">
+          <Button className="mr-1" color="primary" onClick={toggleSidebar}>
             Send
           </Button>
-          <Button color='secondary' outline onClick={toggleSidebar}>
+          <Button color="secondary" outline onClick={toggleSidebar}>
             Cancel
           </Button>
         </FormGroup>

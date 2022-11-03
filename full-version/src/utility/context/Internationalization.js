@@ -21,7 +21,7 @@ const menuMessages = {
   en: { ...messagesEn, ...userMessagesEn },
   de: { ...messagesDe, ...userMessagesDe },
   fr: { ...messagesFr, ...userMessagesFr },
-  pt: { ...messagesPt, ...userMessagesPt }
+  pt: { ...messagesPt, ...userMessagesPt },
 }
 
 // ** Create Context
@@ -33,14 +33,19 @@ const IntlProviderWrapper = ({ children }) => {
   const [messages, setMessages] = useState(menuMessages['en'])
 
   // ** Switches Language
-  const switchLanguage = lang => {
+  const switchLanguage = (lang) => {
     setLocale(lang)
     setMessages(menuMessages[lang])
   }
 
   return (
     <Context.Provider value={{ locale, switchLanguage }}>
-      <IntlProvider key={locale} locale={locale} messages={messages} defaultLocale='en'>
+      <IntlProvider
+        key={locale}
+        locale={locale}
+        messages={messages}
+        defaultLocale="en"
+      >
         {children}
       </IntlProvider>
     </Context.Provider>

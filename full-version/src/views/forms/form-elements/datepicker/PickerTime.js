@@ -7,18 +7,18 @@ const Timepickers = () => {
 
   return (
     <Fragment>
-      <Label id='timepicker'>Basic 24hrs</Label>
+      <Label id="timepicker">Basic 24hrs</Label>
       <Flatpickr
-        className='form-control'
+        className="form-control"
         value={basic}
-        id='timepicker'
+        id="timepicker"
         options={{
           enableTime: true,
           noCalendar: true,
           dateFormat: 'H:i',
           time_24hr: true
         }}
-        onChange={date => setBasic(date)}
+        onChange={(date) => setBasic(date)}
       />
     </Fragment>
   )

@@ -9,18 +9,18 @@ const ReactPlayer = () => {
   return (
     <Fragment>
       <ExtensionsHeader
-        title='React Player'
-        subTitle='React Media Player'
-        link='https://github.com/CookPete/react-player'
+        title="React Player"
+        subTitle="React Media Player"
+        link="https://github.com/CookPete/react-player"
       />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <MediaPlayerVideo />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <MediaPlayerControlled />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <MediaPlayerAudio />
         </Col>
       </Row>

@@ -19,18 +19,22 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 const Tables = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Datatables' breadCrumbParent='Home' breadCrumbActive='Datatables Basic' />
+      <Breadcrumbs
+        breadCrumbTitle="Datatables"
+        breadCrumbParent="Home"
+        breadCrumbActive="Datatables Basic"
+      />
       <Row>
-        <Col sm='12'>
+        <Col sm="12">
           <TableZeroConfig />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <TableWithButtons />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <TableExpandable />
         </Col>
-        <Col sm='12'>
+        <Col sm="12">
           <TableMultilingual />
         </Col>
       </Row>

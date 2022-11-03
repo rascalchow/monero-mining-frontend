@@ -11,8 +11,8 @@ const Faq = () => {
   const [data, setData] = useState(null),
     [searchTerm, setSearchTerm] = useState('')
 
-  const getFAQData = query => {
-    return axios.get('/faq/data', { params: { q: query } }).then(response => {
+  const getFAQData = (query) => {
+    return axios.get('/faq/data', { params: { q: query } }).then((response) => {
       setData(response.data)
     })
   }
@@ -23,9 +23,23 @@ const Faq = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='FAQ' breadCrumbParent='Pages' breadCrumbActive='FAQ' />
-      <FaqFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} getFAQData={getFAQData} />
-      {data !== null ? <Faqs data={data} searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> : null}
+      <Breadcrumbs
+        breadCrumbTitle="FAQ"
+        breadCrumbParent="Pages"
+        breadCrumbActive="FAQ"
+      />
+      <FaqFilter
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        getFAQData={getFAQData}
+      />
+      {data !== null ? (
+        <Faqs
+          data={data}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
+      ) : null}
       <FaqContact />
     </Fragment>
   )

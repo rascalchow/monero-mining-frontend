@@ -59,11 +59,16 @@ const ApexRadialbar = () => {
 
   return (
     <Card>
-      <CardHeader className='d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start'>
-        <CardTitle tag='h4'>Statistics</CardTitle>
+      <CardHeader className="d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
+        <CardTitle tag="h4">Statistics</CardTitle>
       </CardHeader>
       <CardBody>
-        <Chart options={options} series={[80, 50, 35]} type='radialBar' height={350} />
+        <Chart
+          options={options}
+          series={[80, 50, 35]}
+          type="radialBar"
+          height={350}
+        />
       </CardBody>
     </Card>
   )

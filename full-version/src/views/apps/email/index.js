@@ -19,7 +19,7 @@ import {
   selectAllMail,
   resetSelectedMail,
   selectCurrentMail,
-  updateMailLabel
+  updateMailLabel,
 } from './store/actions'
 
 // ** Styles
@@ -36,14 +36,20 @@ const EmailApp = () => {
 
   // ** Store Variables
   const dispatch = useDispatch()
-  const store = useSelector(state => state.email)
+  const store = useSelector((state) => state.email)
 
   // ** Vars
   const params = useParams()
 
   // ** UseEffect: GET initial data on Mount
   useEffect(() => {
-    dispatch(getMails({ q: query || '', folder: params.folder || 'inbox', label: params.label || '' }))
+    dispatch(
+      getMails({
+        q: query || '',
+        folder: params.folder || 'inbox',
+        label: params.label || '',
+      }),
+    )
   }, [query, params.folder, params.label])
 
   return (
@@ -57,11 +63,11 @@ const EmailApp = () => {
         setSidebarOpen={setSidebarOpen}
         resetSelectedMail={resetSelectedMail}
       />
-      <div className='content-right'>
-        <div className='content-body'>
+      <div className="content-right">
+        <div className="content-body">
           <div
             className={classnames('body-content-overlay', {
-              show: sidebarOpen
+              show: sidebarOpen,
             })}
             onClick={() => setSidebarOpen(false)}
           ></div>

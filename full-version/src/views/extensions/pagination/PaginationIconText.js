@@ -2,18 +2,18 @@ import { Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
 import ReactPaginate from 'react-paginate'
 
 const Previous = () => {
-  return <span className='align-middle d-none d-md-inline-block'>Prev</span>
+  return <span className="align-middle d-none d-md-inline-block">Prev</span>
 }
 
 const Next = () => {
-  return <span className='align-middle d-none d-md-inline-block'>Next </span>
+  return <span className="align-middle d-none d-md-inline-block">Next </span>
 }
 
 const IconTextPagination = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>With icon and text</CardTitle>
+        <CardTitle tag="h4">With icon and text</CardTitle>
       </CardHeader>
       <CardBody>
         <ReactPaginate
@@ -30,8 +30,8 @@ const IconTextPagination = () => {
           previousClassName={'page-item prev'}
           previousLinkClassName={'page-link'}
           pageLinkClassName={'page-link'}
-          breakClassName='page-item'
-          breakLinkClassName='page-link'
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
           containerClassName={'pagination react-paginate'}
         />
       </CardBody>

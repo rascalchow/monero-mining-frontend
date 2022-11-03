@@ -16,7 +16,7 @@ import {
   getCartItems,
   addToWishlist,
   deleteCartItem,
-  deleteWishlistItem
+  deleteWishlistItem,
 } from '../store/actions'
 
 // ** Styles
@@ -29,7 +29,7 @@ const Shop = () => {
 
   // ** Vars
   const dispatch = useDispatch()
-  const store = useSelector(state => state.ecommerce)
+  const store = useSelector((state) => state.ecommerce)
 
   // ** Get products
   useEffect(() => {
@@ -38,14 +38,18 @@ const Shop = () => {
         q: '',
         sortBy: 'featured',
         perPage: 9,
-        page: 1
-      })
+        page: 1,
+      }),
     )
   }, [dispatch])
 
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Shop' breadCrumbParent='eCommerce' breadCrumbActive='Shop' />
+      <Breadcrumbs
+        breadCrumbTitle="Shop"
+        breadCrumbParent="eCommerce"
+        breadCrumbActive="Shop"
+      />
       <Products
         store={store}
         dispatch={dispatch}
