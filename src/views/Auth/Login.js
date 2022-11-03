@@ -1,7 +1,9 @@
+import { useDispatch } from 'react-redux'
 import { useSkin } from '@hooks/useSkin'
 import { Link, Redirect } from 'react-router-dom'
 import { Facebook, Twitter, Mail, GitHub } from 'react-feather'
 import InputPasswordToggle from '@components/input-password-toggle'
+import { useForm, Controller } from 'react-hook-form'
 import {
   Row,
   Col,
@@ -14,13 +16,27 @@ import {
   CustomInput,
   Button,
 } from 'reactstrap'
+
 import '@styles/base/pages/page-auth.scss'
 
-const Login = () => {
-  const [skin, setSkin] = useSkin()
+import { handleLogin } from '../../redux/actions/auth' 
 
-  const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg',
-    source = require(`@src/assets/images/pages/${illustration}`).default
+const Login = () => {
+  const [skin] = useSkin()
+  const {register, control, handleSubmit, formState: { isSubmitting, errors }} = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    }
+  })
+  const dispatch = useDispatch()
+  const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg'
+  const source = require(`@src/assets/images/pages/${illustration}`).default
+  
+  const onSubmit = (data) => {
+    console.log(data)
+    return dispatch(handleLogin({data: true}))
+  }
 
   return (
     <div className="auth-wrapper auth-v2">
@@ -113,18 +129,25 @@ const Login = () => {
             </CardText>
             <Form
               className="auth-login-form mt-2"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSubmit(onSubmit)}
             >
               <FormGroup>
                 <Label className="form-label" for="login-email">
                   Email
                 </Label>
-                <Input
-                  type="email"
-                  id="login-email"
-                  placeholder="john@example.com"
-                  autoFocus
+                <Controller
+                  name="email"
+                  control={control}
+                  render={({field})=> (
+                    <Input
+                      type="email"
+                      placeholder="john@example.com"
+                      autoFocus
+                      {...field}
+                    />
+                  )}
                 />
+                
               </FormGroup>
               <FormGroup>
                 <div className="d-flex justify-content-between">
@@ -148,13 +171,13 @@ const Login = () => {
                   label="Remember Me"
                 />
               </FormGroup>
-              <Button.Ripple tag={Link} to="/" color="primary" block>
+              <Button.Ripple type="submit" color="primary" block>
                 Sign in
               </Button.Ripple>
             </Form>
             <p className="text-center mt-2">
               <span className="mr-25">New on our platform?</span>
-              <Link to="/">
+              <Link to="/register">
                 <span>Create an account</span>
               </Link>
             </p>
