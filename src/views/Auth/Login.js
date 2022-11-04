@@ -1,9 +1,10 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSkin } from '@hooks/useSkin'
 import { Link, Redirect } from 'react-router-dom'
 import { Facebook, Twitter, Mail, GitHub, Loader } from 'react-feather'
 import InputPasswordToggle from '@components/input-password-toggle'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import {
   Row,
   Col,
@@ -11,8 +12,6 @@ import {
   CardText,
   Form,
   FormGroup,
-  FormFeedback,
-  Label,
   Input,
   CustomInput,
   Button,
@@ -21,10 +20,10 @@ import {
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import '@styles/base/pages/page-auth.scss'
+import FormField from '@components/form-field'
 
 import { handleLogin } from '@store/actions/auth' 
-import { useState } from 'react'
+
 
 const Login = () => {
   const [skin] = useSkin()
@@ -34,13 +33,22 @@ const Login = () => {
     email: yup.string().required().email(),
     password: yup.string().required(),
   }).required()
-  const {control, handleSubmit, formState: { isSubmitting, errors }} = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: {
+      isSubmitting,
+      errors,
+      isValid
+    }
+  } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       email: '',
       password: '',
     }
   })
+
   const dispatch = useDispatch()
   const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg'
   const source = require(`@src/assets/images/pages/${illustration}`).default
@@ -153,48 +161,34 @@ const Login = () => {
               className="auth-login-form mt-2"
               onSubmit={handleSubmit(onSubmit)}
             >
-              <FormGroup>
-                <Label className="form-label" for="login-email">
-                  Email
-                </Label>
-                <Controller
-                  name="email"
-                  control={control}
-                  render={({field})=> (
-                    <Input
-                      type="email"
-                      placeholder="john@example.com"
-                      autoFocus
-                      invalid={!!errors.email}
-                      {...field}
-                    />
-                  )}
-                />
-                <FormFeedback>{errors.email && errors.email.message}</FormFeedback>
-              </FormGroup>
-              <FormGroup>
-                <div className="d-flex justify-content-between">
-                  <Label className="form-label" for="login-password">
-                    Password
-                  </Label>
-                  <Link to="/">
-                    <small>Forgot Password?</small>
-                  </Link>
-                </div>
-                <Controller
-                  name="password"
-                  control={control}
-                  render={({field}) => (
-                    <InputPasswordToggle
-                      className="input-group-merge"
-                      id="login-password"
-                      {...field}
-                      invalid={!!errors.password}
-                    />
-                  )}
-                />
-                <FormFeedback>{errors.password && errors.password.message}</FormFeedback>
-              </FormGroup>
+              <FormField
+                label="Email"
+                name="email"
+                control={control}
+                error={errors.email}
+                render={({field})=> (
+                  <Input
+                    type="email"
+                    placeholder="john@example.com"
+                    autoFocus
+                    invalid={!!errors.email}
+                    {...field}
+                  />
+                )}
+              />
+              <FormField
+                label="Password"
+                name="password"
+                control={control}
+                error={errors.password}
+                render={({field}) => (
+                  <InputPasswordToggle
+                    className="input-group-merge"
+                    {...field}
+                    invalid={!!errors.password}
+                  />
+                )}
+              />
               <FormGroup>
                 <CustomInput
                   type="checkbox"
@@ -203,7 +197,12 @@ const Login = () => {
                   label="Remember Me"
                 />
               </FormGroup>
-              <Button.Ripple type="submit" color="primary" block>
+              <Button.Ripple
+                type="submit"
+                color="primary"
+                block
+                disabled={!isValid}
+              >
                 { isSubmitting 
                 ? (
                   <Loader
