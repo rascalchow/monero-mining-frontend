@@ -1,4 +1,4 @@
-import { Mail, Home } from 'react-feather'
+import { Mail, Home, Users } from 'react-feather'
 
 export default [
   {

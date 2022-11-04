@@ -1,7 +1,7 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useSkin } from '@hooks/useSkin'
 import { Link, Redirect } from 'react-router-dom'
-import { Facebook, Twitter, Mail, GitHub } from 'react-feather'
+import { Facebook, Twitter, Mail, GitHub, Loader } from 'react-feather'
 import InputPasswordToggle from '@components/input-password-toggle'
 import { useForm, Controller } from 'react-hook-form'
 import {
@@ -11,19 +11,31 @@ import {
   CardText,
   Form,
   FormGroup,
+  FormFeedback,
   Label,
   Input,
   CustomInput,
   Button,
+  Alert,
 } from 'reactstrap'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 import '@styles/base/pages/page-auth.scss'
 
-import { handleLogin } from '../../redux/actions/auth' 
+import { handleLogin } from '@store/actions/auth' 
+import { useState } from 'react'
 
 const Login = () => {
   const [skin] = useSkin()
-  const {register, control, handleSubmit, formState: { isSubmitting, errors }} = useForm({
+  const [fb, setFb] = useState(null)
+  const authedUser = useSelector(state => state.auth.userData)
+  const schema = yup.object({
+    email: yup.string().required().email(),
+    password: yup.string().required(),
+  }).required()
+  const {control, handleSubmit, formState: { isSubmitting, errors }} = useForm({
+    resolver: yupResolver(schema),
     defaultValues: {
       email: '',
       password: '',
@@ -33,9 +45,16 @@ const Login = () => {
   const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg'
   const source = require(`@src/assets/images/pages/${illustration}`).default
   
-  const onSubmit = (data) => {
-    console.log(data)
-    return dispatch(handleLogin({data: true}))
+  const onSubmit = async (data) => {
+    try {
+      await dispatch(handleLogin(data))
+    } catch (error) {
+      setFb('Email or password incorrect')
+    }
+  }
+
+  if (authedUser) {
+    return <Redirect to="/" />
   }
 
   return (
@@ -127,6 +146,9 @@ const Login = () => {
             <CardText className="mb-2">
               Please sign-in to your account and start the adventure
             </CardText>
+            <Alert color="danger" isOpen={!!fb} toggle={() => {setFb(null)}} className="px-3 py-2">
+              Email or password incorrect!
+            </Alert>
             <Form
               className="auth-login-form mt-2"
               onSubmit={handleSubmit(onSubmit)}
@@ -143,11 +165,12 @@ const Login = () => {
                       type="email"
                       placeholder="john@example.com"
                       autoFocus
+                      invalid={!!errors.email}
                       {...field}
                     />
                   )}
                 />
-                
+                <FormFeedback>{errors.email && errors.email.message}</FormFeedback>
               </FormGroup>
               <FormGroup>
                 <div className="d-flex justify-content-between">
@@ -158,10 +181,19 @@ const Login = () => {
                     <small>Forgot Password?</small>
                   </Link>
                 </div>
-                <InputPasswordToggle
-                  className="input-group-merge"
-                  id="login-password"
+                <Controller
+                  name="password"
+                  control={control}
+                  render={({field}) => (
+                    <InputPasswordToggle
+                      className="input-group-merge"
+                      id="login-password"
+                      {...field}
+                      invalid={!!errors.password}
+                    />
+                  )}
                 />
+                <FormFeedback>{errors.password && errors.password.message}</FormFeedback>
               </FormGroup>
               <FormGroup>
                 <CustomInput
@@ -172,7 +204,13 @@ const Login = () => {
                 />
               </FormGroup>
               <Button.Ripple type="submit" color="primary" block>
-                Sign in
+                { isSubmitting 
+                ? (
+                  <Loader
+                    className="spinner"
+                    size={18}
+                  />
+                ) : 'Sign in'}
               </Button.Ripple>
             </Form>
             <p className="text-center mt-2">

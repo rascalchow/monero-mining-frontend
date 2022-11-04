@@ -85,7 +85,7 @@ const NotAuthorized = () => {
           </p>
           <Button.Ripple
             tag={Link}
-            to="/pages/login-v2"
+            to="/login"
             color="primary"
             className="btn-sm-block mb-1"
           >

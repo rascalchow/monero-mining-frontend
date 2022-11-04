@@ -1,15 +1,15 @@
-import { Fragment, useState, useContext } from 'react'
-import { isObjEmpty } from '@utils'
-import classnames from 'classnames'
+import { Fragment, useState } from 'react'
 import { useSkin } from '@hooks/useSkin'
-import useJwt from '@src/auth/jwt/useJwt'
+
 import { useDispatch } from 'react-redux'
-import { useForm } from 'react-hook-form'
-import { handleLogin } from '@store/actions/auth'
-import { Link, useHistory } from 'react-router-dom'
-import { AbilityContext } from '@src/utility/context/Can'
+import { useForm, Controller } from 'react-hook-form'
+import { handleRegister } from '@store/actions/auth'
+import { Link, Redirect } from 'react-router-dom'
 import InputPasswordToggle from '@components/input-password-toggle'
-import { Facebook, Twitter, Mail, GitHub } from 'react-feather'
+import { Facebook, Twitter, Mail, GitHub, Loader } from 'react-feather'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+
 import {
   Row,
   Col,
@@ -21,26 +21,59 @@ import {
   Form,
   Input,
   CustomInput,
+  FormFeedback,
+  Alert,
 } from 'reactstrap'
+
+import _ from 'lodash'
 
 import '@styles/base/pages/page-auth.scss'
 
 const Register = () => {
-  const ability = useContext(AbilityContext)
-
-  const [skin, setSkin] = useSkin()
-
-  const history = useHistory()
-
+  const [skin] = useSkin()
   const dispatch = useDispatch()
+  const [fbMsg, setFbMsg] = useState(null)
+  const [term, setTerm] = useState(false)
+  const schema = yup.object({
+    name: yup.string().required(),
+    email: yup.string().required().email(),
+    phone: yup.string().required(),
+    password: yup.string().required(),
+    companyName: yup.string().required(),
+    application: yup.string().required(),
+    contact: yup.string().required(),
+    country: yup.string().required(),
+    instantMessenger: yup.string().required(),
+    website: yup.string().required(),
+    moreInformation: yup.string().required(),
+  }).required()
 
-  const { register, errors, handleSubmit, trigger } = useForm()
-
-  const [email, setEmail] = useState('')
-  const [valErrors, setValErrors] = useState({})
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [terms, setTerms] = useState(false)
+  const {
+    control,
+    handleSubmit,
+    setError,
+    formState: {
+      isValid,
+      isSubmitting,
+      errors,
+      isSubmitSuccessful,
+    }
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      name: '',
+      email: '',
+      phone: '',
+      password: '',
+      companyName: '',
+      application: '',
+      contact: '',
+      country: '',
+      instantMessenger: '',
+      website: '',
+      moreInformation: '',	
+    }
+  })
 
   const illustration =
       skin === 'dark' ? 'register-v2-dark.svg' : 'register-v2.svg',
@@ -57,48 +90,42 @@ const Register = () => {
     )
   }
 
-  const onSubmit = () => {
-    if (isObjEmpty(errors)) {
-      useJwt
-        .register({ username, email, password })
-        .then((res) => {
-          if (res.data.error) {
-            const arr = {}
-            for (const property in res.data.error) {
-              if (res.data.error[property] !== null)
-                arr[property] = res.data.error[property]
-            }
-            setValErrors(arr)
-            if (res.data.error.email !== null)
-              console.error(res.data.error.email)
-            if (res.data.error.username !== null)
-              console.error(res.data.error.username)
+  const onSubmit = async (data) => {
+    const formData = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      password: data.password,
+      userProfile: {
+        companyName: data.companyName,
+        application: data.application,
+        contact: data.contact,
+        country: data.country,
+        instantMessenger: data.instantMessenger,
+        website: data.website,
+        moreInformation: data.moreInformation
+      }
+    }
+    try{
+      return await dispatch(handleRegister(formData))
+    } catch (error) {
+      console.log({...error})
+      if (error.isAxiosError) {
+        if (error.response.status === 422) {
+          if (error.response.data.errors.msg === 'EMAIL_ALREADY_EXISTS') {
+            setError('email', { type: 'custom', message: 'Email is already taken'})
           } else {
-            setValErrors({})
-            const data = { ...res.data.user, accessToken: res.data.accessToken }
-            ability.update(res.data.user.ability)
-            dispatch(handleLogin(data))
-            history.push('/')
+            setFbMsg(_.get(error, 'response.data.errors.msg', 'Server Error'))
           }
-        })
-        .catch((err) => console.log(err))
+        }
+      }
+      throw error
     }
   }
-
-  const handleUsernameChange = (e) => {
-    const errs = valErrors
-    if (errs.username) delete errs.username
-    setUsername(e.target.value)
-    setValErrors(errs)
+  if (isSubmitSuccessful) {
+    return <Redirect to="/login" />
   }
-
-  const handleEmailChange = (e) => {
-    const errs = valErrors
-    if (errs.email) delete errs.email
-    setEmail(e.target.value)
-    setValErrors(errs)
-  }
-
+  console.log(errors)
   return (
     <div className="auth-wrapper auth-v2">
       <Row className="auth-inner m-0">
@@ -188,93 +215,249 @@ const Register = () => {
             <CardText className="mb-2">
               Make your app management easy and fun!
             </CardText>
-
+            <Alert color="danger" isOpen={!!fbMsg} toggle={() => {setFbMsg(null)}} className="px-3 py-2">
+              Error occured while processing request!
+            </Alert>
             <Form
-              action="/"
               className="auth-register-form mt-2"
               onSubmit={handleSubmit(onSubmit)}
             >
               <FormGroup>
-                <Label className="form-label" for="register-username">
-                  Username
+                <Label className="form-label">
+                  Full name
                 </Label>
-                <Input
-                  autoFocus
-                  type="text"
-                  value={username}
-                  placeholder="johndoe"
-                  id="register-username"
-                  name="register-username"
-                  onChange={handleUsernameChange}
-                  className={classnames({
-                    'is-invalid': errors['register-username'],
-                  })}
-                  innerRef={register({
-                    required: true,
-                    validate: (value) => value !== '',
-                  })}
+                <Controller
+                  name="name"
+                  control={control}
+                  render={({field}) => (
+                    <Input
+                      autoFocus
+                      type="text"
+                      placeholder="John Doe"
+                      invalid={!!errors.name}
+                      {...field}
+                    />
+                  )}
                 />
-                {Object.keys(valErrors).length && valErrors.username ? (
-                  <small className="text-danger">{valErrors.username}</small>
-                ) : null}
+                <FormFeedback>{errors.name && errors.name.message}</FormFeedback>
+              </FormGroup>
+              <Row>
+                <Col>
+                  <FormGroup>
+                    <Label className="form-label">
+                      Email
+                    </Label>
+                    <Controller
+                      name="email"
+                      control={control}
+                      render={({field})=> (
+                        <Input
+                          type="email"
+                          placeholder="john@example.com"
+                          invalid={!!errors.email}
+                          {...field}
+                        />
+                      )}
+                    />
+                    <FormFeedback>{errors.email && errors.email.message}</FormFeedback>
+                  </FormGroup>
+                </Col>
+                <Col>
+                  <FormGroup>
+                    <Label className="form-label">
+                      Phone
+                    </Label>
+                    <Controller
+                      name="phone"
+                      control={control}
+                      render={({field})=> (
+                        <Input
+                          type="text"
+                          placeholder="(+1)555-5555-5555"
+                          invalid={!!errors.phone}
+                          {...field}
+                        />
+                      )}
+                    />
+                    <FormFeedback>{errors.phone && errors.phone.message}</FormFeedback>
+                  </FormGroup>
+                </Col>
+              </Row>
+              <FormGroup>
+                <Label className="form-label">
+                  Company name
+                </Label>
+                <Controller
+                  name="companyName"
+                  control={control}
+                  render={({field})=> (
+                    <Input
+                      type="text"
+                      placeholder="Nurev, LLC"
+                      invalid={!!errors.companyName}
+                      {...field}
+                    />
+                  )}
+                />
+                <FormFeedback>{errors.companyName && errors.companyName.message}</FormFeedback>
               </FormGroup>
               <FormGroup>
-                <Label className="form-label" for="register-email">
-                  Email
+                <Label className="form-label">
+                  Application
                 </Label>
-                <Input
-                  type="email"
-                  value={email}
-                  id="register-email"
-                  name="register-email"
-                  onChange={handleEmailChange}
-                  placeholder="john@example.com"
-                  className={classnames({
-                    'is-invalid': errors['register-email'],
-                  })}
-                  innerRef={register({
-                    required: true,
-                    validate: (value) => value !== '',
-                  })}
+                <Controller
+                  name="application"
+                  control={control}
+                  render={({field})=> (
+                    <Input
+                      type="text"
+                      placeholder=""
+                      invalid={!!errors.application}
+                      {...field}
+                    />
+                  )}
                 />
-                {Object.keys(valErrors).length && valErrors.email ? (
-                  <small className="text-danger">{valErrors.email}</small>
-                ) : null}
+                <FormFeedback>{errors.application && errors.application.message}</FormFeedback>
+              </FormGroup>
+              <Row>
+                <Col>
+                  <FormGroup>
+                    <Label className="form-label">
+                      Contact
+                    </Label>
+                    <Controller
+                      name="contact"
+                      control={control}
+                      render={({field})=> (
+                        <Input
+                          type="text"
+                          placeholder=""
+                          invalid={!!errors.contact}
+                          {...field}
+                        />
+                      )}
+                    />
+                    <FormFeedback>{errors.contact && errors.contact.message}</FormFeedback>
+                  </FormGroup>
+                </Col>
+                <Col>
+                  <FormGroup>
+                    <Label className="form-label">
+                      Country
+                    </Label>
+                    <Controller
+                      name="country"
+                      control={control}
+                      render={({field})=> (
+                        <Input
+                          type="text"
+                          placeholder=""
+                          invalid={!!errors.country}
+                          {...field}
+                        />
+                      )}
+                    />
+                    <FormFeedback>{errors.country && errors.country.message}</FormFeedback>
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <FormGroup>
+                    <Label className="form-label">
+                      Instant Messenger
+                    </Label>
+                    <Controller
+                      name="instantMessenger"
+                      control={control}
+                      render={({field})=> (
+                        <Input
+                          type="text"
+                          placeholder=""
+                          {...field}
+                          invalid={!!errors.instantMessenger}
+                        />
+                      )}
+                    />
+                    <FormFeedback>{errors.instantMessenger && errors.instantMessenger.message}</FormFeedback>
+                  </FormGroup>
+                </Col>
+                <Col>
+                  <FormGroup>
+                    <Label className="form-label">
+                      Website
+                    </Label>
+                    <Controller
+                      name="website"
+                      control={control}
+                      render={({field})=> (
+                        <Input
+                          type="text"
+                          placeholder=""
+                          invalid={!!errors.website}
+                          {...field}
+                        />
+                      )}
+                    />
+                    <FormFeedback>{errors.website && errors.website.message}</FormFeedback>
+                  </FormGroup>
+                </Col>
+              </Row>
+              <FormGroup>
+                <Label className="form-label">
+                  More Information
+                </Label>
+                <Controller
+                  name="moreInformation"
+                  control={control}
+                  render={({field})=> (
+                    <Input
+                      type="textarea"
+                      placeholder=""
+                      {...field}
+                      invalid={!!errors.moreInformation}
+                    />
+                  )}
+                />
+                <FormFeedback>{errors.moreInformation && errors.moreInformation.message}</FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label className="form-label" for="register-password">
                   Password
                 </Label>
-                <InputPasswordToggle
-                  value={password}
-                  id="register-password"
-                  name="register-password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  className={classnames({
-                    'input-group-merge': true,
-                    'is-invalid': errors['register-password'],
-                  })}
-                  innerRef={register({
-                    required: true,
-                    validate: (value) => value !== '',
-                  })}
-                />
+                <Controller
+                  name="password"
+                  control={control}
+                  render={({field})=> (
+                    <InputPasswordToggle
+                      {...field}
+                      invalid={!!errors.password}
+                    >
+                    </InputPasswordToggle>
+                  )}
+                /> 
+                <FormFeedback>{errors.password && errors.password.message}</FormFeedback>
               </FormGroup>
               <FormGroup>
                 <CustomInput
                   type="checkbox"
                   id="terms"
                   name="terms"
-                  value="terms"
                   label={<Terms />}
+                  onChange={(e)=>{setTerm(e.target.value)}}
+                  invalid={!isValid}
                   className="custom-control-Primary"
-                  innerRef={register({ required: true })}
-                  onChange={(e) => setTerms(e.target.checked)}
-                  invalid={errors.terms && true}
                 />
               </FormGroup>
-              <Button.Ripple type="submit" block color="primary">
-                Sign up
+              <Button.Ripple type="submit" block color="primary" disabled={!term}>
+                { isSubmitting 
+                  ? (
+                    <Loader
+                      className="spinner"
+                      size={18}
+                    />
+                  ) : 'Sign up'
+                }
               </Button.Ripple>
             </Form>
             <p className="text-center mt-2">

@@ -1,5 +1,4 @@
 // ** UseJWT import to get config
-import axios from 'axios'
 import useJwt from '@src/auth/jwt/useJwt'
 
 const config = useJwt.jwtConfig
@@ -8,10 +7,12 @@ const jwt = useJwt
 // ** Handle User Login
 export const handleLogin = (data) => {
   return async (dispatch) => {
-    const res = await jwt.login({email: 'admin@nurev.com', password: 'NureVAdmin!2#'})
+    await new Promise((resolve)=>{setTimeout(()=>{resolve(true)}, 1000)})
+    const res = await jwt.login(data)
+
     dispatch({
       type: 'LOGIN',
-      data:res.user,
+      data:res.data.user,
       config,
       [config.storageTokenKeyName]: data[config.storageTokenKeyName],
       [config.storageRefreshTokenKeyName]:
@@ -28,6 +29,13 @@ export const handleLogin = (data) => {
       config.storageRefreshTokenKeyName,
       JSON.stringify(data.refreshToken),
     )
+  }
+}
+// ** Handle User Register
+export const handleRegister = (data) => {
+  return async () => {
+    await new Promise((resolve)=>{setTimeout(()=>{resolve(true)}, 1000)})
+    await jwt.register(data)
   }
 }
 

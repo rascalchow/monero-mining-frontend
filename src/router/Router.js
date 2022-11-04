@@ -1,6 +1,6 @@
 // ** React Imports
-import { Suspense, useContext, lazy } from 'react'
-
+import { Suspense, useContext, lazy } from 'react';
+import { useSelector } from 'react-redux';
 // ** Utils
 import { isUserLoggedIn } from '@utils'
 import { useLayout } from '@hooks/useLayout'
@@ -31,6 +31,8 @@ const Router = () => {
   // ** Hooks
   const [layout, setLayout] = useLayout()
   const [transition, setTransition] = useRouterTransition()
+
+  const authedUser = useSelector(state => state.auth.userData)
 
   // ** ACL Ability Context
   const ability = useContext(AbilityContext)
@@ -129,7 +131,7 @@ const Router = () => {
 
       // ** RouterProps to pass them to Layouts
       const routerProps = {}
-
+      
       return (
         <Route path={LayoutPaths} key={index}>
           <LayoutTag
@@ -153,7 +155,9 @@ const Router = () => {
                         ...props,
                         meta: route.meta,
                       })
-
+                      if (route.private && !isUserLoggedIn()) {
+                        return <Redirect to="/not-authorized" />
+                      }
                       return (
                         <Suspense fallback={null}>
                           {/* Layout Wrapper to add classes based on route's layout, appLayout and className */}

@@ -11,14 +11,16 @@ const Routes = [
   {
     path: '/home',
     component: lazy(() => import('../../views/Home')),
+    private: true
   },
   {
     path: '/second-page',
     component: lazy(() => import('../../views/SecondPage')),
+    private: true
   },
   {
     path: '/login',
-    component: lazy(() => import('../../views/Auth/Login')),
+    component: lazy(() => import('../../views/auth/Login')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true,
@@ -26,7 +28,7 @@ const Routes = [
   },
   {
     path: '/register',
-    component: lazy(() => import('../../views/Auth/Register')),
+    component: lazy(() => import('../../views/auth/Register')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true,
