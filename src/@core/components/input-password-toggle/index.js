@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment, useState, forwardRef } from 'react'
 
 // ** Third Party Components
 import PropTypes from 'prop-types'
@@ -14,7 +14,7 @@ import {
   inputClassName,
 } from 'reactstrap'
 
-const InputPasswordToggle = (props) => {
+const InputPasswordToggle = (props, ref) => {
   // ** Props
   const {
     label,
@@ -52,8 +52,10 @@ const InputPasswordToggle = (props) => {
         })}
       >
         <Input
+          innerRef={ref}
           type={inputVisibility === false ? 'password' : 'text'}
           placeholder={placeholder ? placeholder : '············'}
+          {...props}
           className={classnames({
             [inputClassName]: inputClassName,
           })}
@@ -79,7 +81,7 @@ const InputPasswordToggle = (props) => {
   )
 }
 
-export default InputPasswordToggle
+export default forwardRef(InputPasswordToggle)
 
 // ** PropTypes
 InputPasswordToggle.propTypes = {

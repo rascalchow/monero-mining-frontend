@@ -38,9 +38,8 @@ import '@styles/base/core/menu/menu-types/vertical-overlay-menu.scss'
 
 const VerticalLayout = (props) => {
   // ** Props
-  const { children, navbar, footer, menu, routerProps, currentActiveItem } =
-    props
-
+  const { children, navbar, footer, menu, routerProps, currentActiveItem } = props
+    
   // ** Hooks
   const [skin, setSkin] = useSkin()
   const [isRtl, setIsRtl] = useRTL()
@@ -124,6 +123,7 @@ const VerticalLayout = (props) => {
   if (!isMounted) {
     return null
   }
+
   return (
     <div
       className={classnames(

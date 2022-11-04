@@ -1,7 +1,7 @@
 // ** Auth Endpoints
 export default {
-  loginEndpoint: '/jwt/login',
-  registerEndpoint: '/jwt/register',
+  loginEndpoint: 'http://localhost:4004/login',
+  registerEndpoint: 'http://localhost:4004/register',
   refreshEndpoint: '/jwt/refresh-token',
   logoutEndpoint: '/jwt/logout',
 

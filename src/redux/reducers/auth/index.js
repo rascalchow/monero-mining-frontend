@@ -1,9 +1,10 @@
 // **  Initial State
 const initialState = {
-  userData: {},
+  userData: null,
 }
 
 const authReducer = (state = initialState, action) => {
+
   switch (action.type) {
     case 'LOGIN':
       return {
@@ -17,7 +18,7 @@ const authReducer = (state = initialState, action) => {
     case 'LOGOUT':
       const obj = { ...action }
       delete obj.type
-      return { ...state, userData: {}, ...obj }
+      return { ...state, userData: null, ...obj }
     default:
       return state
   }
