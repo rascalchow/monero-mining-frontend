@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { axiosClient } from '../../services'
 import jwtDefaultConfig from './jwtDefaultConfig'
 
 export default class JwtService {
@@ -15,7 +15,7 @@ export default class JwtService {
     this.jwtConfig = { ...this.jwtConfig, ...jwtOverrideConfig }
 
     // ** Request Interceptor
-    axios.interceptors.request.use(
+    axiosClient.interceptors.request.use(
       (config) => {
         // ** Get token from localStorage
         const accessToken = this.getToken()
@@ -31,7 +31,7 @@ export default class JwtService {
     )
 
     // ** Add request/response interceptor
-    axios.interceptors.response.use(
+    axiosClient.interceptors.response.use(
       (response) => response,
       (error) => {
         // ** const { config, response: { status } } = error
@@ -95,15 +95,15 @@ export default class JwtService {
   }
 
   login(...args) {
-    return axios.post(this.jwtConfig.loginEndpoint, ...args)
+    return axiosClient.post(this.jwtConfig.loginEndpoint, ...args)
   }
 
   register(...args) {
-    return axios.post(this.jwtConfig.registerEndpoint, ...args)
+    return axiosClient.post(this.jwtConfig.registerEndpoint, ...args)
   }
 
   refreshToken() {
-    return axios.post(this.jwtConfig.refreshEndpoint, {
+    return axiosClient.post(this.jwtConfig.refreshEndpoint, {
       refreshToken: this.getRefreshToken(),
     })
   }

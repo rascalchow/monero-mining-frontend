@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react'
 import { useSkin } from '@hooks/useSkin'
 
 import { useDispatch } from 'react-redux'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { handleRegister } from '@store/actions/auth'
 import { Link, Redirect } from 'react-router-dom'
 import InputPasswordToggle from '@components/input-password-toggle'
@@ -16,18 +16,16 @@ import {
   CardTitle,
   CardText,
   FormGroup,
-  Label,
   Button,
   Form,
   Input,
   CustomInput,
-  FormFeedback,
   Alert,
 } from 'reactstrap'
 
 import _ from 'lodash'
 
-import '@styles/base/pages/page-auth.scss'
+import FormField from '@components/form-field'
 
 const Register = () => {
   const [skin] = useSkin()
@@ -125,7 +123,7 @@ const Register = () => {
   if (isSubmitSuccessful) {
     return <Redirect to="/login" />
   }
-  console.log(errors)
+
   return (
     <div className="auth-wrapper auth-v2">
       <Row className="auth-inner m-0">
@@ -222,222 +220,178 @@ const Register = () => {
               className="auth-register-form mt-2"
               onSubmit={handleSubmit(onSubmit)}
             >
-              <FormGroup>
-                <Label className="form-label">
-                  Full name
-                </Label>
-                <Controller
-                  name="name"
-                  control={control}
-                  render={({field}) => (
-                    <Input
-                      autoFocus
-                      type="text"
-                      placeholder="John Doe"
-                      invalid={!!errors.name}
-                      {...field}
-                    />
-                  )}
-                />
-                <FormFeedback>{errors.name && errors.name.message}</FormFeedback>
-              </FormGroup>
+              <FormField
+                label="Full Name"
+                name="name"
+                control={control}
+                error={errors.name}
+                render={({field}) => (
+                  <Input
+                    autoFocus
+                    type="text"
+                    placeholder="John Doe"
+                    invalid={!!errors.name}
+                    {...field}
+                  />
+                )}
+              />
               <Row>
                 <Col>
-                  <FormGroup>
-                    <Label className="form-label">
-                      Email
-                    </Label>
-                    <Controller
-                      name="email"
-                      control={control}
-                      render={({field})=> (
-                        <Input
-                          type="email"
-                          placeholder="john@example.com"
-                          invalid={!!errors.email}
-                          {...field}
-                        />
-                      )}
-                    />
-                    <FormFeedback>{errors.email && errors.email.message}</FormFeedback>
-                  </FormGroup>
+                  <FormField
+                    label="Email"
+                    name="email"
+                    control={control}
+                    error={errors.email}
+                    render={({field})=> (
+                      <Input
+                        type="email"
+                        placeholder="john@example.com"
+                        invalid={!!errors.email}
+                        {...field}
+                      />
+                    )}
+                  />
                 </Col>
                 <Col>
-                  <FormGroup>
-                    <Label className="form-label">
-                      Phone
-                    </Label>
-                    <Controller
-                      name="phone"
-                      control={control}
-                      render={({field})=> (
-                        <Input
-                          type="text"
-                          placeholder="(+1)555-5555-5555"
-                          invalid={!!errors.phone}
-                          {...field}
-                        />
-                      )}
-                    />
-                    <FormFeedback>{errors.phone && errors.phone.message}</FormFeedback>
-                  </FormGroup>
+                  <FormField
+                    label="Phone"
+                    name="phone"
+                    control={control}
+                    error={errors.phone}
+                    render={({field})=> (
+                      <Input
+                        type="text"
+                        placeholder="(+1)555-5555-5555"
+                        invalid={!!errors.phone}
+                        {...field}
+                      />
+                    )}
+                  />
                 </Col>
               </Row>
-              <FormGroup>
-                <Label className="form-label">
-                  Company name
-                </Label>
-                <Controller
-                  name="companyName"
-                  control={control}
-                  render={({field})=> (
-                    <Input
-                      type="text"
-                      placeholder="Nurev, LLC"
-                      invalid={!!errors.companyName}
-                      {...field}
-                    />
-                  )}
-                />
-                <FormFeedback>{errors.companyName && errors.companyName.message}</FormFeedback>
-              </FormGroup>
-              <FormGroup>
-                <Label className="form-label">
-                  Application
-                </Label>
-                <Controller
-                  name="application"
-                  control={control}
-                  render={({field})=> (
-                    <Input
-                      type="text"
-                      placeholder=""
-                      invalid={!!errors.application}
-                      {...field}
-                    />
-                  )}
-                />
-                <FormFeedback>{errors.application && errors.application.message}</FormFeedback>
-              </FormGroup>
+              <FormField
+                label="Company Name"
+                name="companyName"
+                control={control}
+                error={errors.name}
+                render={({field})=> (
+                  <Input
+                    type="text"
+                    placeholder="Nurev, LLC"
+                    invalid={!!errors.companyName}
+                    {...field}
+                  />
+                )}
+              />
+              <FormField
+                label="Application"
+                name="application"
+                control={control}
+                error={errors.application}
+                render={({field})=> (
+                  <Input
+                    type="text"
+                    placeholder="Nurev, LLC"
+                    invalid={!!errors.application}
+                    {...field}
+                  />
+                )}
+              />
               <Row>
                 <Col>
-                  <FormGroup>
-                    <Label className="form-label">
-                      Contact
-                    </Label>
-                    <Controller
-                      name="contact"
-                      control={control}
-                      render={({field})=> (
-                        <Input
-                          type="text"
-                          placeholder=""
-                          invalid={!!errors.contact}
-                          {...field}
-                        />
-                      )}
-                    />
-                    <FormFeedback>{errors.contact && errors.contact.message}</FormFeedback>
-                  </FormGroup>
+                  <FormField
+                    label="Contact"
+                    name="contact"
+                    control={control}
+                    error={errors.contact}
+                    render={({field})=> (
+                      <Input
+                        type="text"
+                        placeholder="Nurev, LLC"
+                        invalid={!!errors.contact}
+                        {...field}
+                      />
+                    )}
+                  />
                 </Col>
                 <Col>
-                  <FormGroup>
-                    <Label className="form-label">
-                      Country
-                    </Label>
-                    <Controller
-                      name="country"
-                      control={control}
-                      render={({field})=> (
-                        <Input
-                          type="text"
-                          placeholder=""
-                          invalid={!!errors.country}
-                          {...field}
-                        />
-                      )}
-                    />
-                    <FormFeedback>{errors.country && errors.country.message}</FormFeedback>
-                  </FormGroup>
+                  <FormField
+                    label="Coutry"
+                    name="country"
+                    control={control}
+                    error={errors.country}
+                    render={({field})=> (
+                      <Input
+                        type="text"
+                        placeholder="Nurev, LLC"
+                        invalid={!!errors.country}
+                        {...field}
+                      />
+                    )}
+                  />
                 </Col>
               </Row>
               <Row>
                 <Col>
-                  <FormGroup>
-                    <Label className="form-label">
-                      Instant Messenger
-                    </Label>
-                    <Controller
-                      name="instantMessenger"
-                      control={control}
-                      render={({field})=> (
-                        <Input
-                          type="text"
-                          placeholder=""
-                          {...field}
-                          invalid={!!errors.instantMessenger}
-                        />
-                      )}
-                    />
-                    <FormFeedback>{errors.instantMessenger && errors.instantMessenger.message}</FormFeedback>
-                  </FormGroup>
+                  <FormField
+                    label="Instant Messenger"
+                    name="instantMessenger"
+                    control={control}
+                    error={errors.instantMessenger}
+                    render={({field})=> (
+                      <Input
+                        type="text"
+                        placeholder=""
+                        {...field}
+                        invalid={!!errors.instantMessenger}
+                      />
+                    )}
+                  />
                 </Col>
                 <Col>
-                  <FormGroup>
-                    <Label className="form-label">
-                      Website
-                    </Label>
-                    <Controller
-                      name="website"
-                      control={control}
-                      render={({field})=> (
-                        <Input
-                          type="text"
-                          placeholder=""
-                          invalid={!!errors.website}
-                          {...field}
-                        />
-                      )}
-                    />
-                    <FormFeedback>{errors.website && errors.website.message}</FormFeedback>
-                  </FormGroup>
+                  <FormField
+                    label="Website"
+                    name="website"
+                    control={control}
+                    error={errors.website}
+                    render={({field})=> (
+                      <Input
+                        type="text"
+                        placeholder=""
+                        invalid={!!errors.website}
+                        {...field}
+                      />
+                    )}
+                  />
                 </Col>
               </Row>
-              <FormGroup>
-                <Label className="form-label">
-                  More Information
-                </Label>
-                <Controller
-                  name="moreInformation"
-                  control={control}
-                  render={({field})=> (
-                    <Input
-                      type="textarea"
-                      placeholder=""
-                      {...field}
-                      invalid={!!errors.moreInformation}
-                    />
-                  )}
-                />
-                <FormFeedback>{errors.moreInformation && errors.moreInformation.message}</FormFeedback>
-              </FormGroup>
-              <FormGroup>
-                <Label className="form-label" for="register-password">
-                  Password
-                </Label>
-                <Controller
-                  name="password"
-                  control={control}
-                  render={({field})=> (
-                    <InputPasswordToggle
-                      {...field}
-                      invalid={!!errors.password}
-                    >
-                    </InputPasswordToggle>
-                  )}
-                /> 
-                <FormFeedback>{errors.password && errors.password.message}</FormFeedback>
-              </FormGroup>
+              <FormField
+                label="More Information"
+                name="moreInformation"
+                control={control}
+                error={errors.moreInformation}
+                render={({field})=> (
+                  <Input
+                    type="textarea"
+                    placeholder=""
+                    {...field}
+                    invalid={!!errors.moreInformation}
+                  />
+                )}
+              />
+              <FormField
+                label="Password"
+                name="password"
+                control={control}
+                error={errors.password}
+                render={({field})=> (
+                  <InputPasswordToggle
+                    {...field}
+                    invalid={!!errors.password}
+                  >
+                  </InputPasswordToggle>
+                )}
+              /> 
               <FormGroup>
                 <CustomInput
                   type="checkbox"
@@ -449,7 +403,12 @@ const Register = () => {
                   className="custom-control-Primary"
                 />
               </FormGroup>
-              <Button.Ripple type="submit" block color="primary" disabled={!term}>
+              <Button.Ripple
+                type="submit"
+                block
+                color="primary"
+                disabled={!term}
+              >
                 { isSubmitting 
                   ? (
                     <Loader
