@@ -14,8 +14,13 @@ const Routes = [
     private: true
   },
   {
-    path: '/second-page',
-    component: lazy(() => import('../../views/SecondPage')),
+    path: '/user/list',
+    component: lazy(() => import('../../views/apps/user/list')),
+    private: true
+  },
+  {
+    path: '/user/view/:id',
+    component: lazy(() => import('../../views/apps/user/view')),
     private: true
   },
   {
