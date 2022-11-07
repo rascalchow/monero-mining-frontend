@@ -9,6 +9,8 @@ import { useSelector, useDispatch } from 'react-redux'
 // ** Reactstrap
 import { Row, Col, Alert } from 'reactstrap'
 
+import LoadingSpinner from '@components/spinner/Loading-spinner'
+
 // ** User View Components
 import PlanCard from './PlanCard'
 import UserInfoCard from './UserInfoCard'
@@ -30,7 +32,13 @@ const UserView = () => {
     dispatch(getUser(id))
   }, [dispatch])
 
-  return store.selectedUser !== null && store.selectedUser !== undefined ? (
+  if (store.isLoading) {
+    return <LoadingSpinner />
+  }
+
+  console.log(store.selectedUser)
+
+  return store.selectedUser ? (
     <div className="app-user-view">
       <Row>
         <Col xl="9" lg="8" md="7">
@@ -58,7 +66,7 @@ const UserView = () => {
     <Alert color="danger">
       <h4 className="alert-heading">User not found</h4>
       <div className="alert-body">
-        User with id: {id} doesn't exist. Check list of all Users:{' '}
+        User with id: {id} does not exist. Check list of all Users:{' '}
         <Link to="/apps/user/list">Users List</Link>
       </div>
     </Alert>

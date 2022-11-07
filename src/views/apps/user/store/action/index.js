@@ -1,19 +1,20 @@
 import axios from 'axios'
-import {
-  getUsers as getUsersApi,
-  getUser as getUserApi,
-} from '../axios'
+import { axiosClient } from '@src/@core/services'
 
 // ** Get data on page or row change
 export const getUsers = (params) => {
   return async (dispatch) => {
-    const res = await getUsersApi(params)
+    dispatch({
+      type: 'SET_LOADING',
+      payload: true,
+    })
+    const res = await axiosClient.get('/users', { params })
     dispatch({
       type: 'SET_USERS',
       payload: {
         data: res.docs,
         total: res.totalDocs,
-      }
+      },
     })
   }
 }
@@ -21,7 +22,11 @@ export const getUsers = (params) => {
 // ** Get User
 export const getUser = (id) => {
   return async (dispatch) => {
-    const res = await getUserApi(id)
+    dispatch({
+      type: 'SET_LOADING',
+      payload: true,
+    })
+    const res = await axiosClient.get(`/users/${id}`)
     dispatch({
       type: 'SET_USER',
       payload: res,
@@ -40,8 +45,7 @@ export const addUser = (user) => {
           payload: response,
         })
       })
-      .then(() => {
-      })
+      .then(() => {})
       .catch((err) => console.log(err))
   }
 }
@@ -54,10 +58,9 @@ export const deleteUser = (id) => {
       .then((response) => {
         dispatch({
           type: 'DELETE_USER',
-          payload: response
+          payload: response,
         })
       })
-      .then(() => {
-      })
+      .then(() => {})
   }
 }

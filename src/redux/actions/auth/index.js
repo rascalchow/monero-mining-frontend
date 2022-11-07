@@ -7,12 +7,11 @@ const jwt = useJwt
 // ** Handle User Login
 export const handleLogin = (data) => {
   return async (dispatch) => {
-    await new Promise((resolve)=>{setTimeout(()=>{resolve(true)}, 1000)})
     const res = await jwt.login(data)
 
     dispatch({
       type: 'LOGIN',
-      data:res.data.user,
+      data:res.user,
       config,
       [config.storageTokenKeyName]: data[config.storageTokenKeyName],
       [config.storageRefreshTokenKeyName]:
@@ -20,10 +19,10 @@ export const handleLogin = (data) => {
     })
 
     // ** Add to user, accessToken & refreshToken to localStorage
-    localStorage.setItem('userData', JSON.stringify(res.data.user))
+    localStorage.setItem('userData', JSON.stringify(res.user))
     localStorage.setItem(
       config.storageTokenKeyName,
-      res.data.token,
+      res.token,
     )
     localStorage.setItem(
       config.storageRefreshTokenKeyName,
@@ -34,7 +33,6 @@ export const handleLogin = (data) => {
 // ** Handle User Register
 export const handleRegister = (data) => {
   return async () => {
-    await new Promise((resolve)=>{setTimeout(()=>{resolve(true)}, 1000)})
     await jwt.register(data)
   }
 }

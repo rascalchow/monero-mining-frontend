@@ -1,7 +1,4 @@
-import {
-  useState,
-  useEffect,
-} from 'react'
+import { useState, useEffect } from 'react'
 
 import Proptypes from 'prop-types'
 
@@ -12,24 +9,11 @@ import { getUsers } from '../store/action'
 import { useDispatch, useSelector } from 'react-redux'
 
 // ** Third Party Components
-import Select from 'react-select'
 import ReactPaginate from 'react-paginate'
 import { ChevronDown } from 'react-feather'
 import DataTable from 'react-data-table-component'
-import { selectThemeColors } from '@utils'
 
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardBody,
-  Input,
-  Row,
-  Col,
-  Label,
-  CustomInput,
-  Button,
-} from 'reactstrap'
+import { Card, Input, Row, Col, Label, CustomInput, Button } from 'reactstrap'
 
 import Sidebar from './Sidebar'
 import { useSearchParams } from '@src/navigation'
@@ -37,32 +21,16 @@ import { useSearchParams } from '@src/navigation'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
-
-const roleOptions = [
-  { value: null, label: 'All' },
-  { value: 'admin', label: 'Admin' },
-  { value: 'publisher', label: 'Publisher' },
-]
-
-const statusOptions = [
-  { value: null, label: 'All' },
-  { value: 'pending', label: 'Pending' },
-  { value: 'active', label: 'Active' },
-  { value: 'inactive', label: 'Inactive' },
-]
-
-const CustomHeader = ({
-  sidebarOpen,
-  setSidebarOpen
-}) => {
+const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
   const [searchParams, setSearchParams] = useSearchParams()
+
   const onPageSizeChange = (e) => {
     setSearchParams(
       {
         limit: e.target.value,
-        page: 1
+        page: 1,
       },
-      true
+      true,
     )
   }
   return (
@@ -81,7 +49,7 @@ const CustomHeader = ({
                 backgroundPosition:
                   'calc(100% - 3px) 11px, calc(100% - 20px) 13px, 100% 0',
               }}
-              onChange = {onPageSizeChange}
+              onChange={onPageSizeChange}
               value={searchParams.get('limit')}
             >
               <option value="10">10</option>
@@ -104,12 +72,14 @@ const CustomHeader = ({
               className="ml-50 w-100"
               type="text"
               value={searchParams.get('search') || ''}
-              onChange={(e) => setSearchParams({'search': e.target.value})}
+              onChange={(e) => setSearchParams({ search: e.target.value })}
             />
           </div>
           <Button.Ripple
             color="primary"
-            onClick={()=>{setSidebarOpen(true)}}
+            onClick={() => {
+              setSidebarOpen(true)
+            }}
             disabled={sidebarOpen}
           >
             Add New User
@@ -122,22 +92,21 @@ const CustomHeader = ({
 
 CustomHeader.propTypes = {
   sidebarOpen: Proptypes.bool.isRequired,
-  setSidebarOpen: Proptypes.func.isRequired
+  setSidebarOpen: Proptypes.func.isRequired,
 }
 
 const UsersTable = () => {
   const dispatch = useDispatch()
+  const [searchParams] = useSearchParams()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const store = useSelector((state) => state.user)
-  
-  const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
     const limit = parseInt(searchParams.get('limit'))
     const query = {
       limit,
       page: parseInt(searchParams.get('page')),
-      filter: {}
+      filter: {},
     }
     if (searchParams.get('status')) {
       query.filter['status'] = searchParams.get('status')
@@ -150,12 +119,16 @@ const UsersTable = () => {
 
   const CustomPagination = () => {
     const [searchParams, setSearchParams] = useSearchParams()
-    const count = Number(Math.ceil(store.total / parseInt(searchParams.get('limit'))))
-    
+    const count = Number(
+      Math.ceil(store.total / parseInt(searchParams.get('limit'))),
+    )
+
     return (
       <ReactPaginate
-        forcePage={parseInt(searchParams.get('page')) -1}
-        onPageChange={(page)=>{setSearchParams({page: page.selected + 1})}}
+        forcePage={parseInt(searchParams.get('page')) - 1}
+        onPageChange={(page) => {
+          setSearchParams({ page: page.selected + 1 })
+        }}
         previousLabel={''}
         nextLabel={''}
         pageCount={count || 1}
@@ -175,46 +148,6 @@ const UsersTable = () => {
   return (
     <div className="users-list-page">
       <Card>
-        <CardHeader>
-          <CardTitle tag="h4">Search Filter</CardTitle>
-        </CardHeader>
-        <CardBody>
-          <Row>
-            <Col md="6">
-              <Select
-                isClearable={false}
-                theme={selectThemeColors}
-                className="react-select"
-                classNamePrefix="select"
-                options={roleOptions}
-                value={roleOptions.find(it=>it.value === searchParams.get('role'))}
-                placeholder="Select Role"
-                onChange={opt=>{setSearchParams({
-                  'role': opt.value,
-                  'page': 1,
-                })}}
-              />
-            </Col>
-            <Col md="6">
-              <Select
-                theme={selectThemeColors}
-                isClearable={false}
-                className="react-select"
-                classNamePrefix="select"
-                options={statusOptions}
-                value={statusOptions.find(it=>it.value === searchParams.get('status'))}
-                onChange={opt=>{setSearchParams({
-                  'status': opt.value,
-                  'page': 1
-                })}}
-                placeholder="Select Status"
-              />
-            </Col>
-          </Row>
-        </CardBody>
-      </Card>
-
-      <Card>
         <DataTable
           noHeader
           pagination
@@ -222,20 +155,26 @@ const UsersTable = () => {
           responsive
           paginationServer
           columns={columns}
+          progressPending={store.isLoading}
           sortIcon={<ChevronDown />}
           className="react-dataTable"
           paginationComponent={CustomPagination}
           data={store.data}
-          subHeaderComponent={(
+          subHeaderComponent={
             <CustomHeader
               sidebarOpen={sidebarOpen}
               setSidebarOpen={setSidebarOpen}
             />
-          )}
+          }
         />
       </Card>
 
-      <Sidebar open={sidebarOpen} toggleSidebar={()=>{setSidebarOpen(state=>!state)}} />
+      <Sidebar
+        open={sidebarOpen}
+        toggleSidebar={() => {
+          setSidebarOpen((state) => !state)
+        }}
+      />
     </div>
   )
 }
