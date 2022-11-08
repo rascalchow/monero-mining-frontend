@@ -5,17 +5,27 @@ import Proptypes from 'prop-types'
 import { columns } from './columns'
 
 // ** Store & Actions
-import { getUsers } from '../store/action'
-import { useDispatch, useSelector } from 'react-redux'
+
+import { useSelector } from 'react-redux'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { ChevronDown } from 'react-feather'
 import DataTable from 'react-data-table-component'
 
-import { Card, Input, Row, Col, Label, CustomInput, Button } from 'reactstrap'
+import {
+  Card,
+  Input,
+  Row,
+  Col,
+  Label,
+  CustomInput,
+  Button,
+  Spinner,
+} from 'reactstrap'
 
 import Sidebar from './Sidebar'
+
 import { useSearchParams } from '@src/navigation'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
@@ -33,6 +43,7 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
       true,
     )
   }
+
   return (
     <div className="invoice-list-table-header w-100 mr-1 ml-50 mt-2 mb-75">
       <Row>
@@ -96,26 +107,8 @@ CustomHeader.propTypes = {
 }
 
 const UsersTable = () => {
-  const dispatch = useDispatch()
-  const [searchParams] = useSearchParams()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const store = useSelector((state) => state.user)
-
-  useEffect(() => {
-    const limit = parseInt(searchParams.get('limit'))
-    const query = {
-      limit,
-      page: parseInt(searchParams.get('page')),
-      filter: {},
-    }
-    if (searchParams.get('status')) {
-      query.filter['status'] = searchParams.get('status')
-    }
-    if (searchParams.get('role')) {
-      query.filter['role'] = searchParams.get('role')
-    }
-    dispatch(getUsers(query))
-  }, [dispatch, searchParams.toString()])
 
   const CustomPagination = () => {
     const [searchParams, setSearchParams] = useSearchParams()
@@ -145,6 +138,7 @@ const UsersTable = () => {
       />
     )
   }
+
   return (
     <div className="users-list-page">
       <Card>
@@ -156,6 +150,11 @@ const UsersTable = () => {
           paginationServer
           columns={columns}
           progressPending={store.isLoading}
+          progressComponent={
+            <div className="table-loader-container">
+              <Spinner className="spinner" />
+            </div>
+          }
           sortIcon={<ChevronDown />}
           className="react-dataTable"
           paginationComponent={CustomPagination}

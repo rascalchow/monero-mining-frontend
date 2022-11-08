@@ -20,7 +20,6 @@ const InputPasswordToggle = (props, ref) => {
     label,
     hideIcon,
     showIcon,
-    visible,
     className,
     htmlFor,
     placeholder,
@@ -30,7 +29,7 @@ const InputPasswordToggle = (props, ref) => {
   } = props
 
   // ** State
-  const [inputVisibility, setInputVisibility] = useState(visible)
+  const [inputVisibility, setInputVisibility] = useState(false)
 
   // ** Renders Icon Based On Visibility
   const renderIcon = () => {

@@ -1,6 +1,11 @@
+import { BrowserRouter } from 'react-router-dom'
 // ** Router Import
-import Router from './router/Router'
+import Routes from './routes'
 
-const App = (props) => <Router />
+const App = () => (
+  <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
+    <Routes />
+  </BrowserRouter>
+)
 
 export default App

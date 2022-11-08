@@ -32,30 +32,27 @@ const Register = () => {
   const dispatch = useDispatch()
   const [fbMsg, setFbMsg] = useState(null)
   const [term, setTerm] = useState(false)
-  const schema = yup.object({
-    name: yup.string().required(),
-    email: yup.string().required().email(),
-    phone: yup.string().required(),
-    password: yup.string().required(),
-    companyName: yup.string().required(),
-    application: yup.string().required(),
-    contact: yup.string().required(),
-    country: yup.string().required(),
-    instantMessenger: yup.string().required(),
-    website: yup.string().required(),
-    moreInformation: yup.string().required(),
-  }).required()
+  const schema = yup
+    .object({
+      name: yup.string().required(),
+      email: yup.string().required().email(),
+      phone: yup.string().required(),
+      password: yup.string().required(),
+      companyName: yup.string().required(),
+      application: yup.string().required(),
+      contact: yup.string().required(),
+      country: yup.string().required(),
+      instantMessenger: yup.string().required(),
+      website: yup.string().required(),
+      moreInformation: yup.string().required(),
+    })
+    .required()
 
   const {
     control,
     handleSubmit,
     setError,
-    formState: {
-      isValid,
-      isSubmitting,
-      errors,
-      isSubmitSuccessful,
-    }
+    formState: { isValid, isSubmitting, errors, isSubmitSuccessful },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -69,8 +66,8 @@ const Register = () => {
       country: '',
       instantMessenger: '',
       website: '',
-      moreInformation: '',	
-    }
+      moreInformation: '',
+    },
   })
 
   const illustration =
@@ -101,17 +98,20 @@ const Register = () => {
         country: data.country,
         instantMessenger: data.instantMessenger,
         website: data.website,
-        moreInformation: data.moreInformation
-      }
+        moreInformation: data.moreInformation,
+      },
     }
-    try{
+    try {
       return await dispatch(handleRegister(formData))
     } catch (error) {
-      console.log({...error})
+      console.log({ ...error })
       if (error.isAxiosError) {
         if (error.response.status === 422) {
           if (error.response.data.errors.msg === 'EMAIL_ALREADY_EXISTS') {
-            setError('email', { type: 'custom', message: 'Email is already taken'})
+            setError('email', {
+              type: 'custom',
+              message: 'Email is already taken',
+            })
           } else {
             setFbMsg(_.get(error, 'response.data.errors.msg', 'Server Error'))
           }
@@ -213,7 +213,14 @@ const Register = () => {
             <CardText className="mb-2">
               Make your app management easy and fun!
             </CardText>
-            <Alert color="danger" isOpen={!!fbMsg} toggle={() => {setFbMsg(null)}} className="px-3 py-2">
+            <Alert
+              color="danger"
+              isOpen={!!fbMsg}
+              toggle={() => {
+                setFbMsg(null)
+              }}
+              className="px-3 py-2"
+            >
               Error occured while processing request!
             </Alert>
             <Form
@@ -225,7 +232,7 @@ const Register = () => {
                 name="name"
                 control={control}
                 error={errors.name}
-                render={({field}) => (
+                render={({ field }) => (
                   <Input
                     autoFocus
                     type="text"
@@ -242,7 +249,7 @@ const Register = () => {
                     name="email"
                     control={control}
                     error={errors.email}
-                    render={({field})=> (
+                    render={({ field }) => (
                       <Input
                         type="email"
                         placeholder="john@example.com"
@@ -258,7 +265,7 @@ const Register = () => {
                     name="phone"
                     control={control}
                     error={errors.phone}
-                    render={({field})=> (
+                    render={({ field }) => (
                       <Input
                         type="text"
                         placeholder="(+1)555-5555-5555"
@@ -274,7 +281,7 @@ const Register = () => {
                 name="companyName"
                 control={control}
                 error={errors.name}
-                render={({field})=> (
+                render={({ field }) => (
                   <Input
                     type="text"
                     placeholder="Nurev, LLC"
@@ -288,10 +295,10 @@ const Register = () => {
                 name="application"
                 control={control}
                 error={errors.application}
-                render={({field})=> (
+                render={({ field }) => (
                   <Input
                     type="text"
-                    placeholder="Nurev, LLC"
+                    placeholder="Application"
                     invalid={!!errors.application}
                     {...field}
                   />
@@ -304,10 +311,10 @@ const Register = () => {
                     name="contact"
                     control={control}
                     error={errors.contact}
-                    render={({field})=> (
+                    render={({ field }) => (
                       <Input
                         type="text"
-                        placeholder="Nurev, LLC"
+                        placeholder="Contact Info"
                         invalid={!!errors.contact}
                         {...field}
                       />
@@ -320,10 +327,10 @@ const Register = () => {
                     name="country"
                     control={control}
                     error={errors.country}
-                    render={({field})=> (
+                    render={({ field }) => (
                       <Input
                         type="text"
-                        placeholder="Nurev, LLC"
+                        placeholder="USA"
                         invalid={!!errors.country}
                         {...field}
                       />
@@ -338,7 +345,7 @@ const Register = () => {
                     name="instantMessenger"
                     control={control}
                     error={errors.instantMessenger}
-                    render={({field})=> (
+                    render={({ field }) => (
                       <Input
                         type="text"
                         placeholder=""
@@ -354,7 +361,7 @@ const Register = () => {
                     name="website"
                     control={control}
                     error={errors.website}
-                    render={({field})=> (
+                    render={({ field }) => (
                       <Input
                         type="text"
                         placeholder=""
@@ -370,7 +377,7 @@ const Register = () => {
                 name="moreInformation"
                 control={control}
                 error={errors.moreInformation}
-                render={({field})=> (
+                render={({ field }) => (
                   <Input
                     type="textarea"
                     placeholder=""
@@ -384,21 +391,22 @@ const Register = () => {
                 name="password"
                 control={control}
                 error={errors.password}
-                render={({field})=> (
+                render={({ field }) => (
                   <InputPasswordToggle
                     {...field}
                     invalid={!!errors.password}
-                  >
-                  </InputPasswordToggle>
+                  ></InputPasswordToggle>
                 )}
-              /> 
+              />
               <FormGroup>
                 <CustomInput
                   type="checkbox"
                   id="terms"
                   name="terms"
                   label={<Terms />}
-                  onChange={(e)=>{setTerm(e.target.value)}}
+                  onChange={(e) => {
+                    setTerm(e.target.value)
+                  }}
                   invalid={!isValid}
                   className="custom-control-Primary"
                 />
@@ -409,14 +417,11 @@ const Register = () => {
                 color="primary"
                 disabled={!term}
               >
-                { isSubmitting 
-                  ? (
-                    <Loader
-                      className="spinner"
-                      size={18}
-                    />
-                  ) : 'Sign up'
-                }
+                {isSubmitting ? (
+                  <Loader className="spinner" size={18} />
+                ) : (
+                  'Sign up'
+                )}
               </Button.Ripple>
             </Form>
             <p className="text-center mt-2">

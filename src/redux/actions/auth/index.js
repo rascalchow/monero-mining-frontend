@@ -11,7 +11,7 @@ export const handleLogin = (data) => {
 
     dispatch({
       type: 'LOGIN',
-      data:res.user,
+      data: res.user,
       config,
       [config.storageTokenKeyName]: data[config.storageTokenKeyName],
       [config.storageRefreshTokenKeyName]:
@@ -20,10 +20,7 @@ export const handleLogin = (data) => {
 
     // ** Add to user, accessToken & refreshToken to localStorage
     localStorage.setItem('userData', JSON.stringify(res.user))
-    localStorage.setItem(
-      config.storageTokenKeyName,
-      res.token,
-    )
+    localStorage.setItem(config.storageTokenKeyName, res.token)
     localStorage.setItem(
       config.storageRefreshTokenKeyName,
       JSON.stringify(data.refreshToken),
@@ -50,5 +47,34 @@ export const handleLogout = () => {
     localStorage.removeItem('userData')
     localStorage.removeItem(config.storageTokenKeyName)
     localStorage.removeItem(config.storageRefreshTokenKeyName)
+  }
+}
+
+export const handleRefreshToken = () => {
+  return async (dispatch) => {
+    try {
+      const data = await jwt.getUser()
+      dispatch({
+        type: 'SET_DATA',
+        payload: {
+          userData: data.user,
+          token: data.token,
+        },
+      })
+
+      // ** Add to user, accessToken & refreshToken to localStorage
+      localStorage.setItem('userData', JSON.stringify(data.user))
+      localStorage.setItem(config.storageTokenKeyName, data.token)
+    } catch (error) {
+      localStorage.setItem('userData')
+      localStorage.setItem(config.storageTokenKeyName)
+      dispatch({
+        type: 'SET_DATA',
+        payload: {
+          userData: null,
+          token: null,
+        },
+      })
+    }
   }
 }

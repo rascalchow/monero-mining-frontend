@@ -4,7 +4,6 @@ const initialState = {
 }
 
 const authReducer = (state = initialState, action) => {
-
   switch (action.type) {
     case 'LOGIN':
       return {
@@ -19,6 +18,11 @@ const authReducer = (state = initialState, action) => {
       const obj = { ...action }
       delete obj.type
       return { ...state, userData: null, ...obj }
+    case 'SET_DATA':
+      return {
+        ...state,
+        userData: action.payload.userData,
+      }
     default:
       return state
   }

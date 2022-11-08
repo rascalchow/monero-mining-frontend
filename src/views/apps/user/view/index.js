@@ -36,8 +36,6 @@ const UserView = () => {
     return <LoadingSpinner />
   }
 
-  console.log(store.selectedUser)
-
   return store.selectedUser ? (
     <div className="app-user-view">
       <Row>

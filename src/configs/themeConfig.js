@@ -3,8 +3,8 @@
 //Template config options
 const themeConfig = {
   app: {
-    appName: 'Vuexy',
-    appLogoImage: require('@src/assets/images/logo/logo.svg').default,
+    appName: 'Nurev',
+    appLogoImage: require('@src/assets/images/logo/nurev_logo.jpeg').default,
   },
   layout: {
     isRTL: false,

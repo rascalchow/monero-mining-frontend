@@ -107,4 +107,7 @@ export default class JwtService {
       refreshToken: this.getRefreshToken(),
     })
   }
+  getUser() {
+    return axiosClient.get(this.jwtConfig.loadUserEndpoint)
+  }
 }

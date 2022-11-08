@@ -45,6 +45,10 @@ const ThemeContext = ({ children }) => {
           light: getHex('--dark').concat('1a'),
           main: getHex('--dark'),
         },
+        main: {
+          light: '#283046',
+          main: 'white',
+        },
       }
 
       setColors({ ...obj })
