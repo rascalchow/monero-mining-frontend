@@ -1,4 +1,6 @@
 // ** Vertical Menu Components
+import { useSelector } from 'react-redux'
+import _ from 'lodash'
 import VerticalNavMenuLink from './VerticalNavMenuLink'
 import VerticalNavMenuGroup from './VerticalNavMenuGroup'
 import VerticalNavMenuSectionHeader from './VerticalNavMenuSectionHeader'
@@ -8,6 +10,8 @@ import { resolveVerticalNavMenuItemComponent as resolveNavItemComponent } from '
 
 const VerticalMenuNavItems = (props) => {
   // ** Components Object
+
+  const userData = useSelector((state) => state.auth.userData)
   const Components = {
     VerticalNavMenuSectionHeader,
     VerticalNavMenuGroup,
@@ -15,11 +19,23 @@ const VerticalMenuNavItems = (props) => {
   }
 
   // ** Render Nav Menu Items
-  const RenderNavItems = props.items.map((item, index) => {
-    const TagName = Components[resolveNavItemComponent(item)]
 
-    return <TagName key={item.id || item.header} item={item} {...props} />
-  })
+  const RenderNavItems = []
+  if (userData) {
+    props.items.forEach((item) => {
+      if (
+        item.restrictedTo &&
+        !_.get(item.restrictedTo, 'role', []).includes(userData.role)
+      ) {
+        return
+      }
+      const TagName = Components[resolveNavItemComponent(item)]
+
+      RenderNavItems.push(
+        <TagName key={item.id || item.header} item={item} {...props} />,
+      )
+    })
+  }
 
   return RenderNavItems
 }

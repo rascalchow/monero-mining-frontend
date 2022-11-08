@@ -16,17 +16,20 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid #283046;
+  border-top: 1px solid #ededed;
   .spinner {
     color: #283046;
   }
 }
 .dark-layout {
   .table-loader-container {
-    border-top: 1px solid white;
+    border-top: 1px solid #3b4253;
     background-color: #283046;
     .spinner {
-      color: white;
+      color: #7961f9;
     }
   }
+}
+.mr-0\.5 {
+  margin-right: 4px;
 }

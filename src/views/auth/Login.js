@@ -19,45 +19,49 @@ import {
 } from 'reactstrap'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-
+import _ from 'lodash'
 import FormField from '@components/form-field'
 
-import { handleLogin } from '@store/actions/auth' 
-
+import { handleLogin } from '@store/actions/auth'
 
 const Login = () => {
   const [skin] = useSkin()
   const [fb, setFb] = useState(null)
-  const authedUser = useSelector(state => state.auth.userData)
-  const schema = yup.object({
-    email: yup.string().required().email(),
-    password: yup.string().required(),
-  }).required()
+  const authedUser = useSelector((state) => state.auth.userData)
+  const schema = yup
+    .object({
+      email: yup.string().required().email(),
+      password: yup.string().required(),
+    })
+    .required()
   const {
     control,
     handleSubmit,
-    formState: {
-      isSubmitting,
-      errors,
-      isValid
-    }
+    formState: { isSubmitting, errors, isValid },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       email: '',
       password: '',
-    }
+    },
   })
 
   const dispatch = useDispatch()
   const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg'
   const source = require(`@src/assets/images/pages/${illustration}`).default
-  
+
   const onSubmit = async (data) => {
     try {
       await dispatch(handleLogin(data))
     } catch (error) {
-      setFb('Email or password incorrect')
+      if (
+        error.status === 401 &&
+        _.get(error, 'data.errors.msg', '') === 'USER_IS_NOT_APPROVED'
+      ) {
+        setFb('Please wait until you are approved')
+      } else {
+        setFb('Email or password incorrect')
+      }
     }
   }
 
@@ -154,8 +158,15 @@ const Login = () => {
             <CardText className="mb-2">
               Please sign-in to your account and start the adventure
             </CardText>
-            <Alert color="danger" isOpen={!!fb} toggle={() => {setFb(null)}} className="px-3 py-2">
-              Email or password incorrect!
+            <Alert
+              color="danger"
+              isOpen={!!fb}
+              toggle={() => {
+                setFb(null)
+              }}
+              className="px-3 py-2"
+            >
+              {fb}
             </Alert>
             <Form
               className="auth-login-form mt-2"
@@ -166,7 +177,7 @@ const Login = () => {
                 name="email"
                 control={control}
                 error={errors.email}
-                render={({field})=> (
+                render={({ field }) => (
                   <Input
                     type="email"
                     placeholder="john@example.com"
@@ -181,7 +192,7 @@ const Login = () => {
                 name="password"
                 control={control}
                 error={errors.password}
-                render={({field}) => (
+                render={({ field }) => (
                   <InputPasswordToggle
                     className="input-group-merge"
                     {...field}
@@ -203,13 +214,11 @@ const Login = () => {
                 block
                 disabled={!isValid}
               >
-                { isSubmitting 
-                ? (
-                  <Loader
-                    className="spinner"
-                    size={18}
-                  />
-                ) : 'Sign in'}
+                {isSubmitting ? (
+                  <Loader className="spinner" size={18} />
+                ) : (
+                  'Sign in'
+                )}
               </Button.Ripple>
             </Form>
             <p className="text-center mt-2">

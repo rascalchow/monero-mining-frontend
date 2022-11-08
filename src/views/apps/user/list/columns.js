@@ -11,7 +11,7 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
 } from 'reactstrap'
 import {
   Edit2,
@@ -24,16 +24,15 @@ import {
 } from 'react-feather'
 import _ from 'lodash'
 
-
 const renderRole = (row) => {
   const roleObj = {
     publisher: {
       class: 'text-primary',
-      icon: UserX
+      icon: UserX,
     },
     admin: {
       class: 'text-success',
-      icon: UserCheck
+      icon: UserCheck,
     },
   }
 
@@ -53,7 +52,7 @@ const renderRole = (row) => {
 const statusObj = {
   pending: 'light-warning',
   active: 'light-success',
-  inactive: 'light-secondary'
+  inactive: 'light-secondary',
 }
 
 export const columns = [
@@ -62,26 +61,26 @@ export const columns = [
     minWidth: '180px',
     selector: 'name',
     sortable: true,
-    cell: (row) => <Link to={`/user/view/${row._id}`}>{row['name']}</Link>
+    cell: (row) => <Link to={`/user/view/${row._id}`}>{row['name']}</Link>,
   },
   {
     name: 'Email',
     minWidth: '220px',
     sortable: true,
-    cell: (row) => row.email
+    cell: (row) => row.email,
   },
   {
     name: 'Company',
     minWidth: '270px',
     sortable: true,
-    cell: (row) => _.get(row, 'userProfileId.companyName', '')
+    cell: (row) => _.get(row, 'userProfileId.companyName', ''),
   },
   {
     name: 'Role',
     minWidth: '172px',
     selector: 'role',
     sortable: true,
-    cell: (row) => renderRole(row)
+    cell: (row) => renderRole(row),
   },
   {
     name: 'Status',
@@ -92,7 +91,7 @@ export const columns = [
       <Badge className="text-capitalize" color={statusObj[row.status]} pill>
         {row.status}
       </Badge>
-    )
+    ),
   },
   {
     name: 'Actions',
@@ -105,7 +104,7 @@ export const columns = [
         <DropdownMenu right>
           <DropdownItem
             tag={Link}
-            to={`/apps/user/view/${row.id}`}
+            to={`/user/view/${row.id}`}
             className="w-100"
             onClick={() => store.dispatch(getUser(row.id))}
           >
@@ -130,6 +129,6 @@ export const columns = [
           </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
-    )
-  }
+    ),
+  },
 ]

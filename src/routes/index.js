@@ -1,6 +1,6 @@
 // ** React Imports
 import { Suspense, lazy, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 // ** Utils
 import { isUserLoggedIn } from '@utils'
 import { useLayout } from '@hooks/useLayout'
@@ -27,7 +27,7 @@ const Router = () => {
   // ** Hooks
   const [layout, setLayout] = useLayout()
   const [transition, setTransition] = useRouterTransition()
-
+  const userData = useSelector((state) => state.auth.userData)
   const dispatch = useDispatch()
 
   // ** Default Layout
@@ -198,14 +198,6 @@ const Router = () => {
 
   return (
     <Switch>
-      {/* If user is logged in Redirect user to DefaultRoute else to login */}
-      {/* <Route
-          exact
-          path='/'
-          render={() => {
-            return isUserLoggedIn() ? <Redirect to={DefaultRoute} /> : <Redirect to='/login' />
-          }}
-        /> */}
       <Route
         exact
         path="/"
@@ -217,7 +209,7 @@ const Router = () => {
       <Route
         exact
         path="/not-authorized"
-        render={(props) => (
+        render={() => (
           <Layouts.BlankLayout>
             <NotAuthorized />
           </Layouts.BlankLayout>

@@ -1,4 +1,4 @@
-import { Mail, Home, Users } from 'react-feather'
+import { Home, Users } from 'react-feather'
 
 export default [
   {
@@ -12,5 +12,6 @@ export default [
     title: 'Users',
     icon: <Users size={20} />,
     navLink: '/user/list',
+    restrictedTo: { role: ['admin'] },
   },
 ]

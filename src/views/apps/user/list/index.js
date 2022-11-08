@@ -1,6 +1,6 @@
 import { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation, Redirect } from 'react-router-dom'
+import { useLocation, Redirect, useHistory } from 'react-router-dom'
 import { Row, Col, Card, CardBody } from 'reactstrap'
 
 import { User } from 'react-feather'
@@ -10,28 +10,37 @@ import Avatar from '@components/avatar'
 import UsersTable from './Table'
 import { useSearchParams } from '@src/navigation'
 import { getUsers } from '../store/action'
+import Filter from './Filter'
 
 const UserList = () => {
   const [searchParams] = useSearchParams()
   const location = useLocation()
   const totalUsers = useSelector((state) => state.user.total)
   const dispatch = useDispatch()
+  const history = useHistory()
 
   useEffect(() => {
-    const limit = parseInt(searchParams.get('limit'))
-    const page = parseInt(searchParams.get('page'))
-    const query = {
-      limit,
-      page,
-      filter: {},
+    const fetchData = async () => {
+      const limit = parseInt(searchParams.get('limit'))
+      const page = parseInt(searchParams.get('page'))
+      const query = {
+        limit,
+        page,
+        filter: {},
+      }
+      if (searchParams.get('status')) {
+        query.filter['status'] = searchParams.get('status')
+      }
+      if (searchParams.get('role')) {
+        query.filter['role'] = searchParams.get('role')
+      }
+      try {
+        await dispatch(getUsers(query))
+      } catch (error) {
+        history.push('/not-authorized')
+      }
     }
-    if (searchParams.get('status')) {
-      query.filter['status'] = searchParams.get('status')
-    }
-    if (searchParams.get('role')) {
-      query.filter['role'] = searchParams.get('role')
-    }
-    dispatch(getUsers(query))
+    fetchData()
   }, [dispatch, searchParams.toString()])
 
   if (searchParams.get('limit') === null || searchParams.get('page') === null) {
@@ -110,6 +119,11 @@ const UserList = () => {
               </CardBody>
             </Card>
           </Col> */}
+        </Row>
+        <Row>
+          <Col>
+            <Filter />
+          </Col>
         </Row>
         <UsersTable />
       </Fragment>

@@ -19,6 +19,11 @@ const usersReducer = (state = initialState, action) => {
       return { ...state, selectedUser: action.payload, isLoading: false }
     case 'SET_LOADING':
       return { ...state, isLoading: action.payload }
+    case 'SET_USER_STATUS':
+      return {
+        ...state,
+        selectedUser: { ...state.selectedUser, status: action.payload.status },
+      }
     default:
       return state
   }

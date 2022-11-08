@@ -4,33 +4,53 @@ import { axiosClient } from '@src/@core/services'
 // ** Get data on page or row change
 export const getUsers = (params) => {
   return async (dispatch) => {
-    dispatch({
-      type: 'SET_LOADING',
-      payload: true,
-    })
-    const res = await axiosClient.get('/users', { params })
-    dispatch({
-      type: 'SET_USERS',
-      payload: {
-        data: res.docs,
-        total: res.totalDocs,
-      },
-    })
+    try {
+      dispatch({
+        type: 'SET_LOADING',
+        payload: true,
+      })
+      const res = await axiosClient.get('/users', { params })
+      dispatch({
+        type: 'SET_USERS',
+        payload: {
+          data: res.docs,
+          total: res.totalDocs,
+        },
+      })
+    } catch (error) {
+      dispatch({
+        type: 'SET_LOADING',
+        payload: false,
+      })
+      throw error
+    }
   }
 }
 
 // ** Get User
 export const getUser = (id) => {
   return async (dispatch) => {
-    dispatch({
-      type: 'SET_LOADING',
-      payload: true,
-    })
-    const res = await axiosClient.get(`/users/${id}`)
-    dispatch({
-      type: 'SET_USER',
-      payload: res,
-    })
+    try {
+      dispatch({
+        type: 'SET_LOADING',
+        payload: true,
+      })
+      const res = await axiosClient.get(`/users/${id}`)
+      dispatch({
+        type: 'SET_USER',
+        payload: res,
+      })
+    } catch (error) {
+      dispatch({
+        type: 'SET_LOADING',
+        payload: false,
+      })
+      dispatch({
+        type: 'SET_USER',
+        payload: null,
+      })
+      throw error
+    }
   }
 }
 
@@ -63,4 +83,23 @@ export const deleteUser = (id) => {
       })
       .then(() => {})
   }
+}
+
+// **Approve user
+export const approveUser = (id) => async (dispatch) => {
+  const res = await axiosClient.post(`/users/${id}/approve`)
+  dispatch({
+    type: 'SET_USER_STATUS',
+    payload: res,
+  })
+  return res
+}
+
+export const rejectUser = (id) => async (dispatch) => {
+  const res = await axiosClient.post(`/users/${id}/reject`)
+  dispatch({
+    type: 'SET_USER_STATUS',
+    payload: res,
+  })
+  return res
 }

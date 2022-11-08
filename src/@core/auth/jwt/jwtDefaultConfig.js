@@ -2,7 +2,7 @@
 export default {
   loginEndpoint: '/login',
   registerEndpoint: '/register',
-  refreshEndpoint: '/refresh-token',
+  refreshEndpoint: '/token',
   logoutEndpoint: '/jwt/logout',
   loadUserEndpoint: '/token',
 

@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
 // ** Store & Actions
@@ -12,62 +12,53 @@ import { Row, Col, Alert } from 'reactstrap'
 import LoadingSpinner from '@components/spinner/Loading-spinner'
 
 // ** User View Components
-import PlanCard from './PlanCard'
 import UserInfoCard from './UserInfoCard'
-import UserTimeline from './UserTimeline'
-import InvoiceList from '../../invoice/list'
-import PermissionsTable from './PermissionsTable'
-
-// ** Styles
 import '@styles/react/apps/app-users.scss'
 
 const UserView = () => {
   // ** Vars
-  const store = useSelector((state) => state.user),
-    dispatch = useDispatch(),
-    { id } = useParams()
+  const store = useSelector((state) => state.user)
+  const [error, setError] = useState(0)
+  const dispatch = useDispatch()
+  const { id } = useParams()
 
   // ** Get suer on mount
   useEffect(() => {
-    dispatch(getUser(id))
+    const fetchData = async () => {
+      try {
+        await dispatch(getUser(id))
+      } catch (error) {
+        setError(error.status)
+      }
+    }
+    fetchData()
   }, [dispatch])
 
   if (store.isLoading) {
     return <LoadingSpinner />
   }
 
-  return store.selectedUser ? (
-    <div className="app-user-view">
-      <Row>
-        <Col xl="9" lg="8" md="7">
-          <UserInfoCard />
-        </Col>
-        <Col xl="3" lg="4" md="5">
-          <PlanCard selectedUser={store.selectedUser} />
-        </Col>
-      </Row>
-      <Row>
-        <Col md="6">
-          <UserTimeline />
-        </Col>
-        <Col md="6">
-          <PermissionsTable />
-        </Col>
-      </Row>
-      <Row>
-        <Col sm="12">
-          <InvoiceList />
-        </Col>
-      </Row>
-    </div>
-  ) : (
-    <Alert color="danger">
-      <h4 className="alert-heading">User not found</h4>
-      <div className="alert-body">
-        User with id: {id} does not exist. Check list of all Users:{' '}
-        <Link to="/apps/user/list">Users List</Link>
-      </div>
-    </Alert>
+  return (
+    <>
+      {store.selectedUser && (
+        <div className="app-user-view">
+          <Row>
+            <Col xl="6" lg="8" md="12">
+              <UserInfoCard />
+            </Col>
+          </Row>
+        </div>
+      )}
+      {error !== 0 && (
+        <Alert color="danger">
+          <h4 className="alert-heading">User not found</h4>
+          <div className="alert-body">
+            User with id: {id} does not exist. Check list of all Users:{' '}
+            <Link to="/user/list">Users List</Link>
+          </div>
+        </Alert>
+      )}
+    </>
   )
 }
 export default UserView
