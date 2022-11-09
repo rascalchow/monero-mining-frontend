@@ -1,12 +1,8 @@
 // ** React Imports
 import { useEffect, useState } from 'react'
 
-// ** Custom Hooks
-import { useSkin } from '@hooks/useSkin'
-
 const BlankLayout = ({ children, ...rest }) => {
   // ** Hooks
-  const [skin, setSkin] = useSkin()
 
   // ** States
   const [isMounted, setIsMounted] = useState(false)

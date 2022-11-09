@@ -1,6 +1,6 @@
 // ** React Imports
 import { Suspense, lazy, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 // ** Utils
 import { isUserLoggedIn } from '@utils'
 import { useLayout } from '@hooks/useLayout'
@@ -27,7 +27,6 @@ const Router = () => {
   // ** Hooks
   const [layout, setLayout] = useLayout()
   const [transition, setTransition] = useRouterTransition()
-  const userData = useSelector((state) => state.auth.userData)
   const dispatch = useDispatch()
 
   // ** Default Layout
