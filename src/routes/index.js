@@ -193,7 +193,9 @@ const Router = () => {
     })
   }
   useEffect(() => {
-    dispatch(handleRefreshToken())
+    if (isUserLoggedIn()) {
+      dispatch(handleRefreshToken())
+    }
   }, [])
 
   return (
