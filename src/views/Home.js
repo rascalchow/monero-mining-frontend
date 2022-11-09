@@ -8,7 +8,7 @@ const Home = () => {
   if (userData === null) {
     return <LoadingSpinner />
   }
-
+  console.log(userData)
   return (
     <div>
       <Card>

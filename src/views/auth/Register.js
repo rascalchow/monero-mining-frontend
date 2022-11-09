@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react'
 import { useSkin } from '@hooks/useSkin'
 
 import { useDispatch } from 'react-redux'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { handleRegister } from '@store/actions/auth'
 import { Link, Redirect } from 'react-router-dom'
 import InputPasswordToggle from '@components/input-password-toggle'
@@ -23,9 +23,13 @@ import {
   Alert,
 } from 'reactstrap'
 
+import ReactSelect from 'react-select'
+
 import _ from 'lodash'
 
+import { selectThemeColors } from '@utils'
 import FormField from '@components/form-field'
+import { COUTRIES, PHONE_REGEX } from '@src/constants'
 
 const Register = () => {
   const [skin] = useSkin()
@@ -36,12 +40,15 @@ const Register = () => {
     .object({
       name: yup.string().required(),
       email: yup.string().required().email(),
-      phone: yup.string().required(),
+      phone: yup
+        .string()
+        .matches(PHONE_REGEX, 'Not a valid phone number')
+        .required(),
       password: yup.string().required(),
       companyName: yup.string().required(),
       application: yup.string().required(),
       contact: yup.string().required(),
-      country: yup.string().required(),
+      country: yup.object().required(),
       instantMessenger: yup.string().required(),
       website: yup.string().required(),
       moreInformation: yup.string().required(),
@@ -63,7 +70,6 @@ const Register = () => {
       companyName: '',
       application: '',
       contact: '',
-      country: '',
       instantMessenger: '',
       website: '',
       moreInformation: '',
@@ -95,7 +101,7 @@ const Register = () => {
         companyName: data.companyName,
         application: data.application,
         contact: data.contact,
-        country: data.country,
+        country: data.country.value,
         instantMessenger: data.instantMessenger,
         website: data.website,
         moreInformation: data.moreInformation,
@@ -104,7 +110,6 @@ const Register = () => {
     try {
       return await dispatch(handleRegister(formData))
     } catch (error) {
-      console.log({ ...error })
       if (error.isAxiosError) {
         if (error.response.status === 422) {
           if (error.response.data.errors.msg === 'EMAIL_ALREADY_EXISTS') {
@@ -328,10 +333,18 @@ const Register = () => {
                     control={control}
                     error={errors.country}
                     render={({ field }) => (
-                      <Input
-                        type="text"
-                        placeholder="USA"
-                        invalid={!!errors.country}
+                      <ReactSelect
+                        isClearable={false}
+                        theme={selectThemeColors}
+                        className={`react-select rounded${
+                          !!errors.country && ' border-danger'
+                        }`}
+                        classNamePrefix="select"
+                        options={COUTRIES.map((it) => ({
+                          label: it.name,
+                          value: it.code,
+                        }))}
+                        placeholder="Select Country"
                         {...field}
                       />
                     )}

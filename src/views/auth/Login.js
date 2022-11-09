@@ -37,7 +37,7 @@ const Login = () => {
   const {
     control,
     handleSubmit,
-    formState: { isSubmitting, errors, isValid },
+    formState: { isSubmitting, errors },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -208,12 +208,7 @@ const Login = () => {
                   label="Remember Me"
                 />
               </FormGroup>
-              <Button.Ripple
-                type="submit"
-                color="primary"
-                block
-                disabled={!isValid}
-              >
+              <Button.Ripple type="submit" color="primary" block>
                 {isSubmitting ? (
                   <Loader className="spinner" size={18} />
                 ) : (
