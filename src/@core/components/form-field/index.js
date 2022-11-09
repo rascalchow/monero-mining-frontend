@@ -1,29 +1,13 @@
 import { Controller } from 'react-hook-form'
 import Proptypes from 'prop-types'
-import {
-  FormGroup,
-  Label,
-  FormFeedback,
-} from 'reactstrap'
+import { FormGroup, Label, FormText } from 'reactstrap'
 
-const FormField = ({
-  name,
-  label,
-  error,
-  render,
-  control,
-}) => {
+const FormField = ({ name, label, error, render, control }) => {
   return (
     <FormGroup>
-      <Label className="form-label">
-        {label}
-      </Label>
-      <Controller
-        name={name}
-        control={control}
-        render={render}
-      />
-      <FormFeedback>{error && error.message}</FormFeedback>
+      <Label className="form-label">{label}</Label>
+      <Controller name={name} control={control} render={render} />
+      <FormText color="danger">{error && error.message}</FormText>
     </FormGroup>
   )
 }
@@ -35,5 +19,5 @@ FormField.propTypes = {
   label: Proptypes.string.isRequired,
   error: Proptypes.object,
   control: Proptypes.any.isRequired,
-  render: Proptypes.func
+  render: Proptypes.func,
 }

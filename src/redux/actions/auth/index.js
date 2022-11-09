@@ -7,34 +7,34 @@ const jwt = useJwt
 // ** Handle User Login
 export const handleLogin = (data) => {
   return async (dispatch) => {
-    await new Promise((resolve)=>{setTimeout(()=>{resolve(true)}, 1000)})
-    const res = await jwt.login(data)
+    try {
+      const res = await jwt.login(data)
+      dispatch({
+        type: 'LOGIN',
+        data: res.user,
+        config,
+        [config.storageTokenKeyName]: data[config.storageTokenKeyName],
+        [config.storageRefreshTokenKeyName]:
+          data[config.storageRefreshTokenKeyName],
+      })
 
-    dispatch({
-      type: 'LOGIN',
-      data:res.data.user,
-      config,
-      [config.storageTokenKeyName]: data[config.storageTokenKeyName],
-      [config.storageRefreshTokenKeyName]:
-        data[config.storageRefreshTokenKeyName],
-    })
-
-    // ** Add to user, accessToken & refreshToken to localStorage
-    localStorage.setItem('userData', JSON.stringify(res.data.user))
-    localStorage.setItem(
-      config.storageTokenKeyName,
-      res.data.token,
-    )
-    localStorage.setItem(
-      config.storageRefreshTokenKeyName,
-      JSON.stringify(data.refreshToken),
-    )
+      // ** Add to user, accessToken & refreshToken to localStorage
+      localStorage.setItem('userData', JSON.stringify(res.user))
+      localStorage.setItem(config.storageTokenKeyName, res.token)
+      localStorage.setItem(
+        config.storageRefreshTokenKeyName,
+        JSON.stringify(data.refreshToken),
+      )
+    } catch (error) {
+      localStorage.removeItem('userData')
+      localStorage.removeItem(config.storageTokenKeyName)
+      throw error
+    }
   }
 }
 // ** Handle User Register
 export const handleRegister = (data) => {
   return async () => {
-    await new Promise((resolve)=>{setTimeout(()=>{resolve(true)}, 1000)})
     await jwt.register(data)
   }
 }
@@ -52,5 +52,34 @@ export const handleLogout = () => {
     localStorage.removeItem('userData')
     localStorage.removeItem(config.storageTokenKeyName)
     localStorage.removeItem(config.storageRefreshTokenKeyName)
+  }
+}
+
+export const handleRefreshToken = () => {
+  return async (dispatch) => {
+    try {
+      const data = await jwt.getUser()
+      dispatch({
+        type: 'SET_DATA',
+        payload: {
+          userData: data.user,
+          token: data.token,
+        },
+      })
+
+      // ** Add to user, accessToken & refreshToken to localStorage
+      localStorage.setItem('userData', JSON.stringify(data.user))
+      localStorage.setItem(config.storageTokenKeyName, data.token)
+    } catch (error) {
+      localStorage.removeItem('userData')
+      localStorage.removeItem(config.storageTokenKeyName)
+      dispatch({
+        type: 'SET_DATA',
+        payload: {
+          userData: null,
+          token: null,
+        },
+      })
+    }
   }
 }

@@ -1,10 +1,9 @@
 // ** React Imports
-import { Suspense, useContext, lazy } from 'react';
-import { useSelector } from 'react-redux';
+import { Suspense, lazy, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 // ** Utils
 import { isUserLoggedIn } from '@utils'
 import { useLayout } from '@hooks/useLayout'
-import { AbilityContext } from '@src/utility/context/Can'
 import { useRouterTransition } from '@hooks/useRouterTransition'
 
 // ** Custom Components
@@ -12,12 +11,7 @@ import { useRouterTransition } from '@hooks/useRouterTransition'
 import LayoutWrapper from '@layouts/components/layout-wrapper'
 
 // ** Router Components
-import {
-  BrowserRouter as AppRouter,
-  Route,
-  Switch,
-  Redirect,
-} from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 // ** Routes & Default Routes
 import { DefaultRoute, Routes } from './routes'
@@ -27,15 +21,13 @@ import BlankLayout from '@layouts/BlankLayout'
 import VerticalLayout from '@src/layouts/VerticalLayout'
 import HorizontalLayout from '@src/layouts/HorizontalLayout'
 
+import { handleRefreshToken } from '../redux/actions/auth'
+
 const Router = () => {
   // ** Hooks
   const [layout, setLayout] = useLayout()
   const [transition, setTransition] = useRouterTransition()
-
-  const authedUser = useSelector(state => state.auth.userData)
-
-  // ** ACL Ability Context
-  const ability = useContext(AbilityContext)
+  const dispatch = useDispatch()
 
   // ** Default Layout
   const DefaultLayout =
@@ -76,42 +68,42 @@ const Router = () => {
   /**
    ** Final Route Component Checks for Login & User Role and then redirects to the route
    */
-  const FinalRoute = (props) => {
-    const route = props.route
-    let action, resource
+  // const FinalRoute = (props) => {
+  //   const route = props.route
+  //   let action, resource
 
-    // ** Assign vars based on route meta
-    if (route.meta) {
-      action = route.meta.action ? route.meta.action : null
-      resource = route.meta.resource ? route.meta.resource : null
-    }
+  //   // ** Assign vars based on route meta
+  //   if (route.meta) {
+  //     action = route.meta.action ? route.meta.action : null
+  //     resource = route.meta.resource ? route.meta.resource : null
+  //   }
 
-    if (
-      (!isUserLoggedIn() && route.meta === undefined) ||
-      (!isUserLoggedIn() &&
-        route.meta &&
-        !route.meta.authRoute &&
-        !route.meta.publicRoute)
-    ) {
-      /**
-       ** If user is not Logged in & route meta is undefined
-       ** OR
-       ** If user is not Logged in & route.meta.authRoute, !route.meta.publicRoute are undefined
-       ** Then redirect user to login
-       */
+  //   if (
+  //     (!isUserLoggedIn() && route.meta === undefined) ||
+  //     (!isUserLoggedIn() &&
+  //       route.meta &&
+  //       !route.meta.authRoute &&
+  //       !route.meta.publicRoute)
+  //   ) {
+  //     /**
+  //      ** If user is not Logged in & route meta is undefined
+  //      ** OR
+  //      ** If user is not Logged in & route.meta.authRoute, !route.meta.publicRoute are undefined
+  //      ** Then redirect user to login
+  //      */
 
-      return <Redirect to="/login" />
-    } else if (route.meta && route.meta.authRoute && isUserLoggedIn()) {
-      // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
-      return <Redirect to="/" />
-    } else if (isUserLoggedIn() && !ability.can(action || 'read', resource)) {
-      // ** If user is Logged in and doesn't have ability to visit the page redirect the user to Not Authorized
-      return <Redirect to="/misc/not-authorized" />
-    } else {
-      // ** If none of the above render component
-      return <route.component {...props} />
-    }
-  }
+  //     return <Redirect to="/login" />
+  //   } else if (route.meta && route.meta.authRoute && isUserLoggedIn()) {
+  //     // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
+  //     return <Redirect to="/" />
+  //   } else if (isUserLoggedIn() && !ability.can(action || 'read', resource)) {
+  //     // ** If user is Logged in and doesn't have ability to visit the page redirect the user to Not Authorized
+  //     return <Redirect to="/misc/not-authorized" />
+  //   } else {
+  //     // ** If none of the above render component
+  //     return <route.component {...props} />
+  //   }
+  // }
 
   // ** Return Route to Render
   const ResolveRoutes = () => {
@@ -131,7 +123,7 @@ const Router = () => {
 
       // ** RouterProps to pass them to Layouts
       const routerProps = {}
-      
+
       return (
         <Route path={LayoutPaths} key={index}>
           <LayoutTag
@@ -199,40 +191,35 @@ const Router = () => {
       )
     })
   }
+  useEffect(() => {
+    if (isUserLoggedIn()) {
+      dispatch(handleRefreshToken())
+    }
+  }, [])
 
   return (
-    <AppRouter basename={process.env.REACT_APP_BASENAME}>
-      <Switch>
-        {/* If user is logged in Redirect user to DefaultRoute else to login */}
-        {/* <Route
-          exact
-          path='/'
-          render={() => {
-            return isUserLoggedIn() ? <Redirect to={DefaultRoute} /> : <Redirect to='/login' />
-          }}
-        /> */}
-        <Route
-          exact
-          path="/"
-          render={() => {
-            return <Redirect to={DefaultRoute} />
-          }}
-        />
-        {/* Not Auth Route */}
-        <Route
-          exact
-          path="/not-authorized"
-          render={(props) => (
-            <Layouts.BlankLayout>
-              <NotAuthorized />
-            </Layouts.BlankLayout>
-          )}
-        />
-        {ResolveRoutes()}
-        {/* NotFound Error page */}
-        <Route path="*" component={Error} />/
-      </Switch>
-    </AppRouter>
+    <Switch>
+      <Route
+        exact
+        path="/"
+        render={() => {
+          return <Redirect to={DefaultRoute} />
+        }}
+      />
+      {/* Not Auth Route */}
+      <Route
+        exact
+        path="/not-authorized"
+        render={() => (
+          <Layouts.BlankLayout>
+            <NotAuthorized />
+          </Layouts.BlankLayout>
+        )}
+      />
+      {ResolveRoutes()}
+      {/* NotFound Error page */}
+      <Route path="*" component={Error} />/
+    </Switch>
   )
 }
 

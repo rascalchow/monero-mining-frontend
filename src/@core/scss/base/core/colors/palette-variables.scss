@@ -19,6 +19,10 @@ $light-color: (
   'base': theme-color('light'),
 );
 
+$main-color: (
+  'base': #283046,
+);
+
 $primary-color: (
   'lighten-5': lighten(theme-color('primary'), 25%),
   'lighten-4': lighten(theme-color('primary'), 20%),
