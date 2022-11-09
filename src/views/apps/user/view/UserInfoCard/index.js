@@ -1,6 +1,5 @@
 // ** React Imports
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -8,10 +7,12 @@ import Avatar from '@components/avatar'
 // ** Third Party Components
 import { Card, CardBody, CardText, Button, Row, Col, Spinner } from 'reactstrap'
 import { Flag, Phone, Grid, Server, Voicemail, Globe } from 'react-feather'
+import _ from 'lodash'
 
 import InfoListItem from './InfoListItem'
 
 import { approveUser, rejectUser } from '../../store/action'
+import { COUTRIES } from '@src/constants.js'
 import './style.scss'
 
 const UserInfoCard = () => {
@@ -84,7 +85,7 @@ const UserInfoCard = () => {
       setIsRejecting(false)
     }
   }
-  console.log(selectedUser)
+
   return (
     <Card className="main-info-card">
       <CardBody>
@@ -144,7 +145,12 @@ const UserInfoCard = () => {
               <div className="my-50">
                 <InfoListItem
                   label="Country"
-                  value={selectedUser.userProfileId.country}
+                  value={_.get(
+                    COUTRIES.find(
+                      (it) => it.code == selectedUser.userProfileId.country,
+                    ),
+                    'name',
+                  )}
                   icon={<Flag className="mr-1" size={14} />}
                 />
               </div>
