@@ -104,9 +104,8 @@ export const columns = [
         <DropdownMenu right>
           <DropdownItem
             tag={Link}
-            to={`/user/view/${row.id}`}
+            to={`/user/view/${row._id}`}
             className="w-100"
-            onClick={() => store.dispatch(getUser(row.id))}
           >
             <FileText size={14} className="mr-50" />
             <span className="align-middle">Details</span>
