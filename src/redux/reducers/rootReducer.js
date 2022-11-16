@@ -5,16 +5,15 @@ import { combineReducers } from 'redux'
 import auth from './auth'
 import navbar from './navbar'
 import layout from './layout'
-import user from '@src/views/apps/user/store/reducer'
-import ecommerce from '@src/views/apps/ecommerce/store/reducer'
-import invoice from '@src/views/apps/invoice/store/reducer'
+import user from '@src/views/user/store/reducer'
+import eula from '@src/views/eula/store/reducer'
+
 const rootReducer = combineReducers({
   auth,
   navbar,
   layout,
   user,
-  ecommerce,
-  invoice
+  eula,
 })
 
 export default rootReducer
