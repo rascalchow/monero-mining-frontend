@@ -8,21 +8,18 @@
     margin-bottom: 0;
     padding: 0.5rem;
     padding-bottom: 0;
-    border-color: $border-color;
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
     .rdw-option-wrapper {
       border: none;
       &.rdw-option-active {
         box-shadow: none;
-        background-color: rgba($color: $primary, $alpha: 0.2);
       }
       &:hover {
         box-shadow: none;
       }
     }
     .rdw-dropdown-wrapper {
-      border: 1px solid $border-color;
       .rdw-dropdown-optionwrapper {
         &:hover {
           box-shadow: none;
@@ -40,7 +37,7 @@
   .rdw-editor-main {
     min-height: 10rem;
     padding: 0.5rem 1.2rem;
-    border: 1px solid $border-color;
+
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
   }
@@ -59,7 +56,6 @@
       border-bottom-right-radius: $border-radius;
     }
     .rdw-editor-main {
-      border-top: 1px solid $border-color;
       border-bottom: 0;
       border-top-left-radius: $border-radius;
       border-top-right-radius: $border-radius;

@@ -24,6 +24,11 @@ const Routes = [
     private: true,
   },
   {
+    path: '/eula/edit',
+    component: lazy(() => import('../../views/eula/edit')),
+    private: true,
+  },
+  {
     path: '/login',
     component: lazy(() => import('../../views/auth/Login')),
     layout: 'BlankLayout',
