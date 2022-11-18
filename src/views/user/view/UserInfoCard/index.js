@@ -5,7 +5,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import Avatar from '@components/avatar'
 
 // ** Third Party Components
-import { Card, CardBody, CardText, Button, Row, Col, Spinner } from 'reactstrap'
+import {
+  Card,
+  CardBody,
+  CardText,
+  Button,
+  Row,
+  Col,
+  Spinner,
+  Alert,
+} from 'reactstrap'
 import { Flag, Phone, Grid, Server, Voicemail, Globe } from 'react-feather'
 import _ from 'lodash'
 
@@ -13,6 +22,7 @@ import InfoListItem from './InfoListItem'
 
 import { approveUser, rejectUser } from '../../store/action'
 import { COUTRIES } from '@src/constants.js'
+
 import './style.scss'
 
 const UserInfoCard = () => {
@@ -112,7 +122,9 @@ const UserInfoCard = () => {
               </div>
             </div>
             <div className="border rounded px-2 py-1 mb-1 more-info">
-              <CardText>{selectedUser.userProfileId.moreInformation}</CardText>
+              <CardText>
+                {_.get(selectedUser, 'userProfileId.moreInformation')}
+              </CardText>
             </div>
             <div className="d-flex flex-wrap align-items-center">
               <Button.Ripple
@@ -140,58 +152,66 @@ const UserInfoCard = () => {
               </Button.Ripple>
             </div>
           </Col>
-          <Col xl="6" lg="12" className="mt-2 mt-xl-0">
-            <div className="user-info-wrapper">
-              <div className="my-50">
-                <InfoListItem
-                  label="Country"
-                  value={_.get(
-                    COUTRIES.find(
-                      (it) => it.code == selectedUser.userProfileId.country,
-                    ),
-                    'name',
-                    '',
-                  )}
-                  icon={<Flag className="mr-1" size={14} />}
-                />
+          {selectedUser.userProfileId ? (
+            <Col xl="6" lg="12" className="mt-2 mt-xl-0">
+              <div className="user-info-wrapper">
+                <div className="my-50">
+                  <InfoListItem
+                    label="Country"
+                    value={_.get(
+                      COUTRIES.find(
+                        (it) => it.code == selectedUser.userProfileId.country,
+                      ),
+                      'name',
+                      '',
+                    )}
+                    icon={<Flag className="mr-1" size={14} />}
+                  />
+                </div>
+                <div className="my-50">
+                  <InfoListItem
+                    label="Contact"
+                    value={selectedUser.userProfileId.contact}
+                    icon={<Phone className="mr-1" size={14} />}
+                  />
+                </div>
+                <div className="my-50">
+                  <InfoListItem
+                    label="Company Name"
+                    value={selectedUser.userProfileId.companyName}
+                    icon={<Server className="mr-1" size={14} />}
+                  />
+                </div>
+                <div className="my-50">
+                  <InfoListItem
+                    label="Application"
+                    value={selectedUser.userProfileId.application}
+                    icon={<Grid className="mr-1" size={14} />}
+                  />
+                </div>
+                <div className="my-50">
+                  <InfoListItem
+                    label="I.M."
+                    value={selectedUser.userProfileId.instantMessenger}
+                    icon={<Voicemail className="mr-1" size={14} />}
+                  />
+                </div>
+                <div className="my-50">
+                  <InfoListItem
+                    label="website."
+                    value={selectedUser.userProfileId.website}
+                    icon={<Globe className="mr-1" size={14} />}
+                  />
+                </div>
               </div>
-              <div className="my-50">
-                <InfoListItem
-                  label="Contact"
-                  value={selectedUser.userProfileId.contact}
-                  icon={<Phone className="mr-1" size={14} />}
-                />
-              </div>
-              <div className="my-50">
-                <InfoListItem
-                  label="Company Name"
-                  value={selectedUser.userProfileId.companyName}
-                  icon={<Server className="mr-1" size={14} />}
-                />
-              </div>
-              <div className="my-50">
-                <InfoListItem
-                  label="Application"
-                  value={selectedUser.userProfileId.application}
-                  icon={<Grid className="mr-1" size={14} />}
-                />
-              </div>
-              <div className="my-50">
-                <InfoListItem
-                  label="I.M."
-                  value={selectedUser.userProfileId.instantMessenger}
-                  icon={<Voicemail className="mr-1" size={14} />}
-                />
-              </div>
-              <div className="my-50">
-                <InfoListItem
-                  label="website."
-                  value={selectedUser.userProfileId.website}
-                  icon={<Globe className="mr-1" size={14} />}
-                />
-              </div>
-            </div>
-          </Col>
+            </Col>
+          ) : (
+            <Col xl="6" lg="12" className="mt-2 mt-xl-0 px-2">
+              <Alert className="px-2 py-2" variant="danger">
+                No profile information has been set
+              </Alert>
+            </Col>
+          )}
         </Row>
       </CardBody>
     </Card>

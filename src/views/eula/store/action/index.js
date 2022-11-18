@@ -31,7 +31,6 @@ export const updateEula = (data) => {
         type: 'SET_UPDATING',
         payload: true,
       })
-      console.log(data)
       const res = await axiosClient.patch('/settings/eula', { eula: data })
       dispatch({
         type: 'SET_EULA',

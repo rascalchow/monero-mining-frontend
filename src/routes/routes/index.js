@@ -10,7 +10,7 @@ const DefaultRoute = '/home'
 const Routes = [
   {
     path: '/home',
-    component: lazy(() => import('../../views/Home')),
+    component: lazy(() => import('../../views/dashboard')),
     private: true,
   },
   {
@@ -44,6 +44,7 @@ const Routes = [
       authRoute: true,
     },
   },
+
   {
     path: '/error',
     component: lazy(() => import('../../views/Error')),
