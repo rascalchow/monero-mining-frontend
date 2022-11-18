@@ -38,7 +38,7 @@ const StatsCard = ({ className }) => {
       icon: <TrendingDown size={24} />,
     },
     {
-      title: '1.423k',
+      title: appStats.installed + appStats.uninstalled,
       subtitle: 'Devices',
       color: 'light-danger',
       icon: <Box size={24} />,

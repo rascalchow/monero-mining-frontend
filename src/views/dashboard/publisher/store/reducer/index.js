@@ -10,20 +10,13 @@ const initialState = {
 
 const dashboardReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_USERS':
-      return {
-        total: action.payload.total,
-        data: action.payload.data,
-        isLoading: false,
-      }
-    case 'SET_USER':
-      return { ...state, selectedUser: action.payload, isLoading: false }
-    case 'SET_LOADING':
-      return { ...state, isLoading: action.payload }
-    case 'SET_USER_STATUS':
+    case 'DASHBOARD/PUBLISHER/SET_APP_STATS':
       return {
         ...state,
-        selectedUser: { ...state.selectedUser, status: action.payload.status },
+        appStats: {
+          ...state.appStats,
+          ...action.payload,
+        },
       }
     default:
       return state
