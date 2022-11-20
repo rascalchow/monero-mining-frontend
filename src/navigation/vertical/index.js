@@ -19,6 +19,5 @@ export default [
     title: 'Edit Eula',
     icon: <FileText size={20} />,
     navLink: '/eula/edit',
-    restrictedTo: { role: ['admin'] },
   },
 ]

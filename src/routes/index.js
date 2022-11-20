@@ -1,6 +1,6 @@
 // ** React Imports
-import { Suspense, lazy, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { Suspense, lazy, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 // ** Utils
 import { isUserLoggedIn } from '@utils'
 import { useLayout } from '@hooks/useLayout'
@@ -20,13 +20,16 @@ import { DefaultRoute, Routes } from './routes'
 import BlankLayout from '@layouts/BlankLayout'
 import VerticalLayout from '@src/layouts/VerticalLayout'
 import HorizontalLayout from '@src/layouts/HorizontalLayout'
+import LoadingSpinner from '@components/spinner/Loading-spinner'
 
-import { handleRefreshToken } from '../redux/actions/auth'
+import { getAuth } from '../redux/actions/auth'
 
 const Router = () => {
   // ** Hooks
   const [layout, setLayout] = useLayout()
   const [transition, setTransition] = useRouterTransition()
+  const [loading, setLoading] = useState(true)
+  const userData = useSelector((state) => state.auth.userData)
   const dispatch = useDispatch()
 
   // ** Default Layout
@@ -193,9 +196,21 @@ const Router = () => {
   }
   useEffect(() => {
     if (isUserLoggedIn()) {
-      dispatch(handleRefreshToken())
+      dispatch(getAuth())
+    } else {
+      setLoading(false)
     }
   }, [])
+
+  useEffect(() => {
+    if (userData) {
+      setLoading(false)
+    }
+  }, [userData])
+
+  if (loading) {
+    return <LoadingSpinner />
+  }
 
   return (
     <Switch>

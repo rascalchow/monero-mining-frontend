@@ -1,64 +1,75 @@
 import { axiosClient } from '@src/@core/services'
 
-export const getAppStats = () => {
+// ** Get eula template
+export const getEula = () => {
   return async (dispatch) => {
     try {
       dispatch({
-        type: 'DASHBOARD/PUBLISHER/SET_APP_STATS',
+        type: 'EULA/USER/SET',
         payload: {
+          data: null,
           isLoading: true,
+          isUpdating: false,
           error: null,
         },
       })
-      const res = await axiosClient.get('/app-users/stats')
+      const res = await axiosClient.get('/eula')
+
       dispatch({
-        type: 'DASHBOARD/PUBLISHER/SET_APP_STATS',
+        type: 'EULA/USER/SET',
         payload: {
           data: res.data,
           isLoading: false,
+          isUpdating: false,
           error: null,
         },
       })
     } catch (error) {
       dispatch({
-        type: 'DASHBOARD/PUBLISHER/SET_APP_STATS',
+        type: 'EULA/USER/SET',
         payload: {
           isLoading: false,
-          error: error.message,
+          isUpdating: false,
+          error: error,
         },
       })
+      throw error
     }
   }
 }
 
-export const getDeviceList = () => {
+// ** Update eula template
+export const updateEula = (data) => {
   return async (dispatch) => {
     try {
       dispatch({
-        type: 'DASHBOARD/PUBLISHER/SET_DEVICE_LIST',
+        type: 'EULA/USER/SET',
         payload: {
-          isLoading: true,
+          isLoading: false,
+          isUpdating: true,
           error: null,
         },
       })
-      const res = await axiosClient.get('/app-users')
-
+      const res = await axiosClient.patch('/eula', { eula: data })
       dispatch({
-        type: 'DASHBOARD/PUBLISHER/SET_DEVICE_LIST',
+        type: 'EULA/USER/SET',
         payload: {
           data: res.data,
           isLoading: false,
+          isUpdating: false,
           error: null,
         },
       })
     } catch (error) {
       dispatch({
-        type: 'DASHBOARD/PUBLISHER/SET_DEVICE_LIST',
+        type: 'SET_UPDATING',
         payload: {
           isLoading: false,
-          error: error.message,
+          isUpdating: false,
+          error: error,
         },
       })
+      throw error
     }
   }
 }

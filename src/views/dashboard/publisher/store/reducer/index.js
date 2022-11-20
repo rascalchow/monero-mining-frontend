@@ -1,8 +1,16 @@
 // **  Initial State
 const initialState = {
   appStats: {
-    installed: 0,
-    uninstalled: 0,
+    data: {
+      installed: 0,
+      uninstalled: 0,
+      devices: 0,
+    },
+    isLoading: false,
+    error: null,
+  },
+  deviceList: {
+    data: [],
     isLoading: false,
     error: null,
   },
@@ -15,6 +23,14 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         appStats: {
           ...state.appStats,
+          ...action.payload,
+        },
+      }
+    case 'DASHBOARD/PUBLISHER/SET_DEVICE_LIST':
+      return {
+        ...state,
+        deviceList: {
+          ...state.deviceList,
           ...action.payload,
         },
       }

@@ -26,19 +26,19 @@ const StatsCard = ({ className }) => {
   }, [])
   const data = [
     {
-      title: appStats.installed,
+      title: appStats.data.installed,
       subtitle: 'Installed',
       color: 'light-primary',
       icon: <TrendingUp size={24} />,
     },
     {
-      title: appStats.uninstalled,
+      title: appStats.data.uninstalled,
       subtitle: 'Uninstalled',
       color: 'light-warning',
       icon: <TrendingDown size={24} />,
     },
     {
-      title: appStats.installed + appStats.uninstalled,
+      title: appStats.data.devices,
       subtitle: 'Devices',
       color: 'light-danger',
       icon: <Box size={24} />,

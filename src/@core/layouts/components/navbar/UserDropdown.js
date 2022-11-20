@@ -18,7 +18,14 @@ import {
   DropdownToggle,
   DropdownItem,
 } from 'reactstrap'
-import { User, Mail, CheckSquare, MessageSquare, Power } from 'react-feather'
+import {
+  User,
+  Mail,
+  CheckSquare,
+  MessageSquare,
+  Power,
+  Settings,
+} from 'react-feather'
 
 // ** Default Avatar Image
 import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
@@ -52,9 +59,9 @@ const UserDropdown = () => {
         <Avatar img={userAvatar} imgHeight="40" imgWidth="40" status="online" />
       </DropdownToggle>
       <DropdownMenu right>
-        <DropdownItem tag={Link} to="#" onClick={(e) => e.preventDefault()}>
-          <User size={14} className="mr-75" />
-          <span className="align-middle">Profile</span>
+        <DropdownItem tag={Link} to="/account-settings">
+          <Settings size={14} className="mr-75" />
+          <span className="align-middle">Settings</span>
         </DropdownItem>
         {/* <DropdownItem tag={Link} to="#" onClick={(e) => e.preventDefault()}>
           <Mail size={14} className="mr-75" />

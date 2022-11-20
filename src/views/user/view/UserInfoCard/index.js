@@ -18,10 +18,10 @@ import {
 import { Flag, Phone, Grid, Server, Voicemail, Globe } from 'react-feather'
 import _ from 'lodash'
 
-import InfoListItem from './InfoListItem'
+import Description from '@components/description'
 
 import { approveUser, rejectUser } from '../../store/action'
-import { COUTRIES } from '@src/constants.js'
+import { COUNTRIES } from '@src/constants.js'
 
 import './style.scss'
 
@@ -156,10 +156,10 @@ const UserInfoCard = () => {
             <Col xl="6" lg="12" className="mt-2 mt-xl-0">
               <div className="user-info-wrapper">
                 <div className="my-50">
-                  <InfoListItem
+                  <Description
                     label="Country"
                     value={_.get(
-                      COUTRIES.find(
+                      COUNTRIES.find(
                         (it) => it.code == selectedUser.userProfileId.country,
                       ),
                       'name',
@@ -169,35 +169,35 @@ const UserInfoCard = () => {
                   />
                 </div>
                 <div className="my-50">
-                  <InfoListItem
+                  <Description
                     label="Contact"
                     value={selectedUser.userProfileId.contact}
                     icon={<Phone className="mr-1" size={14} />}
                   />
                 </div>
                 <div className="my-50">
-                  <InfoListItem
+                  <Description
                     label="Company Name"
                     value={selectedUser.userProfileId.companyName}
                     icon={<Server className="mr-1" size={14} />}
                   />
                 </div>
                 <div className="my-50">
-                  <InfoListItem
+                  <Description
                     label="Application"
                     value={selectedUser.userProfileId.application}
                     icon={<Grid className="mr-1" size={14} />}
                   />
                 </div>
                 <div className="my-50">
-                  <InfoListItem
+                  <Description
                     label="I.M."
                     value={selectedUser.userProfileId.instantMessenger}
                     icon={<Voicemail className="mr-1" size={14} />}
                   />
                 </div>
                 <div className="my-50">
-                  <InfoListItem
+                  <Description
                     label="website."
                     value={selectedUser.userProfileId.website}
                     icon={<Globe className="mr-1" size={14} />}

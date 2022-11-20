@@ -30,7 +30,7 @@ import _ from 'lodash'
 import { selectThemeColors } from '@utils'
 import FormField from '@components/form-field'
 import logo from '@src/assets/images/logo/nurev_logo.jpeg'
-import { COUTRIES, PHONE_REGEX } from '@src/constants'
+import { COUNTRIES, PHONE_REGEX } from '@src/constants'
 
 const Register = () => {
   const [skin] = useSkin()
@@ -275,7 +275,7 @@ const Register = () => {
                           !!errors.country && ' border-danger'
                         }`}
                         classNamePrefix="select"
-                        options={COUTRIES.map((it) => ({
+                        options={COUNTRIES.map((it) => ({
                           label: it.name,
                           value: it.code,
                         }))}
@@ -343,6 +343,7 @@ const Register = () => {
                   <InputPasswordToggle
                     {...field}
                     invalid={!!errors.password}
+                    placeholder="Enter password"
                   ></InputPasswordToggle>
                 )}
               />
@@ -357,6 +358,7 @@ const Register = () => {
                   }}
                   invalid={!isValid}
                   className="custom-control-Primary"
+                  placeholder="Confirm password"
                 />
               </FormGroup>
               <Button.Ripple

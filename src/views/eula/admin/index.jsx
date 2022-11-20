@@ -15,10 +15,10 @@ import {
 } from 'reactstrap'
 import { getEula, updateEula } from './store/action'
 
-const Edit = () => {
+const AdminUpdateEula = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   const dispatch = useDispatch()
-  const eula = useSelector((state) => state.eula)
+  const eula = useSelector((state) => state.eula.admin)
   const onUpldateClick = () => {
     dispatch(
       updateEula(draftToHtml(convertToRaw(editorState.getCurrentContent()))),
@@ -77,4 +77,4 @@ const Edit = () => {
   )
 }
 
-export default Edit
+export default AdminUpdateEula

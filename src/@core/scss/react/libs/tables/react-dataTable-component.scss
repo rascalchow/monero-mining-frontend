@@ -158,6 +158,10 @@
       }
     }
   }
+  .no-data-component {
+    background-color: $theme-dark-card-bg;
+    color: white;
+  }
 
   .rdt_Pagination {
     color: $theme-dark-body-color;

@@ -1,7 +1,7 @@
 import { Row, Col, Container } from 'reactstrap'
-
 import WelcomeCard from './welcome-card'
 import StatsCard from './stats-card'
+import DeviceListCard from './device-list-card'
 
 const PublisherHome = () => {
   return (
@@ -12,6 +12,11 @@ const PublisherHome = () => {
         </Col>
         <Col md={12} lg={8}>
           <StatsCard className="h-100" />
+        </Col>
+      </Row>
+      <Row className="my-2">
+        <Col>
+          <DeviceListCard />
         </Col>
       </Row>
     </Container>

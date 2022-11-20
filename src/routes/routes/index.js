@@ -25,7 +25,12 @@ const Routes = [
   },
   {
     path: '/eula/edit',
-    component: lazy(() => import('../../views/eula/edit')),
+    component: lazy(() => import('../../views/eula')),
+    private: true,
+  },
+  {
+    path: '/account-settings',
+    component: lazy(() => import('../../views/account-settings')),
     private: true,
   },
   {
