@@ -1,4 +1,4 @@
-import { Home, Users, FileText } from 'react-feather'
+import { Home, Users, FileText, Inbox } from 'react-feather'
 
 export default [
   {
@@ -19,5 +19,11 @@ export default [
     title: 'Edit Eula',
     icon: <FileText size={20} />,
     navLink: '/eula/edit',
+  },
+  {
+    id: 'eula-product',
+    title: 'Edit Product',
+    icon: <Inbox size={20} />,
+    navLink: '/product/edit',
   },
 ]

@@ -28,6 +28,12 @@ const Routes = [
     component: lazy(() => import('../../views/eula')),
     private: true,
   },
+
+  {
+    path: '/product/edit',
+    component: lazy(() => import('../../views/product/edit')),
+    private: true,
+  },
   {
     path: '/account-settings',
     component: lazy(() => import('../../views/account-settings')),
