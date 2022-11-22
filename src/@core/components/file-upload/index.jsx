@@ -40,7 +40,13 @@ const FileUpload = ({ defaultSrc, label, alt, onChange, ...props }) => {
             className="mr-1 my-0"
             tag={Label}
           >
-            <input type="file" hidden onChange={onFileChange} {...props} />
+            <input
+              type="file"
+              hidden
+              onChange={onFileChange}
+              accept="image/*"
+              {...props}
+            />
             Upload
           </Button.Ripple>
           <Button.Ripple
