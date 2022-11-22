@@ -23,6 +23,7 @@ import { API_URL } from '../../../constants'
 
 const EditProduct = () => {
   const dispatch = useDispatch()
+  const authData = useSelector((state) => state.auth)
   const productData = useSelector((state) => state.product.edit)
   const [companyLogo, setCompanyLogo] = useState()
   const [productIcon, setProductIcon] = useState()
@@ -90,75 +91,82 @@ const EditProduct = () => {
             <Spinner className="spinner" />
           </div>
         ) : (
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <FileUpload
-              defaultSrc={companyLogoDefault}
-              label="Company Logo"
-              alt="campany logo"
-              onChange={(value) => {
-                setCompanyLogo(value)
-              }}
-            />
-            <Row>
-              <Col>
-                <FormField
-                  label="Product Name"
-                  name="productName"
-                  control={control}
-                  error={errors.productName}
-                  render={({ field }) => <Input {...field} />}
-                />
-              </Col>
-              <Col>
-                <FormField
-                  label="Currency Name"
-                  name="currencyName"
-                  control={control}
-                  error={errors.currencyName}
-                  render={({ field }) => <Input {...field} />}
-                />
-              </Col>
-            </Row>
+          productData.data && (
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <FileUpload
+                defaultSrc={companyLogoDefault}
+                label="Company Logo"
+                alt="campany logo"
+                onChange={(value) => {
+                  setCompanyLogo(value)
+                }}
+              />
+              <Row>
+                <Col>
+                  <FormField
+                    label="Product Name"
+                    name="productName"
+                    control={control}
+                    error={errors.productName}
+                    render={({ field }) => <Input {...field} />}
+                  />
+                </Col>
+                <Col>
+                  <FormField
+                    label="Currency Name"
+                    name="currencyName"
+                    control={control}
+                    error={errors.currencyName}
+                    render={({ field }) => <Input {...field} />}
+                  />
+                </Col>
+              </Row>
 
-            <FileUpload
-              defaultSrc={productIconDefault}
-              label="Product Icon"
-              alt="product icon"
-              onChange={(value) => {
-                setProductIcon(value)
-              }}
-            />
+              <FileUpload
+                defaultSrc={productIconDefault}
+                label="Product Icon"
+                alt="product icon"
+                onChange={(value) => {
+                  setProductIcon(value)
+                }}
+              />
 
-            <Row>
-              <Col>
-                <FormField
-                  label="User Percentage"
-                  name="userPercentage"
-                  control={control}
-                  error={errors.userPercentage}
-                  render={({ field }) => <Input {...field} />}
-                />
-              </Col>
-              <Col>
-                <FormField
-                  label="How many virtual coins(=$1USD)?"
-                  name="numberOfVirtualCoins"
-                  control={control}
-                  error={errors.numberOfVirtualCoins}
-                  render={({ field }) => <Input {...field} />}
-                />
-              </Col>
-            </Row>
-            <div className="d-flex justify-content-between mt-2">
-              <div>
-                <div>Software Download Link:</div>
-                <a href="#">Download product setup file</a>
+              <Row>
+                <Col>
+                  <FormField
+                    label="User Percentage"
+                    name="userPercentage"
+                    control={control}
+                    error={errors.userPercentage}
+                    render={({ field }) => <Input {...field} />}
+                  />
+                </Col>
+                <Col>
+                  <FormField
+                    label="How many virtual coins(=$1USD)?"
+                    name="numberOfVirtualCoins"
+                    control={control}
+                    error={errors.numberOfVirtualCoins}
+                    render={({ field }) => <Input {...field} />}
+                  />
+                </Col>
+              </Row>
+              <div className="d-flex justify-content-between mt-2">
+                <div>
+                  <div>Software Download Link:</div>
+                  <a
+                    href={`${API_URL}/${authData.userData.publisherKey}/install.msi`}
+                    download
+                  >
+                    Download product setup file
+                  </a>
+                </div>
+                <SubmitButton isSubmitting={isSubmitting}>
+                  Save Change
+                </SubmitButton>
               </div>
-              <SubmitButton isSubmitting={isSubmitting}>
-                Save Change
-              </SubmitButton>
-            </div>
-          </Form>
+            </Form>
+          )
         )}
       </CardBody>
     </Card>
