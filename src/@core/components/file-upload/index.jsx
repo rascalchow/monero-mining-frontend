@@ -1,20 +1,24 @@
-import { useState, forwardRef } from 'react'
+import { useState, useEffect } from 'react'
 import Proptypes from 'prop-types'
 import { Button, Label } from 'reactstrap'
 import defaultImg from '../../assets/imgs/default.png'
 import './style.scss'
 
-const FileUpload = ({ defaultSrc, label, alt, onChange, ...props }, ref) => {
+const FileUpload = ({ defaultSrc, label, alt, onChange, ...props }) => {
   const [preview, setPreview] = useState(defaultSrc || defaultImg)
+
   const onFileChange = (e) => {
-    const reader = new FileReader(),
-      files = e.target.files
+    const reader = new FileReader()
+    const files = e.target.files
     reader.onload = function () {
       setPreview(reader.result)
     }
     reader.readAsDataURL(files[0])
-    onChange(e)
+    onChange(files[0])
   }
+  useEffect(() => {
+    setPreview(defaultSrc || defaultImg)
+  }, [defaultSrc])
 
   return (
     <div className="file-upload">
@@ -36,13 +40,7 @@ const FileUpload = ({ defaultSrc, label, alt, onChange, ...props }, ref) => {
             className="mr-1 my-0"
             tag={Label}
           >
-            <input
-              type="file"
-              hidden
-              onChange={onFileChange}
-              ref={ref}
-              {...props}
-            />
+            <input type="file" hidden onChange={onFileChange} {...props} />
             Upload
           </Button.Ripple>
           <Button.Ripple
@@ -51,6 +49,7 @@ const FileUpload = ({ defaultSrc, label, alt, onChange, ...props }, ref) => {
             color="secondary"
             onClick={() => {
               setPreview(defaultSrc || defaultImg)
+              onChange(null)
             }}
           >
             Reset
@@ -61,7 +60,7 @@ const FileUpload = ({ defaultSrc, label, alt, onChange, ...props }, ref) => {
   )
 }
 
-export default forwardRef(FileUpload)
+export default FileUpload
 
 FileUpload.propTypes = {
   defaultSrc: Proptypes.string,

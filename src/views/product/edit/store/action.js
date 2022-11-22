@@ -1,6 +1,6 @@
-import { axiosClient } from '@src/@core/services'
+import { axiosClient } from '../../../../@core/services'
 
-export const getProductInfo = () => async (dispatch) => {
+export const get = () => async (dispatch) => {
   try {
     dispatch({
       type: 'PRODUCT/EDIT/SET',
@@ -10,11 +10,47 @@ export const getProductInfo = () => async (dispatch) => {
         error: null,
       },
     })
-    const res = await axiosClient.get('/profile')
+    const res = await axiosClient.get('/product')
     dispatch({
       type: 'PRODUCT/EDIT/SET',
       payload: {
-        data: res,
+        data: res.data,
+        isLoading: false,
+        isUpdating: false,
+        error: null,
+      },
+    })
+  } catch (error) {
+    dispatch({
+      type: 'PRODUCT/EDIT/SET',
+      payload: {
+        isLoading: false,
+        isUpdating: false,
+        error: error,
+      },
+    })
+  }
+}
+
+export const update = (formData) => async (dispatch) => {
+  try {
+    dispatch({
+      type: 'PRODUCT/EDIT/SET',
+      payload: {
+        isLoading: false,
+        isUpdating: true,
+        error: null,
+      },
+    })
+    const res = await axiosClient.post('/product', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    dispatch({
+      type: 'PRODUCT/EDIT/SET',
+      payload: {
+        data: res.data,
         isLoading: false,
         isUpdating: false,
         error: null,

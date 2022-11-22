@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Card,
@@ -9,20 +9,25 @@ import {
   Input,
   Row,
   Col,
-  Button,
   Spinner,
 } from 'reactstrap'
-import { getProductInfo } from './store/action'
+import { get, update } from './store/action'
 
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import FormField from '../../../@core/components/form-field'
-import FileUpload from '../../../@core/components/file-upload'
+import FormField from '@components/form-field'
+import FileUpload from '@components/file-upload'
+import SubmitButton from '@components/submit-button'
+import { API_URL } from '../../../constants'
 
 const EditProduct = () => {
   const dispatch = useDispatch()
-  const userData = useSelector((state) => state.product.edit)
+  const productData = useSelector((state) => state.product.edit)
+  const [companyLogo, setCompanyLogo] = useState()
+  const [productIcon, setProductIcon] = useState()
+  const [companyLogoDefault, setCompanyLogoDefault] = useState()
+  const [productIconDefault, setProductIconDefault] = useState()
   const schema = yup
     .object({
       productName: yup.string().required(),
@@ -35,37 +40,43 @@ const EditProduct = () => {
     control,
     handleSubmit,
     setValue,
-    formState: { errors, isSubmitting, isDirty },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      companyLogo: '',
       productName: '',
       currencyName: '',
       userPercentage: '',
       numberOfVirtualCoins: '',
-      productIcon: '',
     },
   })
 
   useEffect(() => {
-    dispatch(getProductInfo())
+    dispatch(get())
   }, [])
   useEffect(() => {
-    if (userData.data) {
-      console.log(userData.data)
-      setValue('productName', userData.data.userProfileId.application)
-      setValue('currencyName', userData.data.userProfileId.currencyName)
-      setValue('userPercentage', userData.data.userProfileId.userPercentage)
-      setValue(
-        'numberOfVirtualCoins',
-        userData.data.userProfileId.numberOfVirtualCoins,
-      )
+    if (productData.data) {
+      setValue('productName', productData.data.application)
+      setValue('currencyName', productData.data.currencyName)
+      setValue('userPercentage', productData.data.userPercentage)
+      setValue('numberOfVirtualCoins', productData.data.numberOfVirtualCoins)
+      setCompanyLogoDefault(`${API_URL}/${productData.data.companyLogo}`)
+      setProductIconDefault(`${API_URL}/${productData.data.productIcon}`)
     }
-  }, [userData])
+  }, [productData.data])
 
   const onSubmit = (data) => {
-    console.log(data.companyLogo)
+    const formData = new FormData()
+    Object.keys(data).forEach((key) => {
+      formData.append(key, data[key])
+    })
+    if (companyLogo) {
+      formData.append('companyLogo', companyLogo)
+    }
+    if (productIcon) {
+      formData.append('productIcon', productIcon)
+    }
+    return dispatch(update(formData))
   }
 
   return (
@@ -74,16 +85,18 @@ const EditProduct = () => {
         <CardTitle>Update product configuration</CardTitle>
       </CardHeader>
       <CardBody>
-        {userData.isLoading ? (
+        {productData.isLoading ? (
           <div className="py-4 d-flex justify-content-center">
             <Spinner className="spinner" />
           </div>
         ) : (
           <Form onSubmit={handleSubmit(onSubmit)}>
             <FileUpload
+              defaultSrc={companyLogoDefault}
+              label="Company Logo"
               alt="campany logo"
-              onChange={(e) => {
-                setValue('companyLogo', e.target.files)
+              onChange={(value) => {
+                setCompanyLogo(value)
               }}
             />
             <Row>
@@ -106,15 +119,16 @@ const EditProduct = () => {
                 />
               </Col>
             </Row>
-            <FormField
+
+            <FileUpload
+              defaultSrc={productIconDefault}
               label="Product Icon"
-              name="productIcon"
-              control={control}
-              error={errors.productIcon}
-              render={({ field }) => (
-                <FileUpload alt="product icon" {...field} />
-              )}
+              alt="product icon"
+              onChange={(value) => {
+                setProductIcon(value)
+              }}
             />
+
             <Row>
               <Col>
                 <FormField
@@ -140,10 +154,9 @@ const EditProduct = () => {
                 <div>Software Download Link:</div>
                 <a href="#">Download product setup file</a>
               </div>
-              <Button.Ripple color="primary" type="submit" disabled={!isDirty}>
-                {isSubmitting && <Spinner className="spinner" />}
-                Save Changes
-              </Button.Ripple>
+              <SubmitButton isSubmitting={isSubmitting}>
+                Save Change
+              </SubmitButton>
             </div>
           </Form>
         )}
