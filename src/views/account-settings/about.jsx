@@ -5,6 +5,7 @@ import { getProfile } from './store/action'
 import Description from '@components/description'
 import { Spinner } from 'reactstrap'
 import _ from 'lodash'
+import { API_URL } from '../../constants'
 
 import { COUNTRIES } from '../../constants'
 
@@ -50,6 +51,10 @@ const About = () => {
             <p>{userData.userProfileId.moreInformation}</p>
           </>
         )}
+        <div>Sortware download link</div>
+        <a href={`${API_URL}/${userData.publisherKey}/install.msi`} download>
+          Download product setup file
+        </a>
       </CardBody>
     </Card>
   )
