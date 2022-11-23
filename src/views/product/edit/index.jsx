@@ -23,7 +23,7 @@ import { API_URL } from '../../../constants'
 
 const EditProduct = () => {
   const dispatch = useDispatch()
-  const authData = useSelector((state) => state.auth)
+
   const productData = useSelector((state) => state.product.edit)
   const [companyLogo, setCompanyLogo] = useState()
   const [productIcon, setProductIcon] = useState()

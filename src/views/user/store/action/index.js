@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify'
 import axios from 'axios'
 import { axiosClient } from '@src/@core/services'
 
@@ -87,19 +88,29 @@ export const deleteUser = (id) => {
 
 // **Approve user
 export const approveUser = (id) => async (dispatch) => {
-  const res = await axiosClient.post(`/users/${id}/approve`)
-  dispatch({
-    type: 'SET_USER_STATUS',
-    payload: res,
-  })
-  return res
+  try {
+    const res = await axiosClient.post(`/users/${id}/approve`)
+    toast('Successfully approved user!', { type: 'success' })
+    dispatch({
+      type: 'SET_USER_STATUS',
+      payload: res,
+    })
+    return res
+  } catch (error) {
+    toast('Operation unsuccessful', { type: 'error' })
+  }
 }
 
 export const rejectUser = (id) => async (dispatch) => {
-  const res = await axiosClient.post(`/users/${id}/reject`)
-  dispatch({
-    type: 'SET_USER_STATUS',
-    payload: res,
-  })
-  return res
+  try {
+    const res = await axiosClient.post(`/users/${id}/reject`)
+    toast('Successfully rejected user!', { type: 'success' })
+    dispatch({
+      type: 'SET_USER_STATUS',
+      payload: res,
+    })
+    return res
+  } catch (error) {
+    toast('Operation unsuccessful', { type: 'error' })
+  }
 }
