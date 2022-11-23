@@ -31,7 +31,7 @@ const About = () => {
     { label: 'Phone', value: userData.phone },
     { label: 'Website URL', value: userData.userProfileId.website },
   ]
-
+  console.log(userData)
   return (
     <Card>
       <CardBody>
@@ -49,12 +49,20 @@ const About = () => {
 
             <div>More Information:</div>
             <p>{userData.userProfileId.moreInformation}</p>
+
+            {userData.userProfileId.installer && (
+              <>
+                <div>Sortware download link</div>
+                <a
+                  href={`${API_URL}/${userData.publisherKey}/install.msi`}
+                  download
+                >
+                  Download product setup file
+                </a>
+              </>
+            )}
           </>
         )}
-        <div>Sortware download link</div>
-        <a href={`${API_URL}/${userData.publisherKey}/install.msi`} download>
-          Download product setup file
-        </a>
       </CardBody>
     </Card>
   )

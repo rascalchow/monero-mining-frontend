@@ -4,7 +4,12 @@ import { axiosClient } from '@src/@core/services'
 // ** Get eula template
 export const updatePassword = (data) => {
   return async () => {
-    await axiosClient.patch('/change-password', data)
+    try {
+      await axiosClient.patch('/change-password', data)
+      toast('Successfully updated password!', { type: 'success' })
+    } catch (error) {
+      toast('Password was not updated successfully!', { type: 'error' })
+    }
   }
 }
 
@@ -28,7 +33,6 @@ export const getProfile = () => {
           error: null,
         },
       })
-      toast('Successfully updated password!', { type: 'success' })
     } catch (error) {
       dispatch({
         type: 'ACCOUNT_SETTINGS/SET_PROFILE',
@@ -37,7 +41,6 @@ export const getProfile = () => {
           error: error,
         },
       })
-      toast('Password was not updated successfully!', { type: 'error' })
     }
   }
 }
