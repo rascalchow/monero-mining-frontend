@@ -83,7 +83,7 @@ const EditProduct = () => {
     }
     return dispatch(update(formData))
   }
-  console.log(productData)
+
   return (
     <Card>
       <CardHeader>
