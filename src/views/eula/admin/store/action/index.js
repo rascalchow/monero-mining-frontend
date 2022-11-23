@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify'
 import { axiosClient } from '@src/@core/services'
 
 // ** Get eula template
@@ -31,17 +32,18 @@ export const updateEula = (data) => {
         type: 'SET_UPDATING',
         payload: true,
       })
-      console.log(data)
       const res = await axiosClient.patch('/settings/eula', { eula: data })
       dispatch({
         type: 'SET_EULA',
         payload: res.data,
       })
+      toast('Successfully updated EULA template!', { type: 'success' })
     } catch (error) {
       dispatch({
         type: 'SET_UPDATING',
         payload: false,
       })
+      toast('Update was not successful. Please try again!', { type: 'error' })
       throw error
     }
   }

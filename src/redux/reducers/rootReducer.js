@@ -7,6 +7,9 @@ import navbar from './navbar'
 import layout from './layout'
 import user from '@src/views/user/store/reducer'
 import eula from '@src/views/eula/store/reducer'
+import dashboard from '../../views/dashboard/store/reducer'
+import accountSettings from '../../views/account-settings/store/reducer'
+import product from '../../views/product/store/reducer'
 
 const rootReducer = combineReducers({
   auth,
@@ -14,6 +17,9 @@ const rootReducer = combineReducers({
   layout,
   user,
   eula,
+  dashboard,
+  accountSettings,
+  product,
 })
 
 export default rootReducer

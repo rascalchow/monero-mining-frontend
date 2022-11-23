@@ -1,8 +1,8 @@
 import { Fragment, useState } from 'react'
 import { useSkin } from '@hooks/useSkin'
-
+import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { handleRegister } from '@store/actions/auth'
 import { Link, Redirect } from 'react-router-dom'
 import InputPasswordToggle from '@components/input-password-toggle'
@@ -30,7 +30,7 @@ import _ from 'lodash'
 import { selectThemeColors } from '@utils'
 import FormField from '@components/form-field'
 import logo from '@src/assets/images/logo/nurev_logo.jpeg'
-import { COUTRIES, PHONE_REGEX } from '@src/constants'
+import { COUNTRIES, PHONE_REGEX } from '@src/constants'
 
 const Register = () => {
   const [skin] = useSkin()
@@ -127,6 +127,9 @@ const Register = () => {
     }
   }
   if (isSubmitSuccessful) {
+    toast('Successful registered a user. Pleas wait until being approved!', {
+      type: 'success',
+    })
     return <Redirect to="/login" />
   }
 
@@ -275,7 +278,7 @@ const Register = () => {
                           !!errors.country && ' border-danger'
                         }`}
                         classNamePrefix="select"
-                        options={COUTRIES.map((it) => ({
+                        options={COUNTRIES.map((it) => ({
                           label: it.name,
                           value: it.code,
                         }))}
@@ -343,6 +346,7 @@ const Register = () => {
                   <InputPasswordToggle
                     {...field}
                     invalid={!!errors.password}
+                    placeholder="Enter password"
                   ></InputPasswordToggle>
                 )}
               />
@@ -357,6 +361,7 @@ const Register = () => {
                   }}
                   invalid={!isValid}
                   className="custom-control-Primary"
+                  placeholder="Confirm password"
                 />
               </FormGroup>
               <Button.Ripple

@@ -1,4 +1,4 @@
-export const COUTRIES = [
+export const COUNTRIES = [
   { name: 'Afghanistan', code: 'AF' },
   { name: 'Åland Islands', code: 'AX' },
   { name: 'Albania', code: 'AL' },
@@ -246,3 +246,5 @@ export const COUTRIES = [
 
 export const PHONE_REGEX =
   /^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$/
+
+export const API_URL = process.env.REACT_APP_API_URL

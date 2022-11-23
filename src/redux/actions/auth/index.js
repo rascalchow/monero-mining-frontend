@@ -55,7 +55,7 @@ export const handleLogout = () => {
   }
 }
 
-export const handleRefreshToken = () => {
+export const getAuth = () => {
   return async (dispatch) => {
     try {
       const data = await jwt.getUser()
