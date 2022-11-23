@@ -25,5 +25,6 @@ export default [
     title: 'Edit Product',
     icon: <Inbox size={20} />,
     navLink: '/product/edit',
+    restrictedTo: { role: ['publisher'] },
   },
 ]

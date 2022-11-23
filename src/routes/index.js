@@ -151,7 +151,7 @@ const Router = () => {
                         meta: route.meta,
                       })
                       if (route.private && !isUserLoggedIn()) {
-                        return <Redirect to="/not-authorized" />
+                        return <Redirect to="/login" />
                       }
                       return (
                         <Suspense fallback={null}>

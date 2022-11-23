@@ -21,7 +21,6 @@ export const get = () => async (dispatch) => {
         error: null,
       },
     })
-    toast('Successfully updated product information!', { type: 'success' })
   } catch (error) {
     dispatch({
       type: 'PRODUCT/EDIT/SET',
@@ -30,9 +29,6 @@ export const get = () => async (dispatch) => {
         isUpdating: false,
         error: error,
       },
-    })
-    toast('Product information was not updated successfully!', {
-      type: 'error',
     })
   }
 }
@@ -61,6 +57,7 @@ export const update = (formData) => async (dispatch) => {
         error: null,
       },
     })
+    toast('Successfully updated product information!', { type: 'success' })
   } catch (error) {
     dispatch({
       type: 'PRODUCT/EDIT/SET',
@@ -69,6 +66,9 @@ export const update = (formData) => async (dispatch) => {
         isUpdating: false,
         error: error,
       },
+    })
+    toast('Product information was not updated successfully!', {
+      type: 'error',
     })
   }
 }
