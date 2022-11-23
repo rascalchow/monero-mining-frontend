@@ -23,7 +23,7 @@ import { API_URL } from '../../../constants'
 
 const EditProduct = () => {
   const dispatch = useDispatch()
-  const authData = useSelector((state) => state.auth)
+
   const productData = useSelector((state) => state.product.edit)
   const [companyLogo, setCompanyLogo] = useState()
   const [productIcon, setProductIcon] = useState()
@@ -61,8 +61,12 @@ const EditProduct = () => {
       setValue('currencyName', productData.data.currencyName)
       setValue('userPercentage', productData.data.userPercentage)
       setValue('numberOfVirtualCoins', productData.data.numberOfVirtualCoins)
-      setCompanyLogoDefault(`${API_URL}/${productData.data.companyLogo}`)
-      setProductIconDefault(`${API_URL}/${productData.data.productIcon}`)
+      if (productData.data.companyLogo) {
+        setCompanyLogoDefault(`${API_URL}/${productData.data.companyLogo}`)
+      }
+      if (productData.data.productIcon) {
+        setProductIconDefault(`${API_URL}/${productData.data.productIcon}`)
+      }
     }
   }, [productData.data])
 
@@ -152,15 +156,18 @@ const EditProduct = () => {
                 </Col>
               </Row>
               <div className="d-flex justify-content-between mt-2">
-                <div>
-                  <div>Software Download Link:</div>
-                  <a
-                    href={`${API_URL}/${authData.userData.publisherKey}/install.msi`}
-                    download
-                  >
-                    Download product setup file
-                  </a>
-                </div>
+                {productData.data.installer && (
+                  <div>
+                    <div>Software Download Link:</div>
+                    <a
+                      href={`${API_URL}/${productData.data.installer}`}
+                      download
+                    >
+                      Download product setup file
+                    </a>
+                  </div>
+                )}
+
                 <SubmitButton isSubmitting={isSubmitting}>
                   Save Change
                 </SubmitButton>

@@ -19,7 +19,6 @@ const FileUpload = ({ defaultSrc, label, alt, onChange, ...props }) => {
   useEffect(() => {
     setPreview(defaultSrc || defaultImg)
   }, [defaultSrc])
-
   return (
     <div className="file-upload">
       <div>{label && <Label>{label}</Label>}</div>
