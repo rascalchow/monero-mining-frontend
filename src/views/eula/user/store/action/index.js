@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify'
 import { axiosClient } from '@src/@core/services'
 
 // ** Get eula template
@@ -60,6 +61,7 @@ export const updateEula = (data) => {
           error: null,
         },
       })
+      toast('Successfully updated EULA!', { type: 'success' })
     } catch (error) {
       dispatch({
         type: 'SET_UPDATING',
@@ -69,6 +71,7 @@ export const updateEula = (data) => {
           error: error,
         },
       })
+      toast('Update was not successful. Please try again!', { type: 'error' })
       throw error
     }
   }

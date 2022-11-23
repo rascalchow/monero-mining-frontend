@@ -44,7 +44,7 @@ ReactDOM.render(
     <Suspense fallback={<Spinner />}>
       <ThemeContext>
         <LazyApp />
-        <ToastContainer newestOnTop />
+        <ToastContainer />
       </ThemeContext>
     </Suspense>
   </Provider>,
