@@ -111,18 +111,18 @@ const Register = () => {
     try {
       return await dispatch(handleRegister(formData))
     } catch (error) {
-      if (error.isAxiosError) {
-        if (error.response.status === 422) {
-          if (error.response.data.errors.msg === 'EMAIL_ALREADY_EXISTS') {
-            setError('email', {
-              type: 'custom',
-              message: 'Email is already taken',
-            })
-          } else {
-            setFbMsg(_.get(error, 'response.data.errors.msg', 'Server Error'))
-          }
+      if (error.status === 422) {
+        if (error.data.errors.msg === 'EMAIL_ALREADY_EXISTS') {
+          setError('email', {
+            type: 'custom',
+            message: 'Email is already taken',
+          })
+          toast('Email is already registered!', { type: 'error' })
+        } else {
+          setFbMsg(_.get(error, 'data.errors.msg', 'Server Error'))
         }
       }
+
       throw error
     }
   }

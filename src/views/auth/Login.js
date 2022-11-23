@@ -87,7 +87,7 @@ const Login = () => {
         >
           <Col className="px-xl-2 mx-auto" sm="8" md="6" lg="12">
             <CardTitle tag="h2" className="font-weight-bold mb-1">
-              Welcome to Vuexy! 👋
+              Welcome to Nurev! 👋
             </CardTitle>
             <CardText className="mb-2">
               Please sign-in to your account and start the adventure
@@ -159,7 +159,7 @@ const Login = () => {
             <div className="divider my-2">
               <div className="divider-text">or</div>
             </div>
-            <div className="auth-footer-btn d-flex justify-content-center">
+            {/* <div className="auth-footer-btn d-flex justify-content-center">
               <Button.Ripple color="facebook">
                 <Facebook size={14} />
               </Button.Ripple>
@@ -172,7 +172,7 @@ const Login = () => {
               <Button.Ripple className="mr-0" color="github">
                 <GitHub size={14} />
               </Button.Ripple>
-            </div>
+            </div> */}
           </Col>
         </Col>
       </Row>
