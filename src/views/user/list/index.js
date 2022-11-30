@@ -1,24 +1,21 @@
-import { Fragment, useEffect } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, Redirect, useHistory } from 'react-router-dom'
 import { Row, Col, Card, CardBody } from 'reactstrap'
 
 import { User } from 'react-feather'
-
 import Avatar from '@components/avatar'
-
-import UsersTable from './Table'
+import UsersTable from './partial/Table'
 import { useSearchParams } from '@src/navigation'
 import { getUsers } from '../store/action'
-import Filter from './Filter'
-
+import { SidebarCtx, SidebarProvider } from './partial/sidebarContext'
 const UserList = () => {
-  const [searchParams] = useSearchParams()
+  const [searchParams,setSearchParams] = useSearchParams()
   const location = useLocation()
-  const totalUsers = useSelector((state) => state.user.total)
   const dispatch = useDispatch()
   const history = useHistory()
-
+  const store = useSelector((state) => state.user)
+  const [role, setRole] =useState('')
   useEffect(() => {
     const fetchData = async () => {
       const limit = parseInt(searchParams.get('limit'))
@@ -34,8 +31,18 @@ const UserList = () => {
       if (searchParams.get('role')) {
         query.filter['role'] = searchParams.get('role')
       }
+      if (searchParams.get('search')){
+        query.filter['search'] = searchParams.get('search')
+      }
       try {
-        await dispatch(getUsers(query))
+        if (location.pathname == '/admin/list') {
+          setRole('admin')
+          await dispatch(getUsers({...query, filter:{...query.filter, role:'admin'}}))
+        }
+        else if (location.pathname == '/publisher/list') {
+          setRole('publisher')
+          await dispatch(getUsers({...query, filter:{...query.filter, role:'publisher'}}))
+        }
       } catch (error) {
         history.push('/not-authorized')
       }
@@ -58,11 +65,9 @@ const UserList = () => {
           <Col sm={12} md={6} lg={3}>
             <Card className="card-congratulations-medal">
               <CardBody>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h3 className="fw-bolder mb-75">{totalUsers}</h3>
-                    <p className="card-text">Total Users</p>
-                  </div>
+                <div className="d-flex justify-content-between align-items-end">
+                    <h3 className="fw-bolder mb-75">{store.total}</h3>
+                    <p className="card-text ">Total {role}s</p>
                   <Avatar color="light-primary" size="lg" icon={<User />} />
                 </div>
               </CardBody>
@@ -121,11 +126,13 @@ const UserList = () => {
           </Col> */}
         </Row>
         <Row>
-          <Col>
+          {/* <Col>
             <Filter />
-          </Col>
+          </Col> */}
         </Row>
-        <UsersTable />
+        <SidebarProvider>
+          <UsersTable users={store} role={role}/>
+        </SidebarProvider>
       </Fragment>
     )
   }

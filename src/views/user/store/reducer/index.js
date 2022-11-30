@@ -2,7 +2,7 @@
 const initialState = {
   total: 0,
   data: [],
-  selectedUser: null,
+  selectedUser:null,
   isLoading: false,
   error: null,
 }
@@ -23,6 +23,18 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedUser: { ...state.selectedUser, status: action.payload.status },
+      }
+    case 'UPDATE_USER':
+      let id = action.payload._id
+      return {
+        ...state,
+        isLoading:false,
+        data:state.data.map(it => {
+          if (it._id == id) {
+            return action.payload
+          }
+          return it
+        }),
       }
     default:
       return state

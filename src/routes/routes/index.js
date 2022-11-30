@@ -14,7 +14,12 @@ const Routes = [
     private: true,
   },
   {
-    path: '/user/list',
+    path: '/publisher/list',
+    component: lazy(() => import('../../views/user/list')),
+    private: true,
+  },
+  {
+    path: '/admin/list',
     component: lazy(() => import('../../views/user/list')),
     private: true,
   },

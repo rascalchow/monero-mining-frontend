@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 
 import Proptypes from 'prop-types'
 
@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
-import { ChevronDown } from 'react-feather'
+import { ChevronDown, Cpu } from 'react-feather'
 import DataTable from 'react-data-table-component'
 
 import {
@@ -22,18 +22,30 @@ import {
   CustomInput,
   Button,
   Spinner,
+  CardHeader,
 } from 'reactstrap'
-
+import { store } from '@store/storeConfig/store'
+import { selectThemeColors } from '@utils'
+import Select from 'react-select'
 import Sidebar from './Sidebar'
 
 import { useSearchParams } from '@src/navigation'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
+import { setUser } from '../../store/action'
+import { SidebarCtx } from './sidebarContext'
+
+const statusOptions = [
+  { value: null, label: 'All' },
+  { value: 'pending', label: 'Pending' },
+  { value: 'active', label: 'Active' },
+  { value: 'inactive', label: 'Inactive' },
+]
 
 const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
   const [searchParams, setSearchParams] = useSearchParams()
-
+  const { setToCreateMode } = useContext(SidebarCtx)
   const onPageSizeChange = (e) => {
     setSearchParams(
       {
@@ -44,11 +56,12 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
     )
   }
 
+
   return (
-    <div className="invoice-list-table-header w-100 mr-1 ml-50 mt-2 mb-75">
+    <div className="invoice-list-table-header w-100 mr-1 ml-50 mt-1 mb-75">
       <Row>
-        <Col xl="6" className="d-flex align-items-center p-0">
-          <div className="d-flex align-items-center w-100">
+        <Col xl="6" className="d-flex align-items-center p-0 justify-content-between">
+          <Col xl="4" className="d-flex align-items-center w-100">
             <Label for="rows-per-page">Show</Label>
             <CustomInput
               className="form-control mx-50"
@@ -68,33 +81,56 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
               <option value="50">50</option>
             </CustomInput>
             <Label for="rows-per-page">Entries</Label>
-          </div>
+          </Col>
+
         </Col>
         <Col
           xl="6"
           className="d-flex align-items-sm-center justify-content-lg-end justify-content-start flex-lg-nowrap flex-wrap flex-sm-row flex-column pr-lg-1 p-0 mt-lg-0 mt-1"
         >
-          <div className="d-flex align-items-center mb-sm-0 mb-1 mr-1">
-            <Label className="mb-0" for="search-invoice">
-              Search:
-            </Label>
-            <Input
-              id="search-invoice"
-              className="ml-50 w-100"
-              type="text"
-              value={searchParams.get('search') || ''}
-              onChange={(e) => setSearchParams({ search: e.target.value })}
+          <Col xl="8">
+            <div className="d-flex align-items-center mb-sm-0 mb-1 mr-1">
+              <Label className="mb-0" for="search-invoice">
+                Search:
+              </Label>
+              <Input
+                id="search-invoice"
+                className="ml-50 w-100"
+                type="text"
+                value={searchParams.get('search') || ''}
+                onChange={(e) => { setSearchParams({ search: e.target.value, page: 1 }) }}
+              />
+            </div>
+          </Col>
+          <Col xl="4">
+            <Select
+              theme={selectThemeColors}
+              isClearable={false}
+              className="react-select"
+              classNamePrefix="select"
+              options={statusOptions}
+              value={statusOptions.find(
+                (it) => it.value === searchParams.get('status'),
+              )}
+              onChange={(opt) => {
+                setSearchParams({
+                  status: opt.value,
+                  page: 1,
+                })
+              }}
+              placeholder="Select Status"
             />
-          </div>
-          <Button.Ripple
+          </Col>
+          {/* <Button.Ripple
             color="primary"
             onClick={() => {
               setSidebarOpen(true)
+              setToCreateMode(true)
             }}
             disabled={sidebarOpen}
           >
             Add New User
-          </Button.Ripple>
+          </Button.Ripple> */}
         </Col>
       </Row>
     </div>
@@ -106,16 +142,15 @@ CustomHeader.propTypes = {
   setSidebarOpen: Proptypes.func.isRequired,
 }
 
-const UsersTable = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const store = useSelector((state) => state.user)
+const UsersTable = ({ users, role }) => {
+  // const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const CustomPagination = () => {
-    const [searchParams, setSearchParams] = useSearchParams()
     const count = Number(
-      Math.ceil(store.total / parseInt(searchParams.get('limit'))),
+      Math.ceil(users.total / parseInt(searchParams.get('limit'))),
     )
-
     return (
       <ReactPaginate
         forcePage={parseInt(searchParams.get('page')) - 1}
@@ -142,6 +177,7 @@ const UsersTable = () => {
   return (
     <div className="users-list-page">
       <Card>
+        <CardHeader style={{ borderBottom: '1px solid #b4b7bd40', textTransform: 'capitalize' }} >{`${role}s`}</CardHeader>
         <DataTable
           noHeader
           pagination
@@ -149,7 +185,7 @@ const UsersTable = () => {
           responsive
           paginationServer
           columns={columns}
-          progressPending={store.isLoading}
+          progressPending={users.isLoading}
           progressComponent={
             <div className="table-loader-container">
               <Spinner className="spinner" />
@@ -158,7 +194,7 @@ const UsersTable = () => {
           sortIcon={<ChevronDown />}
           className="react-dataTable"
           paginationComponent={CustomPagination}
-          data={store.data}
+          data={users.data}
           subHeaderComponent={
             <CustomHeader
               sidebarOpen={sidebarOpen}
@@ -167,12 +203,13 @@ const UsersTable = () => {
           }
         />
       </Card>
-
       <Sidebar
         open={sidebarOpen}
         toggleSidebar={() => {
-          setSidebarOpen((state) => !state)
+          store.dispatch(setUser(null))
+          setSidebarOpen(!sidebarOpen)
         }}
+        user={users.selectedUser}
       />
     </div>
   )

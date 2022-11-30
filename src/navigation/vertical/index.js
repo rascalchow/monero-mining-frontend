@@ -1,4 +1,4 @@
-import { Home, Users, FileText, Inbox } from 'react-feather'
+import { Home, Users, User, FileText, Inbox } from 'react-feather'
 
 export default [
   {
@@ -8,10 +8,17 @@ export default [
     navLink: '/home',
   },
   {
-    id: 'users',
-    title: 'Users',
+    id: 'admins',
+    title: 'Admins',
+    icon: <User size={20} />,
+    navLink: '/admin/list',
+    restrictedTo: { role: ['admin'] },
+  },
+  {
+    id: 'publishers',
+    title: 'Publishers',
     icon: <Users size={20} />,
-    navLink: '/user/list',
+    navLink: '/publisher/list',
     restrictedTo: { role: ['admin'] },
   },
   {

@@ -55,9 +55,31 @@ export const getUser = (id) => {
   }
 }
 
+// ** Set User to Store directly
+export const setUser = (user) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'SET_LOADING',
+      payload: false,
+    })
+    try {
+      dispatch({
+        type: 'SET_USER',
+        payload: user
+      })
+    } catch (error) {
+      dispatch({
+        type: 'SET_USER',
+        payload: null,
+      })
+      throw error
+    }
+  }
+}
+
 // ** Add new user
 export const addUser = (user) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     axios
       .post('/apps/users/add-user', user)
       .then((response) => {
@@ -66,8 +88,30 @@ export const addUser = (user) => {
           payload: response,
         })
       })
-      .then(() => {})
+      .then(() => { })
       .catch((err) => console.log(err))
+  }
+}
+
+export const updateUser = (user, id) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: 'SET_LOADING',
+        payload: true,
+      })
+      const res = await axiosClient.patch(`/users/${id}`, user)
+      dispatch({
+        type: 'UPDATE_USER',
+        payload: res,
+      })
+    } catch (error) {
+      dispatch({
+        type: 'SET_LOADING',
+        payload: false,
+      })
+      throw error
+    }
   }
 }
 
@@ -82,7 +126,7 @@ export const deleteUser = (id) => {
           payload: response,
         })
       })
-      .then(() => {})
+      .then(() => { })
   }
 }
 

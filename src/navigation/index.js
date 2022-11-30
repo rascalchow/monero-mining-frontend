@@ -6,7 +6,6 @@ export const useSearchParams = () => {
   const history = useHistory()
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
-  
   const setSearchParams = (state, reset=false) => {
     const searchParams = reset
       ? new URLSearchParams()

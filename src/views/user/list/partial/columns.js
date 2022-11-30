@@ -1,10 +1,11 @@
+import { useContext } from 'react'
 // ** React Imports
 import { Link } from 'react-router-dom'
 
 // ** Store & Actions
-import { getUser, deleteUser } from '../store/action'
+import { setUser, deleteUser } from '../../store/action'
 import { store } from '@store/storeConfig/store'
-
+import { SidebarCtx } from './sidebarContext'
 // ** Third Party Components
 import {
   Badge,
@@ -96,8 +97,9 @@ export const columns = [
   {
     name: 'Actions',
     minWidth: '100px',
-    cell: (row) => (
-      <UncontrolledDropdown>
+    cell: (row) => {
+      const {setSidebarOpen, setToCreateMode} = useContext(SidebarCtx)
+      return (<UncontrolledDropdown>
         <DropdownToggle tag="div" className="btn btn-sm">
           <MoreVertical size={14} className="cursor-pointer" />
         </DropdownToggle>
@@ -111,23 +113,29 @@ export const columns = [
             <span className="align-middle">Details</span>
           </DropdownItem>
           <DropdownItem
-            tag={Link}
-            to={`/apps/user/edit/${row.id}`}
+            // to={`/apps/user/edit/${row._id}`}
             className="w-100"
-            onClick={() => store.dispatch(getUser(row.id))}
+            onClick={() => {
+              store.dispatch(setUser(row))
+              setSidebarOpen(true)
+              setToCreateMode(false)
+            }}
           >
             <Archive size={14} className="mr-50" />
             <span className="align-middle">Edit</span>
           </DropdownItem>
           <DropdownItem
             className="w-100"
-            onClick={() => store.dispatch(deleteUser(row.id))}
+            onClick={() => {
+              store.dispatch(deleteUser(row.id))
+            }}
           >
             <Trash2 size={14} className="mr-50" />
             <span className="align-middle">Delete</span>
           </DropdownItem>
         </DropdownMenu>
-      </UncontrolledDropdown>
-    ),
+      </UncontrolledDropdown>)
+    }
+    ,
   },
 ]

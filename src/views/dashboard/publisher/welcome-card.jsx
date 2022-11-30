@@ -13,7 +13,7 @@ const WelcomeCard = ({ className }) => {
       <CardBody className="d-flex align-items-center justify-content-center">
         <CardText className="text-center">
           Hi {_.get(userData, 'name', '').split(' ')[0]}
-          Your publisher key is ${_.get(userData, 'publisherKey', '')}
+          {/* Your publisher key is ${_.get(userData, 'publisherKey', '')} */}
         </CardText>
       </CardBody>
     </Card>

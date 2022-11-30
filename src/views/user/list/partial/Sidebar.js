@@ -1,3 +1,4 @@
+import { useContext, useEffect, useState } from 'react'
 import Proptypes from 'prop-types'
 import { useForm } from 'react-hook-form'
 import {
@@ -13,14 +14,30 @@ import Sidebar from '@components/sidebar'
 import InputPasswordToggle from '@components/input-password-toggle'
 import FormField from '@components/form-field'
 import { Loader } from 'react-feather'
-
-const SidebarNewUsers = ({ open, toggleSidebar }) => {
-  
+import { SidebarCtx } from './sidebarContext'
+import {addUser, updateUser} from '../../store/action'
+import { useDispatch } from 'react-redux'
+const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
+  const dispatch = useDispatch()
+  const {isCreate} = useContext(SidebarCtx)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    // password: '',
+    companyName: '',
+    application: '',
+    contact: '',
+    country: '',
+    instantMessenger: '',
+    website: '',
+    moreInformation: ''
+  })
   const schema = yup.object({
     name: yup.string().required(),
     email: yup.string().required().email(),
     phone: yup.string().required(),
-    password: yup.string().required(),
+    // password: yup.string().required(),
     companyName: yup.string().required(),
     application: yup.string().required(),
     contact: yup.string().required(),
@@ -29,40 +46,61 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     website: yup.string().required(),
     moreInformation: yup.string().required(),
   }).required()
-
   const {
     control,
     handleSubmit,
+    setValue,
     formState: {
       isSubmitting,
       errors,
     }
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
-      password: '',
-      companyName: '',
-      application: '',
-      contact: '',
-      country: '',
-      instantMessenger: '',
-      website: '',
-      moreInformation: '',	
-    }
+    defaultValues: formData
   })
 
-  const onSubmit = () => {
+  const onSubmit = (info) => {
     toggleSidebar()
+    if (isCreate) {
+      dispatch(addUser(info))
+    }else {
+      dispatch(updateUser(info, user._id))
+    }
   }
 
+  useEffect(() => {
+    if (user) {
+      setValue('name',user.name)
+      setValue('email', user.email)
+      setValue('phone', user.phone)
+      // setValue('password','')
+      setValue('application', user.userProfileId.application)
+      setValue('contact', user.userProfileId.contact)
+      setValue('country', user.userProfileId.country)
+      setValue('companyName', user.userProfileId.companyName)
+      setValue('instantMessenger', user.userProfileId.instantMessenger)
+      setValue('website', user.userProfileId.website)
+      setValue('moreInformation', user.userProfileId.moreInformation)
+    }
+    return ()=>{
+      setValue('name','')
+      setValue('email', '')
+      setValue('phone', '')
+      // setValue('password','')
+      setValue('companyName', '')
+      setValue('application', '')
+      setValue('contact', '')
+      setValue('country', '')
+      setValue('instantMessenger', '')
+      setValue('website', '')
+      setValue('moreInformation', '')
+    }
+  }, [user])
   return (
     <Sidebar
       size="lg"
       open={open}
-      title="New User"
+      title="Edit User"
       headerClassName="mb-1"
       contentClassName="pt-0"
       toggleSidebar={toggleSidebar}
@@ -230,7 +268,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             />
           )}
         />
-        <FormField
+        {/* <FormField
           label="Password"
           name="password"
           control={control}
@@ -242,7 +280,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             >
             </InputPasswordToggle>
           )}
-        />
+        /> */}
         <Button.Ripple
           type="submit"
           block
@@ -254,7 +292,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                 className="spinner"
                 size={18}
               />
-            ) : 'Add User'
+            ) : 'Submit'
           }
         </Button.Ripple>
       </Form>
