@@ -55,10 +55,13 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
     )
   }
   return (
-    <div className="invoice-list-table-header w-100 mr-1 ml-50 mt-1 mb-75">
+    <div className="invoice-list-table-header w-100 mr-1 ml-50 mt-1 ">
       <Row>
-        <Col xl="6" className="d-flex align-items-center p-0 justify-content-between">
-          <Col xl="4" className="d-flex align-items-center w-100">
+        <Col
+          sm="4"
+          className="d-flex align-items-center p-0 justify-content-between  mb-1"
+        >
+          <Col sm="8" className="d-flex align-items-center w-100">
             <Label for="rows-per-page">Show</Label>
             <CustomInput
               className="form-control mx-50"
@@ -79,13 +82,12 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
             </CustomInput>
             <Label for="rows-per-page">Entries</Label>
           </Col>
-
         </Col>
         <Col
-          xl="6"
-          className="d-flex align-items-sm-center justify-content-lg-end justify-content-start flex-lg-nowrap flex-wrap flex-sm-row flex-column pr-lg-1 p-0 mt-lg-0 mt-1"
+          sm="8"
+          className="d-flex align-items-sm-center justify-content-lg-end justify-content-start flex-lg-nowrap flex-wrap flex-sm-row flex-column pr-lg-1 p-0 mb-1"
         >
-          <Col xl="8">
+          <Col sm="8" lg="6">
             <div className="d-flex align-items-center mb-sm-0 mb-1 mr-1">
               <Label className="mb-0" for="search-invoice">
                 Search:
@@ -95,11 +97,13 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
                 className="ml-50 w-100"
                 type="text"
                 value={searchParams.get('search') || ''}
-                onChange={(e) => { setSearchParams({ search: e.target.value, page: 1 }) }}
+                onChange={(e) => {
+                  setSearchParams({ search: e.target.value, page: 1 })
+                }}
               />
             </div>
           </Col>
-          <Col xl="4">
+          <Col sm="4" lg="4">
             <Select
               theme={selectThemeColors}
               isClearable={false}
@@ -170,12 +174,26 @@ const UsersTable = ({ users, role }) => {
     )
   }
   const handleSort = async (column, sortDirection) => {
-    setSearchParams({ [column.selector]: sortDirection, page: 1 }, true) 
+    setSearchParams(
+      {
+        page: searchParams.get('page'),
+        limit: searchParams.get('limit'),
+        search: searchParams.get('search'),
+        [column.selector]: sortDirection,
+        page: 1,
+      },
+      true,
+    )
   }
   return (
     <div className="users-list-page">
       <Card>
-        <CardHeader style={{ borderBottom: '1px solid #b4b7bd40', textTransform: 'capitalize' }} >{`${role}s`}</CardHeader>
+        <CardHeader
+          style={{
+            borderBottom: '1px solid #b4b7bd40',
+            textTransform: 'capitalize',
+          }}
+        >{`${role}s`}</CardHeader>
         <DataTable
           noHeader
           pagination
@@ -189,7 +207,7 @@ const UsersTable = ({ users, role }) => {
               <Spinner className="spinner" />
             </div>
           }
-          sortServer = {true}
+          sortServer={true}
           onSort={handleSort}
           sortIcon={<ChevronDown />}
           className="react-dataTable"

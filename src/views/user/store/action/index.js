@@ -65,7 +65,7 @@ export const setUser = (user) => {
     try {
       dispatch({
         type: 'SET_USER',
-        payload: user
+        payload: user,
       })
     } catch (error) {
       dispatch({
@@ -88,7 +88,7 @@ export const addUser = (user) => {
           payload: response,
         })
       })
-      .then(() => { })
+      .then(() => {})
       .catch((err) => console.log(err))
   }
 }
@@ -101,6 +101,7 @@ export const updateUser = (user, id) => {
         payload: true,
       })
       const res = await axiosClient.patch(`/users/${id}`, user)
+      toast('Successfully updated user!', { type: 'success' })
       dispatch({
         type: 'UPDATE_USER',
         payload: res,
@@ -110,6 +111,7 @@ export const updateUser = (user, id) => {
         type: 'SET_LOADING',
         payload: false,
       })
+      toast('Update failed!', { type: 'error' })
       throw error
     }
   }
@@ -126,7 +128,7 @@ export const deleteUser = (id) => {
           payload: response,
         })
       })
-      .then(() => { })
+      .then(() => {})
   }
 }
 

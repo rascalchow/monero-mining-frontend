@@ -9,15 +9,17 @@ import UsersTable from './partial/Table'
 import { useSearchParams } from '@src/navigation'
 import { getUsers } from '../store/action'
 import { SidebarCtx, SidebarProvider } from './partial/sidebarContext'
+
+const sortKey = ['email', 'name', 'companyName', 'status']
 const UserList = () => {
-  const [searchParams,setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const location = useLocation()
   const dispatch = useDispatch()
   const history = useHistory()
   const store = useSelector((state) => state.user)
-  const [role, setRole] =useState('')
+  const [role, setRole] = useState('')
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       const limit = parseInt(searchParams.get('limit'))
       const page = parseInt(searchParams.get('page'))
       const query = {
@@ -31,29 +33,28 @@ const UserList = () => {
       if (searchParams.get('role')) {
         query.filter['role'] = searchParams.get('role')
       }
-      if (searchParams.get('search')){
+      if (searchParams.get('search')) {
         query.filter['search'] = searchParams.get('search')
       }
-      
-      if (searchParams.get('name')){
-        query.filter['name'] = searchParams.get('name')
-      }
-      if (searchParams.get('email')){
-        query.filter['email'] = searchParams.get('email')
-      }
-      if (searchParams.get('companyName')){
-        query.filter['companyName'] = searchParams.get('companyName')
-      }
-      
-      
+      sortKey.forEach((key) => {
+        if (searchParams.get(key)) {
+          query.filter[key] = searchParams.get(key)
+        }
+      })
       try {
         if (location.pathname == '/admin/list') {
           setRole('admin')
-          await dispatch(getUsers({...query, filter:{...query.filter, role:'admin'}}))
-        }
-        else if (location.pathname == '/publisher/list') {
+          dispatch(
+            getUsers({ ...query, filter: { ...query.filter, role: 'admin' } }),
+          )
+        } else if (location.pathname == '/publisher/list') {
           setRole('publisher')
-          await dispatch(getUsers({...query, filter:{...query.filter, role:'publisher'}}))
+          dispatch(
+            getUsers({
+              ...query,
+              filter: { ...query.filter, role: 'publisher' },
+            }),
+          )
         }
       } catch (error) {
         history.push('/not-authorized')
@@ -78,8 +79,8 @@ const UserList = () => {
             <Card className="card-congratulations-medal">
               <CardBody>
                 <div className="d-flex justify-content-between align-items-end">
-                    <h3 className="fw-bolder mb-75">{store.total}</h3>
-                    <p className="card-text ">Total {role}s</p>
+                  <h3 className="fw-bolder mb-75">{store.total}</h3>
+                  <p className="card-text ">Total {role}s</p>
                   <Avatar color="light-primary" size="lg" icon={<User />} />
                 </div>
               </CardBody>
@@ -143,7 +144,7 @@ const UserList = () => {
           </Col> */}
         </Row>
         <SidebarProvider>
-          <UsersTable users={store} role={role}/>
+          <UsersTable users={store} role={role} />
         </SidebarProvider>
       </Fragment>
     )
