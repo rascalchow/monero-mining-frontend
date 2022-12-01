@@ -6,8 +6,7 @@ import { columns } from './columns'
 
 // ** Store & Actions
 
-import { useSelector } from 'react-redux'
-
+import { useDispatch } from 'react-redux'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { ChevronDown, Cpu } from 'react-feather'
@@ -33,7 +32,7 @@ import { useSearchParams } from '@src/navigation'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { setUser } from '../../store/action'
+import { setUser, getUsers } from '../../store/action'
 import { SidebarCtx } from './sidebarContext'
 
 const statusOptions = [
@@ -45,7 +44,7 @@ const statusOptions = [
 
 const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const { setToCreateMode } = useContext(SidebarCtx)
+  // const { setToCreateMode } = useContext(SidebarCtx)
   const onPageSizeChange = (e) => {
     setSearchParams(
       {
@@ -55,8 +54,6 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
       true,
     )
   }
-
-
   return (
     <div className="invoice-list-table-header w-100 mr-1 ml-50 mt-1 mb-75">
       <Row>
@@ -143,10 +140,9 @@ CustomHeader.propTypes = {
 }
 
 const UsersTable = ({ users, role }) => {
-  // const [sidebarOpen, setSidebarOpen] = useState(false)
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
   const [searchParams, setSearchParams] = useSearchParams()
-
+  const dispatch = useDispatch()
   const CustomPagination = () => {
     const count = Number(
       Math.ceil(users.total / parseInt(searchParams.get('limit'))),
@@ -173,7 +169,9 @@ const UsersTable = ({ users, role }) => {
       />
     )
   }
-
+  const handleSort = async (column, sortDirection) => {
+    setSearchParams({ [column.selector]: sortDirection, page: 1 }, true) 
+  }
   return (
     <div className="users-list-page">
       <Card>
@@ -191,6 +189,8 @@ const UsersTable = ({ users, role }) => {
               <Spinner className="spinner" />
             </div>
           }
+          sortServer = {true}
+          onSort={handleSort}
           sortIcon={<ChevronDown />}
           className="react-dataTable"
           paginationComponent={CustomPagination}

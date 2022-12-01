@@ -2,10 +2,12 @@ import { useContext } from 'react'
 // ** React Imports
 import { Link } from 'react-router-dom'
 
+import { useSearchParams } from '@src/navigation'
 // ** Store & Actions
 import { setUser, deleteUser } from '../../store/action'
 import { store } from '@store/storeConfig/store'
 import { SidebarCtx } from './sidebarContext'
+
 // ** Third Party Components
 import {
   Badge,
@@ -60,33 +62,33 @@ export const columns = [
   {
     name: 'Name',
     minWidth: '180px',
-    selector: 'name',
+    selector:'name',
     sortable: true,
     cell: (row) => <Link to={`/user/view/${row._id}`}>{row['name']}</Link>,
   },
   {
     name: 'Email',
     minWidth: '220px',
+    selector:'email',
     sortable: true,
     cell: (row) => row.email,
   },
   {
     name: 'Company',
     minWidth: '270px',
+    selector:'companyName',
     sortable: true,
     cell: (row) => _.get(row, 'userProfileId.companyName', ''),
   },
   {
     name: 'Role',
     minWidth: '172px',
-    selector: 'role',
     sortable: true,
     cell: (row) => renderRole(row),
   },
   {
     name: 'Status',
     minWidth: '138px',
-    selector: 'status',
     sortable: true,
     cell: (row) => (
       <Badge className="text-capitalize" color={statusObj[row.status]} pill>

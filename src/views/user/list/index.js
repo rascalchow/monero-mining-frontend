@@ -34,6 +34,18 @@ const UserList = () => {
       if (searchParams.get('search')){
         query.filter['search'] = searchParams.get('search')
       }
+      
+      if (searchParams.get('name')){
+        query.filter['name'] = searchParams.get('name')
+      }
+      if (searchParams.get('email')){
+        query.filter['email'] = searchParams.get('email')
+      }
+      if (searchParams.get('companyName')){
+        query.filter['companyName'] = searchParams.get('companyName')
+      }
+      
+      
       try {
         if (location.pathname == '/admin/list') {
           setRole('admin')
