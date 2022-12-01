@@ -31,7 +31,6 @@ const About = () => {
     { label: 'Phone', value: userData.phone },
     { label: 'Website URL', value: userData.userProfileId.website },
   ]
-  console.log(userData)
   return (
     <Card>
       <CardBody>

@@ -98,15 +98,13 @@ const Register = () => {
       email: data.email,
       phone: data.phone,
       password: data.password,
-      userProfile: {
-        companyName: data.companyName,
-        application: data.application,
-        contact: data.contact,
-        country: data.country.value,
-        instantMessenger: data.instantMessenger,
-        website: data.website,
-        moreInformation: data.moreInformation,
-      },
+      companyName: data.companyName,
+      application: data.application,
+      contact: data.contact,
+      country: data.country.value,
+      instantMessenger: data.instantMessenger,
+      website: data.website,
+      moreInformation: data.moreInformation,
     }
     try {
       return await dispatch(handleRegister(formData))

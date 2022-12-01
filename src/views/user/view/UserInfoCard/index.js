@@ -14,6 +14,7 @@ import {
   Col,
   Spinner,
   Alert,
+  Badge,
 } from 'reactstrap'
 import { Flag, Phone, Grid, Server, Voicemail, Globe } from 'react-feather'
 import _ from 'lodash'
@@ -24,6 +25,12 @@ import { approveUser, rejectUser } from '../../store/action'
 import { COUNTRIES } from '@src/constants.js'
 
 import './style.scss'
+
+const STATUS_COLOR = {
+  active: 'success',
+  rejected: 'danger',
+  pending: 'primary',
+}
 
 const UserInfoCard = () => {
   const selectedUser = useSelector((state) => state.user.selectedUser)
@@ -99,6 +106,11 @@ const UserInfoCard = () => {
   return (
     <Card className="main-info-card">
       <CardBody>
+        <div className="d-flex justify-content-end">
+          <Badge color={STATUS_COLOR[selectedUser.status]}>
+            {selectedUser.status}
+          </Badge>
+        </div>
         <Row>
           <Col
             xl="6"

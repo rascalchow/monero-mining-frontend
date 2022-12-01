@@ -55,9 +55,31 @@ export const getUser = (id) => {
   }
 }
 
+// ** Set User to Store directly
+export const setUser = (user) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'SET_LOADING',
+      payload: false,
+    })
+    try {
+      dispatch({
+        type: 'SET_USER',
+        payload: user,
+      })
+    } catch (error) {
+      dispatch({
+        type: 'SET_USER',
+        payload: null,
+      })
+      throw error
+    }
+  }
+}
+
 // ** Add new user
 export const addUser = (user) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     axios
       .post('/apps/users/add-user', user)
       .then((response) => {
@@ -68,6 +90,30 @@ export const addUser = (user) => {
       })
       .then(() => {})
       .catch((err) => console.log(err))
+  }
+}
+
+export const updateUser = (user, id) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: 'SET_LOADING',
+        payload: true,
+      })
+      const res = await axiosClient.patch(`/users/${id}`, user)
+      toast('Successfully updated user!', { type: 'success' })
+      dispatch({
+        type: 'UPDATE_USER',
+        payload: res,
+      })
+    } catch (error) {
+      dispatch({
+        type: 'SET_LOADING',
+        payload: false,
+      })
+      toast('Update failed!', { type: 'error' })
+      throw error
+    }
   }
 }
 
