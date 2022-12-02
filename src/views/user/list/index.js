@@ -10,7 +10,18 @@ import { useSearchParams } from '@src/navigation'
 import { getUsers } from '../store/action'
 import { SidebarCtx, SidebarProvider } from './partial/sidebarContext'
 
-const sortKey = ['email', 'name', 'companyName', 'status']
+const sortKey = [
+  'name',
+  'email',
+  'companyName',
+  'status',
+  'installs',
+  'live',
+  'liveTime',
+  'earnings',
+  'referrals',
+  'payments',
+]
 const UserList = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const location = useLocation()

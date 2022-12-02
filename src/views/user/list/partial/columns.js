@@ -61,35 +61,77 @@ const statusObj = {
 export const columns = [
   {
     name: 'Name',
-    minWidth: '180px',
+    width: '12%',
     selector: 'name',
     sortable: true,
     cell: (row) => <Link to={`/user/view/${row._id}`}>{row['name']}</Link>,
   },
   {
     name: 'Email',
-    minWidth: '220px',
+    width: '12%',
     selector: 'email',
     sortable: true,
     cell: (row) => row.email,
   },
   {
     name: 'Company',
-    minWidth: '270px',
+    width: '11%',
     selector: 'companyName',
     sortable: true,
     cell: (row) => row.companyName,
   },
   {
-    name: 'Role',
-    minWidth: '172px',
-    sortable: false,
-    selector: 'role',
-    cell: (row) => renderRole(row),
+    name: 'Installs',
+    width:'8%',
+    selector: 'installs',
+    sortable: true,
+    cell: (row) => row.installs
+  },
+  {
+    name: 'Live',
+    width:'7%',
+    selector: 'live',
+    sortable: true,
+    cell: (row) => row.live
+  },
+  {
+    name: 'Live Time',
+    width:'7%',
+    selector: 'liveTime',
+    sortable: true,
+    cell: (row) => row.liveTime
+  },
+  {
+    name: 'Success Rate',
+    width:'7%',
+    selector: 'successRate',
+    sortable: true,
+    cell: (row) => 1
+  },
+  {
+    name: 'Earnings',
+    width:'7%',
+    selector: 'earnings',
+    sortable: true,
+    cell: (row) => row.earnings
+  },
+  {
+    name: 'Referrals',
+    width:'7%',
+    selector: 'referrals',
+    sortable: true,
+    cell: (row) => row.referrals
+  },
+  {
+    name: 'Payments',
+    width:'7%',
+    selector: 'payments',
+    sortable: true,
+    cell: (row) => row.payments
   },
   {
     name: 'Status',
-    minWidth: '138px',
+    width: '9%',
     sortable: true,
     selector: 'status',
     cell: (row) => (
@@ -100,7 +142,7 @@ export const columns = [
   },
   {
     name: 'Actions',
-    minWidth: '100px',
+    width: '6%',
     cell: (row) => {
       const { setSidebarOpen, setToCreateMode } = useContext(SidebarCtx)
       return (
