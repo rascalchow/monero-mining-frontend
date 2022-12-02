@@ -78,7 +78,7 @@ export const columns = [
     minWidth: '270px',
     selector: 'companyName',
     sortable: true,
-    cell: (row) => _.get(row, 'userProfileId.companyName', ''),
+    cell: (row) => row.companyName,
   },
   {
     name: 'Role',
