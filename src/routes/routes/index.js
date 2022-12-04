@@ -24,8 +24,8 @@ const Routes = [
     private: true,
   },
   {
-    path: '/user/view/:id',
-    component: lazy(() => import('../../views/user/view')),
+    path: '/publisher/:id',
+    component: lazy(() => import('../../views/user/info')),
     private: true,
   },
   {

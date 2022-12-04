@@ -53,6 +53,7 @@ const EditProduct = () => {
   })
 
   useEffect(() => {
+    console.log('ssssss')
     dispatch(get())
   }, [])
   useEffect(() => {
