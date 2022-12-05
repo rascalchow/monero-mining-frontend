@@ -381,11 +381,9 @@ const ProfileInfoCard = () => {
       </>
     )
   return (
-    <Col xl="12" lg="12" className="mt-2 mt-xl-0 px-2">
       <div className="table-loader-container">
         <Spinner className="spinner" />
       </div>
-    </Col>
   )
 }
 
