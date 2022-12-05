@@ -21,8 +21,17 @@ import {
   Badge,
 } from 'reactstrap'
 import Chart from 'react-apexcharts'
-
-import { Flag, Phone, Grid, Server, Voicemail, Globe } from 'react-feather'
+import Flatpickr from 'react-flatpickr'
+import 'flatpickr/dist/flatpickr.css'
+import {
+  Flag,
+  Phone,
+  Grid,
+  Server,
+  Voicemail,
+  Globe,
+  Calendar,
+} from 'react-feather'
 import _ from 'lodash'
 
 import Description from '@components/description'
@@ -75,7 +84,7 @@ const ProfileInfoCard = () => {
   // const {overview} = useProfileInfoCtx()
   const [isApproving, setIsApproving] = useState(false)
   const [isRejecting, setIsRejecting] = useState(false)
-  const [duration, setDuration] = useState(DURATION[0])
+  const [duration, setDuration] = useState(DURATION)
   const dispatch = useDispatch()
   const { overview, installs } = useProfileInfoCtx()
 
@@ -98,6 +107,12 @@ const ProfileInfoCard = () => {
       setIsRejecting(false)
     } catch (error) {
       setIsRejecting(false)
+    }
+  }
+  const handleDuration = (e) => {
+    if (e.length == 2) {
+      setDuration(e)
+      installs.loadInstallInfo(e)
     }
   }
   if (!overview.loading)
@@ -280,9 +295,9 @@ const ProfileInfoCard = () => {
               <Col
                 sm={{ size: 6, order: 2 }}
                 xs={{ order: 1 }}
-                className="d-flex justify-content-between flex-column text-right"
+                className="d-flex justify-content-end flex-column text-right"
               >
-                <UncontrolledDropdown className="chart-dropdown">
+                {/* <UncontrolledDropdown className="chart-dropdown">
                   <DropdownToggle
                     color=""
                     className="bg-transparent btn-sm border-0 p-50"
@@ -304,16 +319,30 @@ const ProfileInfoCard = () => {
                     ))}
                   </DropdownMenu>
                 </UncontrolledDropdown>
-                {!installs.isInstallLoading ? (
-                  <Chart
-                    options={options}
-                    series={installs.installCount}
-                    type="bar"
-                    height={200}
+                 */}
+                <div className="d-flex align-items-center align-self-end ">
+                  <Calendar size={14} />
+                  <Flatpickr
+                    onChange={(e) => handleDuration(e)}
+                    options={{
+                      mode: 'range',
+                      defaultDate: duration,
+                    }}
+                    className="form-control flat-picker bg-transparent border-0 shadow-none"
                   />
-                ) : (
-                  <Spinner className="spinner" />
-                )}
+                </div>
+                <div className="mt-1">
+                  {!installs.isInstallLoading ? (
+                    <Chart
+                      options={options}
+                      series={installs.installCount}
+                      type="bar"
+                      height={200}
+                    />
+                  ) : (
+                    <Spinner className="spinner" />
+                  )}
+                </div>
               </Col>
             </Row>
             <hr />

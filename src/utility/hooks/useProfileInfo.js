@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { axiosClient } from '@src/@core/services'
 import { useLocation } from 'react-router-dom'
-import { DURATION } from '../../views/user/info/partials/profileInfoContext'
+import {
+  DURATION,
+  PROFILE_TAB_ROUTES,
+} from '../../views/user/info/partials/profileInfoContext'
 import axios from 'axios'
 const useProfileInfo = (id) => {
   const [profileInfo, setProfileInfo] = useState(null)
@@ -10,12 +13,12 @@ const useProfileInfo = (id) => {
   const [isInstallLoading, setInstallLoading] = useState(false)
   const [installInfo, setInstallInfo] = useState(null)
   const [installCount, setInstallCount] = useState([])
-  const location = useLocation()
+  const [liveTimeStaticLoading, setLiveTimeStaticLoading] = useState(false)
+  const [liveTimeChartLoading, setLiveTimeChartLoading] = useState(false)
+  const [liveTimeChartInfo, setLiveTimeChartInfo] = useState(null)
+  const [liveTimeStaticInfo, setLiveTimeStaticInfo] = useState(null)
 
-  useEffect(() => {
-    loadData()
-    loadInstallInfo(DURATION[0])
-  }, [location])
+  const location = useLocation()
 
   const loadData = async () => {
     setLoading(true)
@@ -27,12 +30,11 @@ const useProfileInfo = (id) => {
     }
     setLoading(false)
   }
-  const loadInstallInfo = async (item) => {
-    // const duration = handleDuration(item)
+  const loadInstallInfo = async (param) => {
     setInstallLoading(true)
     try {
-      const result = await axiosClient.get(`/users/installs/${id}`, {
-        params: { item },
+      const result = await axiosClient.get(`/users/appUserInfo/${id}`, {
+        params: { param, type: 'installed' },
       })
       setInstallInfo(result.info)
       setInstallCount([
@@ -46,6 +48,24 @@ const useProfileInfo = (id) => {
     }
     setInstallLoading(false)
   }
+  const loadLiveTimeInfo = async (param, dataType) => {
+    if (dataType == 'STATIC') setLiveTimeStaticLoading(true)
+    else if (dataType == 'CHART') setLiveTimeChartLoading(true)
+    try {
+      const result = await axiosClient.get(`/session/livetime/${id}`, {
+        params: { param, dataType },
+      })
+      if (dataType == 'CHART') {
+        setLiveTimeChartInfo(result)
+        setLiveTimeChartLoading(false)
+      } else if (dataType == 'STATIC') {
+        setLiveTimeStaticInfo(result)
+        setLiveTimeStaticLoading(false)
+      }
+    } catch (error) {
+      toast('Action Failed', { type: 'error' })
+    }
+  }
   const overview = {
     loading,
     profileInfo,
@@ -57,9 +77,17 @@ const useProfileInfo = (id) => {
     loadInstallInfo,
     installCount,
   }
+  const liveTime = {
+    liveTimeStaticLoading,
+    liveTimeChartLoading,
+    loadLiveTimeInfo,
+    liveTimeChartInfo,
+    liveTimeStaticInfo,
+  }
   return {
     overview,
     installs,
+    liveTime,
   }
 }
 

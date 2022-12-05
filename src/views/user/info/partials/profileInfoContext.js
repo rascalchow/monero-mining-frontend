@@ -1,6 +1,8 @@
-import { createContext, useEffect, useContext } from 'react'
+import { createContext, useEffect, useContext, useState } from 'react'
 import { matchPath, useLocation, useParams } from 'react-router-dom'
+import { Calendar } from 'react-feather'
 import useProfileInfo from '@hooks/useProfileInfo'
+import { formatDateAlt } from '../../../../utility/Utils'
 export const PROFILE_TAB_ROUTES = [
   {
     title: 'Overview',
@@ -36,20 +38,27 @@ export const PROFILE_TYPES = [
   },
 ]
 export const DURATION = [
+  formatDateAlt(new Date(Date.now() - 86400000 * 7)),
+  formatDateAlt(new Date()),
+]
+export const LIVETIME = [
   {
-    name: 'Last 7 Days',
-    type: 'day',
-    value: 7,
+    name: "Today's Live Time",
+    color: 'primary',
+    type: 'daily',
+    icon: <Calendar size={21} />,
   },
   {
-    name: 'Last Month',
-    type: 'month',
-    value: 1,
+    name: '30 Days Live Time',
+    iconColor: 'warning',
+    type: 'monthly',
+    icon: <Calendar size={21} />,
   },
   {
-    name: 'Last 3 Months',
-    type: 'month',
-    value: 3,
+    name: 'Total Live Time',
+    iconColor: 'success',
+    type: 'all',
+    icon: <Calendar size={21} />,
   },
 ]
 export const ProfileInfoContext = createContext(null)
@@ -57,18 +66,21 @@ export const useProfileInfoCtx = () => useContext(ProfileInfoContext)
 export const ProfileInfoContextProvider = ({ children }) => {
   const { id } = useParams()
   const location = useLocation()
-
-  const { overview, installs } = useProfileInfo(id)
+  const { overview, installs, liveTime } = useProfileInfo(id)
 
   useEffect(() => {
     const route = PROFILE_TAB_ROUTES.find((route) => {
       return matchPath(`/publisher/${id}/${route.route}`, location.pathname)
     })
     if (route) {
-      switch (route.id) {
+      switch (route.route) {
         case 'overview':
           overview.loadData()
-          installs.loadInstallInfo(DURATION[0])
+          installs.loadInstallInfo(DURATION)
+          break
+        case 'liveTime':
+          liveTime.loadLiveTimeInfo(DURATION, 'CHART')
+          liveTime.loadLiveTimeInfo(DURATION, 'STATIC')
           break
         case 'software':
           break
@@ -76,10 +88,11 @@ export const ProfileInfoContextProvider = ({ children }) => {
           break
       }
     }
-  }, [])
+  }, [location])
   const providerValue = {
     overview,
     installs,
+    liveTime,
   }
   return (
     <ProfileInfoContext.Provider value={providerValue}>
