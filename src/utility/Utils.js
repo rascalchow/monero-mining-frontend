@@ -19,7 +19,6 @@ const isToday = (date) => {
     /* eslint-enable */
   )
 }
-
 /**
  ** Format and return date in Humanize format
  ** Intl docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/format
@@ -34,7 +33,11 @@ export const formatDate = (
   if (!value) return value
   return new Intl.DateTimeFormat('en-US', formatting).format(new Date(value))
 }
-
+export const formatDateAlt = (
+  date
+)=>{
+  return new Intl.DateTimeFormat('ko-KR').format(date).replace(/. /,'-').replace('. ','-').replace('.','')
+}
 // ** Returns short month of passed date
 export const formatDateToMonthShort = (value, toTimeForCurrentDay = true) => {
   const date = new Date(value)

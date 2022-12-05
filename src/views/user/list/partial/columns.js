@@ -64,7 +64,7 @@ export const columns = [
     width: '12%',
     selector: 'name',
     sortable: true,
-    cell: (row) => <Link to={`/user/view/${row._id}`}>{row['name']}</Link>,
+    cell: (row) => <Link to={`/publisher/${row._id}`}>{row['name']}</Link>,
   },
   {
     name: 'Email',
