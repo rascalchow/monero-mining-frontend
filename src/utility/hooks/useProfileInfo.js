@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 import {
   DURATION,
   PROFILE_TAB_ROUTES,
-} from '../../views/user/info/partials/profileInfoContext'
+} from '@const/user'
 import axios from 'axios'
 const useProfileInfo = (id) => {
   const [profileInfo, setProfileInfo] = useState(null)
@@ -17,7 +17,8 @@ const useProfileInfo = (id) => {
   const [liveTimeChartLoading, setLiveTimeChartLoading] = useState(false)
   const [liveTimeChartInfo, setLiveTimeChartInfo] = useState(null)
   const [liveTimeStaticInfo, setLiveTimeStaticInfo] = useState(null)
-
+  const [appUsersInfo, setAppUsers] = useState([])
+  const [appUsersLoading, setAppUsersLoading] = useState(false)
   const location = useLocation()
 
   const loadData = async () => {
@@ -57,14 +58,24 @@ const useProfileInfo = (id) => {
       })
       if (dataType == 'CHART') {
         setLiveTimeChartInfo(result)
-        setLiveTimeChartLoading(false)
       } else if (dataType == 'STATIC') {
         setLiveTimeStaticInfo(result)
-        setLiveTimeStaticLoading(false)
       }
     } catch (error) {
       toast('Action Failed', { type: 'error' })
     }
+    setLiveTimeStaticLoading(false)
+    setLiveTimeChartLoading(false)
+  }
+  const loadAppUsersInfo = async(params)=>{
+    setAppUsersLoading(true)
+    try{
+      const result = await axiosClient.get(`/app-users/${id}`, {params})
+      setAppUsers(result)
+    }catch(error){
+      toast('Action Failed', { type: 'error' })
+    }
+    setAppUsersLoading(false)
   }
   const overview = {
     loading,
@@ -84,10 +95,16 @@ const useProfileInfo = (id) => {
     liveTimeChartInfo,
     liveTimeStaticInfo,
   }
+  const appUsers={
+    appUsersLoading,
+    appUsersInfo,
+    loadAppUsersInfo
+  }
   return {
     overview,
     installs,
     liveTime,
+    appUsers
   }
 }
 

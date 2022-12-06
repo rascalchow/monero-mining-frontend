@@ -33,14 +33,13 @@ import {
   Calendar,
 } from 'react-feather'
 import _ from 'lodash'
-
 import Description from '@components/description'
-
 import { approveUser, rejectUser } from '../../store/action'
 import { COUNTRIES } from '@src/constants.js'
 import './style.scss'
 import { useProfileInfoCtx } from './profileInfoContext'
-import { DURATION } from './profileInfoContext'
+import { DURATION } from '@const/user'
+
 const STATUS_COLOR = {
   active: 'success',
   rejected: 'danger',

@@ -8,7 +8,7 @@ import Sidebar from '@components/sidebar'
 import InputPasswordToggle from '@components/input-password-toggle'
 import FormField from '@components/form-field'
 import { Loader } from 'react-feather'
-import { SidebarCtx } from './sidebarContext'
+import { SidebarCtx } from '@context/user/sidebarContext'
 import { addUser, updateUser } from '../../store/action'
 import { useDispatch } from 'react-redux'
 const SidebarNewUsers = ({ open, toggleSidebar, user }) => {

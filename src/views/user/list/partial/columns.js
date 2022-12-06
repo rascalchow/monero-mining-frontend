@@ -6,7 +6,7 @@ import { useSearchParams } from '@src/navigation'
 // ** Store & Actions
 import { setUser, deleteUser } from '../../store/action'
 import { store } from '@store/storeConfig/store'
-import { SidebarCtx } from './sidebarContext'
+import { SidebarCtx } from '@context/user/sidebarContext'
 
 // ** Third Party Components
 import {

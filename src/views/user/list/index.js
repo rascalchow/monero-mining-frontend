@@ -8,20 +8,9 @@ import Avatar from '@components/avatar'
 import UsersTable from './partial/Table'
 import { useSearchParams } from '@src/navigation'
 import { getUsers } from '../store/action'
-import { SidebarCtx, SidebarProvider } from './partial/sidebarContext'
+import { SidebarCtx, SidebarProvider } from '@context/user/sidebarContext'
+import { PUBLISHER_SORT_KEY } from '@const/user'
 
-const sortKey = [
-  'name',
-  'email',
-  'companyName',
-  'status',
-  'installs',
-  'live',
-  'liveTime',
-  'earnings',
-  'referrals',
-  'payments',
-]
 const UserList = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const location = useLocation()
@@ -47,7 +36,7 @@ const UserList = () => {
       if (searchParams.get('search')) {
         query.filter['search'] = searchParams.get('search')
       }
-      sortKey.forEach((key) => {
+      PUBLISHER_SORT_KEY.forEach((key) => {
         if (searchParams.get(key)) {
           query.filter[key] = searchParams.get(key)
         }

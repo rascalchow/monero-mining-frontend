@@ -14,9 +14,10 @@ import {
   Spinner,
 } from 'reactstrap'
 
-import { DURATION, useProfileInfoCtx } from './profileInfoContext'
+import {  useProfileInfoCtx } from './profileInfoContext'
+import {DURATION} from '@const/user'
 import LiveTimeCount from './LiveTimeStatic'
-import { LIVETIME } from './profileInfoContext'
+import { LIVETIME } from '@const/user'
 
 const LiveTime = ({
   tooltipShadow,

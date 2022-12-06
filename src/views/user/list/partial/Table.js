@@ -33,7 +33,7 @@ import { useSearchParams } from '@src/navigation'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { setUser, getUsers } from '../../store/action'
-import { SidebarCtx } from './sidebarContext'
+import { SidebarCtx } from '@context/user/sidebarContext'
 
 const statusOptions = [
   { value: null, label: 'All' },
