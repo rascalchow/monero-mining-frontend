@@ -6,6 +6,10 @@ import {
   useParams,
   NavLink as RouterNavLink,
   Link,
+  Switch,
+  Route,
+  useRouteMatch,
+  useLocation
 } from 'react-router-dom'
 import { ProfileInfoContextProvider } from './partials/profileInfoContext'
 import { Row, Col, Card, Button, CardBody } from 'reactstrap'
@@ -16,17 +20,18 @@ import LiveTime from './partials/LiveTime'
 const Profile = () => {
   const [block, setBlock] = useState(false)
   const { id } = useParams()
-  const [activeTab, setActiveTab] = useState('1')
-  const toggleTab = (tab) => {
-    setActiveTab(tab)
-  }
+  const {path} = useRouteMatch()
+  const {pathname} = useLocation()
   const handleBlock = () => {
     setBlock(true)
     setTimeout(() => {
       setBlock(false)
     }, 2000)
   }
-
+  const getEndpoint=(pathname)=>{
+    let toArr = pathname.split('/')
+    return toArr[toArr.length-1]==id?'':toArr[toArr.length-1]
+  }
   return (
     <ProfileInfoContextProvider>
       <div id="user-profile">
@@ -37,10 +42,9 @@ const Profile = () => {
                 return (
                   <NavItem key={index}>
                     <NavLink
-                      active={activeTab == `${index + 1}`}
+                      active={getEndpoint(pathname)== `${item.route}`}
                       tag={Link}
                       to={`/publisher/${id}/${item.route}`}
-                      onClick={() => toggleTab(`${index + 1}`)}
                     >
                       {item.title}
                     </NavLink>
@@ -49,29 +53,11 @@ const Profile = () => {
               })}
             </Nav>
           </Card>
-          <TabContent activeTab={activeTab}>
-            <TabPane tabId="1">
-              <Row>
-                <Col sm="12">
-                  <ProfileInfoCard />
-                </Col>
-              </Row>
-            </TabPane>
-            <TabPane tabId="2">
-              <Row>
-                <Col sm="12">
-                  <EditProduct />
-                </Col>
-              </Row>
-            </TabPane>
-            <TabPane tabId="3">
-              <Row>
-                <Col sm="12">
-                 <LiveTime/>
-                </Col>
-              </Row>
-            </TabPane>
-          </TabContent>
+          <Switch>
+            <Route path={`${path}`} index exact component={ProfileInfoCard} />
+            <Route path={`${path}/software`} component={EditProduct} />
+            <Route path={`${path}/liveTime`} component={LiveTime} />
+          </Switch>
         </section>
       </div>
     </ProfileInfoContextProvider>

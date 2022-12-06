@@ -1,7 +1,4 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Users } from 'react-feather'
-import { Spinner, Col } from 'reactstrap'
 import StatsWithAreaChart from '@components/widgets/stats/StatsWithAreaChart'
 import { kFormatter } from '@utils'
 import { useProfileInfoCtx } from './profileInfoContext'

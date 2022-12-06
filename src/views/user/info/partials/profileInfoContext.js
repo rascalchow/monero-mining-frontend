@@ -5,18 +5,22 @@ import useProfileInfo from '@hooks/useProfileInfo'
 import { formatDateAlt } from '../../../../utility/Utils'
 export const PROFILE_TAB_ROUTES = [
   {
+    id:'1',
     title: 'Overview',
-    route: 'overview',
+    route: '',
   },
   {
+    id:'2',
     title: 'Software White Label',
     route: 'software',
   },
   {
+    id:'3',
     title: 'Live Time',
     route: 'liveTime',
   },
   {
+    id:'4',
     title: 'Users',
     route: 'users',
   },
@@ -74,7 +78,7 @@ export const ProfileInfoContextProvider = ({ children }) => {
     })
     if (route) {
       switch (route.route) {
-        case 'overview':
+        case '':
           overview.loadData()
           installs.loadInstallInfo(DURATION)
           break

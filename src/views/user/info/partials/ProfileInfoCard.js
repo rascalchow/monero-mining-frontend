@@ -115,7 +115,7 @@ const ProfileInfoCard = () => {
       installs.loadInstallInfo(e)
     }
   }
-  if (!overview.loading)
+  if (!overview.loading )
     return (
       <>
         <Card className="main-info-card">
