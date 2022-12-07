@@ -25,8 +25,8 @@ const UserList = () => {
         page,
         filter: {},
       }
-      if (searchParams.get('status')) {
-        query.filter['status'] = searchParams.get('status')
+      if (searchParams.get('stat')) {
+        query.filter['stat'] = searchParams.get('stat')
       }
       if (searchParams.get('role')) {
         query.filter['role'] = searchParams.get('role')

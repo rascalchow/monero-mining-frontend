@@ -39,7 +39,7 @@ const STATUS_OPTIONS = [
   { value: null, label: 'All' },
   { value: 'pending', label: 'Pending' },
   { value: 'active', label: 'Active' },
-  { value: 'inactive', label: 'Inactive' },
+  { value: 'rejected', label: 'Rejected' },
 ]
 
 const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {

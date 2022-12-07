@@ -161,7 +161,7 @@ export const columnsPublisher = [
     name: 'Status',
     width: '9%',
     sortable: true,
-    selector: 'status',
+    selector: 'stat',
     cell: (row) => (
       <Badge
         className="text-capitalize "
@@ -229,7 +229,7 @@ export const columnsAdmin = [
     name: 'Status',
     width: '20%',
     sortable: true,
-    selector: 'status',
+    selector: 'stat',
     cell: (row) => (
       <Badge
         className="text-capitalize "
