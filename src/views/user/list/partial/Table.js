@@ -32,10 +32,9 @@ import { useSearchParams } from '@src/navigation'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { setUser, getUsers } from '../../store/action'
 import { SidebarCtx } from '@context/user/sidebarContext'
 import { useLocation } from 'react-router-dom'
-import { useProfileInfoCtx } from '../../../../utility/context/user/profileInfoContext'
+import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 const STATUS_OPTIONS = [
   { value: null, label: 'All' },
   { value: 'pending', label: 'Pending' },
@@ -45,6 +44,12 @@ const STATUS_OPTIONS = [
 
 const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
   const [searchParams, setSearchParams] = useSearchParams()
+  const [isAdminPath, setIsAdminPath] = useState(false)
+  const { pathname } = useLocation()
+  useEffect(() => {
+    if (pathname == '/publisher/list') setIsAdminPath(false)
+    else if (pathname == '/admin/list') setIsAdminPath(true)
+  }, [])
   const onPageSizeChange = (e) => {
     setSearchParams(
       {
@@ -103,25 +108,27 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
               />
             </div>
           </Col>
-          <Col sm="4" lg="4">
-            <Select
-              theme={selectThemeColors}
-              isClearable={false}
-              className="react-select"
-              classNamePrefix="select"
-              options={STATUS_OPTIONS}
-              value={STATUS_OPTIONS.find(
-                (it) => it.value === searchParams.get('status'),
-              )}
-              onChange={(opt) => {
-                setSearchParams({
-                  status: opt.value,
-                  page: 1,
-                })
-              }}
-              placeholder="Select Status"
-            />
-          </Col>
+          {!isAdminPath && (
+            <Col sm="4" lg="4">
+              <Select
+                theme={selectThemeColors}
+                isClearable={false}
+                className="react-select"
+                classNamePrefix="select"
+                options={STATUS_OPTIONS}
+                value={STATUS_OPTIONS.find(
+                  (it) => it.value === searchParams.get('status'),
+                )}
+                onChange={(opt) => {
+                  setSearchParams({
+                    status: opt.value,
+                    page: 1,
+                  })
+                }}
+                placeholder="Select Status"
+              />
+            </Col>
+          )}
         </Col>
       </Row>
     </div>
@@ -138,7 +145,7 @@ const UsersTable = ({ users, role }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { pathname } = useLocation()
   const [columns, setColumns] = useState(columnsAdmin)
-  const {usersInfo} = useProfileInfoCtx()
+  const { usersInfo } = useProfileInfoCtx()
   useEffect(() => {
     if (pathname == '/publisher/list') setColumns(columnsPublisher)
     else if (pathname == '/admin/list') setColumns(columnsAdmin)
