@@ -24,7 +24,7 @@ export const getAppStats = () => {
         type: 'DASHBOARD/PUBLISHER/SET_APP_STATS',
         payload: {
           isLoading: false,
-          error: error.message,
+          error: error ? error.message : 'Something went wrong',
         },
       })
     }
@@ -56,7 +56,8 @@ export const getDeviceList = () => {
         type: 'DASHBOARD/PUBLISHER/SET_DEVICE_LIST',
         payload: {
           isLoading: false,
-          error: error.message,
+
+          error: error ? error.message : '',
         },
       })
     }

@@ -55,6 +55,7 @@ const Login = () => {
       await dispatch(handleLogin(data))
     } catch (error) {
       if (
+        error &&
         error.status === 401 &&
         _.get(error, 'data.errors.msg', '') === 'USER_IS_NOT_APPROVED'
       ) {
