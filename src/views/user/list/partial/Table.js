@@ -35,6 +35,7 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { setUser, getUsers } from '../../store/action'
 import { SidebarCtx } from '@context/user/sidebarContext'
 import { useLocation } from 'react-router-dom'
+import { useProfileInfoCtx } from '../../../../utility/context/user/profileInfoContext'
 const STATUS_OPTIONS = [
   { value: null, label: 'All' },
   { value: 'pending', label: 'Pending' },
@@ -135,12 +136,13 @@ CustomHeader.propTypes = {
 const UsersTable = ({ users, role }) => {
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
   const [searchParams, setSearchParams] = useSearchParams()
-  const {pathname} = useLocation()
+  const { pathname } = useLocation()
   const [columns, setColumns] = useState(columnsAdmin)
-  useEffect(()=>{
-    if (pathname =='/publisher/list') setColumns(columnsPublisher)
-    else if(pathname =='/admin/list') setColumns(columnsAdmin)
-  },[pathname])
+  const {usersInfo} = useProfileInfoCtx()
+  useEffect(() => {
+    if (pathname == '/publisher/list') setColumns(columnsPublisher)
+    else if (pathname == '/admin/list') setColumns(columnsAdmin)
+  }, [pathname])
   const CustomPagination = () => {
     const count = Number(
       Math.ceil(users.total / parseInt(searchParams.get('limit'))),
@@ -195,7 +197,7 @@ const UsersTable = ({ users, role }) => {
           responsive
           paginationServer
           columns={columns}
-          progressPending={users.isLoading}
+          progressPending={usersInfo?.isUsersLoading}
           progressComponent={
             <div className="table-loader-container">
               <Spinner className="spinner" />
@@ -218,7 +220,7 @@ const UsersTable = ({ users, role }) => {
       <Sidebar
         open={sidebarOpen}
         toggleSidebar={() => {
-          store.dispatch(setUser(null))
+          // store.dispatch(setUser(null))
           setSidebarOpen(!sidebarOpen)
         }}
         user={users.selectedUser}

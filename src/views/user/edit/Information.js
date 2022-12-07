@@ -16,7 +16,7 @@ import {
   FormGroup,
   Input,
   CustomInput,
-  Form
+  Form,
 } from 'reactstrap'
 
 // ** Styles
@@ -29,7 +29,7 @@ const UserInfoTab = () => {
   // ** React hook form vars
   const { register, errors, handleSubmit, control, setValue, trigger } =
     useForm({
-      defaultValues: { gender: 'gender-female', dob: null }
+      defaultValues: { gender: 'gender-female', dob: null },
     })
   return (
     <Form
@@ -58,7 +58,7 @@ const UserInfoTab = () => {
               placeholder="YYYY-MM-DD"
               options={{ dateFormat: 'Y-m-d' }}
               className={classnames('form-control', {
-                'is-invalid': errors.dob
+                'is-invalid': errors.dob,
               })}
             />
           </FormGroup>
@@ -78,7 +78,7 @@ const UserInfoTab = () => {
                 'is-invalid':
                   data !== null &&
                   (data.mobileNumber === undefined ||
-                    data.mobileNumber === null)
+                    data.mobileNumber === null),
               })}
             />
           </FormGroup>
@@ -220,7 +220,7 @@ const UserInfoTab = () => {
               defaultValue="A-65, Belvedere Streets"
               innerRef={register({ required: true })}
               className={classnames({
-                'is-invalid': errors.address1
+                'is-invalid': errors.address1,
               })}
             />
           </FormGroup>

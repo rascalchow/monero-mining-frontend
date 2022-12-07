@@ -18,7 +18,8 @@ module.exports = function override(config, env) {
     '@utils': path.resolve(__dirname, 'src/utility/Utils'),
     '@hooks': path.resolve(__dirname, 'src/utility/hooks'),
     '@context': path.resolve(__dirname, 'src/utility/context'),
-    '@const': path.resolve(__dirname, 'src/const')
+    '@const': path.resolve(__dirname, 'src/const'),
+    '@views': path.resolve(__dirname, 'src/views')
 
   })(config, env)
 

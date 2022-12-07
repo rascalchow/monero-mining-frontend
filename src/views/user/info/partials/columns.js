@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom'
 // ** Third Party Components
 import _ from 'lodash'
 
-export const appUserColumns = [
+export const columns = [
   {
     name: 'User Key',
     width: '12%',
     selector: 'userKey',
     sortable: true,
-    cell: (row) =>row.userKey,
+    cell: (row) => row.userKey,
   },
   {
     name: 'Device',
@@ -25,41 +25,41 @@ export const appUserColumns = [
     width: '16%',
     selector: 'operatingSystem',
     sortable: true,
-    cell: (row) =>row.operatingSystem,
+    cell: (row) => row.operatingSystem,
   },
   {
     name: 'Live Time',
-    width:'12%',
+    width: '12%',
     selector: 'liveTime',
     sortable: true,
-    cell: (row) => row.liveTime
+    cell: (row) => row.liveTime,
   },
   {
     name: 'Time Ratio',
-    width:'12%',
+    width: '12%',
     selector: 'timeRatio',
     sortable: true,
-    cell: (row) => row.timeRatio
+    cell: (row) => row.timeRatio,
   },
   {
     name: 'Currency Earned',
-    width:'12%',
+    width: '12%',
     selector: 'currencyEarned',
     sortable: true,
-    cell: (row) => row.currencyEarned
+    cell: (row) => row.currencyEarned,
   },
   {
     name: 'Currency Spent',
-    width:'12%',
+    width: '12%',
     selector: 'currencySpent',
     sortable: true,
-    cell: (row) => row.currencySpent
+    cell: (row) => row.currencySpent,
   },
   {
     name: 'Spend Log',
-    width:'12%',
+    width: '12%',
     selector: 'spendLog',
     sortable: true,
-    cell: (row) => row?.spendLog
-  }
+    cell: (row) => row?.spendLog,
+  },
 ]

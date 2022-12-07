@@ -9,7 +9,7 @@ import {
   Button,
   InputGroup,
   InputGroupAddon,
-  InputGroupText
+  InputGroupText,
 } from 'reactstrap'
 import {
   Twitter,
@@ -17,7 +17,7 @@ import {
   Instagram,
   GitHub,
   Codepen,
-  Slack
+  Slack,
 } from 'react-feather'
 
 const UserSocialTab = () => {

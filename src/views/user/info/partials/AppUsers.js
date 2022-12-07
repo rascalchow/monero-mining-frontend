@@ -2,11 +2,10 @@ import { useState, useEffect, useContext } from 'react'
 
 import Proptypes from 'prop-types'
 
-import { appUserColumns } from './AppUsersColumn'
+import { columns } from './columns'
 // ** Store & Actions
-import { useLocation, Redirect, useHistory } from 'react-router-dom'
+import { useLocation, Redirect, useParams } from 'react-router-dom'
 
-import { useDispatch } from 'react-redux'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { ChevronDown, Cpu } from 'react-feather'
@@ -29,7 +28,7 @@ import { useSearchParams } from '@src/navigation'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { useProfileInfoCtx } from './profileInfoContext'
+import { useProfileInfoCtx } from '../../../../utility/context/user/profileInfoContext'
 import { APP_USER_SORT_KEY } from '@const/user'
 const statusOptions = [
   { value: null, label: 'All' },
@@ -129,6 +128,7 @@ const AppUsers = ({ users, role }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { appUsers } = useProfileInfoCtx()
   const location = useLocation()
+  const {id} = useParams()
   useEffect(() => {
     const limit = parseInt(searchParams.get('limit'))
     const page = parseInt(searchParams.get('page'))
@@ -149,7 +149,7 @@ const AppUsers = ({ users, role }) => {
       }
     })
     try {
-      appUsers.loadAppUsersInfo({ ...query, filter: { ...query.filter } })
+      appUsers.loadAppUsersInfo({ ...query, filter: { ...query.filter } }, id)
     } catch (error) {
       history.push('/not-authorized')
     }
@@ -221,7 +221,7 @@ const AppUsers = ({ users, role }) => {
           subHeader
           responsive
           paginationServer
-          columns={appUserColumns}
+          columns={columns}
           progressPending={appUsers?.appUsersLoading}
           progressComponent={
             <div className="table-loader-container">
@@ -239,11 +239,11 @@ const AppUsers = ({ users, role }) => {
       </Card>
     </div>
   )}
+  // return (
+  //   <div className="table-loader-container">
+  //     <Spinner className="spinner" />
+  //   </div>
+  // )
 }
-// return (
-//   <div className="table-loader-container">
-//     <Spinner className="spinner" />
-//   </div>
-// )
 
 export default AppUsers

@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect, useState ,useContext} from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -32,12 +32,13 @@ import {
   Globe,
   Calendar,
 } from 'react-feather'
+import { useParams } from 'react-router-dom'
 import _ from 'lodash'
 import Description from '@components/description'
 import { approveUser, rejectUser } from '../../store/action'
 import { COUNTRIES } from '@src/constants.js'
 import './style.scss'
-import { useProfileInfoCtx } from './profileInfoContext'
+import { useProfileInfoCtx } from '../../../../utility/context/user/profileInfoContext'
 import { DURATION } from '@const/user'
 import Sidebar from '../../partials/Sidebar'
 import { SidebarCtx } from '@context/user/sidebarContext'
@@ -87,14 +88,14 @@ const ProfileInfoCard = () => {
   const [isRejecting, setIsRejecting] = useState(false)
   const [duration, setDuration] = useState(DURATION)
   const dispatch = useDispatch()
-  const { overview, installs } = useProfileInfoCtx()
+  const { overview, installs, usersInfo } = useProfileInfoCtx()
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
-  // const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { id } = useParams()
   const onApproveUserClick = () => {
     try {
       setIsApproving(true)
-      dispatch(approveUser(overview.profileInfo._id))
-      overview.loadData()
+      // overview.loadData(id)
+      usersInfo.approveUser(id)
       setIsApproving(false)
     } catch (error) {
       setIsApproving(false)
@@ -104,8 +105,8 @@ const ProfileInfoCard = () => {
   const onRejectUserClick = () => {
     try {
       setIsRejecting(true)
-      dispatch(rejectUser(overview.profileInfo._id))
-      overview.loadData()
+      // overview.loadData(id)
+      usersInfo.rejectUser(id)
       setIsRejecting(false)
     } catch (error) {
       setIsRejecting(false)
@@ -117,7 +118,7 @@ const ProfileInfoCard = () => {
   const handleDuration = (e) => {
     if (e.length == 2) {
       setDuration(e)
-      installs.loadInstallInfo(e)
+      installs.loadInstallInfo(e, id)
     }
   }
   if (!overview.loading)
@@ -126,8 +127,8 @@ const ProfileInfoCard = () => {
         <Card className="main-info-card">
           <CardBody>
             <div className="d-flex justify-content-end">
-              <Badge color={STATUS_COLOR[overview.profileInfo?.status]}>
-                {overview.profileInfo?.status}
+              <Badge color={STATUS_COLOR[usersInfo.status]}>
+                {usersInfo.status}
               </Badge>
             </div>
             <Row>
@@ -159,9 +160,7 @@ const ProfileInfoCard = () => {
                     <Button.Ripple
                       color="primary"
                       onClick={onApproveUserClick}
-                      disabled={
-                        isApproving || overview.profileInfo?.status === 'active'
-                      }
+                      disabled={isApproving || usersInfo.status == 'active'}
                     >
                       <div className="d-flex align-items-center">
                         {isApproving && (
@@ -176,10 +175,7 @@ const ProfileInfoCard = () => {
                       color="danger"
                       outline
                       onClick={onRejectUserClick}
-                      disabled={
-                        isRejecting ||
-                        overview.profileInfo?.status === 'rejected'
-                      }
+                      disabled={isRejecting || usersInfo.status == 'rejected'}
                     >
                       <div className="d-flex align-items-center">
                         {isRejecting && (
@@ -390,46 +386,3 @@ const ProfileInfoCard = () => {
 }
 
 export default ProfileInfoCard
-// ** render user img
-// const renderUserImg = () => {
-//   if (selectedUser !== null && selectedUser.avatar) {
-//     return (
-//       <img
-//         src={selectedUser.avatar}
-//         alt="user-avatar"
-//         className="img-fluid rounded"
-//         height="104"
-//         width="104"
-//       />
-//     )
-//   } else {
-//     const stateNum = Math.floor(Math.random() * 6),
-//       states = [
-//         'light-success',
-//         'light-danger',
-//         'light-warning',
-//         'light-info',
-//         'light-primary',
-//         'light-secondary',
-//       ],
-//       color = states[stateNum]
-//     return (
-//       <Avatar
-//         initials
-//         color={color}
-//         className="rounded"
-//         content={selectedUser.name}
-//         contentStyles={{
-//           borderRadius: 0,
-//           fontSize: 'calc(36px)',
-//           width: '100%',
-//           height: '100%',
-//         }}
-//         style={{
-//           height: '90px',
-//           width: '90px',
-//         }}
-//       />
-//     )
-//   }
-// }

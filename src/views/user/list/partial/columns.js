@@ -26,6 +26,7 @@ import {
   UserX,
   User,
 } from 'react-feather'
+import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 import _ from 'lodash'
 
 const renderRole = (row) => {
@@ -176,7 +177,7 @@ export const columnsPublisher = [
     width: '6%',
     cell: (row) => {
       const { setSidebarOpen, setToCreateMode } = useContext(SidebarCtx)
-
+      const { usersInfo } = useProfileInfoCtx()
       return (
         <UncontrolledDropdown>
           <DropdownToggle tag="div" className="btn btn-sm">
@@ -185,32 +186,22 @@ export const columnsPublisher = [
           <DropdownMenu right>
             <DropdownItem
               tag={Link}
-              to={`/user/view/${row._id}`}
+              to={`/publisher/${row._id}`}
               className="w-100"
             >
               <FileText size={14} className="mr-50" />
               <span className="align-middle">Details</span>
             </DropdownItem>
             <DropdownItem
-              // to={`/apps/user/edit/${row._id}`}
               className="w-100"
               onClick={() => {
-                store.dispatch(setUser(row))
                 setSidebarOpen(true)
                 setToCreateMode(false)
+                usersInfo.setUser(row, row._id)
               }}
             >
               <Archive size={14} className="mr-50" />
               <span className="align-middle">Edit</span>
-            </DropdownItem>
-            <DropdownItem
-              className="w-100"
-              onClick={() => {
-                store.dispatch(deleteUser(row.id))
-              }}
-            >
-              <Trash2 size={14} className="mr-50" />
-              <span className="align-middle">Delete</span>
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
@@ -267,16 +258,15 @@ export const columnsAdmin = [
             <MoreVertical size={14} className="cursor-pointer" />
           </DropdownToggle>
           <DropdownMenu right>
-            <DropdownItem
+            {/* <DropdownItem
               tag={Link}
-              to={`/user/view/${row._id}`}
+              to={`/admin/${row._id}`}
               className="w-100"
             >
               <FileText size={14} className="mr-50" />
               <span className="align-middle">Details</span>
-            </DropdownItem>
+            </DropdownItem> */}
             <DropdownItem
-              // to={`/apps/user/edit/${row._id}`}
               className="w-100"
               onClick={() => {
                 store.dispatch(setUser(row))
@@ -287,7 +277,7 @@ export const columnsAdmin = [
               <Archive size={14} className="mr-50" />
               <span className="align-middle">Edit</span>
             </DropdownItem>
-            <DropdownItem
+            {/* <DropdownItem
               className="w-100"
               onClick={() => {
                 store.dispatch(deleteUser(row.id))
@@ -295,7 +285,7 @@ export const columnsAdmin = [
             >
               <Trash2 size={14} className="mr-50" />
               <span className="align-middle">Delete</span>
-            </DropdownItem>
+            </DropdownItem> */}
           </DropdownMenu>
         </UncontrolledDropdown>
       )

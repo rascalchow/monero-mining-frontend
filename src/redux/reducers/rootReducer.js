@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
   auth,
   navbar,
   layout,
-  user,
+  // user,
   eula,
   dashboard,
   accountSettings,

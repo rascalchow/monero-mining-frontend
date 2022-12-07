@@ -8,7 +8,8 @@ export const useProfileInfoCtx = () => useContext(ProfileInfoContext)
 export const ProfileInfoContextProvider = ({ children }) => {
   const { id } = useParams()
   const location = useLocation()
-  const { overview, installs, liveTime , appUsers} = useProfileInfo(id)
+  const { overview, installs, liveTime, appUsers, usersInfo } =
+    useProfileInfo(id)
 
   useEffect(() => {
     const route = PROFILE_TAB_ROUTES.find((route) => {
@@ -17,12 +18,12 @@ export const ProfileInfoContextProvider = ({ children }) => {
     if (route) {
       switch (route.route) {
         case '':
-          overview.loadData()
-          installs.loadInstallInfo(DURATION)
+          overview.loadData(id)
+          installs.loadInstallInfo(DURATION, id)
           break
         case 'liveTime':
-          liveTime.loadLiveTimeInfo(DURATION, 'CHART')
-          liveTime.loadLiveTimeInfo(DURATION, 'STATIC')
+          liveTime.loadLiveTimeInfo(DURATION, 'CHART', id)
+          liveTime.loadLiveTimeInfo(DURATION, 'STATIC', id)
           break
         case 'users':
           break
@@ -37,7 +38,8 @@ export const ProfileInfoContextProvider = ({ children }) => {
     overview,
     installs,
     liveTime,
-    appUsers
+    appUsers,
+    usersInfo,
   }
   return (
     <ProfileInfoContext.Provider value={providerValue}>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import StatsWithAreaChart from '@components/widgets/stats/StatsWithAreaChart'
 import { kFormatter } from '@utils'
-import { useProfileInfoCtx } from './profileInfoContext'
+import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 
 const LiveTimeStatic = ({ name, icon, color, type }) => {
   const { liveTime } = useProfileInfoCtx()

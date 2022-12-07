@@ -23,7 +23,7 @@ import {
   NavLink,
   TabContent,
   TabPane,
-  Alert
+  Alert,
 } from 'reactstrap'
 
 // ** Styles

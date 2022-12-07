@@ -2,12 +2,8 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { axiosClient } from '@src/@core/services'
 import { useLocation } from 'react-router-dom'
-import {
-  DURATION,
-  PROFILE_TAB_ROUTES,
-} from '@const/user'
-import axios from 'axios'
-const useProfileInfo = (id) => {
+
+const useProfileInfo = () => {
   const [profileInfo, setProfileInfo] = useState(null)
   const [loading, setLoading] = useState(false)
   const [isInstallLoading, setInstallLoading] = useState(false)
@@ -19,19 +15,22 @@ const useProfileInfo = (id) => {
   const [liveTimeStaticInfo, setLiveTimeStaticInfo] = useState(null)
   const [appUsersInfo, setAppUsers] = useState([])
   const [appUsersLoading, setAppUsersLoading] = useState(false)
-  const location = useLocation()
-
-  const loadData = async () => {
+  const [users, setUsers] = useState([])
+  const [isUsersLoading, setIsUsersLoading] = useState(false)
+  const [status, setStatus] = useState('pending')
+  // const [isRejected, setIsRejected] = useState(false)
+  const loadData = async (id) => {
     setLoading(true)
     try {
       const result = await axiosClient.get(`/users/${id}`)
       setProfileInfo(result)
+      setStatus(result.status)
     } catch (error) {
       toast('Action failed!', { type: 'error' })
     }
     setLoading(false)
   }
-  const loadInstallInfo = async (param) => {
+  const loadInstallInfo = async (param, id) => {
     setInstallLoading(true)
     try {
       const result = await axiosClient.get(`/users/appUserInfo/${id}`, {
@@ -49,7 +48,7 @@ const useProfileInfo = (id) => {
     }
     setInstallLoading(false)
   }
-  const loadLiveTimeInfo = async (param, dataType) => {
+  const loadLiveTimeInfo = async (param, dataType, id) => {
     if (dataType == 'STATIC') setLiveTimeStaticLoading(true)
     else if (dataType == 'CHART') setLiveTimeChartLoading(true)
     try {
@@ -67,15 +66,83 @@ const useProfileInfo = (id) => {
     setLiveTimeStaticLoading(false)
     setLiveTimeChartLoading(false)
   }
-  const loadAppUsersInfo = async(params)=>{
+  const loadAppUsersInfo = async (params, id) => {
     setAppUsersLoading(true)
-    try{
-      const result = await axiosClient.get(`/app-users/${id}`, {params})
+    try {
+      const result = await axiosClient.get(`/app-users/${id}`, { params })
       setAppUsers(result)
-    }catch(error){
+    } catch (error) {
       toast('Action Failed', { type: 'error' })
     }
     setAppUsersLoading(false)
+  }
+
+  const updateUser = async (user, id) => {
+    setLoading(true)
+    try {
+      const updatedUser = await axiosClient.patch(`/users/${id}`, user)
+      setProfileInfo(updatedUser)
+      let newUsers = users.data
+      if (newUsers.length) {
+        newUsers.forEach((user, index) => {
+          if (user._id == updatedUser._id) newUsers[index] = updatedUser
+        })
+      }
+      setUsers({ ...users, data: newUsers })
+      toast('Successfully updated user!', { type: 'success' })
+    } catch (error) {
+      toast('User update failed!', { type: 'error' })
+    }
+    setLoading(false)
+  }
+
+  const getUsers = async (params) => {
+    setIsUsersLoading(true)
+    try {
+      const result = await axiosClient.get(`/users`, { params })
+      const userInfo = {
+        total: result.totalDocs,
+        data: result.docs,
+        isLoading: isUsersLoading,
+      }
+      setUsers(userInfo)
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+    setIsUsersLoading(false)
+  }
+
+  const setUser = (user, id) => {
+    setUsers({
+      ...users,
+      id,
+      selectedUser: user,
+    })
+  }
+
+  const approveUser = async (id) => {
+    setLoading(true)
+    try {
+      const result = await axiosClient.post(`/users/${id}/approve`)
+      toast('Successfully approved user!', { type: 'success' })
+      setStatus('active')
+    } catch (error) {
+      toast('Operation unsuccessful', { type: 'error' })
+    }
+    setLoading(false)
+  }
+
+  const rejectUser = async (id) => {
+    setLoading(true)
+    try {
+      const res = await axiosClient.post(`/users/${id}/reject`)
+      toast('Successfully rejected user!', { type: 'success' })
+      setStatus('rejected')
+    } catch (error) {
+      toast('Operation unsuccessful', { type: 'error' })
+    }
+    setLoading(false)
   }
   const overview = {
     loading,
@@ -95,16 +162,27 @@ const useProfileInfo = (id) => {
     liveTimeChartInfo,
     liveTimeStaticInfo,
   }
-  const appUsers={
+  const appUsers = {
     appUsersLoading,
     appUsersInfo,
-    loadAppUsersInfo
+    loadAppUsersInfo,
+  }
+  const usersInfo = {
+    users,
+    updateUser,
+    getUsers,
+    setUser,
+    approveUser,
+    rejectUser,
+    isUsersLoading,
+    status,
   }
   return {
     overview,
     installs,
     liveTime,
-    appUsers
+    appUsers,
+    usersInfo,
   }
 }
 

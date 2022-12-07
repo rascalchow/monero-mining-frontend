@@ -8,7 +8,7 @@ import {
   handleMenuCollapsed,
   handleContentWidth,
   handleMenuHidden,
-  handleSkinColor
+  handleSkinColor,
 } from '@store/actions/layout'
 
 // ** Third Party Components
@@ -36,14 +36,14 @@ import { useNavbarColor } from '@hooks/useNavbarColor'
 // ** Styles
 import '@styles/base/core/menu/menu-types/vertical-menu.scss'
 import '@styles/base/core/menu/menu-types/vertical-overlay-menu.scss'
-
-
+// ** Context
 import { SidebarCtx, SidebarProvider } from '@context/user/sidebarContext'
-
+import { ProfileInfoContextProvider } from '../../utility/context/user/profileInfoContext'
 const VerticalLayout = (props) => {
   // ** Props
-  const { children, navbar, footer, menu, routerProps, currentActiveItem } = props
-    
+  const { children, navbar, footer, menu, routerProps, currentActiveItem } =
+    props
+
   // ** Hooks
   const [skin, setSkin] = useSkin()
   const [isRtl, setIsRtl] = useRTL()
@@ -184,9 +184,9 @@ const VerticalLayout = (props) => {
           )}
         </div>
       </Navbar>
-      <SidebarProvider>
-        {children}
-      </SidebarProvider>
+      <ProfileInfoContextProvider>
+        <SidebarProvider>{children}</SidebarProvider>
+      </ProfileInfoContextProvider>
 
       {/* Vertical Nav Menu Overlay */}
       <div
