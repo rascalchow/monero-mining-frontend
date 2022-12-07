@@ -20,7 +20,7 @@ const data = [
         <img className="mr-1" src={pdf} alt="pdf" height="23" />
         <Media body>invoice.pdf</Media>
       </Media>
-    )
+    ),
   },
   {
     title: 'Client Meeting',
@@ -35,14 +35,14 @@ const data = [
           <span>CEO of Infibeam</span>
         </Media>
       </Media>
-    )
+    ),
   },
   {
     title: 'Create a new project for client',
     content: 'Add files to new design folder',
     meta: '2 days ago',
-    color: 'info'
-  }
+    color: 'info',
+  },
 ]
 
 const UserTimeline = () => {

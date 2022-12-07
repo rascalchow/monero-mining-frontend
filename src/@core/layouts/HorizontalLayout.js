@@ -27,7 +27,8 @@ import { useSkin } from '@hooks/useSkin'
 import { useNavbarType } from '@hooks/useNavbarType'
 import { useFooterType } from '@hooks/useFooterType'
 import { useNavbarColor } from '@hooks/useNavbarColor'
-
+import { SidebarCtx, SidebarProvider } from '@context/user/sidebarContext'
+import { ProfileInfoContextProvider } from '../../utility/context/user/profileInfoContext'
 // ** Styles
 import '@styles/base/core/menu/menu-types/horizontal-menu.scss'
 
@@ -171,8 +172,9 @@ const HorizontalLayout = (props) => {
           </Navbar>
         </div>
       ) : null}
-
-      {children}
+      <ProfileInfoContextProvider>
+        <SidebarProvider>{children}</SidebarProvider>
+      </ProfileInfoContextProvider>
       {themeConfig.layout.customizer === true ? (
         <Customizer
           skin={skin}

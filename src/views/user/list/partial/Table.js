@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 
 import Proptypes from 'prop-types'
 
-import { columns } from './columns'
+import { columnsPublisher, columnsAdmin } from './columns'
 
 // ** Store & Actions
 
@@ -26,25 +26,30 @@ import {
 import { store } from '@store/storeConfig/store'
 import { selectThemeColors } from '@utils'
 import Select from 'react-select'
-import Sidebar from './Sidebar'
+import Sidebar from '../../partials/Sidebar'
 
 import { useSearchParams } from '@src/navigation'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { setUser, getUsers } from '../../store/action'
-import { SidebarCtx } from './sidebarContext'
-
-const statusOptions = [
+import { SidebarCtx } from '@context/user/sidebarContext'
+import { useLocation } from 'react-router-dom'
+import { useProfileInfoCtx } from '@context/user/profileInfoContext'
+const STATUS_OPTIONS = [
   { value: null, label: 'All' },
   { value: 'pending', label: 'Pending' },
   { value: 'active', label: 'Active' },
-  { value: 'inactive', label: 'Inactive' },
+  { value: 'rejected', label: 'Rejected' },
 ]
 
 const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
   const [searchParams, setSearchParams] = useSearchParams()
-  // const { setToCreateMode } = useContext(SidebarCtx)
+  const [isAdminPath, setIsAdminPath] = useState(false)
+  const { pathname } = useLocation()
+  useEffect(() => {
+    if (pathname == '/publisher/list') setIsAdminPath(false)
+    else if (pathname == '/admin/list') setIsAdminPath(true)
+  }, [])
   const onPageSizeChange = (e) => {
     setSearchParams(
       {
@@ -103,35 +108,27 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
               />
             </div>
           </Col>
-          <Col sm="4" lg="4">
-            <Select
-              theme={selectThemeColors}
-              isClearable={false}
-              className="react-select"
-              classNamePrefix="select"
-              options={statusOptions}
-              value={statusOptions.find(
-                (it) => it.value === searchParams.get('status'),
-              )}
-              onChange={(opt) => {
-                setSearchParams({
-                  status: opt.value,
-                  page: 1,
-                })
-              }}
-              placeholder="Select Status"
-            />
-          </Col>
-          {/* <Button.Ripple
-            color="primary"
-            onClick={() => {
-              setSidebarOpen(true)
-              setToCreateMode(true)
-            }}
-            disabled={sidebarOpen}
-          >
-            Add New User
-          </Button.Ripple> */}
+          {!isAdminPath && (
+            <Col sm="4" lg="4">
+              <Select
+                theme={selectThemeColors}
+                isClearable={false}
+                className="react-select"
+                classNamePrefix="select"
+                options={STATUS_OPTIONS}
+                value={STATUS_OPTIONS.find(
+                  (it) => it.value === searchParams.get('status'),
+                )}
+                onChange={(opt) => {
+                  setSearchParams({
+                    status: opt.value,
+                    page: 1,
+                  })
+                }}
+                placeholder="Select Status"
+              />
+            </Col>
+          )}
         </Col>
       </Row>
     </div>
@@ -146,7 +143,13 @@ CustomHeader.propTypes = {
 const UsersTable = ({ users, role }) => {
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
   const [searchParams, setSearchParams] = useSearchParams()
-  const dispatch = useDispatch()
+  const { pathname } = useLocation()
+  const [columns, setColumns] = useState(columnsAdmin)
+  const { usersInfo } = useProfileInfoCtx()
+  useEffect(() => {
+    if (pathname == '/publisher/list') setColumns(columnsPublisher)
+    else if (pathname == '/admin/list') setColumns(columnsAdmin)
+  }, [pathname])
   const CustomPagination = () => {
     const count = Number(
       Math.ceil(users.total / parseInt(searchParams.get('limit'))),
@@ -201,7 +204,7 @@ const UsersTable = ({ users, role }) => {
           responsive
           paginationServer
           columns={columns}
-          progressPending={users.isLoading}
+          progressPending={usersInfo?.isUsersLoading}
           progressComponent={
             <div className="table-loader-container">
               <Spinner className="spinner" />
@@ -224,7 +227,7 @@ const UsersTable = ({ users, role }) => {
       <Sidebar
         open={sidebarOpen}
         toggleSidebar={() => {
-          store.dispatch(setUser(null))
+          // store.dispatch(setUser(null))
           setSidebarOpen(!sidebarOpen)
         }}
         user={users.selectedUser}

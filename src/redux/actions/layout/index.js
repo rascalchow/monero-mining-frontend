@@ -13,3 +13,8 @@ export const handleMenuHidden = (value) => (dispatch) =>
 // ** Handles RTL (Bool)
 export const handleRTL = (value) => (dispatch) =>
   dispatch({ type: 'HANDLE_RTL', value })
+
+// ** Handles Theme Color
+export const handleSkinColor = (value) =>(dispatch)=>{
+  dispatch({type:'HANDLE_THEME_COLOR', value})
+}

@@ -5,15 +5,14 @@ import { Button, Form, Input, Row, Col } from 'reactstrap'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Sidebar from '@components/sidebar'
-import InputPasswordToggle from '@components/input-password-toggle'
 import FormField from '@components/form-field'
 import { Loader } from 'react-feather'
-import { SidebarCtx } from './sidebarContext'
-import { addUser, updateUser } from '../../store/action'
-import { useDispatch } from 'react-redux'
+import { useProfileInfoCtx } from '@context/user/profileInfoContext'
+import { useParams } from 'react-router-dom'
+
 const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
-  const dispatch = useDispatch()
-  const { isCreate } = useContext(SidebarCtx)
+  const { overview, usersInfo } = useProfileInfoCtx()
+  const { id } = useParams()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -52,11 +51,8 @@ const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
 
   const onSubmit = (info) => {
     toggleSidebar()
-    if (isCreate) {
-      dispatch(addUser(info))
-    } else {
-      dispatch(updateUser(info, user._id))
-    }
+    let userId = id !== undefined ? id : usersInfo.users.id
+    usersInfo.updateUser(info, userId)
   }
 
   useEffect(() => {
@@ -71,18 +67,6 @@ const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
       setValue('instantMessenger', user.instantMessenger)
       setValue('website', user.website)
       setValue('moreInformation', user.moreInformation)
-    }
-    return () => {
-      setValue('name', '')
-      setValue('email', '')
-      setValue('phone', '')
-      setValue('companyName', '')
-      setValue('application', '')
-      setValue('contact', '')
-      setValue('country', '')
-      setValue('instantMessenger', '')
-      setValue('website', '')
-      setValue('moreInformation', '')
     }
   }, [user])
   return (

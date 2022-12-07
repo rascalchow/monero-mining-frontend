@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Users } from 'react-feather'
-import { Spinner, Col } from 'reactstrap'
 import StatsWithAreaChart from '@components/widgets/stats/StatsWithAreaChart'
 import { kFormatter } from '@utils'
-import { useProfileInfoCtx } from './profileInfoContext'
+import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 
 const LiveTimeStatic = ({ name, icon, color, type }) => {
   const { liveTime } = useProfileInfoCtx()

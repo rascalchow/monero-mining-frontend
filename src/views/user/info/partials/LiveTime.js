@@ -14,9 +14,11 @@ import {
   Spinner,
 } from 'reactstrap'
 
-import { DURATION, useProfileInfoCtx } from './profileInfoContext'
+import { useProfileInfoCtx } from '@context/user/profileInfoContext'
+import { DURATION } from '@const/user'
 import LiveTimeCount from './LiveTimeStatic'
-import { LIVETIME } from './profileInfoContext'
+import { LIVETIME } from '@const/user'
+import { useParams } from 'react-router-dom'
 
 const LiveTime = ({
   tooltipShadow,
@@ -26,10 +28,11 @@ const LiveTime = ({
 }) => {
   const [duration, setDuration] = useState(DURATION)
   const { liveTime } = useProfileInfoCtx()
+  const { id } = useParams()
   const handleDuration = (e) => {
     if (e.length == 2) {
       setDuration(e)
-      liveTime.loadLiveTimeInfo(e, 'CHART')
+      liveTime.loadLiveTimeInfo(e, 'CHART', id)
     }
   }
 
@@ -167,15 +170,15 @@ const LiveTime = ({
               </CardBody>
             </Card>
           ) : (
-              <div className="table-loader-container">
-                <Spinner className="spinner" />
-              </div>
+            <div className="table-loader-container">
+              <Spinner className="spinner" />
+            </div>
           )}
         </>
       ) : (
-          <div className="table-loader-container">
-            <Spinner className="spinner" />
-          </div>
+        <div className="table-loader-container">
+          <Spinner className="spinner" />
+        </div>
       )}
     </>
   )

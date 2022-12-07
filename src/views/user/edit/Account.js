@@ -16,7 +16,7 @@ import {
   Label,
   FormGroup,
   Table,
-  CustomInput
+  CustomInput,
 } from 'reactstrap'
 
 const UserAccountTab = ({ selectedUser }) => {
@@ -61,7 +61,7 @@ const UserAccountTab = ({ selectedUser }) => {
           'light-warning',
           'light-info',
           'light-primary',
-          'light-secondary'
+          'light-secondary',
         ],
         color = states[stateNum]
       return (
@@ -74,11 +74,11 @@ const UserAccountTab = ({ selectedUser }) => {
             borderRadius: 0,
             fontSize: 'calc(36px)',
             width: '100%',
-            height: '100%'
+            height: '100%',
           }}
           style={{
             height: '90px',
-            width: '90px'
+            width: '90px',
           }}
         />
       )
