@@ -82,19 +82,18 @@ const options = {
   },
 }
 
-const ProfileInfoCard = () => {
+const Overview = () => {
   // const {overview} = useProfileInfoCtx()
   const [isApproving, setIsApproving] = useState(false)
   const [isRejecting, setIsRejecting] = useState(false)
   const [duration, setDuration] = useState(DURATION)
   const dispatch = useDispatch()
-  const { overview, installs, usersInfo } = useProfileInfoCtx()
+  const { overview, installs, usersInfo, appUsers } = useProfileInfoCtx()
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
   const { id } = useParams()
   const onApproveUserClick = () => {
     try {
       setIsApproving(true)
-      // overview.loadData(id)
       usersInfo.approveUser(id)
       setIsApproving(false)
     } catch (error) {
@@ -105,7 +104,6 @@ const ProfileInfoCard = () => {
   const onRejectUserClick = () => {
     try {
       setIsRejecting(true)
-      // overview.loadData(id)
       usersInfo.rejectUser(id)
       setIsRejecting(false)
     } catch (error) {
@@ -118,7 +116,7 @@ const ProfileInfoCard = () => {
   const handleDuration = (e) => {
     if (e.length == 2) {
       setDuration(e)
-      installs.loadInstallInfo(e, id)
+      installs.loadInstalledUsers(e, id)
     }
   }
   if (!overview.loading)
@@ -385,4 +383,4 @@ const ProfileInfoCard = () => {
   )
 }
 
-export default ProfileInfoCard
+export default Overview

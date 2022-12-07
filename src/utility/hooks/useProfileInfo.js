@@ -5,18 +5,18 @@ import { useLocation } from 'react-router-dom'
 
 const useProfileInfo = () => {
   const [profileInfo, setProfileInfo] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [isInstallLoading, setInstallLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [isInstallLoading, setInstallLoading] = useState(true)
   const [installInfo, setInstallInfo] = useState(null)
   const [installCount, setInstallCount] = useState([])
-  const [liveTimeStaticLoading, setLiveTimeStaticLoading] = useState(false)
-  const [liveTimeChartLoading, setLiveTimeChartLoading] = useState(false)
+  const [liveTimeStaticLoading, setLiveTimeStaticLoading] = useState(true)
+  const [liveTimeChartLoading, setLiveTimeChartLoading] = useState(true)
   const [liveTimeChartInfo, setLiveTimeChartInfo] = useState(null)
   const [liveTimeStaticInfo, setLiveTimeStaticInfo] = useState(null)
   const [appUsersInfo, setAppUsers] = useState([])
-  const [appUsersLoading, setAppUsersLoading] = useState(false)
+  const [appUsersLoading, setAppUsersLoading] = useState(true)
   const [users, setUsers] = useState([])
-  const [isUsersLoading, setIsUsersLoading] = useState(false)
+  const [isUsersLoading, setIsUsersLoading] = useState(true)
   const [status, setStatus] = useState('pending')
   // const [isRejected, setIsRejected] = useState(false)
   const loadData = async (id) => {
@@ -30,10 +30,10 @@ const useProfileInfo = () => {
     }
     setLoading(false)
   }
-  const loadInstallInfo = async (param, id) => {
+  const loadInstalledUsers = async (param, id) => {
     setInstallLoading(true)
     try {
-      const result = await axiosClient.get(`/users/appUserInfo/${id}`, {
+      const result = await axiosClient.get(`/app-users/installed/${id}`, {
         params: { param, type: 'installed' },
       })
       setInstallInfo(result.info)
@@ -152,7 +152,7 @@ const useProfileInfo = () => {
   const installs = {
     installInfo,
     isInstallLoading,
-    loadInstallInfo,
+    loadInstalledUsers,
     installCount,
   }
   const liveTime = {
