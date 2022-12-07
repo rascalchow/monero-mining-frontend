@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect, useState } from 'react'
+import { useEffect, useState ,useContext} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -39,6 +39,8 @@ import { COUNTRIES } from '@src/constants.js'
 import './style.scss'
 import { useProfileInfoCtx } from './profileInfoContext'
 import { DURATION } from '@const/user'
+import Sidebar from '../../partials/Sidebar'
+import { SidebarCtx } from '@context/user/sidebarContext'
 
 const STATUS_COLOR = {
   active: 'success',
@@ -86,7 +88,8 @@ const ProfileInfoCard = () => {
   const [duration, setDuration] = useState(DURATION)
   const dispatch = useDispatch()
   const { overview, installs } = useProfileInfoCtx()
-
+  const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
+  // const [sidebarOpen, setSidebarOpen] = useState(false)
   const onApproveUserClick = () => {
     try {
       setIsApproving(true)
@@ -108,13 +111,16 @@ const ProfileInfoCard = () => {
       setIsRejecting(false)
     }
   }
+  const onEditUserClick = () => {
+    setSidebarOpen(true)
+  }
   const handleDuration = (e) => {
     if (e.length == 2) {
       setDuration(e)
       installs.loadInstallInfo(e)
     }
   }
-  if (!overview.loading )
+  if (!overview.loading)
     return (
       <>
         <Card className="main-info-card">
@@ -148,34 +154,55 @@ const ProfileInfoCard = () => {
                 <div className="border rounded px-2 py-1 mb-1 more-info">
                   <CardText>{overview.profileInfo?.moreInformation}</CardText>
                 </div>
-                <div className="d-flex flex-wrap align-items-center">
-                  <Button.Ripple
-                    color="primary"
-                    onClick={onApproveUserClick}
-                    disabled={
-                      isApproving || overview.profileInfo?.status === 'active'
-                    }
-                  >
-                    <div className="d-flex align-items-center">
-                      {isApproving && <Spinner size="sm" className="mr-0.5" />}
-                      <span>Approve</span>
-                    </div>
-                  </Button.Ripple>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="d-flex flex-wrap align-items-center">
+                    <Button.Ripple
+                      color="primary"
+                      onClick={onApproveUserClick}
+                      disabled={
+                        isApproving || overview.profileInfo?.status === 'active'
+                      }
+                    >
+                      <div className="d-flex align-items-center">
+                        {isApproving && (
+                          <Spinner size="sm" className="mr-0.5" />
+                        )}
+                        <span>Approve</span>
+                      </div>
+                    </Button.Ripple>
 
-                  <Button.Ripple
-                    className="ml-1"
-                    color="danger"
-                    outline
-                    onClick={onRejectUserClick}
-                    disabled={
-                      isRejecting || overview.profileInfo?.status === 'rejected'
-                    }
-                  >
-                    <div className="d-flex align-items-center">
-                      {isRejecting && <Spinner size="sm" className="mr-0.5" />}
-                      <span>Reject</span>
-                    </div>
-                  </Button.Ripple>
+                    <Button.Ripple
+                      className="ml-1"
+                      color="danger"
+                      outline
+                      onClick={onRejectUserClick}
+                      disabled={
+                        isRejecting ||
+                        overview.profileInfo?.status === 'rejected'
+                      }
+                    >
+                      <div className="d-flex align-items-center">
+                        {isRejecting && (
+                          <Spinner size="sm" className="mr-0.5" />
+                        )}
+                        <span>Reject</span>
+                      </div>
+                    </Button.Ripple>
+                  </div>
+                  <div>
+                    <Button.Ripple
+                      color="primary"
+                      outline
+                      onClick={onEditUserClick}
+                    >
+                      <div className="d-flex align-items-center">
+                        {isApproving && (
+                          <Spinner size="sm" className="mr-0.5" />
+                        )}
+                        <span>Edit</span>
+                      </div>
+                    </Button.Ripple>
+                  </div>
                 </div>
               </Col>
               <Col xl="6" lg="12" className="mt-2 mt-xl-0">
@@ -245,15 +272,7 @@ const ProfileInfoCard = () => {
                   <h2 className="font-weight-bold mb-25">
                     Profile Information
                   </h2>
-                  {/* <CardText className="font-weight-bold mb-2">
-                Avg Sessions
-              </CardText> */}
-                  {/* <h5 className="font-medium-2">
-                <span className="text-success mr-50">Growth</span>
-                <span className="font-weight-normal">vs last 7 days</span>
-              </h5> */}
                 </div>
-                {/* <Button color="primary">View Details</Button> */}
                 <Row>
                   <Col xs="6">
                     <Media>
@@ -296,29 +315,6 @@ const ProfileInfoCard = () => {
                 xs={{ order: 1 }}
                 className="d-flex justify-content-end flex-column text-right"
               >
-                {/* <UncontrolledDropdown className="chart-dropdown">
-                  <DropdownToggle
-                    color=""
-                    className="bg-transparent btn-sm border-0 p-50"
-                  >
-                    {duration.name}
-                  </DropdownToggle>
-                  <DropdownMenu right>
-                    {DURATION.map((item, index) => (
-                      <DropdownItem
-                        className="w-100"
-                        key={index}
-                        onClick={() => {
-                          setDuration(item)
-                          installs.loadInstallInfo(item)
-                        }}
-                      >
-                        {item.name}
-                      </DropdownItem>
-                    ))}
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-                 */}
                 <div className="d-flex align-items-center align-self-end ">
                   <Calendar size={14} />
                   <Flatpickr
@@ -377,12 +373,19 @@ const ProfileInfoCard = () => {
             </Row>
           </CardBody>
         </Card>
+        <Sidebar
+          open={sidebarOpen}
+          toggleSidebar={() => {
+            setSidebarOpen(!sidebarOpen)
+          }}
+          user={overview.profileInfo}
+        />
       </>
     )
   return (
-      <div className="table-loader-container">
-        <Spinner className="spinner" />
-      </div>
+    <div className="table-loader-container">
+      <Spinner className="spinner" />
+    </div>
   )
 }
 

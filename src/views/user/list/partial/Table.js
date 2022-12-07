@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 
 import Proptypes from 'prop-types'
 
-import { columns } from './columns'
+import { columnsPublisher, columnsAdmin } from './columns'
 
 // ** Store & Actions
 
@@ -26,7 +26,7 @@ import {
 import { store } from '@store/storeConfig/store'
 import { selectThemeColors } from '@utils'
 import Select from 'react-select'
-import Sidebar from './Sidebar'
+import Sidebar from '../../partials/Sidebar'
 
 import { useSearchParams } from '@src/navigation'
 // ** Styles
@@ -34,8 +34,8 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { setUser, getUsers } from '../../store/action'
 import { SidebarCtx } from '@context/user/sidebarContext'
-
-const statusOptions = [
+import { useLocation } from 'react-router-dom'
+const STATUS_OPTIONS = [
   { value: null, label: 'All' },
   { value: 'pending', label: 'Pending' },
   { value: 'active', label: 'Active' },
@@ -44,7 +44,6 @@ const statusOptions = [
 
 const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
   const [searchParams, setSearchParams] = useSearchParams()
-  // const { setToCreateMode } = useContext(SidebarCtx)
   const onPageSizeChange = (e) => {
     setSearchParams(
       {
@@ -109,8 +108,8 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
               isClearable={false}
               className="react-select"
               classNamePrefix="select"
-              options={statusOptions}
-              value={statusOptions.find(
+              options={STATUS_OPTIONS}
+              value={STATUS_OPTIONS.find(
                 (it) => it.value === searchParams.get('status'),
               )}
               onChange={(opt) => {
@@ -122,16 +121,6 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
               placeholder="Select Status"
             />
           </Col>
-          {/* <Button.Ripple
-            color="primary"
-            onClick={() => {
-              setSidebarOpen(true)
-              setToCreateMode(true)
-            }}
-            disabled={sidebarOpen}
-          >
-            Add New User
-          </Button.Ripple> */}
         </Col>
       </Row>
     </div>
@@ -146,7 +135,12 @@ CustomHeader.propTypes = {
 const UsersTable = ({ users, role }) => {
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
   const [searchParams, setSearchParams] = useSearchParams()
-  const dispatch = useDispatch()
+  const {pathname} = useLocation()
+  const [columns, setColumns] = useState(columnsAdmin)
+  useEffect(()=>{
+    if (pathname =='/publisher/list') setColumns(columnsPublisher)
+    else if(pathname =='/admin/list') setColumns(columnsAdmin)
+  },[pathname])
   const CustomPagination = () => {
     const count = Number(
       Math.ceil(users.total / parseInt(searchParams.get('limit'))),

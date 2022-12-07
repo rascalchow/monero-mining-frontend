@@ -8,9 +8,10 @@ import { Settings, X } from 'react-feather'
 import { CustomInput, FormGroup } from 'reactstrap'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { selectThemeColors } from '@utils'
-
+import { handleSkinColor } from '@store/actions/layout'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
+import { useDispatch } from 'react-redux'
 
 const Customizer = (props) => {
   // ** Props
@@ -39,7 +40,7 @@ const Customizer = (props) => {
 
   // ** State
   const [openCustomizer, setOpenCustomizer] = useState(false)
-
+  const dispatch = useDispatch()
   // ** Toggles Customizer
   const handleToggle = (e) => {
     e.preventDefault()
@@ -85,7 +86,10 @@ const Customizer = (props) => {
           id={radio.name}
           label={radio.label}
           checked={radio.checked}
-          onChange={() => setSkin(radio.name)}
+          onChange={() => {
+            setSkin(radio.name)
+            dispatch(handleSkinColor(radio.name))
+          }}
           className={classnames({ 'mr-1': marginCondition })}
         />
       )

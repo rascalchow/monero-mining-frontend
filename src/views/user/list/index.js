@@ -86,66 +86,10 @@ const UserList = () => {
               </CardBody>
             </Card>
           </Col>
-          {/* <Col>
-            <Card className="card-congratulations-medal">
-              <CardBody>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h3 className="fw-bolder mb-75">21,459</h3>
-                    <p className="card-text">Admin Users</p>
-                  </div>
-                  <Avatar
-                    color="light-success"
-                    size="lg"
-                    icon={<UserCheck />}
-                  />
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col>
-            <Card className="card-congratulations-medal">
-              <CardBody>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h3 className="fw-bolder mb-75">21,459</h3>
-                    <p className="card-text">Publishers</p>
-                  </div>
-                  <Avatar
-                    color="light-warning"
-                    size="lg"
-                    icon={<UserMinus />}
-                  />
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col>
-            <Card className="card-congratulations-medal">
-              <CardBody>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h3 className="fw-bolder mb-75">21,459</h3>
-                    <p className="card-text">Pending Users</p>
-                  </div>
-                  <Avatar
-                    color="light-danger"
-                    size="lg"
-                    icon={<UserX />}
-                  />
-                </div>
-              </CardBody>
-            </Card>
-          </Col> */}
         </Row>
         <Row>
-          {/* <Col>
-            <Filter />
-          </Col> */}
         </Row>
-        <SidebarProvider>
           <UsersTable users={store} role={role} />
-        </SidebarProvider>
       </Fragment>
     )
   }

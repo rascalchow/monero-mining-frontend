@@ -14,6 +14,7 @@ const initialState = {
   menuCollapsed: initialMenuCollapsed(),
   menuHidden: themeConfig.layout.menu.isHidden,
   contentWidth: themeConfig.layout.contentWidth,
+  skin: themeConfig.layout.skin
 }
 
 const layoutReducer = (state = initialState, action) => {
@@ -27,6 +28,8 @@ const layoutReducer = (state = initialState, action) => {
       return { ...state, menuHidden: action.value }
     case 'HANDLE_RTL':
       return { ...state, isRTL: action.value }
+    case 'HANDLE_THEME_COLOR':
+      return {...state, skin: action.value}
     default:
       return state
   }

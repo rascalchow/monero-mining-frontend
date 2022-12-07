@@ -9,8 +9,9 @@ import InputPasswordToggle from '@components/input-password-toggle'
 import FormField from '@components/form-field'
 import { Loader } from 'react-feather'
 import { SidebarCtx } from '@context/user/sidebarContext'
-import { addUser, updateUser } from '../../store/action'
+import { addUser, updateUser } from '../store/action'
 import { useDispatch } from 'react-redux'
+
 const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
   const dispatch = useDispatch()
   const { isCreate } = useContext(SidebarCtx)
@@ -51,6 +52,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
   })
 
   const onSubmit = (info) => {
+    console.log(info)
     toggleSidebar()
     if (isCreate) {
       dispatch(addUser(info))
@@ -71,18 +73,6 @@ const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
       setValue('instantMessenger', user.instantMessenger)
       setValue('website', user.website)
       setValue('moreInformation', user.moreInformation)
-    }
-    return () => {
-      setValue('name', '')
-      setValue('email', '')
-      setValue('phone', '')
-      setValue('companyName', '')
-      setValue('application', '')
-      setValue('contact', '')
-      setValue('country', '')
-      setValue('instantMessenger', '')
-      setValue('website', '')
-      setValue('moreInformation', '')
     }
   }, [user])
   return (

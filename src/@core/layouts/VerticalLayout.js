@@ -8,6 +8,7 @@ import {
   handleMenuCollapsed,
   handleContentWidth,
   handleMenuHidden,
+  handleSkinColor
 } from '@store/actions/layout'
 
 // ** Third Party Components
@@ -35,6 +36,9 @@ import { useNavbarColor } from '@hooks/useNavbarColor'
 // ** Styles
 import '@styles/base/core/menu/menu-types/vertical-menu.scss'
 import '@styles/base/core/menu/menu-types/vertical-overlay-menu.scss'
+
+
+import { SidebarCtx, SidebarProvider } from '@context/user/sidebarContext'
 
 const VerticalLayout = (props) => {
   // ** Props
@@ -180,7 +184,9 @@ const VerticalLayout = (props) => {
           )}
         </div>
       </Navbar>
-      {children}
+      <SidebarProvider>
+        {children}
+      </SidebarProvider>
 
       {/* Vertical Nav Menu Overlay */}
       <div

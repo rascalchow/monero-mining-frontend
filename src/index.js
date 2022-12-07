@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 
 // ** Redux Imports
 import { Provider } from 'react-redux'
-import { store } from './redux/storeConfig/store'
+import { store, persistor} from './redux/storeConfig/store'
 
 // ** Toast & ThemeColors Context
 import { ToastContainer } from 'react-toastify'
@@ -26,13 +26,13 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 
 // ** React Toastify
 import '@styles/react/libs/toastify/toastify.scss'
-
+//**  React Persiter
+import { PersistGate } from 'redux-persist/lib/integration/react'
 // ** Core styles
 import './@core/assets/fonts/feather/iconfont.css'
 import './@core/scss/core.scss'
 import './assets/scss/style.scss'
 import './index.scss'
-
 // ** Service Worker
 import * as serviceWorker from './serviceWorker'
 
@@ -41,12 +41,14 @@ const LazyApp = lazy(() => import('./App'))
 
 ReactDOM.render(
   <Provider store={store}>
-    <Suspense fallback={<Spinner />}>
-      <ThemeContext>
-        <LazyApp />
-        <ToastContainer />
-      </ThemeContext>
-    </Suspense>
+    <PersistGate persistor={persistor}>
+      <Suspense fallback={<Spinner />}>
+        <ThemeContext>
+          <LazyApp />
+          <ToastContainer />
+        </ThemeContext>
+      </Suspense>
+    </PersistGate>
   </Provider>,
   document.getElementById('root'),
 )

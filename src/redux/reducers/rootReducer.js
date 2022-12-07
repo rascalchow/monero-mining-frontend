@@ -1,4 +1,3 @@
-// ** Redux Imports
 import { combineReducers } from 'redux'
 
 // ** Reducers Imports
@@ -10,7 +9,14 @@ import eula from '@src/views/eula/store/reducer'
 import dashboard from '../../views/dashboard/store/reducer'
 import accountSettings from '../../views/account-settings/store/reducer'
 import product from '../../views/product/store/reducer'
-
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+const persistConfig = {
+  key: 'form',
+  storage,
+  debug: true,
+  whitelist: ['layout'],
+}
 const rootReducer = combineReducers({
   auth,
   navbar,
@@ -21,5 +27,5 @@ const rootReducer = combineReducers({
   accountSettings,
   product,
 })
-
-export default rootReducer
+const pReducer = persistReducer(persistConfig, rootReducer)
+export default pReducer
