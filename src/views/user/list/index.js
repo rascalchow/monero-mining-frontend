@@ -16,7 +16,7 @@ const UserList = () => {
   const { usersInfo } = useProfileInfoCtx()
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [location])
   const fetchData = () => {
     const limit = parseInt(searchParams.get('limit'))
     const page = parseInt(searchParams.get('page'))
