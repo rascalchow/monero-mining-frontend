@@ -30,10 +30,10 @@ const useProfileInfo = () => {
     }
     setLoading(false)
   }
-  const loadInstallInfo = async (param, id) => {
+  const loadInstalledUsers = async (param, id) => {
     setInstallLoading(true)
     try {
-      const result = await axiosClient.get(`/users/appUserInfo/${id}`, {
+      const result = await axiosClient.get(`/app-users/installed/${id}`, {
         params: { param, type: 'installed' },
       })
       setInstallInfo(result.info)
@@ -152,7 +152,7 @@ const useProfileInfo = () => {
   const installs = {
     installInfo,
     isInstallLoading,
-    loadInstallInfo,
+    loadInstalledUsers,
     installCount,
   }
   const liveTime = {

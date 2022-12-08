@@ -19,7 +19,7 @@ export const ProfileInfoContextProvider = ({ children }) => {
       switch (route.route) {
         case '':
           overview.loadData(id)
-          installs.loadInstallInfo(DURATION, id)
+          installs.loadInstalledUsers(DURATION, id)
           break
         case 'liveTime':
           liveTime.loadLiveTimeInfo(DURATION, 'CHART', id)
