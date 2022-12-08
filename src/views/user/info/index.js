@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import ProfileInfoCard from './partials/ProfileInfoCard'
+import Overview from './partials/Overview'
 import '@styles/react/pages/page-profile.scss'
 import {
   useParams,
@@ -53,7 +53,7 @@ const Profile = () => {
           </Nav>
         </Card>
         <Switch>
-          <Route path={`${path}`} index exact component={ProfileInfoCard} />
+          <Route path={`${path}`} index exact component={Overview} />
           <Route path={`${path}/software`} component={EditProduct} />
           <Route path={`${path}/liveTime`} component={LiveTime} />
           <Route path={`${path}/users`} component={AppUsers} />

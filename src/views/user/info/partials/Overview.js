@@ -82,7 +82,7 @@ const options = {
   },
 }
 
-const ProfileInfoCard = () => {
+const Overview = () => {
   // const {overview} = useProfileInfoCtx()
   const [isApproving, setIsApproving] = useState(false)
   const [isRejecting, setIsRejecting] = useState(false)
@@ -383,4 +383,4 @@ const ProfileInfoCard = () => {
   )
 }
 
-export default ProfileInfoCard
+export default Overview
