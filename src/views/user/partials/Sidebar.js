@@ -9,6 +9,7 @@ import FormField from '@components/form-field'
 import { Loader } from 'react-feather'
 import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 import { useParams } from 'react-router-dom'
+import {  PHONE_REGEX } from '@src/constants'
 
 const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
   const { overview, usersInfo } = useProfileInfoCtx()
@@ -25,12 +26,11 @@ const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
     website: '',
     moreInformation: '',
   })
-  const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
   const schema = yup
     .object({
       name: yup.string().required(),
       email: yup.string().required().email(),
-      phone: yup.string().required().matches(phoneRegExp, "Phone number is not valid"),
+      phone: yup.string().required().matches(PHONE_REGEX, "Not a valid phone number"),
       companyName: yup.string().required(),
       application: yup.string().required(),
       contact: yup.string().required(),
