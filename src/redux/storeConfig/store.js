@@ -18,6 +18,6 @@ const store = createStore(
   composeEnhancers(applyMiddleware(...middleware)),
 )
 const persistor = persistStore(store,null,()=>{
-  console.log(store.getState())
+  console.log('redux persist...')
 })
 export { store ,persistor}

@@ -2,8 +2,11 @@ import { Row, Col, Container } from 'reactstrap'
 import WelcomeCard from './welcome-card'
 import StatsCard from './stats-card'
 import DeviceListCard from './device-list-card'
+import AppUsers from '../../user/info/partials/AppUsers'
+import {useSelector } from 'react-redux'
 
 const PublisherHome = () => {
+  const authId = useSelector(state=>state.auth.userData._id)
   return (
     <Container fluid className="px-0">
       <Row>
@@ -16,7 +19,7 @@ const PublisherHome = () => {
       </Row>
       <Row className="my-2">
         <Col>
-          <DeviceListCard />
+          <AppUsers id={authId}/>
         </Col>
       </Row>
     </Container>

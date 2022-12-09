@@ -14,14 +14,16 @@ export const PUBLISHER_SORT_KEY = [
   'payments',
 ]
 export const APP_USER_SORT_KEY = [
-    'userKey',
-    'device',
-    'operatingSystem',
-    'liveTime',
-    'timeRatio',
-    'earned',
-    'spent',
-    'log'
+  'userKey',
+  'device',
+  'operatingSystem',
+  'liveTime',
+  'timeRatio',
+  'earned',
+  'spent',
+  'log',
+  'installedAt',
+  'uninstalledAt'
 ]
 export const PROFILE_TAB_ROUTES = [
   {
@@ -69,5 +71,13 @@ export const LIVETIME = [
     iconColor: 'success',
     type: 'all',
     icon: <Calendar size={21} />,
-  },
+  }
+]
+
+export const RESTRICTED_APP_USER_COLUMN = [
+  'device',
+  'operatingSystem',
+  'installedAt',
+  'uninstalledAt',
+  'status',
 ]

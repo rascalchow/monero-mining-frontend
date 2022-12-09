@@ -18,6 +18,8 @@ const useProfileInfo = () => {
   const [users, setUsers] = useState([])
   const [isUsersLoading, setIsUsersLoading] = useState(true)
   const [status, setStatus] = useState('pending')
+  const [appStatsLoading, setAppStatsLoading] = useState(false)
+  const [appStatsInfo, setAppStats] = useState([])
   // const [isRejected, setIsRejected] = useState(false)
   const loadData = async (id) => {
     setLoading(true)
@@ -144,6 +146,17 @@ const useProfileInfo = () => {
     }
     setLoading(false)
   }
+
+  const loadAppStats = async (id) => {
+    setAppStatsLoading(true)
+    try {
+      const res = await axiosClient.get('/app-users/user/stats')
+      setAppStats(res)
+    } catch (error) {
+      toast('Cannot find application status!', { type: 'error' })
+    }
+    setAppStatsLoading(false)
+  }
   const overview = {
     loading,
     profileInfo,
@@ -166,6 +179,8 @@ const useProfileInfo = () => {
     appUsersLoading,
     appUsersInfo,
     loadAppUsersInfo,
+    loadAppStats,
+    appStatsInfo,
   }
   const usersInfo = {
     users,

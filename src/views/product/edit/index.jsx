@@ -33,8 +33,8 @@ const EditProduct = () => {
     .object({
       productName: yup.string().required(),
       currencyName: yup.string().required(),
-      userPercentage: yup.string().required(),
-      numberOfVirtualCoins: yup.string().required(),
+      userPercentage: yup.number().required(),
+      numberOfVirtualCoins: yup.number().required(),
     })
     .required()
   const {

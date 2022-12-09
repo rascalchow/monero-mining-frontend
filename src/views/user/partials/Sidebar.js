@@ -25,11 +25,12 @@ const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
     website: '',
     moreInformation: '',
   })
+  const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
   const schema = yup
     .object({
       name: yup.string().required(),
       email: yup.string().required().email(),
-      phone: yup.string().required(),
+      phone: yup.string().required().matches(phoneRegExp, "Phone number is not valid"),
       companyName: yup.string().required(),
       application: yup.string().required(),
       contact: yup.string().required(),

@@ -14,7 +14,7 @@ export const getAppStats = () => {
       dispatch({
         type: 'DASHBOARD/PUBLISHER/SET_APP_STATS',
         payload: {
-          data: res.data,
+          // data: res.data,
           isLoading: false,
           error: null,
         },
@@ -31,7 +31,8 @@ export const getAppStats = () => {
   }
 }
 
-export const getDeviceList = () => {
+export const getDeviceList = (id) => {
+  console.log(id)
   return async (dispatch) => {
     try {
       dispatch({
@@ -41,8 +42,8 @@ export const getDeviceList = () => {
           error: null,
         },
       })
-      const res = await axiosClient.get('/app-users')
-
+      const res = await axiosClient.get(`/app-users/${id}`)
+      console.log(res)
       dispatch({
         type: 'DASHBOARD/PUBLISHER/SET_DEVICE_LIST',
         payload: {

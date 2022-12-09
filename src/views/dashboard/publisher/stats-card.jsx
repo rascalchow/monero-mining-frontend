@@ -12,33 +12,36 @@ import {
   Row,
   Col,
   Media,
+  Spinner,
 } from 'reactstrap'
 
 import Avatar from '@components/avatar'
 import { getAppStats } from './store/action'
+import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 
 const StatsCard = ({ className }) => {
-  const appStats = useSelector((state) => state.dashboard.publisher.appStats)
+  // const appStats = useSelector((state) => state.dashboard.publisher.appStats)
   const dispatch = useDispatch()
-
+  const { appUsers } = useProfileInfoCtx()
   useEffect(() => {
-    dispatch(getAppStats())
+    // dispatch(getAppStats())
+    appUsers.loadAppStats()
   }, [])
   const data = [
     {
-      title: appStats.data.installed,
+      title: appUsers.appStatsInfo.data?.installed,
       subtitle: 'Installed',
       color: 'light-primary',
       icon: <TrendingUp size={24} />,
     },
     {
-      title: appStats.data.uninstalled,
+      title: appUsers.appStatsInfo.data?.uninstalled,
       subtitle: 'Uninstalled',
       color: 'light-warning',
       icon: <TrendingDown size={24} />,
     },
     {
-      title: appStats.data.devices,
+      title: appUsers.appStatsInfo.data?.devices,
       subtitle: 'Devices',
       color: 'light-danger',
       icon: <Box size={24} />,
@@ -70,7 +73,15 @@ const StatsCard = ({ className }) => {
         </CardText>
       </CardHeader>
       <CardBody className="statistics-body">
-        <Row>{renderData()}</Row>
+        <Row>
+          {!appUsers.appStatsLoading ? (
+            renderData()
+          ) : (
+            <div className="table-loader-container">
+              <Spinner className="spinner" />
+            </div>
+          )}
+        </Row>
       </CardBody>
     </Card>
   )

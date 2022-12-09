@@ -56,7 +56,9 @@ const Profile = () => {
           <Route path={`${path}`} index exact component={Overview} />
           <Route path={`${path}/software`} component={EditProduct} />
           <Route path={`${path}/liveTime`} component={LiveTime} />
-          <Route path={`${path}/users`} component={AppUsers} />
+          <Route path={`${path}/users`}>
+            <AppUsers id={id} />
+          </Route>
         </Switch>
       </section>
     </div>

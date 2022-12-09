@@ -5,6 +5,7 @@ import Proptypes from 'prop-types'
 import { columns } from './columns'
 // ** Store & Actions
 import { useLocation, Redirect, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -28,8 +29,8 @@ import { useSearchParams } from '@src/navigation'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { useProfileInfoCtx } from '../../../../utility/context/user/profileInfoContext'
-import { APP_USER_SORT_KEY } from '@const/user'
+import { useProfileInfoCtx } from '@context/user/profileInfoContext'
+import { APP_USER_SORT_KEY, RESTRICTED_APP_USER_COLUMN } from '@const/user'
 const statusOptions = [
   { value: null, label: 'All' },
   { value: 'installed', label: 'Installed' },
@@ -48,87 +49,87 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
       true,
     )
   }
- 
-    return (
-      <div className="invoice-list-table-header w-100 mr-1 ml-50 mt-1 ">
-        <Row>
-          <Col
-            sm="4"
-            className="d-flex align-items-center p-0 justify-content-between  mb-1"
-          >
-            <Col sm="8" className="d-flex align-items-center w-100">
-              <Label for="rows-per-page">Show</Label>
-              <CustomInput
-                className="form-control mx-50"
-                type="select"
-                id="rows-per-page"
-                style={{
-                  width: '5rem',
-                  padding: '0 0.8rem',
-                  backgroundPosition:
-                    'calc(100% - 3px) 11px, calc(100% - 20px) 13px, 100% 0',
-                }}
-                onChange={onPageSizeChange}
-                value={searchParams.get('limit')}
-              >
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-              </CustomInput>
-              <Label for="rows-per-page">Entries</Label>
-            </Col>
-          </Col>
-          <Col
-            sm="8"
-            className="d-flex align-items-sm-center justify-content-lg-end justify-content-start flex-lg-nowrap flex-wrap flex-sm-row flex-column pr-lg-1 p-0 mb-1"
-          >
-            <Col sm="8" lg="6">
-              <div className="d-flex align-items-center mb-sm-0 mb-1 mr-1">
-                <Label className="mb-0" for="search-invoice">
-                  Search:
-                </Label>
-                <Input
-                  id="search-invoice"
-                  className="ml-50 w-100"
-                  type="text"
-                  value={searchParams.get('search') || ''}
-                  onChange={(e) => {
-                    setSearchParams({ search: e.target.value, page: 1 })
-                  }}
-                />
-              </div>
-            </Col>
-            <Col sm="4" lg="4">
-              <Select
-                theme={selectThemeColors}
-                isClearable={false}
-                className="react-select"
-                classNamePrefix="select"
-                options={statusOptions}
-                value={statusOptions.find(
-                  (it) => it.value === searchParams.get('status'),
-                )}
-                onChange={(opt) => {
-                  setSearchParams({
-                    status: opt.value,
-                    page: 1,
-                  })
-                }}
-                placeholder="Select Status"
-              />
-            </Col>
-          </Col>
-        </Row>
-      </div>
-    )
 
+  return (
+    <div className="invoice-list-table-header w-100 mr-1 ml-50 mt-1 ">
+      <Row>
+        <Col
+          sm="4"
+          className="d-flex align-items-center p-0 justify-content-between  mb-1"
+        >
+          <Col sm="8" className="d-flex align-items-center w-100">
+            <Label for="rows-per-page">Show</Label>
+            <CustomInput
+              className="form-control mx-50"
+              type="select"
+              id="rows-per-page"
+              style={{
+                width: '5rem',
+                padding: '0 0.8rem',
+                backgroundPosition:
+                  'calc(100% - 3px) 11px, calc(100% - 20px) 13px, 100% 0',
+              }}
+              onChange={onPageSizeChange}
+              value={searchParams.get('limit')}
+            >
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+            </CustomInput>
+            <Label for="rows-per-page">Entries</Label>
+          </Col>
+        </Col>
+        <Col
+          sm="8"
+          className="d-flex align-items-sm-center justify-content-lg-end justify-content-start flex-lg-nowrap flex-wrap flex-sm-row flex-column pr-lg-1 p-0 mb-1"
+        >
+          <Col sm="8" lg="6">
+            <div className="d-flex align-items-center mb-sm-0 mb-1 mr-1">
+              <Label className="mb-0" for="search-invoice">
+                Search:
+              </Label>
+              <Input
+                id="search-invoice"
+                className="ml-50 w-100"
+                type="text"
+                value={searchParams.get('search') || ''}
+                onChange={(e) => {
+                  setSearchParams({ search: e.target.value, page: 1 })
+                }}
+              />
+            </div>
+          </Col>
+          <Col sm="4" lg="4">
+            <Select
+              theme={selectThemeColors}
+              isClearable={false}
+              className="react-select"
+              classNamePrefix="select"
+              options={statusOptions}
+              value={statusOptions.find(
+                (it) => it.value === searchParams.get('status'),
+              )}
+              onChange={(opt) => {
+                setSearchParams({
+                  status: opt.value,
+                  page: 1,
+                })
+              }}
+              placeholder="Select Status"
+            />
+          </Col>
+        </Col>
+      </Row>
+    </div>
+  )
 }
 
-const AppUsers = ({ users, role }) => {
+const AppUsers = ({ id }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { appUsers } = useProfileInfoCtx()
   const location = useLocation()
-  const {id} = useParams()
+  const role = useSelector((state) => state.auth.userData.role)
+  // const {id} = useParams()
   useEffect(() => {
     const limit = parseInt(searchParams.get('limit'))
     const page = parseInt(searchParams.get('page'))
@@ -204,46 +205,48 @@ const AppUsers = ({ users, role }) => {
   if (searchParams.get('limit') === null || searchParams.get('page') === null) {
     return null
   } else {
-  return (
-    <div className="users-list-page">
-      <Card>
-        <CardHeader
-          style={{
-            borderBottom: '1px solid #b4b7bd40',
-            textTransform: 'capitalize',
-          }}
-        >
-          App Users
-        </CardHeader>
-        <DataTable
-          noHeader
-          pagination
-          subHeader
-          responsive
-          paginationServer
-          columns={columns}
-          progressPending={appUsers?.appUsersLoading}
-          progressComponent={
-            <div className="table-loader-container">
-              <Spinner className="spinner" />
-            </div>
-          }
-          sortServer={true}
-          onSort={handleSort}
-          sortIcon={<ChevronDown />}
-          className="react-dataTable"
-          paginationComponent={CustomPagination}
-          data={appUsers?.appUsersInfo.docs}
-          subHeaderComponent={<CustomHeader />}
-        />
-      </Card>
-    </div>
-  )}
-  // return (
-  //   <div className="table-loader-container">
-  //     <Spinner className="spinner" />
-  //   </div>
-  // )
+    return (
+      <div className="users-list-page">
+        <Card>
+          <CardHeader
+            style={{
+              borderBottom: '1px solid #b4b7bd40',
+              textTransform: 'capitalize',
+            }}
+          >
+            App Users
+          </CardHeader>
+          <DataTable
+            noHeader
+            pagination
+            subHeader
+            responsive
+            paginationServer
+            columns={
+              role == 'admin'
+                ? columns
+                : columns.filter((it) =>
+                    RESTRICTED_APP_USER_COLUMN.includes(it.selector),
+                  )
+            }
+            progressPending={appUsers?.appUsersLoading}
+            progressComponent={
+              <div className="table-loader-container">
+                <Spinner className="spinner" />
+              </div>
+            }
+            sortServer={true}
+            onSort={handleSort}
+            sortIcon={<ChevronDown />}
+            className="react-dataTable"
+            paginationComponent={CustomPagination}
+            data={appUsers?.appUsersInfo.docs}
+            subHeaderComponent={<CustomHeader />}
+          />
+        </Card>
+      </div>
+    )
+  }
 }
 
 export default AppUsers
