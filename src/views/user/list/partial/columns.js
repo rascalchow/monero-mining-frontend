@@ -126,7 +126,7 @@ export const columnsPublisher = [
     cell: (row) => row.live,
   },
   {
-    name: 'Live Time (Sec)',
+    name: 'Live Time',
     width: '7%',
     selector: 'liveTime',
     sortable: true,
