@@ -49,8 +49,8 @@ export const PROFILE_TAB_ROUTES = [
 ]
 
 export const DURATION = [
-  formatDateAlt(new Date(Date.now() - 86400000 * 7)),
-  formatDateAlt(new Date()),
+  (new Date(Date.now() - 86400000 * 7)).toISOString(),
+  (new Date()).toISOString()
 ]
 
 export const LIVETIME = [
