@@ -34,4 +34,11 @@ export default [
     navLink: '/product/edit',
     restrictedTo: { role: ['publisher'] },
   },
+  {
+    id: 'referral',
+    title:'Invitations',
+    icon: <Inbox size={20}/>,
+    navLink: '/invite',
+    restrictedTo: {role:['publisher']}
+  }
 ]

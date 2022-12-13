@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 // ** React Imports
 import { Link } from 'react-router-dom'
 
@@ -14,7 +14,9 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
+  UncontrolledTooltip,
   DropdownItem,
+  Button,
 } from 'reactstrap'
 import {
   Edit2,
@@ -28,6 +30,7 @@ import {
 } from 'react-feather'
 import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 import _ from 'lodash'
+import { secondsToHMS } from '@utils'
 
 const renderRole = (row) => {
   const roleObj = {
@@ -127,8 +130,22 @@ export const columnsPublisher = [
     width: '7%',
     selector: 'liveTime',
     sortable: true,
-    cell: (row) => row.liveTime,
+    cell: (row) => {
+      return (
+        <>
+          <div id={'tooltip' + row._id}>
+            {row.liveTime ? `${row.liveTime}  secs` : ''}
+          </div>
+          {row.liveTime && (
+            <UncontrolledTooltip placement="top" target={'tooltip' + row._id}>
+              {secondsToHMS(row.liveTime)}
+            </UncontrolledTooltip>
+          )}
+        </>
+      )
+    },
   },
+
   {
     name: 'Success Rate',
     width: '7%',

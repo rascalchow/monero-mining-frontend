@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 // ** Third Party Components
 import _ from 'lodash'
 //
+import { UncontrolledTooltip } from 'reactstrap'
 import { formatDate } from '@utils'
 import { Badge } from 'reactstrap'
+import { secondsToHMS } from '@utils'
 const BADGE_COLOR = {
   installed: 'light-info',
   uninstalled: 'light-warning',
@@ -33,10 +35,21 @@ export const columns = [
     name: 'Live Time',
     selector: 'liveTime',
     sortable: true,
-    cell: (row) => row.liveTime,
+    cell: (row) => (
+      <>
+        <div id={'tooltip' + row._id}>
+          {row.liveTime ? `${row.liveTime}  secs` : ''}
+        </div>
+        {row.liveTime && (
+          <UncontrolledTooltip placement="top" target={'tooltip' + row._id}>
+            {secondsToHMS(row.liveTime)}
+          </UncontrolledTooltip>
+        )}
+      </>
+    ),
   },
   {
-    name: 'Time Ratio',
+    name: 'Time Ratio (%)',
     selector: 'timeRatio',
     sortable: true,
     cell: (row) => row.timeRatio,
@@ -65,7 +78,7 @@ export const columns = [
       >
         {row.status}
       </Badge>
-    )
+    ),
   },
   {
     name: 'Spend Log',

@@ -33,10 +33,12 @@ export const formatDate = (
   if (!value) return value
   return new Intl.DateTimeFormat('en-US', formatting).format(new Date(value))
 }
-export const formatDateAlt = (
-  date
-)=>{
-  return new Intl.DateTimeFormat('ko-KR').format(date).replace(/. /,'-').replace('. ','-').replace('.','')
+export const formatDateAlt = (date) => {
+  return new Intl.DateTimeFormat('ko-KR')
+    .format(date)
+    .replace(/. /, '-')
+    .replace('. ', '-')
+    .replace('.', '')
 }
 // ** Returns short month of passed date
 export const formatDateToMonthShort = (value, toTimeForCurrentDay = true) => {
@@ -49,7 +51,20 @@ export const formatDateToMonthShort = (value, toTimeForCurrentDay = true) => {
 
   return new Intl.DateTimeFormat('en-US', formatting).format(new Date(value))
 }
+//** Returns DD:HH:MM:SS from seconds */
+export const secondsToHMS = (d) => {
+  d = Number(d)
+  let dy = Math.floor(d/86400)
+  let h = Math.floor((d %86400)/ 3600)
+  let m = Math.floor((d % 3600) / 60)
+  let s = Math.floor((d % 3600) % 60)
 
+  let dDisplay = dy > 0 ? dy + (dy == 1 ? ' day ' : ' days ') : ''
+  let hDisplay = h > 0 ? h + (h == 1 ? ' hr ' : ' hrs ') : ''
+  let mDisplay = m > 0 ? m + (m == 1 ? ' min ' : ' mins ') : ''
+  let sDisplay = s > 0 ? s + (s == 1 ? ' sec' : ' secs') : ''
+  return dDisplay + hDisplay + mDisplay + sDisplay
+}
 /**
  ** Return if user is logged in
  ** This is completely up to you and how you want to store the token in your frontend application
@@ -63,7 +78,7 @@ export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
  ** In real app you won't need this function because your app will navigate to same route for each users regardless of ability
  ** Please note role field is just for showing purpose it's not used by anything in frontend
  ** We are checking role just for ease
- * ? NOTE: If you have different pages to navigate based on user ability then this function can be useful. However, you need to update it.
+ * ? NOTE: If you have different pages to navigate based on user ability then this function can be useful. However you need to update it.
  * @param {String} userRole Role of user
  */
 export const getHomeRouteForLoggedInUser = (userRole) => {

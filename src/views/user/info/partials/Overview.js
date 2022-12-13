@@ -337,31 +337,31 @@ const Overview = () => {
             <hr />
             <Row className="pt-50">
               <Col className="mb-2" md="6" sm="12">
-                <p className="mb-50">Installs</p>
+                <p className="mb-50">Installs (%)</p>
                 <Progress
                   className="avg-session-progress mt-25"
-                  value={`${overview.profileInfo?.installs}`}
+                  value={`${overview.profileInfo?.installsRate * 100}`}
                 />
               </Col>
               <Col className="mb-2" md="6" sm="12">
-                <p className="mb-50">Uninstalls</p>
+                <p className="mb-50">Uninstalls (%)</p>
                 <Progress
                   className="avg-session-progress progress-bar-warning mt-25"
-                  value={`${overview.profileInfo?.uninstalls}`}
+                  value={`${overview.profileInfo?.uninstallsRate * 100}`}
                 />
               </Col>
               <Col md="6" sm="12">
-                <p className="mb-50">Live</p>
+                <p className="mb-50">Live (%)</p>
                 <Progress
                   className="avg-session-progress progress-bar-danger mt-25"
-                  value={`${overview.profileInfo?.live}`}
+                  value={`${overview.profileInfo?.liveRate * 100}`}
                 />
               </Col>
               <Col md="6" sm="12">
-                <p className="mb-50">Live Time</p>
+                <p className="mb-50">Live Time (%)</p>
                 <Progress
                   className="avg-session-progress progress-bar-success mt-25"
-                  value={`${overview.profileInfo?.liveTime}`}
+                  value={`${overview.profileInfo?.liveTimeRate * 100}`}
                 />
               </Col>
             </Row>
