@@ -32,7 +32,6 @@ export const getAppStats = () => {
 }
 
 export const getDeviceList = (id) => {
-  console.log(id)
   return async (dispatch) => {
     try {
       dispatch({
@@ -43,7 +42,6 @@ export const getDeviceList = (id) => {
         },
       })
       const res = await axiosClient.get(`/app-users/${id}`)
-      console.log(res)
       dispatch({
         type: 'DASHBOARD/PUBLISHER/SET_DEVICE_LIST',
         payload: {

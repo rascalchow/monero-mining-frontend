@@ -5,7 +5,6 @@ import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 
 const LiveTimeStatic = ({ name, icon, color, type }) => {
   const { liveTime } = useProfileInfoCtx()
-  console.log(liveTime)
   if (liveTime.liveTimeStaticInfo) {
     return (
       <StatsWithAreaChart

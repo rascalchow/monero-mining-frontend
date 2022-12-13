@@ -33,7 +33,11 @@ const Routes = [
     component: lazy(() => import('../../views/eula')),
     private: true,
   },
-
+  {
+    path:'/invite',
+    component: lazy(() => import('../../views/invite')),
+    private:true
+  },
   {
     path: '/product/edit',
     component: lazy(() => import('../../views/product/edit')),
