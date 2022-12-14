@@ -1,10 +1,10 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { useSkin } from '@hooks/useSkin'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { handleRegister } from '@store/actions/auth'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect, useLocation, useParams } from 'react-router-dom'
 import InputPasswordToggle from '@components/input-password-toggle'
 import { Facebook, Twitter, Mail, GitHub, Loader } from 'react-feather'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -27,16 +27,18 @@ import ReactSelect from 'react-select'
 
 import _ from 'lodash'
 
-import { selectThemeColors } from '@utils'
+import { selectThemeColors, processReferredQuery } from '@utils'
 import FormField from '@components/form-field'
 import logo from '@src/assets/images/logo/nurev_logo.jpeg'
 import { COUNTRIES, PHONE_REGEX } from '@src/constants'
+import { INVITE_ERRORS } from '../../const/invite'
 
 const Register = () => {
   const [skin] = useSkin()
   const dispatch = useDispatch()
   const [fbMsg, setFbMsg] = useState(null)
   const [term, setTerm] = useState(false)
+  const location = useLocation()
   const schema = yup
     .object({
       name: yup.string().required(),
@@ -74,6 +76,7 @@ const Register = () => {
       instantMessenger: '',
       website: '',
       moreInformation: '',
+      referral: '',
     },
   })
 
@@ -93,6 +96,12 @@ const Register = () => {
   }
 
   const onSubmit = async (data) => {
+    let referralQuery = location?.search
+    const referralData = processReferredQuery(referralQuery)
+    if (referralData == null) {
+      toast('No Referrals!', { type: 'error' })
+      return
+    }
     const formData = {
       name: data.name,
       email: data.email,
@@ -105,17 +114,23 @@ const Register = () => {
       instantMessenger: data.instantMessenger,
       website: data.website,
       moreInformation: data.moreInformation,
+      referral: referralData,
     }
     try {
-      return await dispatch(handleRegister(formData))
+      await dispatch(handleRegister(formData))
+      toast('Successful registered a user. Pleas wait until being approved!', {
+        type: 'success',
+      })
     } catch (error) {
       if (error.status === 422) {
-        if (error.data.errors.msg === 'EMAIL_ALREADY_EXISTS') {
-          setError('email', {
-            type: 'custom',
-            message: 'Email is already taken',
-          })
-          toast('Email is already registered!', { type: 'error' })
+        if (INVITE_ERRORS[error.data.errors.msg]) {
+          if (error.data.errors.msg === 'EMAIL_ALREADY_EXISTS') {
+            setError('email', {
+              type: 'custom',
+              message: 'Email is already taken',
+            })
+          }
+          toast(INVITE_ERRORS[error.data.errors.msg], { type: 'error' })
         } else {
           setFbMsg(_.get(error, 'data.errors.msg', 'Server Error'))
         }
@@ -125,9 +140,6 @@ const Register = () => {
     }
   }
   if (isSubmitSuccessful) {
-    toast('Successful registered a user. Pleas wait until being approved!', {
-      type: 'success',
-    })
     return <Redirect to="/login" />
   }
 

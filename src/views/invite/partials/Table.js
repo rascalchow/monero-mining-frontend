@@ -32,7 +32,7 @@ import SidebarInvitations from './Sidebar'
 import { useSearchParams } from '@src/navigation'
 import useInvite from '@hooks/useInvite'
 
-const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
+const CustomHeader = ({ sidebarOpen, setSidebarOpen, onSubmit }) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const onPageSizeChange = (e) => {
@@ -46,6 +46,7 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
   }
   const onHandleInvitation = (val) => {
     setSidebarOpen(val)
+    onSubmit(false)
   }
   return (
     <div className="invoice-list-table-header w-100 mr-1 ml-50 mt-1 ">
@@ -116,7 +117,7 @@ CustomHeader.propTypes = {
   setSidebarOpen: Proptypes.func.isRequired,
 }
 
-const InviteTable = ({ invites, isLoading }) => {
+const InviteTable = ({ invites, isLoading, onSubmit }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const count = Number(
@@ -192,6 +193,7 @@ const InviteTable = ({ invites, isLoading }) => {
             <CustomHeader
               sidebarOpen={sidebarOpen}
               setSidebarOpen={setSidebarOpen}
+              onSubmit={onSubmit}
             />
           }
         />
@@ -201,6 +203,7 @@ const InviteTable = ({ invites, isLoading }) => {
         toggleSidebar={() => {
           setSidebarOpen(!sidebarOpen)
         }}
+        onSubmit={onSubmit}
       />
     </div>
   )

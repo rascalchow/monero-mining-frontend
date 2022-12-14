@@ -9,10 +9,14 @@ const Invitation = () => {
   const { invitesList, getInvites, isLoading } = useInvite()
   const [searchParams, setSearchParams] = useSearchParams()
   const location = useLocation()
-
+  const [isSubmit, setSubmit] = useState(false)
+  const onSubmit = (value)=>{
+    setSubmit(value)
+  }
   useEffect(() => {
     fetchData()
-  }, [location])
+    if (isSubmit) fetchData()
+  }, [location, isSubmit])
   const fetchData = () => {
     const limit = parseInt(searchParams.get('limit'))
     const page = parseInt(searchParams.get('page'))
@@ -34,6 +38,7 @@ const Invitation = () => {
         ...query,
         filter: { ...query.filter },
       })
+      setSubmit(false)
     } catch (error) {
       history.push('/not-authorized')
     }
@@ -48,7 +53,7 @@ const Invitation = () => {
   else
     return (
       <>
-        <InviteTable invites={invitesList} isLoading={isLoading} />
+        <InviteTable invites={invitesList} isLoading={isLoading} onSubmit={onSubmit}/>
       </>
     )
 }
