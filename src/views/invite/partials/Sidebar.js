@@ -7,11 +7,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Sidebar from '@components/sidebar'
 import FormField from '@components/form-field'
 import { Loader } from 'react-feather'
-
-const SidebarInvitations = ({ open, toggleSidebar }) => {
+import useInvite from '@hooks/useInvite'
+const SidebarInvitations = ({ open, toggleSidebar, onSubmit }) => {
   const [formData, setFormData] = useState({
     email: '',
   })
+  const {createInvite} = useInvite()
   const schema = yup
     .object({
       email: yup.string().required().email(),
@@ -27,8 +28,13 @@ const SidebarInvitations = ({ open, toggleSidebar }) => {
     defaultValues: formData,
   })
 
-  const onSubmit = (info) => {
+  const submit = (data) => {
     toggleSidebar(!open)
+    const formData = {
+      email: data.email,
+    }
+    createInvite(formData)
+    onSubmit(true)
   }
   return (
     <Sidebar
@@ -41,7 +47,7 @@ const SidebarInvitations = ({ open, toggleSidebar }) => {
     >
       <Form
         className="auth-register-form mt-2"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(submit)}
       >
         <Col className="px-0 mb-2">
           <FormField

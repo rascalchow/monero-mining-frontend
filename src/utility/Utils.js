@@ -99,3 +99,10 @@ export const selectThemeColors = (theme) => ({
     neutral30: '#ededed', // for input hover border-color
   },
 })
+
+// **Convert referred url to object
+export const processReferredQuery = (query) =>{
+  const reg = /referralInvite=/i
+  if (!reg.test(query)) return null
+  return  (query.substr(1).split('='))[1]
+}

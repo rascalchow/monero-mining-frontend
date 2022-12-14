@@ -139,19 +139,19 @@ const Overview = () => {
                   <div className="d-flex flex-column ml-0">
                     <div className="user-info mb-1">
                       <h1 className="mb-0 text-capitalize">
-                        {overview.profileInfo?.name}
+                        {overview.profileInfo?._doc.name}
                       </h1>
                       <CardText tag="div">
-                        {overview.profileInfo?.email}
+                        {overview.profileInfo?._doc.email}
                       </CardText>
                       <CardText tag="div" className="mt-1">
-                        {overview.profileInfo?.role}
+                        {overview.profileInfo?._doc.role}
                       </CardText>
                     </div>
                   </div>
                 </div>
                 <div className="border rounded px-2 py-1 mb-1 more-info">
-                  <CardText>{overview.profileInfo?.moreInformation}</CardText>
+                  <CardText>{overview.profileInfo?._doc.moreInformation}</CardText>
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="d-flex flex-wrap align-items-center">
@@ -206,7 +206,7 @@ const Overview = () => {
                       label="Country"
                       value={_.get(
                         COUNTRIES.find(
-                          (it) => it.code == overview.profileInfo?.country,
+                          (it) => it.code == overview.profileInfo?._doc.country,
                         ),
                         'name',
                         '',
@@ -217,35 +217,35 @@ const Overview = () => {
                   <div className="my-50">
                     <Description
                       label="Contact"
-                      value={overview.profileInfo?.contact}
+                      value={overview.profileInfo?._doc.contact}
                       icon={<Phone className="mr-1" size={14} />}
                     />
                   </div>
                   <div className="my-50">
                     <Description
                       label="Company Name"
-                      value={overview.profileInfo?.companyName}
+                      value={overview.profileInfo?._doc.companyName}
                       icon={<Server className="mr-1" size={14} />}
                     />
                   </div>
                   <div className="my-50">
                     <Description
                       label="Application"
-                      value={overview.profileInfo?.application}
+                      value={overview.profileInfo?._doc.application}
                       icon={<Grid className="mr-1" size={14} />}
                     />
                   </div>
                   <div className="my-50">
                     <Description
                       label="I.M."
-                      value={overview.profileInfo?.instantMessenger}
+                      value={overview.profileInfo?._doc.instantMessenger}
                       icon={<Voicemail className="mr-1" size={14} />}
                     />
                   </div>
                   <div className="my-50">
                     <Description
                       label="website."
-                      value={overview.profileInfo?.website}
+                      value={overview.profileInfo?._doc.website}
                       icon={<Globe className="mr-1" size={14} />}
                     />
                   </div>
@@ -277,7 +277,7 @@ const Overview = () => {
                       />
                       <Media className="my-auto" body>
                         <h4 className="font-weight-bolder mb-0">
-                          {overview.profileInfo?.earnings}
+                          {overview.profileInfo?._doc.earnings}
                         </h4>
                         <CardText className="font-small-3 mb-0">
                           Earnings
@@ -294,7 +294,7 @@ const Overview = () => {
                       />
                       <Media className="my-auto" body>
                         <h4 className="font-weight-bolder mb-0">
-                          {overview.profileInfo?.payments}
+                          {overview.profileInfo?._doc.payments}
                         </h4>
                         <CardText className="font-small-3 mb-0">
                           Payments
