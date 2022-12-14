@@ -14,9 +14,10 @@ const UserList = () => {
   const history = useHistory()
   const [role, setRole] = useState('')
   const { usersInfo } = useProfileInfoCtx()
+  
   useEffect(() => {
-    fetchData()
-  }, [location])
+   if(location.search) fetchData()
+  }, [location.search])
   const fetchData = () => {
     const limit = parseInt(searchParams.get('limit'))
     const page = parseInt(searchParams.get('page'))

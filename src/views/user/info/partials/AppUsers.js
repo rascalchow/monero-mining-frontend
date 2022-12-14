@@ -150,11 +150,12 @@ const AppUsers = ({ id }) => {
       }
     })
     try {
-      appUsers.loadAppUsersInfo({ ...query, filter: { ...query.filter } }, id)
+      if (location.search)
+        appUsers.loadAppUsersInfo({ ...query, filter: { ...query.filter } }, id)
     } catch (error) {
       history.push('/not-authorized')
     }
-  }, [searchParams.toString()])
+  }, [location.search])
   const CustomPagination = () => {
     const count = Number(
       Math.ceil(
