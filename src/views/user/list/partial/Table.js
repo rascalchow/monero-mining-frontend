@@ -32,9 +32,13 @@ import { useSearchParams } from '@src/navigation'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
+
 import { SidebarCtx } from '@context/user/sidebarContext'
 import { useLocation } from 'react-router-dom'
 import { useProfileInfoCtx } from '@context/user/profileInfoContext'
+
+import DebouceInput from 'react-debounce-input'
+
 const STATUS_OPTIONS = [
   { value: null, label: 'All' },
   { value: 'pending', label: 'Pending' },
@@ -97,9 +101,11 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
               <Label className="mb-0" for="search-invoice">
                 Search:
               </Label>
-              <Input
+              <DebouceInput
+                minLength={2}
+                debounceTimeout = {500}
                 id="search-invoice"
-                className="ml-50 w-100"
+                className="ml-50 w-100 debounce-input"
                 type="text"
                 value={searchParams.get('search') || ''}
                 onChange={(e) => {

@@ -31,6 +31,7 @@ import SidebarInvitations from './Sidebar'
 //** Hooks
 import { useSearchParams } from '@src/navigation'
 import useInvite from '@hooks/useInvite'
+import DebouceInput from 'react-debounce-input'
 
 const CustomHeader = ({ sidebarOpen, setSidebarOpen, onSubmit }) => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -86,9 +87,11 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen, onSubmit }) => {
               <Label className="mb-0" for="search-invoice">
                 Search:
               </Label>
-              <Input
+              <DebouceInput
+                minLength={2}
+                debounceTimeout = {500}
                 id="search-invoice"
-                className="ml-50 w-100"
+                className="ml-50 w-100 debounce-input"
                 type="text"
                 value={searchParams.get('search') || ''}
                 onChange={(e) => {
