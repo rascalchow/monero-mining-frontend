@@ -91,12 +91,12 @@ export const columns = [
     name: 'Accepted At',
     selector: 'acceptedAt',
     sortable: true,
-    cell: (row) => formatDate(new Date(row.acceptedAt)),
+    cell: (row) => row.acceptedAt,
   },
   {
     name: 'Invited At',
     selector: 'createdAt',
     sortable: true,
-    cell: (row) => formatDate(new Date(row.createdAt)),
+    cell: (row) => row.createdAt,
   },
 ]
