@@ -1,8 +1,8 @@
 import { Button, Spinner } from 'reactstrap'
 import Proptypes from 'prop-types'
-const SubmitButton = ({ isSubmitting, children }) => {
+const SubmitButton = ({ isSubmitting, children, disabled }) => {
   return (
-    <Button.Ripple color="primary" type="submit">
+    <Button.Ripple color="primary" type="submit" disabled={disabled}>
       <div className="d-flex aiign-items-cente">
         {isSubmitting && (
           <>

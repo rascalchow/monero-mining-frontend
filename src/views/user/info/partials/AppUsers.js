@@ -31,6 +31,10 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 import { APP_USER_SORT_KEY, RESTRICTED_APP_USER_COLUMN } from '@const/user'
+
+import DebouceInput from 'react-debounce-input'
+
+
 const statusOptions = [
   { value: null, label: 'All' },
   { value: 'installed', label: 'Installed' },
@@ -88,9 +92,11 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
               <Label className="mb-0" for="search-invoice">
                 Search:
               </Label>
-              <Input
+              <DebouceInput
+                minLength={2}
+                debounceTimeout = {500}
                 id="search-invoice"
-                className="ml-50 w-100"
+                className="ml-50 w-100 debounce-input"
                 type="text"
                 value={searchParams.get('search') || ''}
                 onChange={(e) => {

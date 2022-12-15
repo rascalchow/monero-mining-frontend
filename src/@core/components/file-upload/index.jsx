@@ -13,7 +13,7 @@ const FileUpload = ({ defaultSrc, label, alt, onChange, ...props }) => {
     reader.onload = function () {
       setPreview(reader.result)
     }
-    reader.readAsDataURL(files[0])
+    reader.readAsDataURL(new Blob([files[0]]))
     onChange(files[0])
   }
   useEffect(() => {

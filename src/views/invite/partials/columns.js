@@ -7,6 +7,7 @@ import { useSearchParams } from '@src/navigation'
 import { store } from '@store/storeConfig/store'
 import { useLocation } from 'react-router-dom'
 // ** Third Party Components
+import './invite.css'
 import {
   Badge,
   UncontrolledDropdown,
@@ -25,11 +26,13 @@ import {
   UserCheck,
   UserX,
   User,
+  Clipboard,
 } from 'react-feather'
 import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 import _ from 'lodash'
-import { secondsToHMS } from '@utils'
-
+import { toast } from 'react-toastify'
+import { formatDate } from '@utils'
+const APP_URL = 'http://localhost:3000'
 const BADGE_COLOR = {
   invited: 'light-warning',
   signup: 'light-info',
@@ -46,7 +49,29 @@ export const columns = [
     name: 'Code',
     selector: 'code',
     sortable: true,
-    cell: (row) => row.code,
+    cell: (row) => {
+      return (
+        <>
+          <div className="flex nowrap justify-content-between">
+            {row.code}
+            <Clipboard
+              size={18}
+              className="clipboard"
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  `${APP_URL}/register?referralInvite=${row.code}`,
+                )
+                toast('Copied to clipboard!', { type: 'success' })
+              }}
+              id={'tooltip' + row._id}
+            />
+            <UncontrolledTooltip placement="top" target={'tooltip' + row._id}>
+              Copy to clipboard
+            </UncontrolledTooltip>
+          </div>
+        </>
+      )
+    },
   },
   {
     name: 'Status',

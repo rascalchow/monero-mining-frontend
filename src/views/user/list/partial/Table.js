@@ -6,7 +6,7 @@ import { columnsPublisher, columnsAdmin } from './columns'
 
 // ** Store & Actions
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { ChevronDown, Cpu } from 'react-feather'
@@ -32,9 +32,13 @@ import { useSearchParams } from '@src/navigation'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
+
 import { SidebarCtx } from '@context/user/sidebarContext'
 import { useLocation } from 'react-router-dom'
 import { useProfileInfoCtx } from '@context/user/profileInfoContext'
+
+import DebouceInput from 'react-debounce-input'
+
 const STATUS_OPTIONS = [
   { value: null, label: 'All' },
   { value: 'pending', label: 'Pending' },
@@ -97,9 +101,11 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
               <Label className="mb-0" for="search-invoice">
                 Search:
               </Label>
-              <Input
+              <DebouceInput
+                minLength={2}
+                debounceTimeout = {500}
                 id="search-invoice"
-                className="ml-50 w-100"
+                className="ml-50 w-100 debounce-input"
                 type="text"
                 value={searchParams.get('search') || ''}
                 onChange={(e) => {
@@ -146,6 +152,7 @@ const UsersTable = ({ users, role }) => {
   const { pathname } = useLocation()
   const [columns, setColumns] = useState(columnsAdmin)
   const { usersInfo } = useProfileInfoCtx()
+  const auth = useSelector((state) => state.auth.userData)
   useEffect(() => {
     if (pathname == '/publisher/list') setColumns(columnsPublisher)
     else if (pathname == '/admin/list') setColumns(columnsAdmin)
@@ -230,7 +237,7 @@ const UsersTable = ({ users, role }) => {
           // store.dispatch(setUser(null))
           setSidebarOpen(!sidebarOpen)
         }}
-        user={users.selectedUser}
+        user={role == 'publisher' ? users.selectedUser : auth}
       />
     </div>
   )

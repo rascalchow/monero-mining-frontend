@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import Proptypes from 'prop-types'
+import { useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { Button, Form, Input, Row, Col } from 'reactstrap'
 import * as yup from 'yup'
@@ -8,11 +9,13 @@ import Sidebar from '@components/sidebar'
 import FormField from '@components/form-field'
 import { Loader } from 'react-feather'
 import { useProfileInfoCtx } from '@context/user/profileInfoContext'
-import { useParams } from 'react-router-dom'
-import {  PHONE_REGEX } from '@src/constants'
+import { useParams, useLocation } from 'react-router-dom'
+import { PHONE_REGEX } from '@src/constants'
 
 const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
   const { overview, usersInfo } = useProfileInfoCtx()
+  const auth = useSelector((state) => state.auth.userData)
+  const location = useLocation()
   const { id } = useParams()
   const [formData, setFormData] = useState({
     name: '',
@@ -30,7 +33,10 @@ const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
     .object({
       name: yup.string().required(),
       email: yup.string().required().email(),
-      phone: yup.string().required().matches(PHONE_REGEX, "Not a valid phone number"),
+      phone: yup
+        .string()
+        .required()
+        .matches(PHONE_REGEX, 'Not a valid phone number'),
       companyName: yup.string().required(),
       application: yup.string().required(),
       contact: yup.string().required(),
@@ -53,7 +59,11 @@ const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
   const onSubmit = (info) => {
     toggleSidebar()
     let userId = id !== undefined ? id : usersInfo.users.id
-    usersInfo.updateUser(info, userId)
+    if (location.pathname == '/admin/list') {
+      usersInfo.updateUser(info, auth._id)
+    } else {
+      usersInfo.updateUser(info, userId)
+    }
   }
 
   useEffect(() => {
