@@ -25,8 +25,8 @@ const EditProduct = () => {
   const dispatch = useDispatch()
 
   const productData = useSelector((state) => state.product.edit)
-  const [companyLogo, setCompanyLogo] = useState()
-  const [productIcon, setProductIcon] = useState()
+  const [companyLogo, setCompanyLogo] = useState({})
+  const [productIcon, setProductIcon] = useState({})
   const [companyLogoDefault, setCompanyLogoDefault] = useState()
   const [productIconDefault, setProductIconDefault] = useState()
   const schema = yup
@@ -168,7 +168,10 @@ const EditProduct = () => {
                   </div>
                 )}
 
-                <SubmitButton isSubmitting={isSubmitting}>
+                <SubmitButton
+                  isSubmitting={isSubmitting}
+                  disabled={!companyLogo || !productIcon}
+                >
                   Save Change
                 </SubmitButton>
               </div>

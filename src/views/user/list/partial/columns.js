@@ -126,14 +126,14 @@ export const columnsPublisher = [
     cell: (row) => row.live,
   },
   {
-    name: 'Live Time',
+    name: 'Live Time(SEC)',
     width: '7%',
     selector: 'liveTime',
     sortable: true,
     cell: (row) => {
       return (
         <>
-          <div id={'tooltip' + row._id}>
+          <div id={'tooltip' + row._id} style={{ whiteSpace: 'nowrap' }}>
             {row.liveTime ? `${row.liveTime}  secs` : ''}
           </div>
           {row.liveTime && (

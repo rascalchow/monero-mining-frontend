@@ -32,7 +32,7 @@ export const columns = [
     cell: (row) => row.operatingSystem,
   },
   {
-    name: 'Live Time',
+    name: 'Live Time(SEC)',
     selector: 'liveTime',
     sortable: true,
     cell: (row) => (

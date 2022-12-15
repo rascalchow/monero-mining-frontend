@@ -6,7 +6,7 @@ import { columnsPublisher, columnsAdmin } from './columns'
 
 // ** Store & Actions
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { ChevronDown, Cpu } from 'react-feather'
@@ -146,6 +146,7 @@ const UsersTable = ({ users, role }) => {
   const { pathname } = useLocation()
   const [columns, setColumns] = useState(columnsAdmin)
   const { usersInfo } = useProfileInfoCtx()
+  const auth = useSelector((state) => state.auth.userData)
   useEffect(() => {
     if (pathname == '/publisher/list') setColumns(columnsPublisher)
     else if (pathname == '/admin/list') setColumns(columnsAdmin)
@@ -230,7 +231,7 @@ const UsersTable = ({ users, role }) => {
           // store.dispatch(setUser(null))
           setSidebarOpen(!sidebarOpen)
         }}
-        user={users.selectedUser}
+        user={role == 'publisher' ? users.selectedUser : auth}
       />
     </div>
   )

@@ -151,7 +151,9 @@ const Overview = () => {
                   </div>
                 </div>
                 <div className="border rounded px-2 py-1 mb-1 more-info">
-                  <CardText>{overview.profileInfo?._doc.moreInformation}</CardText>
+                  <CardText>
+                    {overview.profileInfo?._doc.moreInformation}
+                  </CardText>
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="d-flex flex-wrap align-items-center">
@@ -337,28 +339,39 @@ const Overview = () => {
             <hr />
             <Row className="pt-50">
               <Col className="mb-2" md="6" sm="12">
-                <p className="mb-50">Installs (%)</p>
+                <p className="mb-50">
+                  Installs{' '}
+                  {(overview.profileInfo?.installsRate * 100).toFixed(2)}(%)
+                </p>
                 <Progress
                   className="avg-session-progress mt-25"
                   value={`${overview.profileInfo?.installsRate * 100}`}
                 />
               </Col>
               <Col className="mb-2" md="6" sm="12">
-                <p className="mb-50">Uninstalls (%)</p>
+                <p className="mb-50">
+                  Uninstalls{' '}
+                  {(overview.profileInfo?.uninstallsRate * 100).toFixed(2)}(%)
+                </p>
                 <Progress
                   className="avg-session-progress progress-bar-warning mt-25"
                   value={`${overview.profileInfo?.uninstallsRate * 100}`}
                 />
               </Col>
               <Col md="6" sm="12">
-                <p className="mb-50">Live (%)</p>
+                <p className="mb-50">
+                  Live {(overview.profileInfo?.liveRate * 100).toFixed(2)}(%)
+                </p>
                 <Progress
                   className="avg-session-progress progress-bar-danger mt-25"
                   value={`${overview.profileInfo?.liveRate * 100}`}
                 />
               </Col>
               <Col md="6" sm="12">
-                <p className="mb-50">Live Time (%)</p>
+                <p className="mb-50">
+                  Live Time{' '}
+                  {(overview.profileInfo?.liveTimeRate * 100).toFixed(2)}(%)
+                </p>
                 <Progress
                   className="avg-session-progress progress-bar-success mt-25"
                   value={`${overview.profileInfo?.liveTimeRate * 100}`}
