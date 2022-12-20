@@ -14,8 +14,7 @@ const Invitation = () => {
     setSubmit(value)
   }
   useEffect(() => {
-    fetchData()
-    if (isSubmit) fetchData()
+    if (isSubmit || location.search.length > 0) fetchData()
   }, [location, isSubmit])
   const fetchData = () => {
     const limit = parseInt(searchParams.get('limit'))

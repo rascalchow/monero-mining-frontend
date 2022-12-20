@@ -2,8 +2,8 @@ export const INVITE_SORT_KEY = [
   'refereeEmail',
   'status',
   'code',
-  'createdAt',
   'acceptedAt',
+  'createdAt'
 ]
 
 export const INVITE_ERRORS = {
