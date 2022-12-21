@@ -10,38 +10,42 @@ const Invitation = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const location = useLocation()
   const [isSubmit, setSubmit] = useState(false)
+
   const onSubmit = (value)=>{
     setSubmit(value)
   }
+
   useEffect(() => {
-    if (isSubmit || location.search.length > 0) fetchData()
-  }, [location, isSubmit])
-  const fetchData = () => {
-    const limit = parseInt(searchParams.get('limit'))
-    const page = parseInt(searchParams.get('page'))
-    const query = {
-      limit,
-      page,
-      filter: {},
-    }
-    if (searchParams.get('search')) {
-      query.filter['search'] = searchParams.get('search')
-    }
-    INVITE_SORT_KEY.forEach((key) => {
-      if (searchParams.get(key)) {
-        query.filter[key] = searchParams.get(key)
+    const fetchData = () => {
+      const limit = parseInt(searchParams.get('limit'))
+      const page = parseInt(searchParams.get('page'))
+      const query = {
+        limit,
+        page,
+        filter: {},
       }
-    })
-    try {
-      getInvites({
-        ...query,
-        filter: { ...query.filter },
+      if (searchParams.get('search')) {
+        query.filter['search'] = searchParams.get('search')
+      }
+      INVITE_SORT_KEY.forEach((key) => {
+        if (searchParams.get(key)) {
+          query.filter[key] = searchParams.get(key)
+        }
       })
-      setSubmit(false)
-    } catch (error) {
-      history.push('/not-authorized')
+      try {
+        getInvites({
+          ...query,
+          filter: { ...query.filter },
+        })
+        setSubmit(false)
+      } catch (error) {
+        history.push('/not-authorized')
+      }
     }
-  }
+    if (isSubmit || location.search.length > 0) fetchData()
+    
+  }, [location, isSubmit])
+
   if (searchParams.get('limit') === null || searchParams.get('page') === null) {
     searchParams.set('limit', 10)
     searchParams.set('page', 1)

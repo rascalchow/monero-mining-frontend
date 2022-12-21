@@ -1,12 +1,3 @@
-import { useContext, useState } from 'react'
-// ** React Imports
-import { Link } from 'react-router-dom'
-
-import { useSearchParams } from '@src/navigation'
-// ** Store & Actions
-import { store } from '@store/storeConfig/store'
-import { useLocation } from 'react-router-dom'
-// ** Third Party Components
 import './invite.css'
 import {
   Badge,
@@ -15,25 +6,15 @@ import {
   DropdownMenu,
   UncontrolledTooltip,
   DropdownItem,
-  Button,
 } from 'reactstrap'
-import {
-  Edit2,
-  MoreVertical,
-  FileText,
-  Trash2,
-  Archive,
-  UserCheck,
-  UserX,
-  User,
-  Clipboard,
-} from 'react-feather'
-import { useProfileInfoCtx } from '@context/user/profileInfoContext'
+import { MoreVertical, Trash2, Clipboard } from 'react-feather'
 import _ from 'lodash'
 import { toast } from 'react-toastify'
-import { formatDate } from '@utils'
 // ** moment
 import moment from 'moment'
+// ** hook
+import useInvite from '@hooks/useInvite'
+
 const APP_URL = 'http://localhost:3000'
 const BADGE_COLOR = {
   invited: 'light-warning',
@@ -56,6 +37,32 @@ export const columns = [
         <>
           <div className="flex nowrap justify-content-between">
             {row.code}
+            <Clipboard
+              size={18}
+              className="clipboard"
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  row.code
+                )
+                toast('Copied to clipboard!', { type: 'success' })
+              }}
+              id={'tooltip' + row._id}
+            />
+            <UncontrolledTooltip placement="top" target={'tooltip' + row._id}>
+              Copy to clipboard
+            </UncontrolledTooltip>
+          </div>
+        </>
+      )
+    },
+  },
+  {
+    name: 'Referral Url',
+    cell: (row) => {
+      return (
+        <>
+          <div className="flex nowrap justify-content-between">
+            {`/register?referralInvite=${row._id}`}
             <Clipboard
               size={18}
               className="clipboard"
@@ -100,5 +107,30 @@ export const columns = [
     selector: 'createdAt',
     sortable: true,
     cell: (row) => moment(row.createdAt).fromNow(),
+  },
+  {
+    name: 'Actions',
+    width: '20%',
+    cell: (row) => {
+      const { cancelInvite } = useInvite()
+      return (
+        <UncontrolledDropdown>
+          <DropdownToggle tag="div" className="btn btn-sm">
+            <MoreVertical size={14} className="cursor-pointer" />
+          </DropdownToggle>
+          <DropdownMenu right>
+            <DropdownItem
+              className="w-100"
+              onClick={async() => {
+               await cancelInvite(row._id)
+              }}
+            >
+              <Trash2 size={14} className="mr-50" />
+              <span className="align-middle">Cancel</span>
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      )
+    },
   },
 ]

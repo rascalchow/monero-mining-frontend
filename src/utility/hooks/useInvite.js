@@ -5,6 +5,7 @@ import { INVITE_ERRORS } from '@const/invite'
 const useInvite = () => {
   const [invitesList, setInvites] = useState([])
   const [isLoading, setLoadingState] = useState(false)
+  const [isCanceled, setCanceled] = useState(false)
   const getInvites = async (params) => {
     setLoadingState(true)
     try {
@@ -42,12 +43,26 @@ const useInvite = () => {
       })
     }
   }
+
+  const cancelInvite = async (id)=>{
+    setCanceled(true)
+    try{
+      await axiosClient.delete(`/invite/${id}`)
+      toast('Invitation canceled!', { type: 'success' })
+    }catch(error){
+      toast('Cannot cancel the invititation!', { type: 'error' })
+    }
+    setCanceled(false)
+  }
+
   return {
     invitesList,
     isLoading,
+    isCanceled,
     getInvites,
     createInvite,
     checkInvite,
+    cancelInvite
   }
 }
 
