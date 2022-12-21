@@ -89,7 +89,7 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen, onSubmit }) => {
               </Label>
               <DebouceInput
                 minLength={2}
-                debounceTimeout = {500}
+                debounceTimeout={500}
                 id="search-invoice"
                 className="ml-50 w-100 debounce-input"
                 type="text"
@@ -120,7 +120,7 @@ CustomHeader.propTypes = {
   setSidebarOpen: Proptypes.func.isRequired,
 }
 
-const InviteTable = ({ invites, isLoading, onSubmit }) => {
+const InviteTable = ({ invites, isLoading, onSubmit, cancelInvite }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const count = Number(
@@ -179,7 +179,7 @@ const InviteTable = ({ invites, isLoading, onSubmit }) => {
           subHeader
           responsive
           paginationServer
-          columns={columns}
+          columns={columns(cancelInvite)}
           progressPending={isLoading}
           progressComponent={
             <div className="table-loader-container">

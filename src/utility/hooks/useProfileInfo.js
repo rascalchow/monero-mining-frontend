@@ -20,6 +20,8 @@ const useProfileInfo = () => {
   const [status, setStatus] = useState('pending')
   const [appStatsLoading, setAppStatsLoading] = useState(false)
   const [appStatsInfo, setAppStats] = useState([])
+  const [isReferralsLoading, setIsReferralsLoading] = useState(false)
+  const [referrals, setReferrals] = useState([])
   // const [isRejected, setIsRejected] = useState(false)
   const loadData = async (id) => {
     setLoading(true)
@@ -157,6 +159,17 @@ const useProfileInfo = () => {
     }
     setAppStatsLoading(false)
   }
+
+  const loadReferralsInfo = async (params, id) => {
+    setIsReferralsLoading(true)
+    try {
+      const res = await axiosClient.get(`/invite/referrals/${id}`, { params })
+      setReferrals(res)
+    } catch (error) {
+      toast('Cannot find referrals!', { type: 'error' })
+    }
+    setIsReferralsLoading(false)
+  }
   const overview = {
     loading,
     profileInfo,
@@ -192,12 +205,18 @@ const useProfileInfo = () => {
     isUsersLoading,
     status,
   }
+  const referralsInfo = {
+    referrals,
+    loadReferralsInfo,
+    isReferralsLoading,
+  }
   return {
     overview,
     installs,
     liveTime,
     appUsers,
     usersInfo,
+    referralsInfo,
   }
 }
 

@@ -1,12 +1,3 @@
-import { useContext, useState } from 'react'
-// ** React Imports
-import { Link } from 'react-router-dom'
-
-import { useSearchParams } from '@src/navigation'
-// ** Store & Actions
-import { store } from '@store/storeConfig/store'
-import { useLocation } from 'react-router-dom'
-// ** Third Party Components
 import './invite.css'
 import {
   Badge,
@@ -15,30 +6,20 @@ import {
   DropdownMenu,
   UncontrolledTooltip,
   DropdownItem,
-  Button,
 } from 'reactstrap'
-import {
-  Edit2,
-  MoreVertical,
-  FileText,
-  Trash2,
-  Archive,
-  UserCheck,
-  UserX,
-  User,
-  Clipboard,
-} from 'react-feather'
-import { useProfileInfoCtx } from '@context/user/profileInfoContext'
+import { MoreVertical, Trash2, Clipboard } from 'react-feather'
 import _ from 'lodash'
 import { toast } from 'react-toastify'
-import { formatDate } from '@utils'
+// ** moment
+import moment from 'moment'
+
 const APP_URL = 'http://localhost:3000'
 const BADGE_COLOR = {
   invited: 'light-warning',
   signup: 'light-info',
 }
 
-export const columns = [
+export const columns =(cancelInvite) => [
   {
     name: 'Email',
     selector: 'refereeEmail',
@@ -58,8 +39,32 @@ export const columns = [
               size={18}
               className="clipboard"
               onClick={() => {
+                navigator.clipboard.writeText(row.code)
+                toast('Copied to clipboard!', { type: 'success' })
+              }}
+              id={'tooltip' + row._id}
+            />
+            <UncontrolledTooltip placement="top" target={'tooltip' + row._id}>
+              Copy to clipboard
+            </UncontrolledTooltip>
+          </div>
+        </>
+      )
+    },
+  },
+  {
+    name: 'Referral Url',
+    cell: (row) => {
+      return (
+        <>
+          <div className="flex nowrap justify-content-between">
+            {row._id}
+            <Clipboard
+              size={18}
+              className="clipboard"
+              onClick={() => {
                 navigator.clipboard.writeText(
-                  `${APP_URL}/register?referralInvite=${row.code}`,
+                  `${APP_URL}/register?referralInvite=${row._id}`,
                 )
                 toast('Copied to clipboard!', { type: 'success' })
               }}
@@ -91,12 +96,37 @@ export const columns = [
     name: 'Accepted At',
     selector: 'acceptedAt',
     sortable: true,
-    cell: (row) => row.acceptedAt,
+    cell: (row) => (row.acceptedAt ? moment(row.acceptedAt).fromNow() : ''),
   },
   {
     name: 'Invited At',
     selector: 'createdAt',
     sortable: true,
-    cell: (row) => row.createdAt,
+    cell: (row) => moment(row.createdAt).fromNow(),
+  },
+  {
+    name: 'Actions',
+    width: '20%',
+    cell: (row) => {
+      return (
+        <UncontrolledDropdown>
+          <DropdownToggle tag="div" className="btn btn-sm">
+            <MoreVertical size={14} className="cursor-pointer" />
+          </DropdownToggle>
+          <DropdownMenu right>
+            <DropdownItem
+              disabled={row.status == 'signup' || row.expired}
+              className="w-100"
+              onClick={() => {
+                cancelInvite(row._id)
+              }}
+            >
+              <Trash2 size={14} className="mr-50" />
+              <span className="align-middle">Cancel</span>
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      )
+    },
   },
 ]

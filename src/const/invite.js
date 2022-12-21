@@ -2,16 +2,16 @@ export const INVITE_SORT_KEY = [
   'refereeEmail',
   'status',
   'code',
-  'createdAt',
   'acceptedAt',
+  'createdAt'
 ]
 
 export const INVITE_ERRORS = {
-  YOU_ALREADY_INVITED: 'You already invited this email!',
-  USER_ALREADY_REGISTERED: 'This user has already signed up!',
-  EMAIL_ALREADY_EXISTS: 'Email is already registered!',
-  REFERRAL_ALREADY_EXPIRED: 'Referral Code is no longer valid!',
-  WRONG_REFERRAL_CODE: 'Referral Code is no longer valid!',
-  REFERRAL_CODE_NOT_EXIST: 'Please use your referral code!',
+  REFERRAL_CODE_DOES_NOT_EXIST: 'Referral code does not exist!',
+  REFERRAL_ID_DOES_NOT_EXIST: 'Invalid Url!',
+  NO_REFERRALS: 'No referrals!',
+  USER_ALREADY_SIGNED_UP: 'User has already signed up!',
+  REFERRAL_ALREADY_EXPIRED: 'Referral has already expired!',
+  REFERRAL_CODE_DOES_NOT_MATCH: 'Please use correct referral code!',
   WRONG_EMAIL: 'Plaese use correct email!',
 }
