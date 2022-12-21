@@ -72,7 +72,7 @@ const AppCollapse = (props) => {
           key={index}
         >
           <CardHeader
-            className={classnames('align-items-center', {
+            className={classnames('align-items-center p-0', {
               collapsed: accordion
                 ? openCollapse !== index
                 : !openCollapse.includes(index),
@@ -95,7 +95,7 @@ const AppCollapse = (props) => {
               accordion ? openCollapse === index : openCollapse.includes(index)
             }
           >
-            <CardBody>{content}</CardBody>
+            <CardBody className="p-0">{content}</CardBody>
           </Collapse>
         </Card>
       )

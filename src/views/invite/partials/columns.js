@@ -32,6 +32,8 @@ import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 import _ from 'lodash'
 import { toast } from 'react-toastify'
 import { formatDate } from '@utils'
+// ** moment
+import moment from 'moment'
 const APP_URL = 'http://localhost:3000'
 const BADGE_COLOR = {
   invited: 'light-warning',
@@ -91,12 +93,12 @@ export const columns = [
     name: 'Accepted At',
     selector: 'acceptedAt',
     sortable: true,
-    cell: (row) => row.acceptedAt,
+    cell: (row) => (row.acceptedAt ? moment(row.acceptedAt).fromNow() : ''),
   },
   {
     name: 'Invited At',
     selector: 'createdAt',
     sortable: true,
-    cell: (row) => row.createdAt,
+    cell: (row) => moment(row.createdAt).fromNow(),
   },
 ]

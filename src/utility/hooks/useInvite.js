@@ -5,7 +5,6 @@ import { INVITE_ERRORS } from '@const/invite'
 const useInvite = () => {
   const [invitesList, setInvites] = useState([])
   const [isLoading, setLoadingState] = useState(false)
-
   const getInvites = async (params) => {
     setLoadingState(true)
     try {
@@ -30,11 +29,25 @@ const useInvite = () => {
     }
     setLoadingState(false)
   }
+
+  const checkInvite = async (id) => {
+    try {
+      const res = await axiosClient.get(`/invite/check-code/${id}`)
+      return new Promise((resolve, reject) => {
+        resolve(res)
+      })
+    } catch (error) {
+      return new Promise((resolve, reject) => {
+        reject(error)
+      })
+    }
+  }
   return {
     invitesList,
     isLoading,
     getInvites,
     createInvite,
+    checkInvite,
   }
 }
 
