@@ -25,6 +25,13 @@ export const APP_USER_SORT_KEY = [
   'installedAt',
   'uninstalledAt'
 ]
+export const REFERRALS_SORT_KEY = [
+  'companyName',
+  'stat',
+  'commissions',
+  'referrals',
+  'referralCommissions'
+]
 export const PROFILE_TAB_ROUTES = [
   {
     id: '1',
@@ -46,6 +53,11 @@ export const PROFILE_TAB_ROUTES = [
     title: 'App Users',
     route: 'users',
   },
+  {
+    id: '5',
+    title: 'Referrals',
+    route: 'referral'
+  }
 ]
 
 export const DURATION = [

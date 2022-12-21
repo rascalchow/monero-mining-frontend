@@ -8,7 +8,7 @@ export const useProfileInfoCtx = () => useContext(ProfileInfoContext)
 export const ProfileInfoContextProvider = ({ children }) => {
   const { id } = useParams()
   const location = useLocation()
-  const { overview, installs, liveTime, appUsers, usersInfo } =
+  const { overview, installs, liveTime, appUsers, usersInfo, referralsInfo } =
     useProfileInfo(id)
 
   useEffect(() => {
@@ -29,6 +29,8 @@ export const ProfileInfoContextProvider = ({ children }) => {
           break
         case 'software':
           break
+        case 'referral':
+          break
         default:
           break
       }
@@ -40,6 +42,7 @@ export const ProfileInfoContextProvider = ({ children }) => {
     liveTime,
     appUsers,
     usersInfo,
+    referralsInfo
   }
   return (
     <ProfileInfoContext.Provider value={providerValue}>

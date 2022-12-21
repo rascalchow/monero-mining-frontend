@@ -99,3 +99,52 @@ export const columns = [
     cell: (row) => formatDate(row.uninstalledAt),
   },
 ]
+
+/////////////////////REFERRALS///////////////////
+
+const REFERRAL_BADGE_COLOR = {
+  active: 'light-info',
+  pending: 'light-warning',
+  rejected: 'light-danger',
+}
+
+export const referralsColumn = [
+  {
+    name: 'Company Name',
+    selector: 'companyName',
+    sortable: true,
+    cell: (row) => row.companyName,
+  },
+  {
+    name: 'Status',
+    selector: 'stat',
+    sortable: true,
+    cell: (row) => (
+      <Badge
+        className="text-capitalize "
+        color={
+          REFERRAL_BADGE_COLOR[row.status]
+            ? REFERRAL_BADGE_COLOR[row.status]
+            : ''
+        }
+        pill
+      >
+        {row.status}
+      </Badge>
+    ),
+  },
+  {
+    name: 'Referrals',
+    selector: 'referrals',
+    sortable: true,
+    cell: (row) => row.referrals,
+  },
+  {
+    name: 'Commissions',
+    cell: (row) => '0',
+  },
+  {
+    name: 'Referral Commissions',
+    cell: (row) => '0',
+  },
+]
