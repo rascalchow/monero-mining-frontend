@@ -61,7 +61,7 @@ export const columns = [
               className="clipboard"
               onClick={() => {
                 navigator.clipboard.writeText(
-                  `${APP_URL}/register?referralInvite=${row.code}`,
+                  `${APP_URL}/register?referralInvite=${row._id}`,
                 )
                 toast('Copied to clipboard!', { type: 'success' })
               }}
