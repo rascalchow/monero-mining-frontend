@@ -12,8 +12,6 @@ import _ from 'lodash'
 import { toast } from 'react-toastify'
 // ** moment
 import moment from 'moment'
-// ** hook
-import useInvite from '@hooks/useInvite'
 
 const APP_URL = 'http://localhost:3000'
 const BADGE_COLOR = {
@@ -21,7 +19,7 @@ const BADGE_COLOR = {
   signup: 'light-info',
 }
 
-export const columns = [
+export const columns =(cancelInvite) => [
   {
     name: 'Email',
     selector: 'refereeEmail',
@@ -41,9 +39,7 @@ export const columns = [
               size={18}
               className="clipboard"
               onClick={() => {
-                navigator.clipboard.writeText(
-                  row.code
-                )
+                navigator.clipboard.writeText(row.code)
                 toast('Copied to clipboard!', { type: 'success' })
               }}
               id={'tooltip' + row._id}
@@ -62,7 +58,7 @@ export const columns = [
       return (
         <>
           <div className="flex nowrap justify-content-between">
-            {`/register?referralInvite=${row._id}`}
+            {row._id}
             <Clipboard
               size={18}
               className="clipboard"
@@ -112,7 +108,6 @@ export const columns = [
     name: 'Actions',
     width: '20%',
     cell: (row) => {
-      const { cancelInvite } = useInvite()
       return (
         <UncontrolledDropdown>
           <DropdownToggle tag="div" className="btn btn-sm">
@@ -120,9 +115,10 @@ export const columns = [
           </DropdownToggle>
           <DropdownMenu right>
             <DropdownItem
+              disabled={row.status == 'signup' || row.expired}
               className="w-100"
-              onClick={async() => {
-               await cancelInvite(row._id)
+              onClick={() => {
+                cancelInvite(row._id)
               }}
             >
               <Trash2 size={14} className="mr-50" />

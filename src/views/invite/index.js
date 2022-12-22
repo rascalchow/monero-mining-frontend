@@ -6,15 +6,14 @@ import useInvite from '@hooks/useInvite'
 import { useSearchParams } from '@src/navigation'
 import { INVITE_SORT_KEY } from '@const/invite'
 const Invitation = () => {
-  const { invitesList, getInvites, isLoading } = useInvite()
+  const { invitesList, getInvites, isLoading, cancelInvite } = useInvite()
   const [searchParams, setSearchParams] = useSearchParams()
   const location = useLocation()
   const [isSubmit, setSubmit] = useState(false)
 
-  const onSubmit = (value)=>{
+  const onSubmit = (value) => {
     setSubmit(value)
   }
-
   useEffect(() => {
     const fetchData = () => {
       const limit = parseInt(searchParams.get('limit'))
@@ -43,7 +42,6 @@ const Invitation = () => {
       }
     }
     if (isSubmit || location.search.length > 0) fetchData()
-    
   }, [location, isSubmit])
 
   if (searchParams.get('limit') === null || searchParams.get('page') === null) {
@@ -56,7 +54,12 @@ const Invitation = () => {
   else
     return (
       <>
-        <InviteTable invites={invitesList} isLoading={isLoading} onSubmit={onSubmit}/>
+        <InviteTable
+          invites={invitesList}
+          isLoading={isLoading}
+          onSubmit={onSubmit}
+          cancelInvite={cancelInvite}
+        />
       </>
     )
 }
