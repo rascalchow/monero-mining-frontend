@@ -15,7 +15,7 @@ const VerticalMenuHeader = (props) => {
     setMenuCollapsed,
     setMenuVisibility,
     setGroupOpen,
-    menuHover
+    menuHover,
   } = props
 
   // ** Reset open group

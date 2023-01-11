@@ -327,7 +327,7 @@ const Register = () => {
               to="/"
               onClick={(e) => e.preventDefault()}
             >
-              <img src={logo} alt="logo" width="200" />
+              <img src={logo} alt="logo" width="100" />
             </Link>
             <Col
               className="d-none d-lg-flex align-items-start p-5 relative"
