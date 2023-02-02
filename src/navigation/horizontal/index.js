@@ -1,4 +1,4 @@
-import { Home, Users, User, FileText, Inbox, Mail } from 'react-feather'
+import { Home, Users, User, FileText, Inbox, Mail, FolderPlus, UserPlus, Cast, DollarSign, CreditCard } from 'react-feather'
 
 export default [
   {
@@ -35,10 +35,45 @@ export default [
     restrictedTo: { role: ['publisher'] },
   },
   {
+    id: 'install',
+    title: 'Installs',
+    icon: <FolderPlus size={20} />,
+    navLink: '/install',
+    restrictedTo: { role: ['publisher'] },
+  },
+  {
+    id: 'live',
+    title: 'Live Time',
+    icon: <Cast size={20} />,
+    navLink: '/live-time',
+    restrictedTo: { role: ['publisher'] },
+  },
+  {
     id: 'referral',
     title:'Invitations',
     icon: <Inbox size={20}/>,
     navLink: '/invite',
     restrictedTo: {role:['publisher']}
-  }
+  },
+  {
+    id: 'affiliate',
+    title:'Affiliates',
+    icon: <UserPlus size={20}/>,
+    navLink: '/affiliate',
+    restrictedTo: {role:['publisher']}
+  },
+  {
+    id: 'earning',
+    title:'Earnings',
+    icon: <DollarSign size={20}/>,
+    navLink: '/earning',
+    restrictedTo: {role:['publisher']}
+  },
+  {
+    id: 'payment',
+    title:'Payments',
+    icon: <CreditCard size={20}/>,
+    navLink: '/payment',
+    restrictedTo: {role:['publisher']}
+  },
 ]

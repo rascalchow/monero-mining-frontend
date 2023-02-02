@@ -26,10 +26,11 @@ import { getAuth } from '../redux/actions/auth'
 
 const Router = () => {
   // ** Hooks
-  const [layout, setLayout] = useLayout()
+  // const [layout, setLayout] = useLayout()
   const [transition, setTransition] = useRouterTransition()
   const [loading, setLoading] = useState(true)
   const userData = useSelector((state) => state.auth.userData)
+  const layout = userData?.role == 'publisher' ? 'horizontal' : 'vertical';
   const dispatch = useDispatch()
 
   // ** Default Layout
@@ -132,7 +133,7 @@ const Router = () => {
           <LayoutTag
             routerProps={routerProps}
             layout={layout}
-            setLayout={setLayout}
+            // setLayout={setLayout}
             transition={transition}
             setTransition={setTransition}
             currentActiveItem={currentActiveItem}

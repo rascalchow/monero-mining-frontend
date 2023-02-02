@@ -47,7 +47,7 @@ const Register = () => {
   const location = useLocation()
   const { checkInvite } = useInvite()
   const [inviteStatus, setStatus] = useState()
-  const reg = /referralInvite=/i
+  const reg = /referralInvite=/s
   const schema = yup
     .object({
       name: yup.string().required(),
@@ -311,6 +311,7 @@ const Register = () => {
     }
   }, [inviteStatus])
 
+  console.log(location.search)
   if (isSubmitSuccessful) {
     return <Redirect to="/login" />
   } else if (location.search === '' || !reg.test(location.search)) {

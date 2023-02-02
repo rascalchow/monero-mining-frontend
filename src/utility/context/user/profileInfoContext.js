@@ -2,6 +2,7 @@ import { createContext, useEffect, useContext, useState } from 'react'
 import { matchPath, useLocation, useParams } from 'react-router-dom'
 import useProfileInfo from '@hooks/useProfileInfo'
 import { PROFILE_TAB_ROUTES, DURATION } from '@const/user'
+import { useSelector } from 'react-redux'
 
 export const ProfileInfoContext = createContext(null)
 export const useProfileInfoCtx = () => useContext(ProfileInfoContext)
@@ -10,7 +11,7 @@ export const ProfileInfoContextProvider = ({ children }) => {
   const location = useLocation()
   const { overview, installs, liveTime, appUsers, usersInfo, referralsInfo } =
     useProfileInfo(id)
-
+ 
   useEffect(() => {
     const route = PROFILE_TAB_ROUTES.find((route) => {
       return matchPath(`/publisher/${id}/${route.route}`, location.pathname)
@@ -35,6 +36,7 @@ export const ProfileInfoContextProvider = ({ children }) => {
           break
       }
     }
+
   }, [location])
   const providerValue = {
     overview,

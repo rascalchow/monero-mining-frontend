@@ -154,6 +154,7 @@ const useProfileInfo = () => {
     try {
       const res = await axiosClient.get('/app-users/user/stats')
       setAppStats(res)
+      console.log({res})
     } catch (error) {
       toast('Cannot find application status!', { type: 'error' })
     }
@@ -189,6 +190,7 @@ const useProfileInfo = () => {
     liveTimeStaticInfo,
   }
   const appUsers = {
+    appStatsLoading,
     appUsersLoading,
     appUsersInfo,
     loadAppUsersInfo,
