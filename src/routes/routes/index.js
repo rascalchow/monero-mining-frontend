@@ -49,6 +49,16 @@ const Routes = [
     private: true,
   },
   {
+    path: '/installs',
+    component: lazy(() => import('../../views/publisher/LiveTime')),
+    private: true,
+  },
+  {
+    path: '/live-time',
+    component: lazy(() => import('../../views/publisher/Install')),
+    private: true,
+  },
+  {
     path: '/login',
     component: lazy(() => import('../../views/auth/Login')),
     layout: 'BlankLayout',

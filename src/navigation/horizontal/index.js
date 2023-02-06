@@ -35,10 +35,10 @@ export default [
     restrictedTo: { role: ['publisher'] },
   },
   {
-    id: 'install',
+    id: 'installs',
     title: 'Installs',
     icon: <FolderPlus size={20} />,
-    navLink: '/install',
+    navLink: '/installs',
     restrictedTo: { role: ['publisher'] },
   },
   {

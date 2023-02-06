@@ -97,7 +97,7 @@ const PublisherHome = () => {
     <>
       <Row>
         <Col sm={12} md={6} lg={3}>
-          <Link to={'/install'}>
+          <Link to={'/installs'}>
             <Card className="card-congratulations-medal">
               <CardBody>
                 <div className="d-flex justify-content-between align-items-end">

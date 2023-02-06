@@ -11,10 +11,14 @@ const useProfileInfo = () => {
   const [installCount, setInstallCount] = useState([])
   const [liveTimeStaticLoading, setLiveTimeStaticLoading] = useState(true)
   const [liveTimeChartLoading, setLiveTimeChartLoading] = useState(true)
+  const [publisherLiveTimeStatsLoading, setPublisherLiveTimeStatsLoading] = useState(true)
   const [liveTimeChartInfo, setLiveTimeChartInfo] = useState(null)
   const [liveTimeStaticInfo, setLiveTimeStaticInfo] = useState(null)
+  const [publisherLiveTimeStats, setPublisherLiveTimeStats] = useState(null)
   const [appUsersInfo, setAppUsers] = useState([])
+  const [publisherInstallsChartData, setPublisherInstallsChartData] = useState([])
   const [appUsersLoading, setAppUsersLoading] = useState(true)
+  const [publisherInstallsLoading, setPublisherAppUsersLoading] = useState(true)
   const [users, setUsers] = useState([])
   const [isUsersLoading, setIsUsersLoading] = useState(true)
   const [status, setStatus] = useState('pending')
@@ -70,6 +74,18 @@ const useProfileInfo = () => {
     setLiveTimeStaticLoading(false)
     setLiveTimeChartLoading(false)
   }
+  const loadLiveTimeStats = async (param, query) => {
+    setPublisherLiveTimeStatsLoading(true);
+    try {
+      const result = await axiosClient.get(`/session/publisher/livetime`, {
+        params: { param, ...query },
+      })
+      setPublisherLiveTimeStats(result)
+    } catch (error) {
+      toast('Action Failed', { type: 'error' })
+    }
+    setPublisherLiveTimeStatsLoading(false);
+  }
   const loadAppUsersInfo = async (params, id) => {
     setAppUsersLoading(true)
     try {
@@ -79,6 +95,17 @@ const useProfileInfo = () => {
       toast('Action Failed', { type: 'error' })
     }
     setAppUsersLoading(false)
+  }
+
+  const loadPublisherInstallStats = async (params) => {
+    setPublisherAppUsersLoading(true)
+    try {
+      const result = await axiosClient.get(`/app-users/publisher/install`, { params })
+      setPublisherInstallsChartData(result)
+    } catch (error) {
+      toast('Action Failed', { type: 'error' })
+    }
+    setPublisherAppUsersLoading(false)
   }
 
   const updateUser = async (user, id) => {
@@ -185,16 +212,22 @@ const useProfileInfo = () => {
   const liveTime = {
     liveTimeStaticLoading,
     liveTimeChartLoading,
+    publisherLiveTimeStatsLoading,
     loadLiveTimeInfo,
+    loadLiveTimeStats,
+    publisherLiveTimeStats,
     liveTimeChartInfo,
     liveTimeStaticInfo,
   }
   const appUsers = {
     appStatsLoading,
     appUsersLoading,
+    publisherInstallsLoading,
     appUsersInfo,
+    publisherInstallsChartData,
     loadAppUsersInfo,
     loadAppStats,
+    loadPublisherInstallStats,
     appStatsInfo,
   }
   const usersInfo = {

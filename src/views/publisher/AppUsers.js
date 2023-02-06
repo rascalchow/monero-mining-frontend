@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 
 import Proptypes from 'prop-types'
 
-import { columns } from './columns'
+import { columns } from './partials/columns'
 // ** Store & Actions
 import { useLocation, Redirect, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -162,6 +162,7 @@ const AppUsers = ({ id }) => {
       history.push('/not-authorized')
     }
   }, [location.search])
+  
   const CustomPagination = () => {
     const count = Number(
       Math.ceil(
@@ -221,7 +222,7 @@ const AppUsers = ({ id }) => {
               textTransform: 'capitalize',
             }}
           >
-            App Users
+            App Installs
           </CardHeader>
           <DataTable
             noHeader
