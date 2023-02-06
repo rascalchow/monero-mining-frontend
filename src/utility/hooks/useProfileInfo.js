@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { axiosClient } from '@src/@core/services'
 import { useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 const useProfileInfo = () => {
+  const dispatch = useDispatch();
   const [profileInfo, setProfileInfo] = useState(null)
   const [loading, setLoading] = useState(true)
   const [isInstallLoading, setInstallLoading] = useState(true)
@@ -127,6 +129,25 @@ const useProfileInfo = () => {
     setLoading(false)
   }
 
+  const editAccountSetting = async (user) => {
+    setLoading(true)
+    try {
+      const updatedUser = await axiosClient.patch(`/profile`, user)
+      dispatch({
+        type: 'ACCOUNT_SETTINGS/SET_PROFILE',
+        payload: {
+          ...updatedUser,
+          isLoading: false,
+          error: null,
+        },
+      })
+      toast("Your profile update request has been sent. Please wait for Admin's approval", { type: 'success' })
+    } catch (error) {
+      toast('User update failed!', { type: 'error' })
+    }
+    setLoading(false)
+  }
+
   const getUsers = async (params) => {
     setIsUsersLoading(true)
     try {
@@ -181,7 +202,7 @@ const useProfileInfo = () => {
     try {
       const res = await axiosClient.get('/app-users/user/stats')
       setAppStats(res)
-      console.log({res})
+      console.log({ res })
     } catch (error) {
       toast('Cannot find application status!', { type: 'error' })
     }
@@ -233,6 +254,7 @@ const useProfileInfo = () => {
   const usersInfo = {
     users,
     updateUser,
+    editAccountSetting,
     getUsers,
     setUser,
     approveUser,
