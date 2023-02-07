@@ -98,7 +98,7 @@ const Register = () => {
   })
 
   const illustration =
-      skin === 'dark' ? 'register-v2-dark.svg' : 'register-v2.svg',
+    skin === 'dark' ? 'register-v2-dark.svg' : 'register-v2.svg',
     source = require(`@src/assets/images/pages/${illustration}`).default
 
   const Terms = () => {
@@ -311,7 +311,6 @@ const Register = () => {
     }
   }, [inviteStatus])
 
-  console.log(location.search)
   if (isSubmitSuccessful) {
     return <Redirect to="/login" />
   } else if (location.search === '' || !reg.test(location.search)) {
@@ -499,9 +498,8 @@ const Register = () => {
                           <ReactSelect
                             isClearable={false}
                             theme={selectThemeColors}
-                            className={`react-select rounded${
-                              !!errors.country && ' border-danger'
-                            }`}
+                            className={`react-select rounded${!!errors.country && ' border-danger'
+                              }`}
                             classNamePrefix="select"
                             options={COUNTRIES.map((it) => ({
                               label: it.name,

@@ -35,10 +35,10 @@ export default [
     restrictedTo: { role: ['publisher'] },
   },
   {
-    id: 'install',
+    id: 'installs',
     title: 'Installs',
     icon: <FolderPlus size={20} />,
-    navLink: '/install',
+    navLink: '/installs',
     restrictedTo: { role: ['publisher'] },
   },
   {
@@ -50,30 +50,37 @@ export default [
   },
   {
     id: 'referral',
-    title:'Invitations',
-    icon: <Inbox size={20}/>,
+    title: 'Invitations',
+    icon: <Inbox size={20} />,
     navLink: '/invite',
-    restrictedTo: {role:['publisher']}
+    restrictedTo: { role: ['publisher'] }
   },
   {
     id: 'affiliate',
-    title:'Affiliates',
-    icon: <UserPlus size={20}/>,
+    title: 'Affiliates',
+    icon: <UserPlus size={20} />,
     navLink: '/affiliate',
-    restrictedTo: {role:['publisher']}
+    restrictedTo: { role: ['publisher'] }
   },
   {
     id: 'earning',
-    title:'Earnings',
-    icon: <DollarSign size={20}/>,
+    title: 'Earnings',
+    icon: <DollarSign size={20} />,
     navLink: '/earning',
-    restrictedTo: {role:['publisher']}
+    restrictedTo: { role: ['publisher'] }
   },
   {
     id: 'payment',
-    title:'Payments',
-    icon: <CreditCard size={20}/>,
+    title: 'Payments',
+    icon: <CreditCard size={20} />,
     navLink: '/payment',
-    restrictedTo: {role:['publisher']}
+    restrictedTo: { role: ['publisher'] }
   },
+  {
+    id: 'app-users',
+    title: 'App Users',
+    icon: <Inbox size={20} />,
+    navLink: '/app-users',
+    restrictedTo: { role: ['publisher'] }
+  }
 ]

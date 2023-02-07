@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { axiosClient } from '@src/@core/services'
 import { useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 const useProfileInfo = () => {
+  const dispatch = useDispatch();
   const [profileInfo, setProfileInfo] = useState(null)
   const [loading, setLoading] = useState(true)
   const [isInstallLoading, setInstallLoading] = useState(true)
@@ -11,10 +13,14 @@ const useProfileInfo = () => {
   const [installCount, setInstallCount] = useState([])
   const [liveTimeStaticLoading, setLiveTimeStaticLoading] = useState(true)
   const [liveTimeChartLoading, setLiveTimeChartLoading] = useState(true)
+  const [publisherLiveTimeStatsLoading, setPublisherLiveTimeStatsLoading] = useState(true)
   const [liveTimeChartInfo, setLiveTimeChartInfo] = useState(null)
   const [liveTimeStaticInfo, setLiveTimeStaticInfo] = useState(null)
+  const [publisherLiveTimeStats, setPublisherLiveTimeStats] = useState(null)
   const [appUsersInfo, setAppUsers] = useState([])
+  const [publisherInstallsChartData, setPublisherInstallsChartData] = useState([])
   const [appUsersLoading, setAppUsersLoading] = useState(true)
+  const [publisherInstallsLoading, setPublisherAppUsersLoading] = useState(true)
   const [users, setUsers] = useState([])
   const [isUsersLoading, setIsUsersLoading] = useState(true)
   const [status, setStatus] = useState('pending')
@@ -70,6 +76,18 @@ const useProfileInfo = () => {
     setLiveTimeStaticLoading(false)
     setLiveTimeChartLoading(false)
   }
+  const loadLiveTimeStats = async (param, query) => {
+    setPublisherLiveTimeStatsLoading(true);
+    try {
+      const result = await axiosClient.get(`/session/publisher/livetime`, {
+        params: { param, ...query },
+      })
+      setPublisherLiveTimeStats(result)
+    } catch (error) {
+      toast('Action Failed', { type: 'error' })
+    }
+    setPublisherLiveTimeStatsLoading(false);
+  }
   const loadAppUsersInfo = async (params, id) => {
     setAppUsersLoading(true)
     try {
@@ -79,6 +97,17 @@ const useProfileInfo = () => {
       toast('Action Failed', { type: 'error' })
     }
     setAppUsersLoading(false)
+  }
+
+  const loadPublisherInstallStats = async (params) => {
+    setPublisherAppUsersLoading(true)
+    try {
+      const result = await axiosClient.get(`/app-users/publisher/install`, { params })
+      setPublisherInstallsChartData(result)
+    } catch (error) {
+      toast('Action Failed', { type: 'error' })
+    }
+    setPublisherAppUsersLoading(false)
   }
 
   const updateUser = async (user, id) => {
@@ -94,6 +123,25 @@ const useProfileInfo = () => {
       }
       setUsers({ ...users, data: newUsers })
       toast('Successfully updated user!', { type: 'success' })
+    } catch (error) {
+      toast('User update failed!', { type: 'error' })
+    }
+    setLoading(false)
+  }
+
+  const editAccountSetting = async (user) => {
+    setLoading(true)
+    try {
+      const updatedUser = await axiosClient.patch(`/profile`, user)
+      dispatch({
+        type: 'ACCOUNT_SETTINGS/SET_PROFILE',
+        payload: {
+          ...updatedUser,
+          isLoading: false,
+          error: null,
+        },
+      })
+      toast("Your profile update request has been sent. Please wait for Admin's approval", { type: 'success' })
     } catch (error) {
       toast('User update failed!', { type: 'error' })
     }
@@ -154,7 +202,7 @@ const useProfileInfo = () => {
     try {
       const res = await axiosClient.get('/app-users/user/stats')
       setAppStats(res)
-      console.log({res})
+      console.log({ res })
     } catch (error) {
       toast('Cannot find application status!', { type: 'error' })
     }
@@ -185,21 +233,28 @@ const useProfileInfo = () => {
   const liveTime = {
     liveTimeStaticLoading,
     liveTimeChartLoading,
+    publisherLiveTimeStatsLoading,
     loadLiveTimeInfo,
+    loadLiveTimeStats,
+    publisherLiveTimeStats,
     liveTimeChartInfo,
     liveTimeStaticInfo,
   }
   const appUsers = {
     appStatsLoading,
     appUsersLoading,
+    publisherInstallsLoading,
     appUsersInfo,
+    publisherInstallsChartData,
     loadAppUsersInfo,
     loadAppStats,
+    loadPublisherInstallStats,
     appStatsInfo,
   }
   const usersInfo = {
     users,
     updateUser,
+    editAccountSetting,
     getUsers,
     setUser,
     approveUser,

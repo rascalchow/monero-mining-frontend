@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Card, CardBody } from 'reactstrap'
+import { Card, CardBody, Button, Row, Col } from 'reactstrap'
 import { getProfile } from './store/action'
 import Description from '@components/description'
 import { Spinner } from 'reactstrap'
@@ -8,6 +8,9 @@ import _ from 'lodash'
 import { API_URL } from '../../constants'
 
 import { COUNTRIES } from '../../constants'
+import Sidebar from './partials/Sidebar'
+import { SidebarCtx } from '@context/user/sidebarContext'
+import { Inbox, Key, UserCheck } from 'react-feather'
 
 const About = () => {
   const userData = useSelector((state) => state.accountSettings.profile)
@@ -15,55 +18,87 @@ const About = () => {
   useEffect(() => {
     dispatch(getProfile())
   }, [])
+  const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
+  const onEditUserClick = () => {
+    setSidebarOpen(true)
+  }
   const disp = [
-    { label: 'Publiser Key', value: userData.publisherKey },
-    { label: 'Company Name', value: userData.userProfileId.companyName },
-    { label: 'Website/Application', value: userData.userProfileId.application },
-    { label: 'Contact Person', value: userData.userProfileId.contact },
-    { label: 'Email', value: userData.email },
+    { label: 'Full Name', value: userData.name, icon: <UserCheck size={15} /> },
+    { label: 'Email', value: userData.email, icon: <Inbox size={15} /> },
+    { label: 'Publiser Key', value: userData.publisherKey, icon: <Key size={15} /> },
+    { label: 'Company Name', value: userData.companyName, icon: <UserCheck size={15} /> },
+    { label: 'Website/Application', value: userData.application, icon: <UserCheck size={15} /> },
+    { label: 'Contact Person', value: userData.contact, icon: <UserCheck size={15} /> },
     {
       label: 'Country',
       value: _.get(
-        COUNTRIES.find((it) => it.code === userData.userProfileId.country),
+        COUNTRIES.find((it) => it.code === userData.country),
         'name',
-      ),
+      ), icon: <UserCheck size={15} />
     },
-    { label: 'Phone', value: userData.phone },
-    { label: 'Website URL', value: userData.userProfileId.website },
+    { label: 'Phone', value: userData.phone, icon: <UserCheck size={15} /> },
+    { label: 'Website URL', value: userData.website, icon: <UserCheck size={15} /> },
   ]
   return (
-    <Card>
-      <CardBody>
-        {userData.isLoading ? (
-          <div className="d-flex justify-content-center py-5">
-            <Spinner />
-          </div>
-        ) : (
-          <>
-            {disp.map((it, i) => (
-              <div className="my-50" key={i}>
-                <Description label={it.label} value={it.value} />
-              </div>
-            ))}
+    <>
+      <Card>
+        <CardBody>
+          {userData.isLoading ? (
+            <div className="d-flex justify-content-center py-5">
+              <Spinner />
+            </div>
+          ) : (
+            <>
+              <Row>
+                {disp.map((it, i) => (
+                  <Col sm={12} md={6} key={i}>
+                    <Description label={it.label} value={it.value} />
+                  </Col>
+                ))}
+              </Row>
 
-            <div>More Information:</div>
-            <p>{userData.userProfileId.moreInformation}</p>
+              <p>{userData.moreInformation}</p>
 
-            {userData.userProfileId.installer && (
-              <>
-                <div>Sortware download link</div>
-                <a
-                  href={`${API_URL}/${userData.publisherKey}/install.msi`}
-                  download
-                >
-                  Download product setup file
-                </a>
-              </>
-            )}
-          </>
-        )}
-      </CardBody>
-    </Card>
+              {userData.installer && (
+                <>
+                  <div>Sortware download link</div>
+                  <a
+                    href={`${API_URL}/${userData.publisherKey}/install.msi`}
+                    download
+                  >
+                    Download product setup file
+                  </a>
+                </>
+              )}
+
+              {userData.role == 'publisher' && (
+                <>
+                  <Button.Ripple
+                    color="primary"
+                    outline
+                    onClick={onEditUserClick}
+                  >
+                    <div className="d-flex align-items-center">
+                      <span>Edit</span>
+                    </div>
+                  </Button.Ripple>
+                </>
+              )}
+            </>
+          )}
+        </CardBody>
+      </Card>
+      <Sidebar
+        open={sidebarOpen}
+        toggleSidebar={() => {
+          setSidebarOpen(!sidebarOpen)
+        }}
+        onSave={() => {
+
+        }}
+        user={userData}
+      />
+    </>
   )
 }
 

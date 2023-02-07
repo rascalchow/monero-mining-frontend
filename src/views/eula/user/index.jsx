@@ -14,6 +14,7 @@ import {
   Button,
 } from 'reactstrap'
 import { getEula, updateEula } from './store/action'
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const UserUpdateEula = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
