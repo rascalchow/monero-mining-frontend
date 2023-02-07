@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Flatpickr from 'react-flatpickr'
-import { Calendar, ChevronDown, UserCheck } from 'react-feather'
+import { Calendar, ChevronDown, Tv, UserCheck } from 'react-feather'
 import { Bar } from 'react-chartjs-2'
 import 'flatpickr/dist/flatpickr.css'
 import Avatar from '@components/avatar'
@@ -133,7 +133,6 @@ const LiveTime = ({
   const { liveTime } = useProfileInfoCtx()
   const handleDuration = (e) => {
     if (e.length == 2) {
-      console.log({e})
       setDuration(e)
     }
   }
@@ -180,7 +179,7 @@ const LiveTime = ({
     const count = Number(
       Math.ceil(
         liveTime.publisherLiveTimeStats.totalActiveUsers /
-          parseInt(searchParams.get('limit')),
+        parseInt(searchParams.get('limit')),
       ),
     )
 
@@ -222,27 +221,50 @@ const LiveTime = ({
   return (
     <>
       <Row>
-        <Card className="card-congratulations-medal">
-          <CardBody>
-            <div className="d-flex justify-content-between align-items-end">
-              <h3 className="fw-bolder mb-75">
-                {liveTime?.publisherLiveTimeStatsLoading ? (
-                  <Spinner
-                    className="spinner "
-                    variant="primary"
-                    style={{ color: '#7367F0' }}
-                  />
-                ) : (
-                  <div className="text-primary">
-                    {liveTime.publisherLiveTimeStats?.current}
-                  </div>
-                )}
-              </h3>
+        <Col sm={12} md={6}>
+          <Card className="card-congratulations-medal">
+            <CardBody>
+              <div className="d-flex justify-content-between align-items-end">
+                <h3 className="fw-bolder mb-75">
+                  {liveTime?.publisherLiveTimeStatsLoading ? (
+                    <Spinner
+                      className="spinner "
+                      variant="primary"
+                      style={{ color: '#7367F0' }}
+                    />
+                  ) : (
+                    <div className="text-primary">
+                      {liveTime.publisherLiveTimeStats?.current}
+                    </div>
+                  )}
+                </h3>
+                <Avatar color="light-primary" size="lg" icon={<UserCheck />} />
+              </div>
               <p className="card-text mb-75">Current Active Session </p>
-              <Avatar color="light-primary" size="lg" icon={<UserCheck />} />
-            </div>
-          </CardBody>
-        </Card>
+            </CardBody>
+          </Card></Col>
+        <Col sm={12} md={6}>
+          <Card className="card-congratulations-medal">
+            <CardBody>
+              <div className="d-flex justify-content-between align-items-end">
+                <h3 className="fw-bolder mb-75">
+                  {liveTime?.publisherLiveTimeStatsLoading ? (
+                    <Spinner
+                      className="spinner "
+                      variant="primary"
+                      style={{ color: '#7367F0' }}
+                    />
+                  ) : (
+                    <div className="text-primary">
+                      {liveTime.publisherLiveTimeStats?.liveTimeSum} s
+                    </div>
+                  )}
+                </h3>
+                <Avatar color="light-primary" size="lg" icon={<Tv />} />
+              </div>
+              <p className="card-text mb-75">Live Time </p>
+            </CardBody>
+          </Card></Col>
       </Row>
       {!liveTime.publisherLiveTimeStatsLoading ? (
         <>

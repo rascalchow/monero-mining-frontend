@@ -36,9 +36,9 @@ export default [
   },
   {
     id: 'referral',
-    title:'Invitations',
-    icon: <Inbox size={20}/>,
+    title: 'Invitations',
+    icon: <Inbox size={20} />,
     navLink: '/invite',
-    restrictedTo: {role:['publisher']}
+    restrictedTo: { role: ['publisher'] }
   }
 ]

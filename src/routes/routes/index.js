@@ -34,9 +34,9 @@ const Routes = [
     private: true,
   },
   {
-    path:'/invite',
+    path: '/invite',
     component: lazy(() => import('../../views/invite')),
-    private:true
+    private: true
   },
   {
     path: '/product/edit',
@@ -56,6 +56,16 @@ const Routes = [
   {
     path: '/live-time',
     component: lazy(() => import('../../views/publisher/Install')),
+    private: true,
+  },
+  {
+    path: '/app-users',
+    component: lazy(() => import('../../views/publisher/AppUsers')),
+    private: true,
+  },
+  {
+    path: '/affiliate',
+    component: lazy(() => import('../../views/publisher/Invites')),
     private: true,
   },
   {

@@ -1,49 +1,42 @@
-import { useState, useEffect, useContext } from 'react'
-
-import Proptypes from 'prop-types'
-
-import { columns } from './partials/columns'
+import { useEffect } from 'react'
+import { referralsColumn } from './partials/columns'
 // ** Store & Actions
 import { useLocation, Redirect, useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { ChevronDown, Cpu } from 'react-feather'
 import DataTable from 'react-data-table-component'
-
 import {
   Card,
-  Input,
   Row,
   Col,
   Label,
   CustomInput,
-  Button,
   Spinner,
   CardHeader,
 } from 'reactstrap'
 import { selectThemeColors } from '@utils'
 import Select from 'react-select'
-import { useSearchParams } from '@src/navigation'
+import DebouceInput from 'react-debounce-input'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
+
+// ** context hooks
+import { useSearchParams } from '@src/navigation'
 import { useProfileInfoCtx } from '@context/user/profileInfoContext'
-import { APP_USER_SORT_KEY, RESTRICTED_APP_USER_COLUMN } from '@const/user'
-
-import DebouceInput from 'react-debounce-input'
-
+// ** const
+import { REFERRALS_SORT_KEY } from '@const/user'
 
 const statusOptions = [
   { value: null, label: 'All' },
-  { value: 'installed', label: 'Installed' },
-  { value: 'uninstalled', label: 'Uninstalled' },
+  { value: 'active', label: 'Active' },
+  { value: 'pending', label: 'Pending' },
+  { value: 'rejected', label: 'Rejected' },
 ]
 
 const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
   const [searchParams, setSearchParams] = useSearchParams()
-  // const { setToCreateMode } = useContext(SidebarCtx)
   const onPageSizeChange = (e) => {
     setSearchParams(
       {
@@ -130,12 +123,11 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
   )
 }
 
-const AppUsers = () => {
+const Invites = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const { appUsers } = useProfileInfoCtx()
+  const { referralsInfo } = useProfileInfoCtx()
   const location = useLocation()
-  const role = useSelector((state) => state.auth.userData.role)
-  const authId = useSelector((state) => state.auth.userData._id)
+  const { id } = useParams()
   useEffect(() => {
     const limit = parseInt(searchParams.get('limit'))
     const page = parseInt(searchParams.get('page'))
@@ -150,23 +142,26 @@ const AppUsers = () => {
     if (searchParams.get('status')) {
       query.filter['status'] = searchParams.get('status')
     }
-    APP_USER_SORT_KEY.forEach((key) => {
+    REFERRALS_SORT_KEY.forEach((key) => {
       if (searchParams.get(key)) {
         query.filter[key] = searchParams.get(key)
       }
     })
     try {
       if (location.search)
-        appUsers.loadAppUsersInfo({ ...query, filter: { ...query.filter } }, authId)
+        referralsInfo.loadReferralsInfo(
+          { ...query, filter: { ...query.filter } },
+          id,
+        )
     } catch (error) {
       history.push('/not-authorized')
     }
   }, [location.search])
-
   const CustomPagination = () => {
     const count = Number(
       Math.ceil(
-        appUsers.appUsersInfo?.totalDocs / parseInt(searchParams.get('limit')),
+        referralsInfo.referrals?.totalDocs /
+        parseInt(searchParams.get('limit')),
       ),
     )
 
@@ -222,7 +217,7 @@ const AppUsers = () => {
               textTransform: 'capitalize',
             }}
           >
-            App Installs
+            Referrals
           </CardHeader>
           <DataTable
             noHeader
@@ -230,8 +225,8 @@ const AppUsers = () => {
             subHeader
             responsive
             paginationServer
-            columns={columns}
-            progressPending={appUsers?.appUsersLoading}
+            columns={referralsColumn}
+            progressPending={referralsInfo.isReferralsLoading}
             progressComponent={
               <div className="table-loader-container">
                 <Spinner className="spinner" />
@@ -242,7 +237,7 @@ const AppUsers = () => {
             sortIcon={<ChevronDown />}
             className="react-dataTable"
             paginationComponent={CustomPagination}
-            data={appUsers?.appUsersInfo.docs}
+            data={referralsInfo?.referrals?.docs}
             subHeaderComponent={<CustomHeader />}
           />
         </Card>
@@ -251,4 +246,4 @@ const AppUsers = () => {
   }
 }
 
-export default AppUsers
+export default Invites

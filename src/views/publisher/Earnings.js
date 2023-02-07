@@ -44,7 +44,6 @@ const Earnings = ({
   const [duration, setDuration] = useState(DURATION)
   const handleDuration = (e) => {
     if (e.length == 2) {
-      console.log({e})
       setDuration(e)
     }
   }
