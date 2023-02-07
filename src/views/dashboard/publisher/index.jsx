@@ -145,7 +145,7 @@ const PublisherHome = () => {
               <>
                 <CardHeader>
                   <CardTitle tag="h4">Installs Retention Rate</CardTitle>
-                  <Link to={'/install'}>
+                  <Link to={'/installs'}>
                     <BarChart2 size={18} className="text-muted cursor-pointer" /> </Link>
                 </CardHeader>
                 <CardBody className="p-0">

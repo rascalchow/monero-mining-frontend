@@ -31,7 +31,7 @@ export const getEula = () => {
         payload: {
           isLoading: false,
           isUpdating: false,
-          error: JSON.parse(error),
+          error: error?.data?.errors?.msg || 'Something went wrong.',
         },
       })
       throw error
