@@ -95,6 +95,7 @@ const PublisherHome = () => {
   };
 
   const { appUsers } = useProfileInfoCtx()
+  const CARD_LOADING_HEIGHT = 100; // Will be more dynamic by constant
 
   useEffect(() => {
     appUsers.loadAppStats();
@@ -103,34 +104,63 @@ const PublisherHome = () => {
     <>
       <Row>
         <Col sm={12} md={4}>
-          <StatsWithLineChart
-            icon={<DollarSign size={21} />}
-            color="primary"
-            stats={"$ " + appUsers.appStatsInfo?.earnings}
-            statTitle="Today's Earnings"
-            series={[
-              {
-                name: 'Traffic Rate',
-                data: [150, 200, 125, 225, 200, 250]
-              }
-            ]}
-            type="line"
-          />
+          {appUsers?.appStatsLoading ? (
+            <Card>
+              <Spinner
+                className="spinner"
+                style={{ color: '#7367F0', margin: 'auto', marginTop: CARD_LOADING_HEIGHT, marginBottom: CARD_LOADING_HEIGHT }}
+              />
+            </Card>
+          ) : (
+            <StatsWithLineChart
+              icon={<DollarSign size={21} />}
+              color="primary"
+              stats={"$ " + appUsers.appStatsInfo?.earnings}
+              statTitle="Today's Earnings"
+              series={[
+                {
+                  name: 'Traffic Rate',
+                  data: [150, 200, 125, 225, 200, 250]
+                }
+              ]}
+              type="line"
+            />
+          )}
           <Row>
             <Col sm={12} md={6}>
-              <StatsVertical
-                icon={<CreditCard size={21} />}
-                color="danger"
-                stats={appUsers.appStatsInfo?.lastPayment}
-                statTitle="Last Payout"
-              /></Col>
+              {appUsers?.appStatsLoading ? (
+                <Card>
+                  <Spinner
+                    className="spinner"
+                    style={{ color: '#7367F0', margin: 'auto', marginTop: CARD_LOADING_HEIGHT, marginBottom: CARD_LOADING_HEIGHT }}
+                  />
+                </Card>
+              ) : (
+                <StatsVertical
+                  icon={<CreditCard size={21} />}
+                  color="danger"
+                  stats={appUsers.appStatsInfo?.lastPayment}
+                  statTitle="Last Payout"
+                />
+              )}
+            </Col>
             <Col sm={12} md={6}>
-              <StatsVertical
-                icon={<UserPlus size={21} />}
-                color="primary"
-                stats={appUsers.appStatsInfo?.referrals}
-                statTitle="Referrals"
-              /></Col>
+              {appUsers?.appStatsLoading ? (
+                <Card>
+                  <Spinner
+                    className="spinner"
+                    style={{ color: '#7367F0', margin: 'auto', marginTop: CARD_LOADING_HEIGHT, marginBottom: CARD_LOADING_HEIGHT }}
+                  />
+                </Card>
+              ) : (
+                <StatsVertical
+                  icon={<UserPlus size={21} />}
+                  color="primary"
+                  stats={appUsers.appStatsInfo?.referrals}
+                  statTitle="Referrals"
+                />
+              )}
+            </Col>
           </Row>
         </Col>
         <Col sm={12} md={4}>
@@ -139,7 +169,7 @@ const PublisherHome = () => {
               <Spinner
                 className="spinner "
                 variant="primary"
-                style={{ color: '#7367F0' }}
+                style={{ color: '#7367F0', margin: 'auto', marginTop: CARD_LOADING_HEIGHT, marginBottom: CARD_LOADING_HEIGHT }}
               />
             ) : (
               <>
@@ -176,7 +206,7 @@ const PublisherHome = () => {
               <Spinner
                 className="spinner "
                 variant="primary"
-                style={{ color: '#7367F0' }}
+                style={{ color: '#7367F0', margin: 'auto', marginTop: CARD_LOADING_HEIGHT, marginBottom: CARD_LOADING_HEIGHT }}
               />
             ) : (
               <>
@@ -207,7 +237,7 @@ const PublisherHome = () => {
             )}
           </Card>
         </Col>
-      </Row>
+      </Row >
 
     </>
   )

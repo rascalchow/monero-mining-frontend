@@ -1,21 +1,15 @@
 //** React Imports
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useSelector } from 'react'
 
+import { getUserData } from '@utils'
 // ** Configs
 import themeConfig from '@configs/themeConfig'
 
 export const useLayout = () => {
   // ** States
-  const [lastLayout, setLastLayout] = useState(null)
-  const [layout, setLayout] = useState(() => {
-    try {
-      return themeConfig.layout.type
-    } catch (error) {
-      // ** If error return initialValue
-      console.log(error)
-      return themeConfig.layout.type
-    }
-  })
+  const userData = getUserData();
+  const lastLayout = userData?.role == 'publisher' ? 'horizontal' : 'vertical';
+  const [layout, setLayout] = useState(lastLayout)
 
   // ** Return a wrapped version of useState's setter function
   const setValue = (value) => {
@@ -35,7 +29,6 @@ export const useLayout = () => {
     // ** If layout is horizontal & screen size is equals to or below 1200
     if (layout === 'horizontal' && window.innerWidth <= 1200) {
       setLayout('vertical')
-      setLastLayout('horizontal')
     }
     // ** If lastLayout is horizontal & screen size is equals to or above 1200
     if (lastLayout === 'horizontal' && window.innerWidth >= 1200) {
@@ -51,7 +44,7 @@ export const useLayout = () => {
   useEffect(() => {
     // ** Window Resize Event
     window.addEventListener('resize', handleLayout)
-  }, [layout, lastLayout])
+  }, [layout])
 
   return [layout, setValue]
 }

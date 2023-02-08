@@ -54,15 +54,14 @@ const Login = () => {
     try {
       await dispatch(handleLogin(data))
     } catch (error) {
-      if (
-        error &&
-        error.status === 401 &&
-        _.get(error, 'data.errors.msg', '') === 'USER_IS_NOT_APPROVED'
-      ) {
-        setFb('Please wait until you are approved')
-      } else {
-        setFb('Email or password incorrect')
-      }
+      const msg = {
+        USER_IS_NOT_APPROVED: 'Please wait until you are approved',
+        USER_DOES_NOT_EXIST: 'User does not exist',
+        WRONG_PASSWORD: 'Password is incorrect',
+        ERROR: 'Email or password incorrect',
+        BLOCKED_USER: 'This user is blocked due to too many arbitary attempts'
+      }[_.get(error, 'data.errors.msg', 'ERROR')];
+      setFb(msg)
     }
   }
 
