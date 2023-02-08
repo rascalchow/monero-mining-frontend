@@ -50,7 +50,7 @@ const Register = () => {
   const reg = /referralInvite=/s
   const schema = yup
     .object({
-      name: yup.string().required(),
+      name: yup.string().matches(/^[a-z0-9\-_]+$/, 'Only lower letters, numbers and underscore can be used').required(),
       email: yup.string().required().email(),
       phone: yup
         .string()
@@ -375,7 +375,7 @@ const Register = () => {
                   <Row>
                     <Col>
                       <FormField
-                        label="Full Name"
+                        label="Username"
                         name="name"
                         control={control}
                         error={errors.name}
