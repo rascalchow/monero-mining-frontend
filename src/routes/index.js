@@ -26,11 +26,10 @@ import { getAuth } from '../redux/actions/auth'
 
 const Router = () => {
   // ** Hooks
-  // const [layout, setLayout] = useLayout()
+  const [layout, setLayout] = useLayout()
   const [transition, setTransition] = useRouterTransition()
   const [loading, setLoading] = useState(true)
   const userData = useSelector((state) => state.auth.userData)
-  const layout = userData?.role == 'publisher' ? 'horizontal' : 'vertical';
   const dispatch = useDispatch()
 
   // ** Default Layout
@@ -165,20 +164,20 @@ const Router = () => {
                             /*eslint-disable */
                             {...(route.appLayout
                               ? {
-                                  appLayout: route.appLayout,
-                                }
+                                appLayout: route.appLayout,
+                              }
                               : {})}
                             {...(route.meta
                               ? {
-                                  routeMeta: route.meta,
-                                }
+                                routeMeta: route.meta,
+                              }
                               : {})}
                             {...(route.className
                               ? {
-                                  wrapperClass: route.className,
-                                }
+                                wrapperClass: route.className,
+                              }
                               : {})}
-                            /*eslint-enable */
+                          /*eslint-enable */
                           >
                             <route.component {...props} />
                             {/* <FinalRoute route={route} {...props} /> */}

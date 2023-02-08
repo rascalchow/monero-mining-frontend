@@ -45,6 +45,7 @@ const Install = ({
   labelColor,
   successColorShade,
 }) => {
+  const CARD_LOADING_HEIGHT = 100;
   const { colors } = useContext(ThemeColors)
   const [duration, setDuration] = useState(DURATION)
   const options = {
@@ -117,7 +118,7 @@ const Install = ({
               <Spinner
                 className="spinner "
                 variant="primary"
-                style={{ color: '#7367F0' }}
+                style={{ color: '#7367F0', margin: 'auto', marginTop: CARD_LOADING_HEIGHT, marginBottom: CARD_LOADING_HEIGHT }}
               />
             ) : (
               <>

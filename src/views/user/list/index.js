@@ -14,9 +14,9 @@ const UserList = () => {
   const history = useHistory()
   const [role, setRole] = useState('')
   const { usersInfo } = useProfileInfoCtx()
-  
+
   useEffect(() => {
-   if(location.search) fetchData()
+    if (location.search) fetchData()
   }, [location.search])
   const fetchData = () => {
     const limit = parseInt(searchParams.get('limit'))
@@ -73,7 +73,7 @@ const UserList = () => {
           <Col sm={12} md={6} lg={3}>
             <Card className="card-congratulations-medal">
               <CardBody>
-                <div className="d-flex justify-content-between align-items-end">
+                <div className="d-flex align-items-end justify-content-between">
                   <h3 className="fw-bolder mb-75">
                     {usersInfo?.isUsersLoading ? (
                       <Spinner
@@ -87,9 +87,9 @@ const UserList = () => {
                       </div>
                     )}
                   </h3>
-                  <p className="card-text mb-75">Total {role}s</p>
                   <Avatar color="light-primary" size="lg" icon={<User />} />
                 </div>
+                <p className="card-text mb-75">Total {role}s</p>
               </CardBody>
             </Card>
           </Col>
