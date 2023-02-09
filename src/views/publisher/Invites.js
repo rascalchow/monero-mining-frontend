@@ -27,6 +27,7 @@ import { useSearchParams } from '@src/navigation'
 import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 // ** const
 import { REFERRALS_SORT_KEY } from '@const/user'
+import { useSelector } from 'react-redux'
 
 const statusOptions = [
   { value: null, label: 'All' },
@@ -127,7 +128,7 @@ const Invites = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { referralsInfo } = useProfileInfoCtx()
   const location = useLocation()
-  const { id } = useParams()
+
   useEffect(() => {
     const limit = parseInt(searchParams.get('limit'))
     const page = parseInt(searchParams.get('page'))
@@ -149,9 +150,8 @@ const Invites = () => {
     })
     try {
       if (location.search)
-        referralsInfo.loadReferralsInfo(
+        referralsInfo.loadPublisherReferrals(
           { ...query, filter: { ...query.filter } },
-          id,
         )
     } catch (error) {
       history.push('/not-authorized')

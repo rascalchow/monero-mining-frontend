@@ -56,7 +56,8 @@ const About = () => {
                   </Col>
                 ))}
               </Row>
-
+              <div className="mb-4"></div>
+              <span>More Information: </span>
               <p>{userData.moreInformation}</p>
 
               {userData.installer && (
@@ -68,12 +69,14 @@ const About = () => {
                   >
                     Download product setup file
                   </a>
+                  <br />
                 </>
               )}
 
               {userData.role == 'publisher' && (
                 <>
                   <Button.Ripple
+                    className="mt-4"
                     color="primary"
                     outline
                     onClick={onEditUserClick}

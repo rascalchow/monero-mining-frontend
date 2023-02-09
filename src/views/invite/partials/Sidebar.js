@@ -12,7 +12,7 @@ const SidebarInvitations = ({ open, toggleSidebar, onSubmit }) => {
   const [formData, setFormData] = useState({
     email: '',
   })
-  const {createInvite} = useInvite()
+  const { createInvite } = useInvite()
   const schema = yup
     .object({
       email: yup.string().required().email(),
@@ -33,8 +33,7 @@ const SidebarInvitations = ({ open, toggleSidebar, onSubmit }) => {
     const formData = {
       email: data.email,
     }
-    createInvite(formData)
-    onSubmit(true)
+    createInvite(formData, onSubmit)
   }
   return (
     <Sidebar

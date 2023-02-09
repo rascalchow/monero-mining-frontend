@@ -1,15 +1,21 @@
 //** React Imports
-import { useState, useEffect, useSelector } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { getUserData } from '@utils'
-// ** Configs
-import themeConfig from '@configs/themeConfig'
 
 export const useLayout = () => {
   // ** States
-  const userData = getUserData();
-  const lastLayout = userData?.role == 'publisher' ? 'horizontal' : 'vertical';
-  const [layout, setLayout] = useState(lastLayout)
+  const userData = useSelector((state) => state.auth.userData)
+  const [lastLayout, setLastLayout] = useState('vertical');
+
+  useEffect(() => {
+    const varLayout = userData?.role == 'publisher' ? 'horizontal' : 'vertical';
+    setLastLayout(varLayout)
+    setLayout(varLayout)
+  }, [userData])
+
+  const [layout, setLayout] = useState('vertical')
 
   // ** Return a wrapped version of useState's setter function
   const setValue = (value) => {
@@ -25,7 +31,7 @@ export const useLayout = () => {
     }
   }
 
-  const handleLayout = () => {
+  const handleLayout = useCallback(() => {
     // ** If layout is horizontal & screen size is equals to or below 1200
     if (layout === 'horizontal' && window.innerWidth <= 1200) {
       setLayout('vertical')
@@ -34,17 +40,16 @@ export const useLayout = () => {
     if (lastLayout === 'horizontal' && window.innerWidth >= 1200) {
       setLayout('horizontal')
     }
-  }
+  }, [layout, lastLayout])
 
   // ** ComponentDidMount
   useEffect(() => {
-    handleLayout()
+    window.addEventListener('resize', handleLayout)
   }, [])
 
   useEffect(() => {
-    // ** Window Resize Event
-    window.addEventListener('resize', handleLayout)
-  }, [layout])
+    handleLayout()
+  }, [lastLayout])
 
   return [layout, setValue]
 }
