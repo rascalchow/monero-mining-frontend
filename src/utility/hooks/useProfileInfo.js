@@ -219,6 +219,16 @@ const useProfileInfo = () => {
     }
     setIsReferralsLoading(false)
   }
+  const loadPublisherReferrals = async (params) => {
+    setIsReferralsLoading(true)
+    try {
+      const res = await axiosClient.get(`/invite/publisher/referrals`, { params })
+      setReferrals(res)
+    } catch (error) {
+      toast('Cannot find referrals!', { type: 'error' })
+    }
+    setIsReferralsLoading(false)
+  }
   const overview = {
     loading,
     profileInfo,
@@ -265,6 +275,7 @@ const useProfileInfo = () => {
   const referralsInfo = {
     referrals,
     loadReferralsInfo,
+    loadPublisherReferrals,
     isReferralsLoading,
   }
   return {

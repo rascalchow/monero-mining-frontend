@@ -156,7 +156,7 @@ const EditProduct = () => {
                 </Col>
               </Row>
               <div className="d-flex justify-content-between mt-2">
-                {productData.data.installer && (
+                {!productData.data.installer && (
                   <div>
                     <div>Software Download Link:</div>
                     <a

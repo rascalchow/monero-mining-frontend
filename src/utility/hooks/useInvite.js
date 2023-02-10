@@ -16,10 +16,11 @@ const useInvite = () => {
     }
     setLoadingState(false)
   }
-  const createInvite = async (data) => {
+  const createInvite = async (data, onSubmit) => {
     setLoadingState(true)
     try {
       await axiosClient.post('/invite', data)
+      onSubmit();
       toast('Invitation Success!', { type: 'success' })
     } catch (error) {
       if (INVITE_ERRORS[error.data.errors.msg]) {

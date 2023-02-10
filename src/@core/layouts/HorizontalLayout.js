@@ -130,9 +130,9 @@ const HorizontalLayout = (props) => {
               <NavItem>
                 <Link to="/" className="navbar-brand">
                   <span className="brand-logo">
-                    <img src={themeConfig.app.appLogoImage} alt="logo" />
+                    <img src={themeConfig.app.appLogoImage} alt="logo" style={{ maxHeight: 35 }} />
                   </span>
-                  <h2 className="brand-text mb-0">{themeConfig.app.appName}</h2>
+                  {/* <h2 className="brand-text mb-0">{themeConfig.app.appName}</h2> */}
                 </Link>
               </NavItem>
             </ul>
