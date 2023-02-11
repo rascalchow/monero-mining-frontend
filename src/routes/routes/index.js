@@ -65,7 +65,7 @@ const Routes = [
   },
   {
     path: '/affiliate',
-    component: lazy(() => import('../../views/publisher/Invites')),
+    component: lazy(() => import('../../views/user/info/partials/Invites')),
     private: true,
   },
   {

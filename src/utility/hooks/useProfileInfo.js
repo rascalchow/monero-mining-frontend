@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { axiosClient } from '@src/@core/services'
 import { useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const useProfileInfo = () => {
+
+
+  const userData = useSelector((state) => state.auth.userData)
+
   const dispatch = useDispatch();
   const [profileInfo, setProfileInfo] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -212,18 +216,12 @@ const useProfileInfo = () => {
   const loadReferralsInfo = async (params, id) => {
     setIsReferralsLoading(true)
     try {
-      const res = await axiosClient.get(`/invite/referrals/${id}`, { params })
-      setReferrals(res)
-    } catch (error) {
-      toast('Cannot find referrals!', { type: 'error' })
-    }
-    setIsReferralsLoading(false)
-  }
-  const loadPublisherReferrals = async (params) => {
-    setIsReferralsLoading(true)
-    try {
-      const res = await axiosClient.get(`/invite/publisher/referrals`, { params })
-      setReferrals(res)
+      if (userData?.role == 'admin' && id) {
+        setReferrals(await axiosClient.get(`/invite/referrals/${id}`, { params }))
+      } else {
+        setReferrals(await axiosClient.get(`/invite/publisher/referrals`, { params }))
+
+      }
     } catch (error) {
       toast('Cannot find referrals!', { type: 'error' })
     }
@@ -275,7 +273,6 @@ const useProfileInfo = () => {
   const referralsInfo = {
     referrals,
     loadReferralsInfo,
-    loadPublisherReferrals,
     isReferralsLoading,
   }
   return {
