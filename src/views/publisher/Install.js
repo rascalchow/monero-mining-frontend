@@ -17,18 +17,10 @@ import {
   Label, CardText,
   Spinner,
 } from 'reactstrap'
-import { columns } from './partials/columns'
-import DataTable from 'react-data-table-component'
 import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 import { DURATION } from '@const/user'
-import { selectThemeColors } from '@utils'
-import { useParams, Redirect } from 'react-router-dom'
-import ReactPaginate from 'react-paginate'
-import { useSearchParams } from '@src/navigation'
-import DebouceInput from 'react-debounce-input'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { APP_USER_SORT_KEY, RESTRICTED_APP_USER_COLUMN } from '@const/user'
 import { useContext } from 'react'
 import { ThemeColors } from '../../utility/context/ThemeColors'
 

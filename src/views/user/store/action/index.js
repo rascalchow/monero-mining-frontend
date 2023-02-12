@@ -88,7 +88,7 @@ export const addUser = (user) => {
           payload: response,
         })
       })
-      .then(() => {})
+      .then(() => { })
       .catch((err) => console.log(err))
   }
 }
@@ -128,7 +128,7 @@ export const deleteUser = (id) => {
           payload: response,
         })
       })
-      .then(() => {})
+      .then(() => { })
   }
 }
 

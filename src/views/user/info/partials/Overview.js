@@ -1,6 +1,6 @@
 // ** React Imports
 import { useEffect, useState, useContext } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 // ** Custom Components
 import Avatar from '@components/avatar'
 import { TrendingUp, User, Box, DollarSign } from 'react-feather'
@@ -35,7 +35,6 @@ import {
 import { useParams } from 'react-router-dom'
 import _ from 'lodash'
 import Description from '@components/description'
-import { approveUser, rejectUser } from '../../store/action'
 import { COUNTRIES } from '@src/constants.js'
 import './style.scss'
 import { useProfileInfoCtx } from '../../../../utility/context/user/profileInfoContext'

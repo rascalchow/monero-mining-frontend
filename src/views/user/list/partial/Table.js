@@ -6,7 +6,7 @@ import { columnsPublisher, columnsAdmin } from './columns'
 
 // ** Store & Actions
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { ChevronDown, Cpu } from 'react-feather'

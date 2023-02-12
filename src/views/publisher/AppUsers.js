@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 
 import Proptypes from 'prop-types'
 
-import { columns } from './partials/columns'
+import { columns } from '../user/info/partials/columns'
 // ** Store & Actions
 import { useLocation, Redirect, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'

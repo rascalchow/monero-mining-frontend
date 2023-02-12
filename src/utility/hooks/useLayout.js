@@ -45,10 +45,7 @@ export const useLayout = () => {
   // ** ComponentDidMount
   useEffect(() => {
     window.addEventListener('resize', handleLayout)
-  }, [])
-
-  useEffect(() => {
-    handleLayout()
+    handleLayout();
   }, [lastLayout])
 
   return [layout, setValue]

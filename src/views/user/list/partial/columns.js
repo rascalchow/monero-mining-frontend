@@ -76,9 +76,8 @@ const renderStatus = (row) => {
     <span className="text-truncate text-capitalize align-middle">
       <Icon
         size={18}
-        className={`${
-          statusObj[row.status] ? statusObj[row.status].class : ''
-        } mr-50`}
+        className={`${statusObj[row.status] ? statusObj[row.status].class : ''
+          } mr-50`}
       />
     </span>
   )
