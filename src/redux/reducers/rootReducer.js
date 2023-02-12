@@ -7,7 +7,6 @@ import layout from './layout'
 import eula from '@src/views/eula/store/reducer'
 import dashboard from '../../views/dashboard/store/reducer'
 import accountSettings from '../../views/account-settings/store/reducer'
-import product from '../../views/product/store/reducer'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 const persistConfig = {
@@ -23,7 +22,6 @@ const rootReducer = combineReducers({
   eula,
   dashboard,
   accountSettings,
-  product,
 })
 const pReducer = persistReducer(persistConfig, rootReducer)
 export default pReducer
