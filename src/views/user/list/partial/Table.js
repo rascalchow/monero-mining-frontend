@@ -103,7 +103,7 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
               </Label>
               <DebouceInput
                 minLength={2}
-                debounceTimeout = {500}
+                debounceTimeout={500}
                 id="search-invoice"
                 className="ml-50 w-100 debounce-input"
                 type="text"
@@ -237,7 +237,7 @@ const UsersTable = ({ users, role }) => {
           // store.dispatch(setUser(null))
           setSidebarOpen(!sidebarOpen)
         }}
-        user={role == 'publisher' ? users.selectedUser : auth}
+        user={users.selectedUser}
       />
     </div>
   )
