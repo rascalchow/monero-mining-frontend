@@ -4,9 +4,6 @@ import Proptypes from 'prop-types'
 
 import { columnsPublisher, columnsAdmin } from './columns'
 
-// ** Store & Actions
-
-import { useSelector } from 'react-redux'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { ChevronDown, Cpu } from 'react-feather'
@@ -23,7 +20,6 @@ import {
   Spinner,
   CardHeader,
 } from 'reactstrap'
-import { store } from '@store/storeConfig/store'
 import { selectThemeColors } from '@utils'
 import Select from 'react-select'
 import Sidebar from '../../partials/Sidebar'
@@ -152,7 +148,6 @@ const UsersTable = ({ users, role }) => {
   const { pathname } = useLocation()
   const [columns, setColumns] = useState(columnsAdmin)
   const { usersInfo } = useProfileInfoCtx()
-  const auth = useSelector((state) => state.auth.userData)
   useEffect(() => {
     if (pathname == '/publisher/list') setColumns(columnsPublisher)
     else if (pathname == '/admin/list') setColumns(columnsAdmin)

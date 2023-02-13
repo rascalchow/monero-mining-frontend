@@ -1,10 +1,9 @@
-import { useSelector } from 'react-redux'
 import { Card, CardHeader, CardBody, CardTitle, CardText } from 'reactstrap'
-
+import { useAuthCtx } from '@context/authContext'
 import _ from 'lodash'
 
 const AdminHome = () => {
-  const userData = useSelector((state) => state.auth.userData)
+  const { userData } = useAuthCtx();
   return (
     <div>
       <Card>

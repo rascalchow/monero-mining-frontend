@@ -1,10 +1,13 @@
 import { BrowserRouter } from 'react-router-dom'
+import { AuthContextProvider } from '@context/authContext'
 // ** Router Import
 import Routes from './routes'
 
 const App = () => (
   <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
-    <Routes />
+    <AuthContextProvider>
+      <Routes />
+    </AuthContextProvider>
   </BrowserRouter>
 )
 

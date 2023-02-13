@@ -17,6 +17,16 @@ const useProfile = () => {
     }
     setLoading(false)
   }
+  const update = async (user) => {
+    setLoading(true)
+    try {
+      const result = await axiosClient.patch(`/profile`, user)
+      setProfile(result)
+    } catch (error) {
+      toast('Action failed!', { type: 'error' })
+    }
+    setLoading(false)
+  }
 
   // ** Update Password
   const updatePassword = async (data) => {
@@ -32,6 +42,7 @@ const useProfile = () => {
     profile,
     loading,
     load,
+    update,
     updatePassword,
   }
 }

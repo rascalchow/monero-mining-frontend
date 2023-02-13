@@ -1,9 +1,8 @@
 import { Fragment, useState, useEffect } from 'react'
 import { useSkin } from '@hooks/useSkin'
 import { toast } from 'react-toastify'
-import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
-import { handleRegister } from '@store/actions/auth'
+import { useAuthCtx } from '@context/authContext'
 import { Link, Redirect, useLocation, useParams } from 'react-router-dom'
 import InputPasswordToggle from '@components/input-password-toggle'
 import { Facebook, Twitter, Mail, GitHub, Loader } from 'react-feather'
@@ -41,7 +40,7 @@ const ReferrerCollapse = ({ data }) => (
 )
 const Register = () => {
   const [skin] = useSkin()
-  const dispatch = useDispatch()
+  const { handleRegister } = useAuthCtx()
   const [fbMsg, setFbMsg] = useState(null)
   const [term, setTerm] = useState(false)
   const location = useLocation()
@@ -71,6 +70,8 @@ const Register = () => {
         .max(6, 'Must be exactly 6 charactors'),
     })
     .required()
+
+
 
   const {
     control,
@@ -246,6 +247,7 @@ const Register = () => {
   const onSubmit = async (data) => {
     let query = location?.search
     const id = processReferredQuery(query)
+
     if (id == null) {
       toast('Invalid Url!', { type: 'error' })
       return
@@ -266,7 +268,7 @@ const Register = () => {
       id,
     }
     try {
-      await dispatch(handleRegister(formData))
+      await handleRegister(formData)
       toast('Successful registered a user. Pleas wait until being approved!', {
         type: 'success',
       })

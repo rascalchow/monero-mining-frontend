@@ -5,7 +5,7 @@ import Proptypes from 'prop-types'
 import { columns } from './columns'
 // ** Store & Actions
 import { useLocation, Redirect, useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useAuthCtx } from '@context/authContext'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -94,7 +94,7 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
               </Label>
               <DebouceInput
                 minLength={2}
-                debounceTimeout = {500}
+                debounceTimeout={500}
                 id="search-invoice"
                 className="ml-50 w-100 debounce-input"
                 type="text"
@@ -134,8 +134,7 @@ const AppUsers = ({ id }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { appUsers } = useProfileInfoCtx()
   const location = useLocation()
-  const role = useSelector((state) => state.auth.userData.role)
-  // const {id} = useParams()
+  const { userData: { role } } = useAuthCtx();
   useEffect(() => {
     const limit = parseInt(searchParams.get('limit'))
     const page = parseInt(searchParams.get('page'))
@@ -233,8 +232,8 @@ const AppUsers = ({ id }) => {
               role == 'admin'
                 ? columns
                 : columns.filter((it) =>
-                    RESTRICTED_APP_USER_COLUMN.includes(it.selector),
-                  )
+                  RESTRICTED_APP_USER_COLUMN.includes(it.selector),
+                )
             }
             progressPending={appUsers?.appUsersLoading}
             progressComponent={

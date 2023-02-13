@@ -1,15 +1,11 @@
 // ** React Imports
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useAuthCtx } from '@context/authContext'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
-
-// ** Store & Actions
-import { useDispatch } from 'react-redux'
-import { handleLogout } from '@store/actions/auth'
 
 // ** Third Party Components
 import {
@@ -19,10 +15,6 @@ import {
   DropdownItem,
 } from 'reactstrap'
 import {
-  User,
-  Mail,
-  CheckSquare,
-  MessageSquare,
   Power,
   Settings,
 } from 'react-feather'
@@ -32,8 +24,7 @@ import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
 
 const UserDropdown = () => {
   // ** Store Vars
-  const dispatch = useDispatch()
-  const userData = useSelector((state) => state.auth.userData)
+  const { userData, handleLogout } = useAuthCtx();
 
   // ** State
 
@@ -78,13 +69,13 @@ const UserDropdown = () => {
         <DropdownItem
           tag={Link}
           to="/login"
-          onClick={() => dispatch(handleLogout())}
+          onClick={() => handleLogout()}
         >
           <Power size={14} className="mr-75" />
           <span className="align-middle">Logout</span>
         </DropdownItem>
       </DropdownMenu>
-    </UncontrolledDropdown>
+    </UncontrolledDropdown >
   )
 }
 

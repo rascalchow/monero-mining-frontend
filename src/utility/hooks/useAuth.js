@@ -1,23 +1,18 @@
+import { useState } from 'react'
 // ** UseJWT import to get config
 import useJwt from '@src/auth/jwt/useJwt'
 
 const config = useJwt.jwtConfig
 const jwt = useJwt
 
-// ** Handle User Login
-export const handleLogin = (data) => {
-  return async (dispatch) => {
+const useAuth = () => {
+  const [userData, setUserData] = useState(null);
+
+  // ** Handle User Login
+  const handleLogin = async (data) => {
     try {
       const res = await jwt.login(data)
-      dispatch({
-        type: 'LOGIN',
-        data: res.user,
-        config,
-        [config.storageTokenKeyName]: data[config.storageTokenKeyName],
-        [config.storageRefreshTokenKeyName]:
-          data[config.storageRefreshTokenKeyName],
-      })
-
+      setUserData(res.user)
       // ** Add to user, accessToken & refreshToken to localStorage
       localStorage.setItem('userData', JSON.stringify(res.user))
       localStorage.setItem(config.storageTokenKeyName, res.token)
@@ -31,55 +26,42 @@ export const handleLogin = (data) => {
       throw error
     }
   }
-}
-// ** Handle User Register
-export const handleRegister = (data) => {
-  return async () => {
+  // ** Handle User Register
+  const handleRegister = async (data) => {
     await jwt.register(data)
   }
-}
 
-// ** Handle User Logout
-export const handleLogout = () => {
-  return (dispatch) => {
-    dispatch({
-      type: 'LOGOUT',
-      [config.storageTokenKeyName]: null,
-      [config.storageRefreshTokenKeyName]: null,
-    })
-
+  // ** Handle User Logout
+  const handleLogout = () => {
+    setUserData(null);
     // ** Remove user, accessToken & refreshToken from localStorage
     localStorage.removeItem('userData')
     localStorage.removeItem(config.storageTokenKeyName)
     localStorage.removeItem(config.storageRefreshTokenKeyName)
   }
-}
 
-export const getAuth = () => {
-  return async (dispatch) => {
+  const getAuth = async () => {
     try {
       const data = await jwt.getUser()
-      dispatch({
-        type: 'SET_DATA',
-        payload: {
-          userData: data.user,
-          token: data.token,
-        },
-      })
-
+      setUserData(data.user);
       // ** Add to user, accessToken & refreshToken to localStorage
       localStorage.setItem('userData', JSON.stringify(data.user))
       localStorage.setItem(config.storageTokenKeyName, data.token)
     } catch (error) {
       localStorage.removeItem('userData')
       localStorage.removeItem(config.storageTokenKeyName)
-      dispatch({
-        type: 'SET_DATA',
-        payload: {
-          userData: null,
-          token: null,
-        },
-      })
+      setUserData(null);
     }
   }
+
+
+  return {
+    userData,
+    handleLogin,
+    handleLogout,
+    getAuth,
+    handleRegister,
+  }
 }
+
+export default useAuth

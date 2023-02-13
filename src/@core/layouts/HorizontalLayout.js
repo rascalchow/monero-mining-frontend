@@ -31,6 +31,7 @@ import { SidebarCtx, SidebarProvider } from '@context/user/sidebarContext'
 import { ProfileInfoContextProvider } from '@context/user/profileInfoContext'
 // ** Styles
 import '@styles/base/core/menu/menu-types/horizontal-menu.scss'
+import { AuthContextProvider } from '@context/authContext'
 
 const HorizontalLayout = (props) => {
   // ** Props

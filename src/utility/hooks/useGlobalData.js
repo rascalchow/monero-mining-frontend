@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { axiosClient } from '@src/@core/services'
 import { useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useAuthCtx } from '@context/authContext'
 
 const useGlobalData = () => {
 
 
-  const userData = useSelector((state) => state.auth.userData)
+  const { userData } = useAuthCtx();
 
   const dispatch = useDispatch();
   const [profileInfo, setProfileInfo] = useState(null)
@@ -138,25 +139,6 @@ const useGlobalData = () => {
     setLoading(false)
   }
 
-  const editAccountSetting = async (user) => {
-    setLoading(true)
-    try {
-      const updatedUser = await axiosClient.patch(`/profile`, user)
-      dispatch({
-        type: 'ACCOUNT_SETTINGS/SET_PROFILE',
-        payload: {
-          ...updatedUser,
-          isLoading: false,
-          error: null,
-        },
-      })
-      toast("Your profile update request has been sent. Please wait for Admin's approval", { type: 'success' })
-    } catch (error) {
-      toast('User update failed!', { type: 'error' })
-    }
-    setLoading(false)
-  }
-
   const getUsers = async (params) => {
     setIsUsersLoading(true)
     try {
@@ -242,7 +224,7 @@ const useGlobalData = () => {
       }
       setEulaError(null);
     } catch (error) {
-      setEulaError(error);
+      setEulaError(error?.errors?.msg, "Something went wrong loading eula");
       toast('Cannot find referrals!', { type: 'error' })
     }
     setEulaLoading(false)
@@ -297,7 +279,6 @@ const useGlobalData = () => {
   const usersInfo = {
     users,
     updateUser,
-    editAccountSetting,
     getUsers,
     setUser,
     approveUser,

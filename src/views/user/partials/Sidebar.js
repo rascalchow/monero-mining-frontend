@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import Proptypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useAuthCtx } from '@context/authContext'
 import { useForm } from 'react-hook-form'
 import { Button, Form, Input, Row, Col } from 'reactstrap'
 import * as yup from 'yup'
@@ -14,7 +14,7 @@ import { PHONE_REGEX } from '@src/constants'
 
 const SidebarNewUsers = ({ open, toggleSidebar, user }) => {
   const { overview, usersInfo } = useProfileInfoCtx()
-  const auth = useSelector((state) => state.auth.userData)
+  const { userData: auth } = useAuthCtx();
   const location = useLocation()
   const { id } = useParams()
   const [formData, setFormData] = useState({

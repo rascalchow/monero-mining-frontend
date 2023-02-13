@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
 import Proptypes from 'prop-types'
-import { useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { Button, Form, Input, Row, Col } from 'reactstrap'
 import * as yup from 'yup'
@@ -13,10 +12,6 @@ import { useParams, useLocation } from 'react-router-dom'
 import { PHONE_REGEX } from '@src/constants'
 
 const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
-  const { overview, usersInfo } = useProfileInfoCtx()
-  const auth = useSelector((state) => state.auth.userData)
-  const location = useLocation()
-  const { id } = useParams()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -58,8 +53,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
 
   const onSubmit = (info) => {
     toggleSidebar()
-    usersInfo.editAccountSetting(info)
-    onSave();
+    onSave(info);
   }
 
   useEffect(() => {

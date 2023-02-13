@@ -1,5 +1,4 @@
 import { useEffect, useContext } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Card, CardBody, Button, Row, Col } from 'reactstrap'
 import Description from '@components/description'
 import { Spinner } from 'reactstrap'
@@ -13,7 +12,7 @@ import { Inbox, Key, UserCheck } from 'react-feather'
 import useProfile from '@hooks/useProfile'
 
 const About = () => {
-  const { load: loadProfile, profile, loading } = useProfile();
+  const { load: loadProfile, profile, loading, update: updateProfile } = useProfile();
   useEffect(() => {
     loadProfile();
   }, [])
@@ -95,8 +94,8 @@ const About = () => {
         toggleSidebar={() => {
           setSidebarOpen(!sidebarOpen)
         }}
-        onSave={() => {
-
+        onSave={(info) => {
+          updateProfile(info)
         }}
         user={profile}
       />

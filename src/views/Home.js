@@ -1,10 +1,11 @@
-import { useSelector } from 'react-redux'
+
+import { useAuthCtx } from '@context/authContext'
 import { Card, CardHeader, CardBody, CardTitle, CardText } from 'reactstrap'
 import LoadingSpinner from '@components/spinner/Loading-spinner'
 
 import _ from 'lodash'
 const Home = () => {
-  const userData = useSelector((state) => state.auth.userData)
+  const { userData } = useAuthCtx();
   if (userData === null) {
     return <LoadingSpinner />
   }

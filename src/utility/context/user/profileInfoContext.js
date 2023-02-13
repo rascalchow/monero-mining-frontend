@@ -2,7 +2,6 @@ import { createContext, useEffect, useContext, useState } from 'react'
 import { matchPath, useLocation, useParams } from 'react-router-dom'
 import useGlobalData from '@hooks/useGlobalData'
 import { PROFILE_TAB_ROUTES, DURATION } from '@const/user'
-import { useSelector } from 'react-redux'
 
 export const ProfileInfoContext = createContext(null)
 export const useProfileInfoCtx = () => useContext(ProfileInfoContext)
