@@ -4,9 +4,6 @@ import Proptypes from 'prop-types'
 
 import { columnsPublisher, columnsAdmin } from './columns'
 
-// ** Store & Actions
-
-import { useDispatch, useSelector } from 'react-redux'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { ChevronDown, Cpu } from 'react-feather'
@@ -23,7 +20,6 @@ import {
   Spinner,
   CardHeader,
 } from 'reactstrap'
-import { store } from '@store/storeConfig/store'
 import { selectThemeColors } from '@utils'
 import Select from 'react-select'
 import Sidebar from '../../partials/Sidebar'
@@ -103,7 +99,7 @@ const CustomHeader = ({ sidebarOpen, setSidebarOpen }) => {
               </Label>
               <DebouceInput
                 minLength={2}
-                debounceTimeout = {500}
+                debounceTimeout={500}
                 id="search-invoice"
                 className="ml-50 w-100 debounce-input"
                 type="text"
@@ -152,7 +148,6 @@ const UsersTable = ({ users, role }) => {
   const { pathname } = useLocation()
   const [columns, setColumns] = useState(columnsAdmin)
   const { usersInfo } = useProfileInfoCtx()
-  const auth = useSelector((state) => state.auth.userData)
   useEffect(() => {
     if (pathname == '/publisher/list') setColumns(columnsPublisher)
     else if (pathname == '/admin/list') setColumns(columnsAdmin)
@@ -237,7 +232,7 @@ const UsersTable = ({ users, role }) => {
           // store.dispatch(setUser(null))
           setSidebarOpen(!sidebarOpen)
         }}
-        user={role == 'publisher' ? users.selectedUser : auth}
+        user={users.selectedUser}
       />
     </div>
   )

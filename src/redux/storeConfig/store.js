@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import createDebounce from 'redux-debounced'
 import pReducer from '../reducers/rootReducer'
 import { createStore, applyMiddleware, compose } from 'redux'
-import {persistStore, persistReducer} from 'redux-persist'
+import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 // ** init middleware
 const middleware = [thunk, createDebounce()]
@@ -17,6 +17,6 @@ const store = createStore(
   {},
   composeEnhancers(applyMiddleware(...middleware)),
 )
-const persistor = persistStore(store,null,()=>{
+const persistor = persistStore(store, null, () => {
 })
-export { store ,persistor}
+export { store, persistor }

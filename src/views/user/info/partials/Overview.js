@@ -1,6 +1,6 @@
 // ** React Imports
 import { useEffect, useState, useContext } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 // ** Custom Components
 import Avatar from '@components/avatar'
 import { TrendingUp, User, Box, DollarSign } from 'react-feather'
@@ -35,10 +35,9 @@ import {
 import { useParams } from 'react-router-dom'
 import _ from 'lodash'
 import Description from '@components/description'
-import { approveUser, rejectUser } from '../../store/action'
 import { COUNTRIES } from '@src/constants.js'
 import './style.scss'
-import { useProfileInfoCtx } from '../../../../utility/context/user/profileInfoContext'
+import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 import { DURATION } from '@const/user'
 import Sidebar from '../../partials/Sidebar'
 import { SidebarCtx } from '@context/user/sidebarContext'
@@ -87,7 +86,6 @@ const Overview = () => {
   const [isApproving, setIsApproving] = useState(false)
   const [isRejecting, setIsRejecting] = useState(false)
   const [duration, setDuration] = useState(DURATION)
-  const dispatch = useDispatch()
   const { overview, installs, usersInfo, appUsers } = useProfileInfoCtx()
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
   const { id } = useParams()

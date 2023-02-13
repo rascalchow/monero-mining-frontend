@@ -1,13 +1,7 @@
 import { useContext, useState } from 'react'
 // ** React Imports
 import { Link } from 'react-router-dom'
-
-import { useSearchParams } from '@src/navigation'
-// ** Store & Actions
-import { setUser, deleteUser } from '../../store/action'
-import { store } from '@store/storeConfig/store'
 import { SidebarCtx } from '@context/user/sidebarContext'
-import { useLocation } from 'react-router-dom'
 // ** Third Party Components
 import {
   Badge,
@@ -76,9 +70,8 @@ const renderStatus = (row) => {
     <span className="text-truncate text-capitalize align-middle">
       <Icon
         size={18}
-        className={`${
-          statusObj[row.status] ? statusObj[row.status].class : ''
-        } mr-50`}
+        className={`${statusObj[row.status] ? statusObj[row.status].class : ''
+          } mr-50`}
       />
     </span>
   )
@@ -269,6 +262,7 @@ export const columnsAdmin = [
     width: '20%',
     cell: (row) => {
       const { setSidebarOpen, setToCreateMode } = useContext(SidebarCtx)
+      const { usersInfo } = useProfileInfoCtx()
       return (
         <UncontrolledDropdown>
           <DropdownToggle tag="div" className="btn btn-sm">
@@ -285,10 +279,15 @@ export const columnsAdmin = [
             </DropdownItem> */}
             <DropdownItem
               className="w-100"
+              // onClick={() => {
+              //   setSidebarOpen(true)
+              //   setToCreateMode(false)
+              //   usersInfo.setUser(row, row._id)
+              // }}
               onClick={() => {
-                store.dispatch(setUser(row))
                 setSidebarOpen(true)
                 setToCreateMode(false)
+                usersInfo.setUser(row, row._id)
               }}
             >
               <Archive size={14} className="mr-50" />

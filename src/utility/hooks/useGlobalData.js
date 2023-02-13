@@ -3,8 +3,13 @@ import { toast } from 'react-toastify'
 import { axiosClient } from '@src/@core/services'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { useAuthCtx } from '@context/authContext'
 
-const useProfileInfo = () => {
+const useGlobalData = () => {
+
+
+  const { userData } = useAuthCtx();
+
   const dispatch = useDispatch();
   const [profileInfo, setProfileInfo] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -28,7 +33,12 @@ const useProfileInfo = () => {
   const [appStatsInfo, setAppStats] = useState([])
   const [isReferralsLoading, setIsReferralsLoading] = useState(false)
   const [referrals, setReferrals] = useState([])
-  // const [isRejected, setIsRejected] = useState(false)
+  const [eula, setEula] = useState(null)
+  const [eulaLoading, setEulaLoading] = useState(true)
+  const [eulaUpdating, setEulaUpdating] = useState(true)
+  const [eulaError, setEulaError] = useState(null)
+
+
   const loadData = async (id) => {
     setLoading(true)
     try {
@@ -129,25 +139,6 @@ const useProfileInfo = () => {
     setLoading(false)
   }
 
-  const editAccountSetting = async (user) => {
-    setLoading(true)
-    try {
-      const updatedUser = await axiosClient.patch(`/profile`, user)
-      dispatch({
-        type: 'ACCOUNT_SETTINGS/SET_PROFILE',
-        payload: {
-          ...updatedUser,
-          isLoading: false,
-          error: null,
-        },
-      })
-      toast("Your profile update request has been sent. Please wait for Admin's approval", { type: 'success' })
-    } catch (error) {
-      toast('User update failed!', { type: 'error' })
-    }
-    setLoading(false)
-  }
-
   const getUsers = async (params) => {
     setIsUsersLoading(true)
     try {
@@ -202,7 +193,6 @@ const useProfileInfo = () => {
     try {
       const res = await axiosClient.get('/app-users/user/stats')
       setAppStats(res)
-      console.log({ res })
     } catch (error) {
       toast('Cannot find application status!', { type: 'error' })
     }
@@ -212,23 +202,48 @@ const useProfileInfo = () => {
   const loadReferralsInfo = async (params, id) => {
     setIsReferralsLoading(true)
     try {
-      const res = await axiosClient.get(`/invite/referrals/${id}`, { params })
-      setReferrals(res)
+      if (userData?.role == 'admin' && id) {
+        setReferrals(await axiosClient.get(`/invite/referrals/${id}`, { params }))
+      } else {
+        setReferrals(await axiosClient.get(`/invite/publisher/referrals`, { params }))
+
+      }
     } catch (error) {
       toast('Cannot find referrals!', { type: 'error' })
     }
     setIsReferralsLoading(false)
   }
-  const loadPublisherReferrals = async (params) => {
-    setIsReferralsLoading(true)
+
+  const loadEula = async () => {
+    setEulaLoading(true)
     try {
-      const res = await axiosClient.get(`/invite/publisher/referrals`, { params })
-      setReferrals(res)
+      if (userData?.role == 'admin') {
+        setEula((await axiosClient.get(`settings/eula`)).data)
+      } else {
+        setEula((await axiosClient.get(`eula`)).data?.eula)
+      }
+      setEulaError(null);
+    } catch (error) {
+      setEulaError(error?.errors?.msg, "Something went wrong loading eula");
+      toast('Cannot find referrals!', { type: 'error' })
+    }
+    setEulaLoading(false)
+  }
+
+  const updateEula = async (data) => {
+    setEulaUpdating(true)
+    try {
+      if (userData?.role == 'admin') {
+        setEula((await axiosClient.patch(`settings/eula`, { eula: data })).data)
+      } else {
+        setEula((await axiosClient.patch(`eula`, { eula: data })).data?.eula)
+      }
     } catch (error) {
       toast('Cannot find referrals!', { type: 'error' })
     }
-    setIsReferralsLoading(false)
+    setEulaUpdating(false)
   }
+
   const overview = {
     loading,
     profileInfo,
@@ -264,7 +279,6 @@ const useProfileInfo = () => {
   const usersInfo = {
     users,
     updateUser,
-    editAccountSetting,
     getUsers,
     setUser,
     approveUser,
@@ -275,8 +289,15 @@ const useProfileInfo = () => {
   const referralsInfo = {
     referrals,
     loadReferralsInfo,
-    loadPublisherReferrals,
     isReferralsLoading,
+  }
+  const eulaInfo = {
+    loading: eulaLoading,
+    updating: eulaUpdating,
+    error: eulaError,
+    eula,
+    loadEula,
+    updateEula,
   }
   return {
     overview,
@@ -285,7 +306,8 @@ const useProfileInfo = () => {
     appUsers,
     usersInfo,
     referralsInfo,
+    eulaInfo,
   }
 }
 
-export default useProfileInfo
+export default useGlobalData

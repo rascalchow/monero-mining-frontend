@@ -1,5 +1,5 @@
 // ** Vertical Menu Components
-import { useSelector } from 'react-redux'
+import { useAuthCtx } from '@context/authContext'
 import _ from 'lodash'
 import VerticalNavMenuLink from './VerticalNavMenuLink'
 import VerticalNavMenuGroup from './VerticalNavMenuGroup'
@@ -10,8 +10,7 @@ import { resolveVerticalNavMenuItemComponent as resolveNavItemComponent } from '
 
 const VerticalMenuNavItems = (props) => {
   // ** Components Object
-
-  const userData = useSelector((state) => state.auth.userData)
+  const { userData } = useAuthCtx();
   const Components = {
     VerticalNavMenuSectionHeader,
     VerticalNavMenuGroup,

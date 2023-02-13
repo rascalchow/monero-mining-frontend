@@ -1,7 +1,5 @@
 import { useEffect, useContext } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Card, CardBody, Button, Row, Col } from 'reactstrap'
-import { getProfile } from './store/action'
 import Description from '@components/description'
 import { Spinner } from 'reactstrap'
 import _ from 'lodash'
@@ -11,39 +9,39 @@ import { COUNTRIES } from '../../constants'
 import Sidebar from './partials/Sidebar'
 import { SidebarCtx } from '@context/user/sidebarContext'
 import { Inbox, Key, UserCheck } from 'react-feather'
+import useProfile from '@hooks/useProfile'
 
 const About = () => {
-  const userData = useSelector((state) => state.accountSettings.profile)
-  const dispatch = useDispatch()
+  const { load: loadProfile, profile, loading, update: updateProfile } = useProfile();
   useEffect(() => {
-    dispatch(getProfile())
+    loadProfile();
   }, [])
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
   const onEditUserClick = () => {
     setSidebarOpen(true)
   }
-  const disp = [
-    { label: 'Full Name', value: userData.name, icon: <UserCheck size={15} /> },
-    { label: 'Email', value: userData.email, icon: <Inbox size={15} /> },
-    { label: 'Publiser Key', value: userData.publisherKey, icon: <Key size={15} /> },
-    { label: 'Company Name', value: userData.companyName, icon: <UserCheck size={15} /> },
-    { label: 'Website/Application', value: userData.application, icon: <UserCheck size={15} /> },
-    { label: 'Contact Person', value: userData.contact, icon: <UserCheck size={15} /> },
+  const disp = loading || [
+    { label: 'Full Name', value: profile.name, icon: <UserCheck size={15} /> },
+    { label: 'Email', value: profile.email, icon: <Inbox size={15} /> },
+    { label: 'Publiser Key', value: profile.publisherKey, icon: <Key size={15} /> },
+    { label: 'Company Name', value: profile.companyName, icon: <UserCheck size={15} /> },
+    { label: 'Website/Application', value: profile.application, icon: <UserCheck size={15} /> },
+    { label: 'Contact Person', value: profile.contact, icon: <UserCheck size={15} /> },
     {
       label: 'Country',
       value: _.get(
-        COUNTRIES.find((it) => it.code === userData.country),
+        COUNTRIES.find((it) => it.code === profile.country),
         'name',
       ), icon: <UserCheck size={15} />
     },
-    { label: 'Phone', value: userData.phone, icon: <UserCheck size={15} /> },
-    { label: 'Website URL', value: userData.website, icon: <UserCheck size={15} /> },
+    { label: 'Phone', value: profile.phone, icon: <UserCheck size={15} /> },
+    { label: 'Website URL', value: profile.website, icon: <UserCheck size={15} /> },
   ]
   return (
     <>
       <Card>
         <CardBody>
-          {userData.isLoading ? (
+          {loading ? (
             <div className="d-flex justify-content-center py-5">
               <Spinner />
             </div>
@@ -58,13 +56,13 @@ const About = () => {
               </Row>
               <div className="mb-4"></div>
               <span>More Information: </span>
-              <p>{userData.moreInformation}</p>
+              <p>{profile.moreInformation}</p>
 
-              {userData.installer && (
+              {profile.installer && (
                 <>
                   <div>Sortware download link</div>
                   <a
-                    href={`${API_URL}/${userData.publisherKey}/install.msi`}
+                    href={`${API_URL}/${profile.publisherKey}/install.msi`}
                     download
                   >
                     Download product setup file
@@ -73,7 +71,7 @@ const About = () => {
                 </>
               )}
 
-              {userData.role == 'publisher' && (
+              {profile.role == 'publisher' && (
                 <>
                   <Button.Ripple
                     className="mt-4"
@@ -96,10 +94,10 @@ const About = () => {
         toggleSidebar={() => {
           setSidebarOpen(!sidebarOpen)
         }}
-        onSave={() => {
-
+        onSave={(info) => {
+          updateProfile(info)
         }}
-        user={userData}
+        user={profile}
       />
     </>
   )

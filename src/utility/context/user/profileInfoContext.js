@@ -1,17 +1,16 @@
 import { createContext, useEffect, useContext, useState } from 'react'
 import { matchPath, useLocation, useParams } from 'react-router-dom'
-import useProfileInfo from '@hooks/useProfileInfo'
+import useGlobalData from '@hooks/useGlobalData'
 import { PROFILE_TAB_ROUTES, DURATION } from '@const/user'
-import { useSelector } from 'react-redux'
 
 export const ProfileInfoContext = createContext(null)
 export const useProfileInfoCtx = () => useContext(ProfileInfoContext)
 export const ProfileInfoContextProvider = ({ children }) => {
   const { id } = useParams()
   const location = useLocation()
-  const { overview, installs, liveTime, appUsers, usersInfo, referralsInfo } =
-    useProfileInfo(id)
- 
+  const { overview, installs, liveTime, appUsers, usersInfo, referralsInfo, eulaInfo } =
+    useGlobalData(id)
+
   useEffect(() => {
     const route = PROFILE_TAB_ROUTES.find((route) => {
       return matchPath(`/publisher/${id}/${route.route}`, location.pathname)
@@ -23,8 +22,8 @@ export const ProfileInfoContextProvider = ({ children }) => {
           installs.loadInstalledUsers(DURATION, id)
           break
         case 'liveTime':
-          liveTime.loadLiveTimeInfo(DURATION, 'CHART', id)
-          liveTime.loadLiveTimeInfo(DURATION, 'STATIC', id)
+          // liveTime.loadLiveTimeInfo(DURATION, 'CHART', id)
+          // liveTime.loadLiveTimeInfo(DURATION, 'STATIC', id)
           break
         case 'users':
           break
@@ -44,7 +43,8 @@ export const ProfileInfoContextProvider = ({ children }) => {
     liveTime,
     appUsers,
     usersInfo,
-    referralsInfo
+    referralsInfo,
+    eulaInfo,
   }
   return (
     <ProfileInfoContext.Provider value={providerValue}>

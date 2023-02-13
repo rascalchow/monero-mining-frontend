@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useSkin } from '@hooks/useSkin'
 import { Link, Redirect } from 'react-router-dom'
 import { Facebook, Twitter, Mail, GitHub, Loader } from 'react-feather'
@@ -22,12 +22,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import _ from 'lodash'
 import FormField from '@components/form-field'
 import logo from '@src/assets/images/logo/nurev_logo.jpeg'
-import { handleLogin } from '@store/actions/auth'
+import { useAuthCtx } from '@context/authContext'
 
 const Login = () => {
   const [skin] = useSkin()
   const [fb, setFb] = useState(null)
-  const authedUser = useSelector((state) => state.auth.userData)
+  const { userData, handleLogin } = useAuthCtx();
   const schema = yup
     .object({
       email: yup.string().required().email(),
@@ -46,13 +46,12 @@ const Login = () => {
     },
   })
 
-  const dispatch = useDispatch()
   const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg'
   const source = require(`@src/assets/images/pages/${illustration}`).default
 
   const onSubmit = async (data) => {
     try {
-      await dispatch(handleLogin(data))
+      await handleLogin(data)
     } catch (error) {
       const msg = {
         USER_IS_NOT_APPROVED: 'Please wait until you are approved',
@@ -65,7 +64,7 @@ const Login = () => {
     }
   }
 
-  if (authedUser) {
+  if (userData) {
     return <Redirect to="/" />
   }
 

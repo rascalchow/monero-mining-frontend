@@ -2,10 +2,10 @@ import { useState, useEffect, useContext } from 'react'
 
 import Proptypes from 'prop-types'
 
-import { columns } from './partials/columns'
+import { columns } from '../user/info/partials/columns'
 // ** Store & Actions
 import { useLocation, Redirect, useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useAuthCtx } from '@context/authContext'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -134,8 +134,7 @@ const AppUsers = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { appUsers } = useProfileInfoCtx()
   const location = useLocation()
-  const role = useSelector((state) => state.auth.userData.role)
-  const authId = useSelector((state) => state.auth.userData._id)
+  const { userData } = useAuthCtx();
   useEffect(() => {
     const limit = parseInt(searchParams.get('limit'))
     const page = parseInt(searchParams.get('page'))
@@ -157,7 +156,7 @@ const AppUsers = () => {
     })
     try {
       if (location.search)
-        appUsers.loadAppUsersInfo({ ...query, filter: { ...query.filter } }, authId)
+        appUsers.loadAppUsersInfo({ ...query, filter: { ...query.filter } }, userData._id)
     } catch (error) {
       history.push('/not-authorized')
     }

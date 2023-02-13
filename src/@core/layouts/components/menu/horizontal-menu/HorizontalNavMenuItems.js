@@ -2,11 +2,11 @@
 import HorizontalNavMenuLink from './HorizontalNavMenuLink'
 import HorizontalNavMenuGroup from './HorizontalNavMenuGroup'
 import { resolveHorizontalNavMenuItemComponent as resolveNavItemComponent } from '@layouts/utils'
-import { useSelector } from 'react-redux'
 import _ from 'lodash'
+import { useAuthCtx } from '@context/authContext'
 
 const HorizontalNavMenuItems = (props) => {
-  const authData = useSelector((state) => state.auth.userData)
+  const { userData: authData } = useAuthCtx();
   // ** Components Object
   const Components = {
     HorizontalNavMenuGroup,

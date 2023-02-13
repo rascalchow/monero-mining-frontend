@@ -16,7 +16,7 @@ import {
   Label,
   Spinner,
 } from 'reactstrap'
-import { columns } from './partials/columns'
+import { columns } from '../user/info/partials/columns'
 import DataTable from 'react-data-table-component'
 import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 import { DURATION } from '@const/user'

@@ -1,6 +1,6 @@
 // ** React Imports
 import { Suspense, lazy, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAuthCtx } from '@context/authContext'
 // ** Utils
 import { isUserLoggedIn } from '@utils'
 import { useLayout } from '@hooks/useLayout'
@@ -22,15 +22,13 @@ import VerticalLayout from '@src/layouts/VerticalLayout'
 import HorizontalLayout from '@src/layouts/HorizontalLayout'
 import LoadingSpinner from '@components/spinner/Loading-spinner'
 
-import { getAuth } from '../redux/actions/auth'
 
 const Router = () => {
   // ** Hooks
   const [layout, setLayout] = useLayout()
   const [transition, setTransition] = useRouterTransition()
   const [loading, setLoading] = useState(true)
-  const userData = useSelector((state) => state.auth.userData)
-  const dispatch = useDispatch()
+  const { userData, getAuth } = useAuthCtx();
 
   // ** Default Layout
   const DefaultLayout =
@@ -196,7 +194,7 @@ const Router = () => {
   }
   useEffect(() => {
     if (isUserLoggedIn()) {
-      dispatch(getAuth())
+      getAuth()
     } else {
       setLoading(false)
     }

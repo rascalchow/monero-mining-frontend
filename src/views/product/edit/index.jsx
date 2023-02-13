@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import {
   Card,
   CardBody,
@@ -11,8 +10,6 @@ import {
   Col,
   Spinner,
 } from 'reactstrap'
-import { get, update } from './store/action'
-
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -20,11 +17,12 @@ import FormField from '@components/form-field'
 import FileUpload from '@components/file-upload'
 import SubmitButton from '@components/submit-button'
 import { API_URL } from '../../../constants'
+import useProduct from '@hooks/useProduct'
 
 const EditProduct = () => {
-  const dispatch = useDispatch()
 
-  const productData = useSelector((state) => state.product.edit)
+  const { productData, load: loadProduct, isLoading, update: updateProduct } = useProduct();
+
   const [companyLogo, setCompanyLogo] = useState({})
   const [productIcon, setProductIcon] = useState({})
   const [companyLogoDefault, setCompanyLogoDefault] = useState()
@@ -53,22 +51,23 @@ const EditProduct = () => {
   })
 
   useEffect(() => {
-    dispatch(get())
+    loadProduct();
   }, [])
+
   useEffect(() => {
-    if (productData.data) {
-      setValue('productName', productData.data.application)
-      setValue('currencyName', productData.data.currencyName)
-      setValue('userPercentage', productData.data.userPercentage)
-      setValue('numberOfVirtualCoins', productData.data.numberOfVirtualCoins)
-      if (productData.data.companyLogo) {
-        setCompanyLogoDefault(`${API_URL}/${productData.data.companyLogo}`)
+    if (productData) {
+      setValue('productName', productData.application)
+      setValue('currencyName', productData.currencyName)
+      setValue('userPercentage', productData.userPercentage)
+      setValue('numberOfVirtualCoins', productData.numberOfVirtualCoins)
+      if (productData.companyLogo) {
+        setCompanyLogoDefault(`${API_URL}/${productData.companyLogo}`)
       }
-      if (productData.data.productIcon) {
-        setProductIconDefault(`${API_URL}/${productData.data.productIcon}`)
+      if (productData.productIcon) {
+        setProductIconDefault(`${API_URL}/${productData.productIcon}`)
       }
     }
-  }, [productData.data])
+  }, [productData])
 
   const onSubmit = (data) => {
     const formData = new FormData()
@@ -81,7 +80,8 @@ const EditProduct = () => {
     if (productIcon) {
       formData.append('productIcon', productIcon)
     }
-    return dispatch(update(formData))
+
+    updateProduct(formData);
   }
 
   return (
@@ -90,12 +90,12 @@ const EditProduct = () => {
         <CardTitle>Update product configuration</CardTitle>
       </CardHeader>
       <CardBody>
-        {productData.isLoading ? (
+        {isLoading ? (
           <div className="py-4 d-flex justify-content-center">
             <Spinner className="spinner" />
           </div>
         ) : (
-          productData.data && (
+          productData && (
             <Form onSubmit={handleSubmit(onSubmit)}>
               <FileUpload
                 defaultSrc={companyLogoDefault}
@@ -156,11 +156,11 @@ const EditProduct = () => {
                 </Col>
               </Row>
               <div className="d-flex justify-content-between mt-2">
-                {!productData.data.installer && (
+                {!productData.installer && (
                   <div>
                     <div>Software Download Link:</div>
                     <a
-                      href={`${API_URL}/${productData.data.installer}`}
+                      href={`${API_URL}/${productData.installer}`}
                       download
                     >
                       Download product setup file

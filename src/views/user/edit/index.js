@@ -6,10 +6,7 @@ import { useParams, Link } from 'react-router-dom'
 import SocialTab from './Social'
 import AccountTab from './Account'
 import InfoTab from './Information'
-
-// ** Store & Actions
-import { getUser } from '../store/action'
-import { useSelector, useDispatch } from 'react-redux'
+import useUser from '@hooks/useUser'
 
 // ** Third Party Components
 import { User, Info, Share2 } from 'react-feather'
@@ -31,20 +28,19 @@ import '@styles/react/apps/app-users.scss'
 
 const UserEdit = () => {
   // ** States & Vars
-  const [activeTab, setActiveTab] = useState('1'),
-    store = useSelector((state) => state.users),
-    dispatch = useDispatch(),
-    { id } = useParams()
+  const { id } = useParams();
+
+  const [activeTab, setActiveTab] = useState('1');
+  const { selectedUser, getUser } = useUser();
+
+  useEffect(() => {
+    getUser(id);
+  }, [])
 
   // ** Function to toggle tabs
   const toggle = (tab) => setActiveTab(tab)
 
-  // ** Function to get user on mount
-  useEffect(() => {
-    dispatch(getUser(parseInt(id)))
-  }, [dispatch])
-
-  return store.selectedUser !== null && store.selectedUser !== undefined ? (
+  return selectedUser ? (
     <Row className="app-user-edit">
       <Col sm="12">
         <Card>
@@ -75,7 +71,7 @@ const UserEdit = () => {
             </Nav>
             <TabContent activeTab={activeTab}>
               <TabPane tabId="1">
-                <AccountTab selectedUser={store.selectedUser} />
+                <AccountTab selectedUser={selectedUser} />
               </TabPane>
               <TabPane tabId="2">
                 <InfoTab />

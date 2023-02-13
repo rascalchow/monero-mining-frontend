@@ -1,12 +1,10 @@
 //** React Imports
 import { useState, useEffect, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-
-import { getUserData } from '@utils'
+import { useAuthCtx } from '@context/authContext'
 
 export const useLayout = () => {
   // ** States
-  const userData = useSelector((state) => state.auth.userData)
+  const { userData } = useAuthCtx();
   const [lastLayout, setLastLayout] = useState('vertical');
 
   useEffect(() => {
@@ -45,10 +43,7 @@ export const useLayout = () => {
   // ** ComponentDidMount
   useEffect(() => {
     window.addEventListener('resize', handleLayout)
-  }, [])
-
-  useEffect(() => {
-    handleLayout()
+    handleLayout();
   }, [lastLayout])
 
   return [layout, setValue]
