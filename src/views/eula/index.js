@@ -30,7 +30,7 @@ const UpdateEula = () => {
     if (eulaInfo.eula) {
       setEditorState(
         EditorState.createWithContent(
-          ContentState.createFromBlockArray(htmlToDraft(eulaInfo.eula.eula)),
+          ContentState.createFromBlockArray(htmlToDraft(eulaInfo.eula)),
         ),
       )
     }

@@ -211,7 +211,6 @@ const useGlobalData = () => {
     try {
       const res = await axiosClient.get('/app-users/user/stats')
       setAppStats(res)
-      console.log({ res })
     } catch (error) {
       toast('Cannot find application status!', { type: 'error' })
     }
@@ -239,7 +238,7 @@ const useGlobalData = () => {
       if (userData?.role == 'admin') {
         setEula((await axiosClient.get(`settings/eula`)).data)
       } else {
-        setEula((await axiosClient.get(`eula`)).data)
+        setEula((await axiosClient.get(`eula`)).data?.eula)
       }
       setEulaError(null);
     } catch (error) {
@@ -255,7 +254,7 @@ const useGlobalData = () => {
       if (userData?.role == 'admin') {
         setEula((await axiosClient.patch(`settings/eula`, { eula: data })).data)
       } else {
-        setEula((await axiosClient.patch(`eula`, { eula: data })).data)
+        setEula((await axiosClient.patch(`eula`, { eula: data })).data?.eula)
       }
     } catch (error) {
       toast('Cannot find referrals!', { type: 'error' })
