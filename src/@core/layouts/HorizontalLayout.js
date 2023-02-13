@@ -28,7 +28,7 @@ import { useNavbarType } from '@hooks/useNavbarType'
 import { useFooterType } from '@hooks/useFooterType'
 import { useNavbarColor } from '@hooks/useNavbarColor'
 import { SidebarCtx, SidebarProvider } from '@context/user/sidebarContext'
-import { ProfileInfoContextProvider } from '../../utility/context/user/profileInfoContext'
+import { ProfileInfoContextProvider } from '@context/user/profileInfoContext'
 // ** Styles
 import '@styles/base/core/menu/menu-types/horizontal-menu.scss'
 

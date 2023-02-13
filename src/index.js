@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom'
 
 // ** Redux Imports
 import { Provider } from 'react-redux'
-import { store, persistor} from './redux/storeConfig/store'
+import { store, persistor } from './redux/storeConfig/store'
 
 // ** Toast & ThemeColors Context
 import { ToastContainer } from 'react-toastify'
-import { ThemeContext } from './utility/context/ThemeColors'
+import { ThemeContext } from '@context/ThemeColors'
 
 // ** Spinner (Splash Screen)
 import Spinner from './@core/components/spinner/Fallback-spinner'

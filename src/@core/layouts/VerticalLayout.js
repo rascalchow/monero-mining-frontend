@@ -38,7 +38,7 @@ import '@styles/base/core/menu/menu-types/vertical-menu.scss'
 import '@styles/base/core/menu/menu-types/vertical-overlay-menu.scss'
 // ** Context
 import { SidebarCtx, SidebarProvider } from '@context/user/sidebarContext'
-import { ProfileInfoContextProvider } from '../../utility/context/user/profileInfoContext'
+import { ProfileInfoContextProvider } from '@context/user/profileInfoContext'
 const VerticalLayout = (props) => {
   // ** Props
   const { children, navbar, footer, menu, routerProps, currentActiveItem } =

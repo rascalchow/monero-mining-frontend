@@ -32,6 +32,10 @@ const useGlobalData = () => {
   const [appStatsInfo, setAppStats] = useState([])
   const [isReferralsLoading, setIsReferralsLoading] = useState(false)
   const [referrals, setReferrals] = useState([])
+  const [eula, setEula] = useState(null)
+  const [eulaLoading, setEulaLoading] = useState(true)
+  const [eulaUpdating, setEulaUpdating] = useState(true)
+  const [eulaError, setEulaError] = useState(null)
 
 
   const loadData = async (id) => {
@@ -228,6 +232,37 @@ const useGlobalData = () => {
     }
     setIsReferralsLoading(false)
   }
+
+  const loadEula = async () => {
+    setEulaLoading(true)
+    try {
+      if (userData?.role == 'admin') {
+        setEula((await axiosClient.get(`settings/eula`)).data)
+      } else {
+        setEula((await axiosClient.get(`eula`)).data)
+      }
+      setEulaError(null);
+    } catch (error) {
+      setEulaError(error);
+      toast('Cannot find referrals!', { type: 'error' })
+    }
+    setEulaLoading(false)
+  }
+
+  const updateEula = async (data) => {
+    setEulaUpdating(true)
+    try {
+      if (userData?.role == 'admin') {
+        setEula((await axiosClient.patch(`settings/eula`, { eula: data })).data)
+      } else {
+        setEula((await axiosClient.patch(`eula`, { eula: data })).data)
+      }
+    } catch (error) {
+      toast('Cannot find referrals!', { type: 'error' })
+    }
+    setEulaUpdating(false)
+  }
+
   const overview = {
     loading,
     profileInfo,
@@ -276,6 +311,14 @@ const useGlobalData = () => {
     loadReferralsInfo,
     isReferralsLoading,
   }
+  const eulaInfo = {
+    loading: eulaLoading,
+    updating: eulaUpdating,
+    error: eulaError,
+    eula,
+    loadEula,
+    updateEula,
+  }
   return {
     overview,
     installs,
@@ -283,6 +326,7 @@ const useGlobalData = () => {
     appUsers,
     usersInfo,
     referralsInfo,
+    eulaInfo,
   }
 }
 

@@ -10,9 +10,7 @@ import {
   useRouteMatch,
   useLocation,
 } from 'react-router-dom'
-import { ProfileInfoContextProvider } from '../../../utility/context/user/profileInfoContext'
-import { Row, Col, Card, Button, CardBody } from 'reactstrap'
-import { Nav, NavLink, NavItem, TabContent, TabPane } from 'reactstrap'
+import { Nav, NavLink, NavItem, Card } from 'reactstrap'
 import { PROFILE_TAB_ROUTES } from '@const/user'
 import EditProduct from '../../product/edit'
 import LiveTime from './partials/LiveTime'

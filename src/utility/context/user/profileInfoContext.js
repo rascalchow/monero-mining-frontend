@@ -9,7 +9,7 @@ export const useProfileInfoCtx = () => useContext(ProfileInfoContext)
 export const ProfileInfoContextProvider = ({ children }) => {
   const { id } = useParams()
   const location = useLocation()
-  const { overview, installs, liveTime, appUsers, usersInfo, referralsInfo } =
+  const { overview, installs, liveTime, appUsers, usersInfo, referralsInfo, eulaInfo } =
     useGlobalData(id)
 
   useEffect(() => {
@@ -23,8 +23,8 @@ export const ProfileInfoContextProvider = ({ children }) => {
           installs.loadInstalledUsers(DURATION, id)
           break
         case 'liveTime':
-          liveTime.loadLiveTimeInfo(DURATION, 'CHART', id)
-          liveTime.loadLiveTimeInfo(DURATION, 'STATIC', id)
+          // liveTime.loadLiveTimeInfo(DURATION, 'CHART', id)
+          // liveTime.loadLiveTimeInfo(DURATION, 'STATIC', id)
           break
         case 'users':
           break
@@ -44,7 +44,8 @@ export const ProfileInfoContextProvider = ({ children }) => {
     liveTime,
     appUsers,
     usersInfo,
-    referralsInfo
+    referralsInfo,
+    eulaInfo,
   }
   return (
     <ProfileInfoContext.Provider value={providerValue}>

@@ -22,7 +22,7 @@ import { DURATION } from '@const/user'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { useContext } from 'react'
-import { ThemeColors } from '../../utility/context/ThemeColors'
+import { ThemeColors } from '@context/ThemeColors'
 
 const statusOptions = [
   { value: null, label: 'All' },
