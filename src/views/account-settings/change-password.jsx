@@ -5,11 +5,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Form, Button, Spinner, Card, CardBody } from 'reactstrap'
 import InputPasswordToggle from '@components/input-password-toggle'
 import FormField from '@components/form-field'
-
-import { updatePassword } from './store/action'
+import useProfile from '@hooks/useProfile'
 
 const ChangePassword = () => {
-  const dispatch = useDispatch()
+
+  const { updatePassword } = useProfile();
+
   const SignupSchema = yup.object().shape({
     password: yup.string().required(),
     confirmPassword: yup
@@ -31,7 +32,7 @@ const ChangePassword = () => {
   })
 
   const onSubmit = (value) => {
-    return dispatch(updatePassword({ password: value.password }))
+    updatePassword({ password: value.password })
   }
 
   return (

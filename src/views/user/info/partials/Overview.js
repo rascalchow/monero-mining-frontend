@@ -86,7 +86,6 @@ const Overview = () => {
   const [isApproving, setIsApproving] = useState(false)
   const [isRejecting, setIsRejecting] = useState(false)
   const [duration, setDuration] = useState(DURATION)
-  const dispatch = useDispatch()
   const { overview, installs, usersInfo, appUsers } = useProfileInfoCtx()
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
   const { id } = useParams()

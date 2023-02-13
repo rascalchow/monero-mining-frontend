@@ -4,7 +4,7 @@ import { axiosClient } from '@src/@core/services'
 import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-const useProfileInfo = () => {
+const useGlobalData = () => {
 
 
   const userData = useSelector((state) => state.auth.userData)
@@ -32,7 +32,8 @@ const useProfileInfo = () => {
   const [appStatsInfo, setAppStats] = useState([])
   const [isReferralsLoading, setIsReferralsLoading] = useState(false)
   const [referrals, setReferrals] = useState([])
-  // const [isRejected, setIsRejected] = useState(false)
+
+
   const loadData = async (id) => {
     setLoading(true)
     try {
@@ -285,4 +286,4 @@ const useProfileInfo = () => {
   }
 }
 
-export default useProfileInfo
+export default useGlobalData
