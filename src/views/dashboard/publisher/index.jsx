@@ -1,10 +1,6 @@
 // ** React Imports
 import { useEffect, useState, useContext } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 // ** Custom Components
-import Avatar from '@components/avatar'
-import { BarChart2, Monitor, UserPlus } from 'react-feather'
-import { TrendingUp, User, Box, DollarSign, FolderPlus, FolderMinus, Tv, Cast, Percent, UserCheck, CreditCard } from 'react-feather'
 import { Link } from 'react-router-dom'
 import {
   Card,
@@ -17,25 +13,13 @@ import {
   Spinner,
 } from 'reactstrap'
 import Chart from 'react-apexcharts'
-import Flatpickr from 'react-flatpickr'
 import 'flatpickr/dist/flatpickr.css'
-import {
-  Flag,
-  Phone,
-  Grid,
-  Server,
-  Voicemail,
-  Globe,
-  Calendar,
-} from 'react-feather'
-import { useParams } from 'react-router-dom'
 import _ from 'lodash'
+import { DollarSign, CreditCard, BarChart2, UserPlus } from 'react-feather'
 import './style.scss'
-import { useProfileInfoCtx } from '../../../utility/context/user/profileInfoContext'
-import { DURATION } from '@const/user'
-import { ThemeColors } from '../../../utility/context/ThemeColors'
+import { useProfileInfoCtx } from '@context/user/profileInfoContext'
+import { ThemeColors } from '@context/ThemeColors'
 import StatsWithLineChart from '@components/widgets/stats/StatsWithLineChart'
-
 import StatsVertical from '@components/widgets/stats/StatsVertical'
 
 const PublisherHome = () => {
