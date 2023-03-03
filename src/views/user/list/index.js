@@ -16,8 +16,8 @@ const UserList = () => {
   const { usersInfo } = useProfileInfoCtx()
 
   useEffect(() => {
-    if (location.search) fetchData()
-  }, [location.search])
+    if (location.search || !usersInfo.isSetPrimaryUserLoading) fetchData()
+  }, [location.search, !usersInfo.isSetPrimaryUserLoading])
   const fetchData = () => {
     const limit = parseInt(searchParams.get('limit'))
     const page = parseInt(searchParams.get('page'))
