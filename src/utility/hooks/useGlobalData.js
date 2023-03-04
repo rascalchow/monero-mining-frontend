@@ -121,6 +121,16 @@ const useGlobalData = () => {
     setPublisherAppUsersLoading(false)
   }
 
+  const publisherWithdraw = async (payoutAddress) => {
+    setPublisherAppUsersLoading(true)
+    try {
+      await axiosClient.post(`/payment/withdraw`, { payoutAddress })
+    } catch (error) {
+      toast('Action Failed', { type: 'error' })
+    }
+    setPublisherAppUsersLoading(false)
+  }
+
   const updateUser = async (user, id) => {
     setLoading(true)
     try {
@@ -286,6 +296,7 @@ const useGlobalData = () => {
     loadAppUsersInfo,
     loadAppStats,
     loadPublisherInstallStats,
+    publisherWithdraw,
     appStatsInfo,
   }
   const usersInfo = {

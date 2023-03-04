@@ -11,6 +11,7 @@ import {
   Row,
   Col,
   Spinner,
+  Button,
 } from 'reactstrap'
 import Chart from 'react-apexcharts'
 import 'flatpickr/dist/flatpickr.css'
@@ -21,11 +22,16 @@ import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 import { ThemeColors } from '@context/ThemeColors'
 import StatsWithLineChart from '@components/widgets/stats/StatsWithLineChart'
 import StatsVertical from '@components/widgets/stats/StatsVertical'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import 'animate.css/animate.css'
+import '@styles/base/plugins/extensions/ext-component-sweet-alerts.scss'
+import { useAuthCtx } from '@context/authContext'
 
+const MySwal = withReactContent(Swal)
 const PublisherHome = () => {
 
   const { colors } = useContext(ThemeColors);
-
   const options = {
     chart: {
       sparkline: {
@@ -77,13 +83,71 @@ const PublisherHome = () => {
       }
     }
   };
-
+  const { userData: authData } = useAuthCtx();
   const { appUsers } = useProfileInfoCtx()
   const CARD_LOADING_HEIGHT = 100; // Will be more dynamic by constant
 
   useEffect(() => {
     appUsers.loadAppStats();
   }, [])
+
+  const handleQuestions = async () => {
+    const steps = ['ADDRESS', 'CONFIRM', 'RESULT']
+    const swalQueueStep = MySwal.mixin({
+      confirmButtonText: 'Forward',
+      cancelButtonText: 'Back',
+      progressSteps: steps,
+      inputAttributes: {
+        required: true
+      },
+      reverseButtons: true,
+      validationMessage: 'This field is required',
+      input: 'text',
+    })
+
+    let address = '';
+    let currentStep
+    for (currentStep = 0; currentStep < steps.length;) {
+      if (steps[currentStep] == 'ADDRESS') {
+        const result = await swalQueueStep.fire({
+          title: `Please input your payout address`,
+          inputValue: address,
+          showCancelButton: currentStep > 0,
+          currentProgressStep: currentStep
+        })
+        if (result.value) {
+          address = result.value;
+          currentStep++
+        } else if (result.dismiss === MySwal.DismissReason.cancel) {
+          currentStep--
+        } else {
+          break
+        }
+      } else if (steps[currentStep] == 'CONFIRM') {
+        const result = await swalQueueStep.fire({
+          title: `Are you sure to withdraw ${appUsers.appStatsInfo?.withdrawBalance} ${authData?.payoutCurrency} to ${address}?`,
+          showCancelButton: currentStep > 0,
+          currentProgressStep: currentStep
+        })
+        if (result.value) {
+          appUsers.publisherWithdraw();
+          currentStep++
+        } else if (result.dismiss === MySwal.DismissReason.cancel) {
+          currentStep--
+        } else {
+          break
+        }
+      } else if (steps[currentStep] == 'RESULT') {
+        await swalQueueStep.fire({
+          title: `Congratulations!`,
+          currentProgressStep: currentStep
+        })
+        appUsers.loadAppStats();
+      }
+    }
+  }
+
+
   return (
     <>
       <Row>
@@ -111,7 +175,27 @@ const PublisherHome = () => {
             />
           )}
           <Row>
-            <Col sm={12} md={6}>
+            <Col sm={12} md={4}>
+              {appUsers?.appStatsLoading ? (
+                <Card>
+                  <Spinner
+                    className="spinner"
+                    style={{ color: '#7367F0', margin: 'auto', marginTop: CARD_LOADING_HEIGHT, marginBottom: CARD_LOADING_HEIGHT }}
+                  />
+                </Card>
+              ) : (
+                <>
+                  <StatsVertical
+                    icon={<DollarSign size={21} />}
+                    color="danger"
+                    stats={appUsers.appStatsInfo?.balance}
+                    statTitle="Current Balance"
+                  />
+                  <Button color="primary" onClick={handleQuestions} outline> Withdraw</Button>
+                </>
+              )}
+            </Col>
+            <Col sm={12} md={4}>
               {appUsers?.appStatsLoading ? (
                 <Card>
                   <Spinner
@@ -128,7 +212,7 @@ const PublisherHome = () => {
                 />
               )}
             </Col>
-            <Col sm={12} md={6}>
+            <Col sm={12} md={4}>
               {appUsers?.appStatsLoading ? (
                 <Card>
                   <Spinner
