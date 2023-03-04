@@ -123,12 +123,15 @@ const useGlobalData = () => {
 
   const publisherWithdraw = async (payoutAddress) => {
     setPublisherAppUsersLoading(true)
+    let success = true;
     try {
       await axiosClient.post(`/payment/withdraw`, { payoutAddress })
     } catch (error) {
       toast('Action Failed', { type: 'error' })
+      success = false;
     }
     setPublisherAppUsersLoading(false)
+    return success;
   }
 
   const updateUser = async (user, id) => {

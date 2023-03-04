@@ -92,28 +92,28 @@ const PublisherHome = () => {
   }, [])
 
   const handleQuestions = async () => {
+
     const steps = ['ADDRESS', 'CONFIRM', 'RESULT']
-    const swalQueueStep = MySwal.mixin({
-      confirmButtonText: 'Forward',
-      cancelButtonText: 'Back',
-      progressSteps: steps,
-      inputAttributes: {
-        required: true
-      },
-      reverseButtons: true,
-      validationMessage: 'This field is required',
-      input: 'text',
-    })
 
     let address = '';
     let currentStep
     for (currentStep = 0; currentStep < steps.length;) {
       if (steps[currentStep] == 'ADDRESS') {
-        const result = await swalQueueStep.fire({
-          title: `Please input your payout address`,
-          inputValue: address,
+        const result = await Swal.fire({
+          confirmButtonText: 'Forward',
+          cancelButtonText: 'Back',
+          progressSteps: ['1', '2', '3'],
           showCancelButton: currentStep > 0,
-          currentProgressStep: currentStep
+          currentProgressStep: currentStep,
+          reverseButtons: true,
+
+          title: `Please input your payout address`,
+          inputAttributes: {
+            required: true
+          },
+          validationMessage: 'This field is required',
+          input: 'text',
+          inputValue: address,
         })
         if (result.value) {
           address = result.value;
@@ -124,25 +124,31 @@ const PublisherHome = () => {
           break
         }
       } else if (steps[currentStep] == 'CONFIRM') {
-        const result = await swalQueueStep.fire({
+        const result = await Swal.fire({
           title: `Are you sure to withdraw ${appUsers.appStatsInfo?.withdrawBalance} ${authData?.payoutCurrency} to ${address}?`,
-          showCancelButton: currentStep > 0,
-          currentProgressStep: currentStep
+          confirmButtonText: 'Forward',
+          cancelButtonText: 'Back',
+          progressSteps: ['1', '2', '3'],
+          currentProgressStep: currentStep,
+          reverseButtons: true,
         })
         if (result.value) {
-          appUsers.publisherWithdraw();
-          currentStep++
+          const success = await appUsers.publisherWithdraw(address);
+          success && currentStep++
         } else if (result.dismiss === MySwal.DismissReason.cancel) {
           currentStep--
         } else {
           break
         }
       } else if (steps[currentStep] == 'RESULT') {
-        await swalQueueStep.fire({
+        await Swal.fire({
           title: `Congratulations!`,
-          currentProgressStep: currentStep
+          confirmButtonText: 'OK',
+          progressSteps: ['1', '2', '3'],
+          currentProgressStep: 2,
         })
         appUsers.loadAppStats();
+        currentStep++
       }
     }
   }
