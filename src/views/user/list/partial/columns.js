@@ -21,6 +21,7 @@ import {
   UserCheck,
   UserX,
   User,
+  Award,
 } from 'react-feather'
 import { useProfileInfoCtx } from '@context/user/profileInfoContext'
 import _ from 'lodash'
@@ -85,7 +86,7 @@ const BADGE_COLOR = {
 export const columnsPublisher = [
   {
     name: 'Name',
-    width: '12%',
+    width: '10%',
     selector: 'name',
     sortable: true,
     cell: (row) => <Link to={`/publisher/${row._id}`}>{row['name']}</Link>,
@@ -99,7 +100,7 @@ export const columnsPublisher = [
   },
   {
     name: 'Company',
-    width: '11%',
+    width: '10%',
     selector: 'companyName',
     sortable: true,
     cell: (row) => row.companyName,
@@ -169,7 +170,7 @@ export const columnsPublisher = [
   },
   {
     name: 'Status',
-    width: '9%',
+    width: '6%',
     sortable: true,
     selector: 'stat',
     cell: (row) => (
@@ -179,6 +180,20 @@ export const columnsPublisher = [
         pill
       >
         {row.status}
+      </Badge>
+    ),
+  },
+  {
+    name: 'Primary',
+    width: '6%',
+    sortable: true,
+    selector: 'stat',
+    cell: (row) => row.isPrimary && (
+      <Badge
+        className="text-capitalize "
+        color={'light-success'}
+        pill
+      >MASTER
       </Badge>
     ),
   },
@@ -212,6 +227,15 @@ export const columnsPublisher = [
             >
               <Archive size={14} className="mr-50" />
               <span className="align-middle">Edit</span>
+            </DropdownItem>
+            <DropdownItem
+              className="w-100"
+              onClick={() => {
+                usersInfo.setPrimaryUser(row._id)
+              }}
+            >
+              <Award size={14} className="mr-50" />
+              <span className="align-middle">Set Master Publisher</span>
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>

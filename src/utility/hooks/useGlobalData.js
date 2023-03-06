@@ -37,6 +37,7 @@ const useGlobalData = () => {
   const [eulaLoading, setEulaLoading] = useState(true)
   const [eulaUpdating, setEulaUpdating] = useState(true)
   const [eulaError, setEulaError] = useState(null)
+  const [isSetPrimaryUserLoading, setIsSetPrimaryUserLoading] = useState(true)
 
 
   const loadData = async (id) => {
@@ -120,6 +121,19 @@ const useGlobalData = () => {
     setPublisherAppUsersLoading(false)
   }
 
+  const publisherWithdraw = async (payoutAddress) => {
+    setPublisherAppUsersLoading(true)
+    let success = true;
+    try {
+      await axiosClient.post(`/payment/withdraw`, { payoutAddress })
+    } catch (error) {
+      toast('Action Failed', { type: 'error' })
+      success = false;
+    }
+    setPublisherAppUsersLoading(false)
+    return success;
+  }
+
   const updateUser = async (user, id) => {
     setLoading(true)
     try {
@@ -174,6 +188,17 @@ const useGlobalData = () => {
       toast('Operation unsuccessful', { type: 'error' })
     }
     setLoading(false)
+  }
+
+  const setPrimaryUser = async (id) => {
+    setIsSetPrimaryUserLoading(true)
+    try {
+      await axiosClient.post(`/users/${id}/setPrimary`)
+      toast('Successfully set master user!', { type: 'success' })
+    } catch (error) {
+      toast('Operation unsuccessful', { type: 'error' })
+    }
+    setIsSetPrimaryUserLoading(false)
   }
 
   const rejectUser = async (id) => {
@@ -274,6 +299,7 @@ const useGlobalData = () => {
     loadAppUsersInfo,
     loadAppStats,
     loadPublisherInstallStats,
+    publisherWithdraw,
     appStatsInfo,
   }
   const usersInfo = {
@@ -281,10 +307,12 @@ const useGlobalData = () => {
     updateUser,
     getUsers,
     setUser,
+    setPrimaryUser,
     approveUser,
     rejectUser,
     isUsersLoading,
     status,
+    isSetPrimaryUserLoading,
   }
   const referralsInfo = {
     referrals,

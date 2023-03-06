@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import ReactSelect from 'react-select'
 import Proptypes from 'prop-types'
 import { useForm } from 'react-hook-form'
 import { Button, Form, Input, Row, Col } from 'reactstrap'
@@ -7,11 +8,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Sidebar from '@components/sidebar'
 import FormField from '@components/form-field'
 import { Loader } from 'react-feather'
-import { useProfileInfoCtx } from '@context/user/profileInfoContext'
-import { useParams, useLocation } from 'react-router-dom'
 import { PHONE_REGEX } from '@src/constants'
+import { selectThemeColors } from '@utils'
+import usePayment from '@hooks/usePayment'
 
 const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
+  const { availableCurrencies, loadAvailableCurrencies, loadingAvailableCurrencies } = usePayment()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,6 +24,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
     country: '',
     instantMessenger: '',
     website: '',
+    payoutCurrency: '',
     moreInformation: '',
   })
   const schema = yup
@@ -38,6 +41,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
       country: yup.string().required(),
       instantMessenger: yup.string().required(),
       website: yup.string().required(),
+      payoutCurrency: yup.object().required(),
       moreInformation: yup.string().required(),
     })
     .required()
@@ -53,6 +57,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
 
   const onSubmit = (info) => {
     toggleSidebar()
+    info.payoutCurrency = info.payoutCurrency.value;
     onSave(info);
   }
 
@@ -67,9 +72,14 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
       setValue('companyName', user.companyName)
       setValue('instantMessenger', user.instantMessenger)
       setValue('website', user.website)
+      setValue('payoutCurrency', { label: user.payoutCurrency.toUpperCase(), value: user.payoutCurrency })
       setValue('moreInformation', user.moreInformation)
     }
   }, [user])
+  useEffect(() => {
+    loadAvailableCurrencies()
+  }, [])
+
   return (
     <Sidebar
       size="lg"
@@ -179,7 +189,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
           </Col>
           <Col>
             <FormField
-              label="Coutry"
+              label="Country"
               name="country"
               control={control}
               error={errors.country}
@@ -228,6 +238,35 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
             />
           </Col>
         </Row>
+        <FormField
+          label="Payout Currency"
+          name="payoutCurrency"
+          control={control}
+          error={errors.payoutCurrency}
+          render={({ field }) => (
+            <ReactSelect
+              defaultValue={field.value}
+              isClearable={false}
+              isLoading={loadingAvailableCurrencies}
+              theme={selectThemeColors}
+              className={`react-select rounded${!!errors.payoutCurrency && ' border-danger'
+                }`}
+              classNamePrefix="select"
+              options={availableCurrencies.map((it) => ({
+                label: it.toUpperCase(),
+                value: it,
+              }))}
+
+              placeholder="Select Payout Currency"
+              styles={{
+                menu: base => ({
+                  ...base, zIndex: 9999
+                }),
+              }}
+              {...field}
+            />
+          )}
+        />
         <FormField
           label="More Information"
           name="moreInformation"

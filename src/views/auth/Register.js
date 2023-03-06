@@ -3,6 +3,7 @@ import { useSkin } from '@hooks/useSkin'
 import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 import { useAuthCtx } from '@context/authContext'
+import usePayment from '@hooks/usePayment'
 import { Link, Redirect, useLocation, useParams } from 'react-router-dom'
 import InputPasswordToggle from '@components/input-password-toggle'
 import { Facebook, Twitter, Mail, GitHub, Loader } from 'react-feather'
@@ -45,6 +46,7 @@ const Register = () => {
   const [term, setTerm] = useState(false)
   const location = useLocation()
   const { checkInvite } = useInvite()
+  const { availableCurrencies, loadAvailableCurrencies, loadingAvailableCurrencies } = usePayment()
   const [inviteStatus, setStatus] = useState()
   const reg = /referralInvite=/s
   const schema = yup
@@ -68,6 +70,7 @@ const Register = () => {
         .required()
         .min(6, 'Must be exactly 6 charactors')
         .max(6, 'Must be exactly 6 charactors'),
+      payoutCurrency: yup.object().required(),
     })
     .required()
 
@@ -95,6 +98,7 @@ const Register = () => {
       referral: '',
       code: '',
       id: '',
+      payoutCurrency: '',
     },
   })
 
@@ -265,6 +269,7 @@ const Register = () => {
       website: data.website,
       moreInformation: data.moreInformation,
       referral: data.code,
+      payoutCurrency: data.payoutCurrency.value,
       id,
     }
     try {
@@ -305,6 +310,10 @@ const Register = () => {
         data: null,
       })
     }
+  }, [])
+
+  useEffect(() => {
+    loadAvailableCurrencies();
   }, [])
 
   useEffect(() => {
@@ -548,6 +557,33 @@ const Register = () => {
                       />
                     </Col>
                   </Row>
+                  <FormField
+                    label="Payout Currency"
+                    name="payoutCurrency"
+                    control={control}
+                    error={errors.payoutCurrency}
+                    render={({ field }) => (
+                      <ReactSelect
+                        isClearable={false}
+                        isLoading={loadingAvailableCurrencies}
+                        theme={selectThemeColors}
+                        className={`react-select rounded${!!errors.payoutCurrency && ' border-danger'
+                          }`}
+                        classNamePrefix="select"
+                        options={availableCurrencies.map((it) => ({
+                          label: it.toUpperCase(),
+                          value: it,
+                        }))}
+                        placeholder="Select Payout Currency"
+                        styles={{
+                          menu: base => ({
+                            ...base, zIndex: 9999
+                          }),
+                        }}
+                        {...field}
+                      />
+                    )}
+                  />
                   <FormField
                     label="More Information"
                     name="moreInformation"
