@@ -125,7 +125,7 @@ const PublisherHome = () => {
         }
       } else if (steps[currentStep] == 'CONFIRM') {
         const result = await Swal.fire({
-          title: `Are you sure to withdraw ${appUsers.appStatsInfo?.withdrawBalance} ${authData?.payoutCurrency} to ${address}?`,
+          title: `Are you sure to withdraw ${Number(appUsers.appStatsInfo?.withdrawBalance || 0).toFixed(2)} ${authData?.payoutCurrency.toUpperCase()} to ${address}?`,
           confirmButtonText: 'Forward',
           cancelButtonText: 'Back',
           progressSteps: ['1', '2', '3'],
