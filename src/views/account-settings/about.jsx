@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react'
-import { Card, CardBody, Button, Row, Col } from 'reactstrap'
+import { Card, CardBody, Button, Row, Col, Alert } from 'reactstrap'
 import Description from '@components/description'
 import { Spinner } from 'reactstrap'
 import _ from 'lodash'
@@ -12,7 +12,7 @@ import { Inbox, Key, UserCheck } from 'react-feather'
 import useProfile from '@hooks/useProfile'
 
 const About = () => {
-  const { load: loadProfile, profile, loading, update: updateProfile } = useProfile();
+  const { load: loadProfile, profile, loading, update: updateProfile, updatePayoutCurrency } = useProfile();
   useEffect(() => {
     loadProfile();
   }, [])
@@ -48,6 +48,20 @@ const About = () => {
             </div>
           ) : (
             <>
+              {profile.status == 'pending' && (
+                <Alert
+                  color="warning"
+                  className="px-3 py-2"
+                >Your profile update request is pending now. Please wait until it gets approved.
+                </Alert>
+              )}
+              {profile.status == 'rejected' && (
+                <Alert
+                  color="danger"
+                  className="px-3 py-2"
+                >Your profile update request is rejected. Please update again.
+                </Alert>
+              )}
               <Row>
                 {disp.map((it, i) => (
                   <Col sm={12} md={6} key={i}>
@@ -86,6 +100,7 @@ const About = () => {
                   </Button.Ripple>
                 </>
               )}
+
             </>
           )}
         </CardBody>
@@ -96,7 +111,11 @@ const About = () => {
           setSidebarOpen(!sidebarOpen)
         }}
         onSave={(info) => {
-          updateProfile(info)
+          if (profile.status === 'pending') {
+            updatePayoutCurrency(info.payoutCurrency)
+          } else {
+            updateProfile(info)
+          }
         }}
         user={profile}
       />

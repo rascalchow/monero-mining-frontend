@@ -54,7 +54,7 @@ const Login = () => {
       await handleLogin(data)
     } catch (error) {
       const msg = {
-        USER_IS_NOT_APPROVED: 'Please wait until you are approved',
+        USER_IS_INACTIVE: 'Oops. You account is disabled.',
         USER_DOES_NOT_EXIST: 'User does not exist',
         WRONG_PASSWORD: 'Password is incorrect',
         ERROR: 'Email or password incorrect',

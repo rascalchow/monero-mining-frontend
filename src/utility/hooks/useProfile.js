@@ -28,6 +28,17 @@ const useProfile = () => {
     setLoading(false)
   }
 
+  const updatePayoutCurrency = async (currency) => {
+    setLoading(true)
+    try {
+      const result = await axiosClient.patch(`/profile/payoutCurrency`, { currency })
+      setProfile(result)
+    } catch (error) {
+      toast('Action failed!', { type: 'error' })
+    }
+    setLoading(false)
+  }
+
   // ** Update Password
   const updatePassword = async (data) => {
     try {
@@ -44,6 +55,7 @@ const useProfile = () => {
     load,
     update,
     updatePassword,
+    updatePayoutCurrency,
   }
 }
 
