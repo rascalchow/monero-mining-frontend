@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import ReactSelect from 'react-select'
 import Proptypes from 'prop-types'
 import { useForm } from 'react-hook-form'
-import { Button, Form, Input, Row, Col } from 'reactstrap'
+import { Button, Form, Input, Row, Col, Alert } from 'reactstrap'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Sidebar from '@components/sidebar'
@@ -61,6 +61,8 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
     onSave(info);
   }
 
+  const [isPending, setIsPending] = useState(false);
+
   useEffect(() => {
     if (user) {
       setValue('name', user.name)
@@ -72,8 +74,9 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
       setValue('companyName', user.companyName)
       setValue('instantMessenger', user.instantMessenger)
       setValue('website', user.website)
-      setValue('payoutCurrency', { label: user.payoutCurrency.toUpperCase(), value: user.payoutCurrency })
+      setValue('payoutCurrency', { label: String(user.payoutCurrency).toUpperCase(), value: user.payoutCurrency })
       setValue('moreInformation', user.moreInformation)
+      setIsPending(user.status === 'pending');
     }
   }, [user])
   useEffect(() => {
@@ -89,6 +92,14 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
       contentClassName="pt-0"
       toggleSidebar={toggleSidebar}
     >
+      {isPending && (
+        <Alert
+          color="warning"
+          className="px-3 py-2"
+        >You can only update payout currency while pending.
+        </Alert>
+      )}
+
       <Form
         className="auth-register-form mt-2"
         onSubmit={handleSubmit(onSubmit)}
@@ -100,6 +111,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
           error={errors.name}
           render={({ field }) => (
             <Input
+              disabled={isPending}
               autoFocus
               type="text"
               placeholder="John Doe"
@@ -117,6 +129,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
               error={errors.email}
               render={({ field }) => (
                 <Input
+                  disabled={isPending}
                   type="email"
                   placeholder="john@example.com"
                   invalid={!!errors.email}
@@ -133,6 +146,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
               error={errors.phone}
               render={({ field }) => (
                 <Input
+                  disabled={isPending}
                   type="text"
                   placeholder="(+1)555-5555-5555"
                   invalid={!!errors.phone}
@@ -149,6 +163,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
           error={errors.name}
           render={({ field }) => (
             <Input
+              disabled={isPending}
               type="text"
               placeholder="Nurev, LLC"
               invalid={!!errors.companyName}
@@ -163,6 +178,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
           error={errors.application}
           render={({ field }) => (
             <Input
+              disabled={isPending}
               type="text"
               placeholder="Nurev, LLC"
               invalid={!!errors.application}
@@ -179,6 +195,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
               error={errors.contact}
               render={({ field }) => (
                 <Input
+                  disabled={isPending}
                   type="text"
                   placeholder="Nurev, LLC"
                   invalid={!!errors.contact}
@@ -195,6 +212,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
               error={errors.country}
               render={({ field }) => (
                 <Input
+                  disabled={isPending}
                   type="text"
                   placeholder="Nurev, LLC"
                   invalid={!!errors.country}
@@ -213,6 +231,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
               error={errors.instantMessenger}
               render={({ field }) => (
                 <Input
+                  disabled={isPending}
                   type="text"
                   placeholder=""
                   {...field}
@@ -229,6 +248,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
               error={errors.website}
               render={({ field }) => (
                 <Input
+                  disabled={isPending}
                   type="text"
                   placeholder=""
                   invalid={!!errors.website}
@@ -274,6 +294,7 @@ const SidebarNewUsers = ({ open, toggleSidebar, user, onSave }) => {
           error={errors.moreInformation}
           render={({ field }) => (
             <Input
+              disabled={isPending}
               type="textarea"
               placeholder=""
               {...field}

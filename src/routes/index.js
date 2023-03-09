@@ -2,7 +2,7 @@
 import { Suspense, lazy, useEffect, useState } from 'react'
 import { useAuthCtx } from '@context/authContext'
 // ** Utils
-import { isUserLoggedIn } from '@utils'
+import { isUserLoggedIn, isUserApproved } from '@utils'
 import { useLayout } from '@hooks/useLayout'
 import { useRouterTransition } from '@hooks/useRouterTransition'
 
@@ -150,6 +150,9 @@ const Router = () => {
                       })
                       if (route.private && !isUserLoggedIn()) {
                         return <Redirect to="/login" />
+                      }
+                      if (isUserLoggedIn() && !isUserApproved() && !route.passApproval) {
+                        return <Redirect to="/account-settings" />
                       }
                       return (
                         <Suspense fallback={null}>

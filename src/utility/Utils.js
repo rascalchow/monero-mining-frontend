@@ -54,8 +54,8 @@ export const formatDateToMonthShort = (value, toTimeForCurrentDay = true) => {
 //** Returns DD:HH:MM:SS from seconds */
 export const secondsToHMS = (d) => {
   d = Number(d)
-  let dy = Math.floor(d/86400)
-  let h = Math.floor((d %86400)/ 3600)
+  let dy = Math.floor(d / 86400)
+  let h = Math.floor((d % 86400) / 3600)
   let m = Math.floor((d % 3600) / 60)
   let s = Math.floor((d % 3600) % 60)
 
@@ -71,6 +71,13 @@ export const secondsToHMS = (d) => {
  *  ? e.g. If you are using cookies to store the application please update this function
  */
 export const isUserLoggedIn = () => localStorage.getItem('userData')
+export const isUserApproved = () => {
+  try {
+    return JSON.parse(localStorage.getItem('userData')).status == 'active';
+  } catch (e) {
+    return false;
+  }
+}
 export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
 
 /**
@@ -101,8 +108,8 @@ export const selectThemeColors = (theme) => ({
 })
 
 // **Convert referred url to object
-export const processReferredQuery = (query) =>{
+export const processReferredQuery = (query) => {
   const reg = /referralInvite=/i
   if (!reg.test(query)) return null
-  return  (query.substr(1).split('='))[1]
+  return (query.substr(1).split('='))[1]
 }

@@ -47,6 +47,7 @@ const Routes = [
     path: '/account-settings',
     component: lazy(() => import('../../views/account-settings')),
     private: true,
+    passApproval: true,
   },
   {
     path: '/installs',
