@@ -501,7 +501,7 @@ const Register = () => {
                     </Col>
                     <Col>
                       <FormField
-                        label="Coutry"
+                        label="Country"
                         name="country"
                         control={control}
                         error={errors.country}
@@ -618,7 +618,7 @@ const Register = () => {
                       name="terms"
                       label={<Terms />}
                       onChange={(e) => {
-                        setTerm(e.target.value)
+                        setTerm(e.target.checked)
                       }}
                       invalid={!isValid}
                       className="custom-control-Primary"
