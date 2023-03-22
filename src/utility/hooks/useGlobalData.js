@@ -127,8 +127,9 @@ const useGlobalData = () => {
     try {
       await axiosClient.post(`/payment/withdraw`, { payoutAddress })
     } catch (error) {
-      toast('Action Failed', error)
-      success = error;
+      const message = error.data.err
+      toast('Action Failed', message)
+      success = message;
     }
     setPublisherAppUsersLoading(false)
     return success;
@@ -136,7 +137,8 @@ const useGlobalData = () => {
 
   const getPublisherWithdrawStatus = async () => {
     try {
-      return await axiosClient.get(`/payment/withdraw_status`)
+      const resp = await axiosClient.get(`/payment/withdraw_status`)
+      return resp.data
     } catch (error) {
       toast('Action Failed', { type: 'error' })
       return false;

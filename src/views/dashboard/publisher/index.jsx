@@ -148,11 +148,11 @@ const PublisherHome = () => {
                 await Swal.fire({
                   title: `Overall Status: ${status.status}`,
                   confirmButtonText: 'OK',
-                  text: `
+                  html: `
                   <span>Amount: ${status.amount}</span> <br/>
-                  <span>Date: ${status.createdAt}</span> <br/>
+                  <span>Date: ${new Date(status.createdAt).toLocaleString()}</span> <br/>
                   <span>Transaction Status: ${status.tx.status}</span> <br/>` +
-                    status.tx.status == 'confirmed' && `<span>Amount: ${status.confirms}</span> <br/>` +
+                    (status.tx.status == 'confirmed' ? `<span>Confirms: ${status.tx.confirms}</span> <br/>` : '') +
                     `<span>TxHash: ${status.txHash}</span> <br/>
                 `,
                 })
