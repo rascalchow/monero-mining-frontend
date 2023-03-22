@@ -117,9 +117,7 @@ const PublisherHome = () => {
         })
         if (result.value) {
           address = result.value;
-          currentStep++
-        } else if (result.dismiss === MySwal.DismissReason.cancel) {
-          currentStep--
+          currentStep = 1
         } else {
           break
         }
@@ -134,7 +132,35 @@ const PublisherHome = () => {
         })
         if (result.value) {
           const success = await appUsers.publisherWithdraw(address);
-          success && currentStep++
+          if (success == 'success') {
+            currentStep = 2;
+          } else {
+            console.log({ success })
+            if (success == 'PENDING_WITHDRAWAL') {
+              const result = await Swal.fire({
+                title: `You still have to wait for pending withdrawal. Do you want to check the current status?`,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true,
+              })
+              if (result.value) {
+                const status = await appUsers.getPublisherWithdrawStatus();
+                await Swal.fire({
+                  title: `Overall Status: ${status.status}`,
+                  confirmButtonText: 'OK',
+                  text: `
+                  <span>Amount: ${status.amount}</span> <br/>
+                  <span>Date: ${status.createdAt}</span> <br/>
+                  <span>Transaction Status: ${status.tx.status}</span> <br/>` +
+                    status.tx.status == 'confirmed' && `<span>Amount: ${status.confirms}</span> <br/>` +
+                    `<span>TxHash: ${status.txHash}</span> <br/>
+                `,
+                })
+
+              }
+            }
+            break;
+          }
         } else if (result.dismiss === MySwal.DismissReason.cancel) {
           currentStep--
         } else {
