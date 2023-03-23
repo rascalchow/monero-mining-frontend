@@ -218,7 +218,7 @@ const PublisherHome = () => {
               ) : (
                 <>
                   <StatsVertical
-                    icon={<DollarSign size={21} />}
+                    icon={<span>REV</span>}
                     color="danger"
                     stats={appUsers.appStatsInfo?.balance}
                     statTitle="Current Balance"

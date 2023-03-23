@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from 'react'
 import { useDispatch } from 'react-redux'
 // ** Custom Components
 import Avatar from '@components/avatar'
-import { TrendingUp, User, Box, DollarSign } from 'react-feather'
+import { TrendingUp, User, Box, DollarSign, Key, FileText, MessageCircle } from 'react-feather'
 import {
   Card,
   CardBody,
@@ -89,6 +89,7 @@ const Overview = () => {
   const { overview, installs, usersInfo, appUsers } = useProfileInfoCtx()
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarCtx)
   const { id } = useParams()
+  console.log(overview?.profileInfo?._doc)
   const onApproveUserClick = () => {
     try {
       setIsApproving(true)
@@ -123,8 +124,8 @@ const Overview = () => {
         <Card className="main-info-card">
           <CardBody>
             <div className="d-flex justify-content-end">
-              <Badge color={STATUS_COLOR[usersInfo.status]}>
-                {usersInfo.status}
+              <Badge color={STATUS_COLOR[overview.profileInfo?._doc.status]}>
+                {overview.profileInfo?._doc.status}
               </Badge>
             </div>
             <Row>
@@ -158,7 +159,7 @@ const Overview = () => {
                     <Button.Ripple
                       color="primary"
                       onClick={onApproveUserClick}
-                      disabled={isApproving || usersInfo.status == 'active'}
+                      disabled={isApproving || overview.profileInfo?._doc.status == 'active'}
                     >
                       <div className="d-flex align-items-center">
                         {isApproving && (
@@ -173,7 +174,7 @@ const Overview = () => {
                       color="danger"
                       outline
                       onClick={onRejectUserClick}
-                      disabled={isRejecting || usersInfo.status == 'rejected'}
+                      disabled={isRejecting || overview.profileInfo?._doc.status == 'rejected'}
                     >
                       <div className="d-flex align-items-center">
                         {isRejecting && (
@@ -201,54 +202,83 @@ const Overview = () => {
               </Col>
               <Col xl="6" lg="12" className="mt-2 mt-xl-0">
                 <div className="user-info-wrapper">
-                  <div className="my-50">
-                    <Description
-                      label="Country"
-                      value={_.get(
-                        COUNTRIES.find(
-                          (it) => it.code == overview.profileInfo?._doc.country,
-                        ),
-                        'name',
-                        '',
-                      )}
-                      icon={<Flag className="mr-1" size={14} />}
-                    />
-                  </div>
-                  <div className="my-50">
-                    <Description
-                      label="Contact"
-                      value={overview.profileInfo?._doc.contact}
-                      icon={<Phone className="mr-1" size={14} />}
-                    />
-                  </div>
-                  <div className="my-50">
-                    <Description
-                      label="Company Name"
-                      value={overview.profileInfo?._doc.companyName}
-                      icon={<Server className="mr-1" size={14} />}
-                    />
-                  </div>
-                  <div className="my-50">
-                    <Description
-                      label="Application"
-                      value={overview.profileInfo?._doc.application}
-                      icon={<Grid className="mr-1" size={14} />}
-                    />
-                  </div>
-                  <div className="my-50">
-                    <Description
-                      label="I.M."
-                      value={overview.profileInfo?._doc.instantMessenger}
-                      icon={<Voicemail className="mr-1" size={14} />}
-                    />
-                  </div>
-                  <div className="my-50">
-                    <Description
-                      label="website."
-                      value={overview.profileInfo?._doc.website}
-                      icon={<Globe className="mr-1" size={14} />}
-                    />
-                  </div>
+                  <Row>
+                    <Col xl="6" lg="12">
+
+                      <div className="my-50">
+                        <Description
+                          label="Country"
+                          value={_.get(
+                            COUNTRIES.find(
+                              (it) => it.code == overview.profileInfo?._doc.country,
+                            ),
+                            'name',
+                            '',
+                          )}
+                          icon={<Flag className="mr-1" size={14} />}
+                        />
+                      </div>
+                      <div className="my-50">
+                        <Description
+                          label="Contact"
+                          value={overview.profileInfo?._doc.contact}
+                          icon={<Phone className="mr-1" size={14} />}
+                        />
+                      </div>
+                      <div className="my-50">
+                        <Description
+                          label="Company Name"
+                          value={overview.profileInfo?._doc.companyName}
+                          icon={<Server className="mr-1" size={14} />}
+                        />
+                      </div>
+                      <div className="my-50">
+                        <Description
+                          label="Application"
+                          value={overview.profileInfo?._doc.application}
+                          icon={<Grid className="mr-1" size={14} />}
+                        />
+                      </div>
+                      <div className="my-50">
+                        <Description
+                          label="Website"
+                          value={overview.profileInfo?._doc.website}
+                          icon={<Globe className="mr-1" size={14} />}
+                        />
+                      </div>
+                    </Col>
+                    <Col xl="6" lg="12">
+                      <div className="my-50">
+                        <Description
+                          label="Publisher key"
+                          value={overview.profileInfo?._doc.publisherKey}
+                          icon={<Key className="mr-1" size={14} />}
+                        />
+                      </div>
+                      <div className="my-50">
+                        <Description
+                          label="Earnings"
+                          value={overview.profileInfo?._doc.earnings}
+                          icon={<FileText className="mr-1" size={14} />}
+                        />
+                      </div>
+                      <div className="my-50">
+                        <Description
+                          label="Payout currency"
+                          value={overview.profileInfo?._doc.payoutCurrency}
+                          icon={<DollarSign className="mr-1" size={14} />}
+                        />
+                      </div>
+                      <div className="my-50">
+                        <Description
+                          label="Instant messenger"
+                          value={overview.profileInfo?._doc.instantMessenger}
+                          icon={<MessageCircle className="mr-1" size={14} />}
+                        />
+                      </div>
+
+                    </Col>
+                  </Row>
                 </div>
               </Col>
             </Row>

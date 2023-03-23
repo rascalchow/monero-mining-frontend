@@ -16,8 +16,8 @@ const useGlobalData = () => {
   const [isInstallLoading, setInstallLoading] = useState(true)
   const [installInfo, setInstallInfo] = useState(null)
   const [installCount, setInstallCount] = useState([])
-  const [liveTimeStaticLoading, setLiveTimeStaticLoading] = useState(true)
-  const [liveTimeChartLoading, setLiveTimeChartLoading] = useState(true)
+  const [liveTimeStaticLoading, setLiveTimeStaticLoading] = useState(false)
+  const [liveTimeChartLoading, setLiveTimeChartLoading] = useState(false)
   const [publisherLiveTimeStatsLoading, setPublisherLiveTimeStatsLoading] = useState(true)
   const [liveTimeChartInfo, setLiveTimeChartInfo] = useState(null)
   const [liveTimeStaticInfo, setLiveTimeStaticInfo] = useState(null)
@@ -128,7 +128,7 @@ const useGlobalData = () => {
       await axiosClient.post(`/payment/withdraw`, { payoutAddress })
     } catch (error) {
       const message = error.data.err
-      toast('Action Failed', message)
+      toast(message)
       success = message;
     }
     setPublisherAppUsersLoading(false)
@@ -140,7 +140,7 @@ const useGlobalData = () => {
       const resp = await axiosClient.get(`/payment/withdraw_status`)
       return resp.data
     } catch (error) {
-      toast('Action Failed', { type: 'error' })
+      // toast('Action Failed', { type: 'error' })
       return false;
     }
   }

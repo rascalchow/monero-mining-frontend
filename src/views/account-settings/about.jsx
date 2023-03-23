@@ -36,7 +36,7 @@ const About = () => {
     },
     { label: 'Phone', value: profile.phone, icon: <UserCheck size={15} /> },
     { label: 'Website URL', value: profile.website, icon: <UserCheck size={15} /> },
-    { label: 'Payout Currency', value: profile.payoutCurrency, icon: <UserCheck size={15} /> },
+    { label: 'Payout Currency', value: profile.payoutCurrency.toUpperCase(), icon: <UserCheck size={15} /> },
   ]
   return (
     <>

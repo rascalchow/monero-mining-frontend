@@ -57,6 +57,21 @@ export const PROFILE_TAB_ROUTES = [
     id: '5',
     title: 'Referrals',
     route: 'referral'
+  },
+  {
+    id: '6',
+    title: 'Invitations',
+    route: 'invites'
+  },
+  {
+    id: '7',
+    title: 'Payment',
+    route: 'payment'
+  },
+  {
+    id: '8',
+    title: 'Eula',
+    route: 'eula'
   }
 ]
 
