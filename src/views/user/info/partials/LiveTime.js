@@ -32,9 +32,12 @@ const LiveTime = ({
   const handleDuration = (e) => {
     if (e.length == 2) {
       setDuration(e)
-      liveTime.loadLiveTimeInfo(e, 'CHART', id)
     }
   }
+
+  useEffect(() => {
+    liveTime.loadLiveTimeInfo(duration, 'CHART', id)
+  }, [duration])
 
   return (
     <>

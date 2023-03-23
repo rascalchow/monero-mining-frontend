@@ -2,15 +2,24 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { axiosClient } from '@src/@core/services'
 import { INVITE_ERRORS } from '@const/invite'
+import { useAuthCtx } from '@context/authContext'
+
 const useInvite = () => {
   const [invitesList, setInvites] = useState([])
   const [isLoading, setLoadingState] = useState(false)
   const [isCanceled, setIsCanceled] = useState(false)
-  const getInvites = async (params) => {
+  const { userData } = useAuthCtx();
+
+  const getInvites = async (params, id) => {
     setLoadingState(true)
     try {
-      const result = await axiosClient.get(`/invite`, { params })
-      setInvites(result)
+      if (userData?.role == 'admin' && id) {
+        const result = await axiosClient.get(`/invite/${id}`, { params })
+        setInvites(result)
+      } else {
+        const result = await axiosClient.get(`/invite`, { params })
+        setInvites(result)
+      }
     } catch (error) {
       toast('Action failed!', { type: 'error' })
     }

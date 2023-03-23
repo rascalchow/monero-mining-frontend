@@ -15,7 +15,8 @@ import { PROFILE_TAB_ROUTES } from '@const/user'
 import EditProduct from '../../product/edit'
 import LiveTime from './partials/LiveTime'
 import AppUsers from './partials/AppUsers'
-import Invites from './partials/Invites'
+import Referrals from './partials/Invites'
+import Invites from '../../invite/index'
 const Profile = () => {
   const [block, setBlock] = useState(false)
   const { id } = useParams()
@@ -58,7 +59,8 @@ const Profile = () => {
           <Route path={`${path}/users`}>
             <AppUsers id={id} />
           </Route>
-          <Route path={`${path}/referral`} component={Invites} />
+          <Route path={`${path}/referral`} component={Referrals} />
+          <Route path={`${path}/invites`} component={Invites} />
         </Switch>
       </section>
     </div>

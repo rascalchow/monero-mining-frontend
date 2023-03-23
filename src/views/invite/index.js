@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation, Redirect, useHistory } from 'react-router-dom'
+import { useLocation, Redirect, useHistory, useParams } from 'react-router-dom'
 
 import InviteTable from './partials/Table'
 import useInvite from '@hooks/useInvite'
@@ -8,9 +8,9 @@ import { INVITE_SORT_KEY } from '@const/invite'
 const Invitation = () => {
   const { invitesList, getInvites, isLoading, cancelInvite } = useInvite()
   const [searchParams, setSearchParams] = useSearchParams()
+  const { id } = useParams()
   const location = useLocation()
   const [isSubmit, setSubmit] = useState(false)
-
   const onSubmit = (value) => {
     setSubmit(value)
   }
@@ -35,7 +35,7 @@ const Invitation = () => {
         getInvites({
           ...query,
           filter: { ...query.filter },
-        })
+        }, id)
         setSubmit(false)
       } catch (error) {
         history.push('/not-authorized')
